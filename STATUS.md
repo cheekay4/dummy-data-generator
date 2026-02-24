@@ -154,12 +154,93 @@
 
 ---
 
-## 7. 変更履歴
+## 7. Git リポジトリ情報
+
+### リポジトリ
+
+| 項目 | 内容 |
+|------|------|
+| リモートURL | https://github.com/cheekay4/dummy-data-generator.git |
+| ブランチ | `main` |
+| 最新コミット | `cc59691` Initial clean commit: モノレポ全プロジェクト（node_modules除外） |
+| コミット日 | 2026-02-23 |
+
+### .gitignore（ルート）の除外対象
+
+```
+APIkeys.txt        # ← APIキー。絶対にコミット禁止
+*.env / *.env.local
+node_modules/      # ← サブプロジェクト含め全て除外
+.next/
+dist/ / out/
+.vercel/
+```
+
+### git push トラブルシューティング記録（2026-02-23）
+
+**発生した問題と解決手順:**
+
+#### 問題1: リモートに先行コミットがあり push 拒否
+```
+! [rejected] main -> main (fetch first)
+```
+- **原因:** `dummy-data-generator.git` のリモートに、ローカルと無関係な初期コミット2件（`759687f`, `d5e1030`）が存在し、履歴が分岐していた
+- **試みた対処:** `git pull --rebase` → 失敗
+
+#### 問題2: git rebase が node_modules DLL でブロック
+```
+error: unable to unlink old 'node_modules/@img/sharp-win32-x64/lib/libvips-42.dll': Invalid argument
+```
+- **原因:** Windows がプロセスで DLL ファイルをロックしていたため、git が上書きできなかった
+- **試みた対処:** `git reset --hard d31083f` → 同様にロックで失敗
+
+#### 問題3: git push --force が GitHub の 100MB 制限で拒否
+```
+remote: error: File node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node is 122.06 MB
+```
+- **原因:** `5610dbe`（Phase 2 コミット）で `node_modules/` がルート `.gitignore` 未設定のまま全コミットされていた。`@next/swc-win32-x64-msvc` の DLL が 122MB あり GitHub の上限 100MB を超過
+
+#### 最終的な解決手順
+```bash
+# 1. 孤立ブランチを作成（歴史を持たない）
+git checkout --orphan clean-main
+
+# 2. インデックスを全クリア
+git rm -r --cached .
+
+# 3. .gitignore に node_modules/ を明記した状態で再ステージ
+git add .
+# → node_modules/（0件）、.next/（0件）、APIkeys.txt（0件）を確認
+
+# 4. クリーンな1コミット作成
+git commit -m "Initial clean commit: モノレポ全プロジェクト（node_modules除外）"
+
+# 5. force push
+git push origin clean-main:main --force
+
+# 6. ローカル main を clean-main に揃える
+git checkout -B main cc59691
+git branch -d clean-main
+```
+
+#### 再発防止
+- **次回から `git add .` の前に必ず確認:**
+  ```bash
+  git ls-files | grep "node_modules" | wc -l   # → 0 であること
+  git ls-files | grep "\.next/" | wc -l         # → 0 であること
+  ```
+- サブプロジェクトが増えたときも、ルートの `.gitignore` の `node_modules/` で全階層をカバーできる（先頭に `/` がないため）
+- 各サブプロジェクトの `.gitignore` も独立して存在するが、ルートのもので十分
+
+---
+
+## 8. 変更履歴
 
 <!-- 最新が上。形式: YYYY-MM-DD | 内容 | 担当 -->
 
 | 日付 | 内容 |
 |------|------|
+| 2026-02-23 | git push トラブル解決: node_modules（122MB DLL）がコミットに混入 → orphan ブランチ方式でクリーン1コミット（cc59691）に再構築して force push 完了。ルート .gitignore 新設（node_modules/・APIkeys.txt・.next/） | Claude Code |
 | 2026-02-24 | sales-agent-web（Next.js ダッシュボード）新規作成: Dashboard/Leads/Drafts/Replies/Campaigns/Settings全ページ。Add-B（CLI A/B生成+MsgScoreセルフスコアリング）・Add-C（テスト送信API）・Step6（返信承認+Gmail送信）・Step7（Cron自動送信）実装完了。npm run build ✅ x2（CLI+web）| Claude Code |
 | 2026-02-23 | review-reply-ai: /generator子ページ分離（LP/ツール分割）・privacy/termsページ追加・口コミ5,000文字制限追加。npm run build ✅ Vercelデプロイ完了 | Claude Code |
 | 2026-02-23 | AI口コミ返信ジェネレーター（review-reply-ai）Phase 1 MVP実装完了 + Vercelデプロイ完了（https://review-reply-ai-nu.vercel.app）。Next.js 16+Claude API+Zustand。8業種/3トーン/8プラットフォーム対応。IPレート制限3回/日。npm run build ✅ | Claude Code |

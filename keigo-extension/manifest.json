@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "敬語メールライター",
+  "version": "1.0.0",
+  "description": "Gmail・Outlookのメール作成画面で、そのまま敬語メールに変換。keigo-tools.vercel.app の拡張機能版。",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://outlook.live.com/*",
+    "https://outlook.office.com/*",
+    "https://keigo-tools.vercel.app/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["dist/content/gmail.js"],
+      "css": ["dist/content/content.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://outlook.live.com/*",
+        "https://outlook.office.com/*"
+      ],
+      "js": ["dist/content/outlook.js"],
+      "css": ["dist/content/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "dist/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "dist/background/service-worker.js"
+  }
+}

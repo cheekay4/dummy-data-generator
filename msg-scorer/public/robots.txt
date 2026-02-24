@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://msgscore.jp/sitemap.xml

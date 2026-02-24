@@ -1,0 +1,20 @@
+# Sensitive files
+APIkeys.txt
+*.env
+*.env.local
+.env*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Build outputs
+.next/
+dist/
+out/
+
+# Vercel
+.vercel/

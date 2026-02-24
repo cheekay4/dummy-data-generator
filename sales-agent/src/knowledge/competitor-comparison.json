@@ -1,0 +1,20 @@
+[
+  {
+    "competitor": "Benchmark Email / Mailchimp（海外ツール）",
+    "our_advantage": "日本語に特化したスコアリング。日本のメール慣習・敬語・開封率ベンチマークを学習しています。海外ツールは英語基準のため、日本語文章の評価精度が低いです。",
+    "their_advantage": "配信機能・テンプレート・A/Bテスト機能が充実。MsgScoreは現時点で配信機能は持ちません。",
+    "positioning": "MsgScoreは「配信する前の文章チェック・改善」に特化したツールです。既存の配信ツールと併用できます。"
+  },
+  {
+    "competitor": "Cuenote /配配メール（国内配信ツール）",
+    "our_advantage": "スコアリング・予測に特化。配信ツールとは競合せず、むしろ組み合わせて使うことでより効果的です。価格も大幅に安い（月980円）。",
+    "their_advantage": "配信・ドメイン認証・到達率管理など配信インフラが整っている。",
+    "positioning": "配配メールで配信し、MsgScoreで文章を事前チェックするワークフローが最適です。"
+  },
+  {
+    "competitor": "ChatGPT / Claude 直接利用",
+    "our_advantage": "MsgScoreは日本のメール配信特化の評価基準（開封率・CTR・CV）でスコア化し、数値として見える化します。汎用AIへのプロンプト設計不要で、すぐに使えます。",
+    "their_advantage": "文章生成能力が高く、様々な用途に使える。",
+    "positioning": "ChatGPTで文章を作り、MsgScoreでスコアチェックする使い方が多いです。"
+  }
+]

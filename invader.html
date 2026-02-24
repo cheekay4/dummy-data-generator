@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>インベーダーゲーム</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+  canvas { border: 1px solid #333; }
+</style>
+</head>
+<body>
+<canvas id="game" width="640" height="480"></canvas>
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+
+// ゲーム状態
+let score = 0;
+let lives = 3;
+let gameOver = false;
+let gameWon = false;
+let keys = {};
+
+// 自機
+const player = { x: 300, y: 440, w: 40, h: 16, speed: 5, color: '#0f0' };
+
+// 弾丸
+let bullets = [];
+const bulletSpeed = 7;
+let canShoot = true;
+const shootCooldown = 300;
+
+// 敵
+const enemyCols = 11;
+const enemyRows = 5;
+const enemyW = 32;
+const enemyH = 24;
+const enemyPadding = 12;
+let enemies = [];
+let enemyDir = 1;
+let enemySpeed = 1;
+let enemyMoveTimer = 0;
+let enemyMoveInterval = 40;
+let enemyDropAmount = 20;
+
+// 敵の弾
+let enemyBullets = [];
+const enemyBulletSpeed = 3;
+let enemyShootTimer = 0;
+const enemyShootInterval = 60;
+
+// UFO
+let ufo = null;
+let ufoTimer = 0;
+const ufoInterval = 600;
+
+// バリケード
+let barriers = [];
+
+// 敵の色（行ごと）
+const enemyColors = ['#f00', '#f80', '#ff0', '#0f0', '#0ff'];
+const enemyScores = [50, 40, 30, 20, 10];
+
+function initEnemies() {
+  enemies = [];
+  const startX = 60;
+  const startY = 60;
+  for (let r = 0; r < enemyRows; r++) {
+    for (let c = 0; c < enemyCols; c++) {
+      enemies.push({
+        x: startX + c * (enemyW + enemyPadding),
+        y: startY + r * (enemyH + enemyPadding),
+        w: enemyW, h: enemyH,
+        alive: true,
+        row: r,
+        frame: 0
+      });
+    }
+  }
+}
+
+function initBarriers() {
+  barriers = [];
+  const barrierW = 60;
+  const barrierH = 40;
+  const positions = [100, 230, 360, 490];
+  const blockSize = 4;
+  for (let b = 0; b < 4; b++) {
+    const bx = positions[b];
+    const by = 380;
+    for (let r = 0; r < barrierH / blockSize; r++) {
+      for (let c = 0; c < barrierW / blockSize; c++) {
+        const px = bx + c * blockSize;
+        const py = by + r * blockSize;
+        // アーチ型の切り抜き
+        const cx = bx + barrierW / 2;
+        const cy = by + barrierH;
+        const dx = px + blockSize / 2 - cx;
+        const dy = py + blockSize / 2 - cy;
+        if (r > 4 && Math.sqrt(dx * dx + dy * dy) < 18) continue;
+        barriers.push({ x: px, y: py, w: blockSize, h: blockSize, alive: true });
+      }
+    }
+  }
+}
+
+function init() {
+  score = 0;
+  lives = 3;
+  gameOver = false;
+  gameWon = false;
+  enemyDir = 1;
+  enemySpeed = 1;
+  enemyMoveTimer = 0;
+  enemyMoveInterval = 40;
+  bullets = [];
+  enemyBullets = [];
+  ufo = null;
+  ufoTimer = 0;
+  player.x = 300;
+  initEnemies();
+  initBarriers();
+}
+
+// 敵の描画（ドット絵風）
+function drawEnemy(e) {
+  const color = enemyColors[e.row];
+  ctx.fillStyle = color;
+  const cx = e.x + e.w / 2;
+  const cy = e.y + e.h / 2;
+  const s = 3;
+
+  if (e.row === 0) {
+    // トップ行：小さいタイプ
+    const pattern = [
+      [0,0,1,1,0,0],
+      [0,1,1,1,1,0],
+      [1,1,1,1,1,1],
+      [1,0,1,1,0,1],
+      [0,1,0,0,1,0],
+    ];
+    const ox = e.x + 5;
+    const oy = e.y + 2;
+    for (let r = 0; r < pattern.length; r++)
+      for (let c = 0; c < pattern[r].length; c++)
+        if (pattern[r][c]) ctx.fillRect(ox + c * s, oy + r * s, s, s);
+  } else if (e.row <= 2) {
+    // 中間行：中タイプ
+    const pattern = [
+      [0,1,0,0,0,1,0],
+      [0,0,1,1,1,0,0],
+      [0,1,1,1,1,1,0],
+      [1,0,1,1,1,0,1],
+      [1,1,1,1,1,1,1],
+      [0,1,0,0,0,1,0],
+    ];
+    const ox = e.x + 2;
+    const oy = e.y + 1;
+    for (let r = 0; r < pattern.length; r++)
+      for (let c = 0; c < pattern[r].length; c++)
+        if (pattern[r][c]) ctx.fillRect(ox + c * s, oy + r * s, s, s);
+  } else {
+    // 下段行：大タイプ
+    const pattern = [
+      [0,0,1,1,1,1,0,0],
+      [0,1,1,1,1,1,1,0],
+      [1,1,0,1,1,0,1,1],
+      [1,1,1,1,1,1,1,1],
+      [0,1,0,0,0,0,1,0],
+      [1,0,1,0,0,1,0,1],
+    ];
+    const ox = e.x + 2;
+    const oy = e.y + 1;
+    for (let r = 0; r < pattern.length; r++)
+      for (let c = 0; c < pattern[r].length; c++)
+        if (pattern[r][c]) ctx.fillRect(ox + c * s, oy + r * s, s, s);
+  }
+}
+
+function drawPlayer() {
+  ctx.fillStyle = player.color;
+  // 砲台の形
+  ctx.fillRect(player.x, player.y + 6, player.w, 10);
+  ctx.fillRect(player.x + 8, player.y + 2, player.w - 16, 8);
+  ctx.fillRect(player.x + 17, player.y - 2, 6, 6);
+}
+
+function drawBullet(b, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(b.x, b.y, 3, 10);
+}
+
+function drawUFO() {
+  if (!ufo) return;
+  ctx.fillStyle = '#f0f';
+  ctx.beginPath();
+  ctx.ellipse(ufo.x + 20, ufo.y + 8, 20, 8, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#f8f';
+  ctx.beginPath();
+  ctx.ellipse(ufo.x + 20, ufo.y + 4, 10, 6, 0, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawBarriers() {
+  ctx.fillStyle = '#0f0';
+  for (const b of barriers) {
+    if (b.alive) ctx.fillRect(b.x, b.y, b.w, b.h);
+  }
+}
+
+function drawHUD() {
+  ctx.fillStyle = '#fff';
+  ctx.font = '16px monospace';
+  ctx.fillText('SCORE: ' + score, 10, 20);
+  ctx.fillText('LIVES: ' + lives, 540, 20);
+  // ライフアイコン
+  for (let i = 0; i < lives - 1; i++) {
+    ctx.fillStyle = '#0f0';
+    ctx.fillRect(540 + i * 30, 28, 20, 6);
+    ctx.fillRect(548 + i * 30, 24, 6, 4);
+  }
+}
+
+function drawGameOver() {
+  ctx.fillStyle = 'rgba(0,0,0,0.7)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 40px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(gameWon ? 'YOU WIN!' : 'GAME OVER', canvas.width / 2, canvas.height / 2 - 20);
+  ctx.font = '20px monospace';
+  ctx.fillText('SCORE: ' + score, canvas.width / 2, canvas.height / 2 + 20);
+  ctx.fillText('PRESS ENTER TO RESTART', canvas.width / 2, canvas.height / 2 + 60);
+  ctx.textAlign = 'left';
+}
+
+function rectCollision(a, b) {
+  return a.x < b.x + b.w && a.x + (a.w || 3) > b.x &&
+         a.y < b.y + b.h && a.y + (a.h || 10) > b.y;
+}
+
+function update() {
+  if (gameOver) {
+    if (keys['Enter']) init();
+    return;
+  }
+
+  // 自機移動
+  if (keys['ArrowLeft'] || keys['a']) player.x = Math.max(0, player.x - player.speed);
+  if (keys['ArrowRight'] || keys['d']) player.x = Math.min(canvas.width - player.w, player.x + player.speed);
+
+  // 弾発射
+  if ((keys[' '] || keys['ArrowUp']) && canShoot) {
+    bullets.push({ x: player.x + player.w / 2 - 1, y: player.y - 10 });
+    canShoot = false;
+    setTimeout(() => canShoot = true, shootCooldown);
+  }
+
+  // 弾移動
+  bullets = bullets.filter(b => {
+    b.y -= bulletSpeed;
+    return b.y > -10;
+  });
+
+  // 敵弾移動
+  enemyBullets = enemyBullets.filter(b => {
+    b.y += enemyBulletSpeed;
+    return b.y < canvas.height;
+  });
+
+  // 敵の移動
+  enemyMoveTimer++;
+  if (enemyMoveTimer >= enemyMoveInterval) {
+    enemyMoveTimer = 0;
+    let hitEdge = false;
+    for (const e of enemies) {
+      if (!e.alive) continue;
+      if ((enemyDir > 0 && e.x + e.w + enemySpeed * 10 > canvas.width - 10) ||
+          (enemyDir < 0 && e.x - enemySpeed * 10 < 10)) {
+        hitEdge = true;
+        break;
+      }
+    }
+    if (hitEdge) {
+      enemyDir *= -1;
+      for (const e of enemies) {
+        if (e.alive) e.y += enemyDropAmount;
+      }
+    } else {
+      for (const e of enemies) {
+        if (e.alive) e.x += enemyDir * enemySpeed * 10;
+      }
+    }
+    // フレーム切り替え
+    for (const e of enemies) e.frame = 1 - e.frame;
+  }
+
+  // 敵が自機ラインに到達
+  for (const e of enemies) {
+    if (e.alive && e.y + e.h >= player.y) {
+      gameOver = true;
+      return;
+    }
+  }
+
+  // 敵の発射
+  enemyShootTimer++;
+  if (enemyShootTimer >= enemyShootInterval) {
+    enemyShootTimer = 0;
+    const alive = enemies.filter(e => e.alive);
+    if (alive.length > 0) {
+      // 最下段の敵から発射
+      const cols = {};
+      for (const e of alive) {
+        const col = Math.round(e.x / (enemyW + enemyPadding));
+        if (!cols[col] || e.y > cols[col].y) cols[col] = e;
+      }
+      const bottom = Object.values(cols);
+      const shooter = bottom[Math.floor(Math.random() * bottom.length)];
+      enemyBullets.push({ x: shooter.x + shooter.w / 2, y: shooter.y + shooter.h });
+    }
+  }
+
+  // 弾と敵の当たり判定
+  for (const b of bullets) {
+    for (const e of enemies) {
+      if (!e.alive) continue;
+      if (rectCollision(b, e)) {
+        e.alive = false;
+        b.y = -100;
+        score += enemyScores[e.row];
+        // 敵が減ると速くなる
+        const aliveCount = enemies.filter(e => e.alive).length;
+        enemyMoveInterval = Math.max(4, Math.floor(40 * aliveCount / (enemyCols * enemyRows)));
+      }
+    }
+  }
+
+  // 弾とバリケードの当たり判定
+  for (const b of bullets) {
+    for (const bar of barriers) {
+      if (!bar.alive) continue;
+      if (rectCollision(b, bar)) {
+        bar.alive = false;
+        b.y = -100;
+        break;
+      }
+    }
+  }
+
+  // 敵弾とバリケードの当たり判定
+  for (const b of enemyBullets) {
+    for (const bar of barriers) {
+      if (!bar.alive) continue;
+      if (rectCollision(b, bar)) {
+        bar.alive = false;
+        b.y = 9999;
+        break;
+      }
+    }
+  }
+
+  // 敵弾と自機の当たり判定
+  for (const b of enemyBullets) {
+    if (b.x > player.x && b.x < player.x + player.w &&
+        b.y > player.y && b.y < player.y + player.h + 10) {
+      b.y = 9999;
+      lives--;
+      if (lives <= 0) gameOver = true;
+      else player.x = 300;
+    }
+  }
+
+  // UFO
+  ufoTimer++;
+  if (!ufo && ufoTimer >= ufoInterval) {
+    ufoTimer = 0;
+    ufo = { x: -40, y: 30, w: 40, h: 16, speed: 2 };
+  }
+  if (ufo) {
+    ufo.x += ufo.speed;
+    if (ufo.x > canvas.width + 40) ufo = null;
+  }
+
+  // 弾とUFOの当たり判定
+  if (ufo) {
+    for (const b of bullets) {
+      if (rectCollision(b, ufo)) {
+        score += [100, 150, 200, 300][Math.floor(Math.random() * 4)];
+        b.y = -100;
+        ufo = null;
+        break;
+      }
+    }
+  }
+
+  // 全滅チェック
+  if (enemies.every(e => !e.alive)) {
+    gameWon = true;
+    gameOver = true;
+  }
+}
+
+function draw() {
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // 下線
+  ctx.strokeStyle = '#0f0';
+  ctx.beginPath();
+  ctx.moveTo(0, 460);
+  ctx.lineTo(canvas.width, 460);
+  ctx.stroke();
+
+  drawBarriers();
+  drawPlayer();
+
+  for (const e of enemies) {
+    if (e.alive) drawEnemy(e);
+  }
+
+  for (const b of bullets) drawBullet(b, '#fff');
+  for (const b of enemyBullets) drawBullet(b, '#f44');
+
+  drawUFO();
+  drawHUD();
+
+  if (gameOver) drawGameOver();
+}
+
+function gameLoop() {
+  update();
+  draw();
+  requestAnimationFrame(gameLoop);
+}
+
+document.addEventListener('keydown', e => {
+  keys[e.key] = true;
+  if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
+    e.preventDefault();
+  }
+});
+document.addEventListener('keyup', e => keys[e.key] = false);
+
+init();
+gameLoop();
+</script>
+</body>
+</html>

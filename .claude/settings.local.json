@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm test:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx create-next-app@14:*)",
+      "Bash(npm install:*)",
+      "Bash(npx shadcn@latest init:*)",
+      "Bash(npx shadcn@latest add:*)",
+      "Bash(node -e:*)",
+      "Bash(cd /c/Users/cheek/Desktop/my-first-project && npx create-next-app@latest msg-scorer --typescript --tailwind --app --src-dir --import-alias \"@/*\" --no-eslint --no-git 2>&1)",
+      "Bash(cd /c/Users/cheek/Desktop/my-first-project && echo \"\" | npx create-next-app@latest msg-scorer --typescript --tailwind --app --src-dir --import-alias \"@/*\" --no-eslint --no-git 2>&1)",
+      "Bash(cd /c/Users/cheek/Desktop/my-first-project/keigo-extension && node generate-icons.js 2>&1)",
+      "Bash(cd /c/Users/cheek/Desktop/my-first-project/keigo-tools && npx vercel --prod 2>&1)",
+      "Bash(grep:*)",
+      "Bash(cd /c/Users/cheek/Desktop/my-first-project/msg-scorer && vercel --prod 2>&1)",
+      "Bash(cd \"C:/Users/cheek/Desktop/my-first-project/msg-scorer-extension\" && npm install 2>&1 && npm run generate-icons 2>&1 && npm run build 2>&1)",
+      "Bash(cd \"C:/Users/cheek/Desktop/my-first-project/msg-scorer-extension\" && npm run generate-icons 2>&1)",
+      "Bash(cd \"C:/Users/cheek/Desktop/my-first-project/msg-scorer\" && vercel --prod 2>&1)",
+      "WebSearch",
+      "Bash(cd /c/Users/cheek/Desktop/my-first-project && npx create-next-app@latest review-reply-ai --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git 2>&1)",
+      "Bash(python3:*)",
+      "Bash(cd /c/Users/cheek/Desktop/my-first-project && git push origin main --force 2>&1)",
+      "Bash(cd \"C:/Users/cheek/Desktop/my-first-project/sales-agent\" && echo \"b\" | timeout 10 node dist/index.js review 2>&1)"
+    ]
+  }
+}

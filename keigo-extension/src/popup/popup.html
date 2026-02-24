@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>敬語メールライター</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- ヘッダー -->
+    <div class="header">
+      <span class="header-title">✉ 敬語メールライター</span>
+      <button id="btn-settings" class="icon-btn" title="設定">⚙</button>
+    </div>
+
+    <!-- メイン画面 -->
+    <div id="view-main">
+      <div class="form-group">
+        <label class="label">変換したいテキスト</label>
+        <textarea id="input-text" class="textarea" rows="4" placeholder="メールの下書きや要点を入力してください…"></textarea>
+      </div>
+
+      <div class="selects-row">
+        <div class="select-group">
+          <label class="label-sm">シーン</label>
+          <select id="sel-scene" class="select">
+            <option value="reply">返信</option>
+            <option value="request">依頼</option>
+            <option value="apologize">お詫び</option>
+            <option value="thanks">感謝</option>
+            <option value="check">確認</option>
+          </select>
+        </div>
+        <div class="select-group">
+          <label class="label-sm">相手</label>
+          <select id="sel-recipient" class="select">
+            <option value="client">取引先</option>
+            <option value="superior">上司</option>
+            <option value="colleague">同僚</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+        <div class="select-group">
+          <label class="label-sm">丁寧さ</label>
+          <select id="sel-tone" class="select">
+            <option value="polite">丁寧</option>
+            <option value="formal">かしこまる</option>
+            <option value="casual">ややカジュアル</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button id="btn-generate" class="btn-primary">変換する</button>
+        <span id="usage-badge" class="usage-badge"></span>
+      </div>
+
+      <div id="error-msg" class="error-msg hidden"></div>
+
+      <div id="result-section" class="hidden">
+        <label class="label">変換結果</label>
+        <textarea id="result-text" class="textarea textarea-result" rows="6" readonly></textarea>
+        <button id="btn-copy" class="btn-secondary">コピーする</button>
+      </div>
+    </div>
+
+    <!-- 設定画面 -->
+    <div id="view-settings" class="hidden">
+      <h2 class="settings-title">Pro ライセンスキー設定</h2>
+      <div class="form-group">
+        <input id="input-license" type="text" class="input" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
+      </div>
+      <button id="btn-save-license" class="btn-primary">保存して確認</button>
+      <div id="license-status" class="license-status"></div>
+      <div class="settings-links">
+        <a href="https://keigo-tools.vercel.app/pricing" target="_blank" class="settings-link">
+          → Proプランを購入
+        </a>
+        <a href="https://keigo-tools.vercel.app/account" target="_blank" class="settings-link">
+          → ライセンスキーを確認する
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

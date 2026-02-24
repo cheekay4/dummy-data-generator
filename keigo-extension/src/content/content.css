@@ -1,0 +1,2 @@
+/* Gmailページ全体へのグローバルスタイルは最小限に抑える */
+/* Shadow DOM内のスタイルはgmail.ts / outlook.ts で直接定義 */

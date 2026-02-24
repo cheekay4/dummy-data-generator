@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MsgScore</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- ヘッダー -->
+    <div class="header">
+      <span class="header-title">M MsgScore</span>
+      <button id="btn-settings" class="icon-btn" title="設定">⚙</button>
+    </div>
+
+    <!-- メイン画面 -->
+    <div id="view-main">
+      <div class="form-group">
+        <label class="label">チャネル</label>
+        <select id="sel-channel" class="select select-full">
+          <option value="email-subject">メール件名</option>
+          <option value="email-body">メール本文</option>
+          <option value="line">LINE</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="label">セグメントプリセット</label>
+        <select id="sel-preset" class="select select-full">
+          <option value="ec-general">EC全体</option>
+          <option value="young-women-ec">20代女性向けEC</option>
+          <option value="btob-lead">BtoBリード</option>
+          <option value="family">ファミリー層</option>
+          <option value="senior">シニア層</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="label">テキスト</label>
+        <textarea id="input-text" class="textarea" rows="4" placeholder="スコアリングするテキストを入力…"></textarea>
+      </div>
+
+      <div class="action-row">
+        <button id="btn-score" class="btn-primary">スコアリング</button>
+        <span id="usage-badge" class="usage-badge"></span>
+      </div>
+
+      <div id="error-msg" class="error-msg hidden"></div>
+
+      <div id="result-section" class="hidden">
+        <div class="score-display">
+          <span id="score-number" class="score-number">--</span>
+          <span class="score-label">/ 100</span>
+        </div>
+
+        <div id="axes-list" class="axes-list"></div>
+
+        <div id="improvements-section" class="improvements-section hidden">
+          <p class="improvements-title">改善提案</p>
+          <ul id="improvements-list" class="improvements-list"></ul>
+        </div>
+
+        <div class="result-footer">
+          <a id="link-web" href="https://msg-scorer.vercel.app" target="_blank" class="settings-link">
+            → Web版で詳細を見る
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 設定画面 -->
+    <div id="view-settings" class="hidden">
+      <h2 class="settings-title">Chrome拡張トークン設定</h2>
+      <p class="settings-desc">
+        <a href="https://msg-scorer.vercel.app/settings" target="_blank" class="settings-link">
+          設定ページ
+        </a>でトークンを生成し、入力してください。
+      </p>
+      <div class="form-group">
+        <input id="input-token" type="text" class="input" placeholder="mse_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+      </div>
+      <button id="btn-save-token" class="btn-primary">保存して確認</button>
+      <div id="token-status" class="token-status"></div>
+
+      <div class="settings-links">
+        <a href="https://msg-scorer.vercel.app/settings" target="_blank" class="settings-link">
+          → トークンを生成する
+        </a>
+        <a href="https://msg-scorer.vercel.app/pricing" target="_blank" class="settings-link">
+          → Proプランを確認
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

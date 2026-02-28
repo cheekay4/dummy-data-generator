@@ -3,7 +3,7 @@
 > このファイルはプロジェクトの現在状態を記録するSST（Single Source of Truth）。
 > Claude Code は毎セッション開始時に読み込み、変更時に即反映すること。
 
-最終更新: 2026-02-28（MyReplyTone ブランドリニューアル・ファビコン・メールテンプレ・rate limit修正完了。詳細は review-reply-ai/MYREPLYTONE-STATUS.md 参照）
+最終更新: 2026-02-28（MyReplyTone UXテスト🔴4件修正・本番デプロイ完了。詳細は review-reply-ai/MYREPLYTONE-STATUS.md 参照）
 
 ---
 
@@ -160,6 +160,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-02-28 | MyReplyTone UXテスト🔴4件修正（ナビ順序・広告非表示・料金表修正・残回数初期値）デプロイ完了 | Claude Code |
 | 2026-02-28 | MyReplyTone ブランドリニューアル・ファビコン・Supabaseメールテンプレ日本語化・rate limit Supabase永続化・AuthModal UI改善 | Claude Code |
 | 2026-02-28 | GA4(G-8Z4CYXXR5N)設定・Search Console登録・sitemap送信・Supabase URL更新・DNS設定・myreplytone.com 本番完全稼働 | Claude Code |
 | 2026-02-28 | myreplytone.com ドメイン変更。絵文字→lucide-react全置換・Headerナビ2状態・性格診断推奨化。npm run build ✅ git push ✅ | Claude Code |

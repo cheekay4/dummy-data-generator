@@ -52,7 +52,7 @@ const DEFAULT_STATE = {
   step: 'form' as const,
   result: null,
   error: null,
-  remainingToday: 1,
+  remainingToday: -1,
 }
 
 export const useGeneratorStore = create<GeneratorState>((set) => ({

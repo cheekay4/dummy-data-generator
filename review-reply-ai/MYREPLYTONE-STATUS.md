@@ -3,7 +3,7 @@
 > このファイルは `review-reply-ai`（旧URL: review-reply-ai-nu.vercel.app → 新URL: myreplytone.com）の
 > Single Source of Truth。このプロジェクトが中心プロダクトのため、詳細ログを別ファイルで管理する。
 
-最終更新: 2026-02-28（ブランドリニューアル・ファビコン・メールテンプレ・rate limit修正完了）
+最終更新: 2026-02-28（UXテスト🔴4件修正・デプロイ完了）
 
 ---
 
@@ -275,7 +275,8 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
-| 2026-02-28 | ファビコン追加（icon.tsx/apple-icon.tsx 波形アイコン）・Supabaseメールテンプレ日本語化 | 最新 |
+| 2026-02-28 | UXテスト🔴4件修正: Headerナビ順序CTA先頭化・広告プレースホルダー非表示・料金表お試し3回/日に修正・残回数初期値センチネル化 | 最新 |
+| 2026-02-28 | ファビコン追加（icon.tsx/apple-icon.tsx 波形アイコン）・Supabaseメールテンプレ日本語化 | - |
 | 2026-02-28 | サービス名 MyReplyTone に統一・ロゴ刷新（AudioWaveform）・AI口コミ返信ジェネレーター併記・rate limit Supabase永続化（3回/日）・AuthModal UI改善 | b3ecf8c |
 | 2026-02-28 | GA4（G-8Z4CYXXR5N）Vercel環境変数設定・デプロイ反映。Search Console sitemap.xml送信完了 | 54618af |
 | 2026-02-28 | Google Search Console 所有権確認完了（HTMLファイル + メタタグ2方式）| ce6b1d2 / 572c85a |

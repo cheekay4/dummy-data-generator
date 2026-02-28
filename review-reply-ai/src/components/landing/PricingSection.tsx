@@ -7,7 +7,7 @@ export default function PricingSection() {
       price: '0',
       sub: 'ログイン不要',
       badge: null,
-      features: ['AI返信1回', '基本返信のみ', '客層分析なし'],
+      features: ['AI返信3回/日', '基本返信のみ', '客層分析なし'],
       cta: '今すぐ試す',
       ctaHref: '/generator',
       variant: 'outline' as const,

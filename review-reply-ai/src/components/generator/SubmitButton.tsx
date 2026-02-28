@@ -24,7 +24,7 @@ export default function SubmitButton({ profileId, modifierId }: SubmitButtonProp
     setError,
   } = useGeneratorStore()
 
-  const isDisabled = !reviewText.trim() || rating === 0 || step === 'loading' || remainingToday <= 0
+  const isDisabled = !reviewText.trim() || rating === 0 || step === 'loading' || remainingToday === 0
 
   async function handleSubmit() {
     setStep('loading')
@@ -79,17 +79,19 @@ export default function SubmitButton({ profileId, modifierId }: SubmitButtonProp
             </svg>
             AIが返信文を生成中...
           </span>
-        ) : remainingToday <= 0 ? (
+        ) : remainingToday === 0 ? (
           '本日の利用回数を使い切りました'
         ) : (
-          `✨ 返信文を生成する`
+          '✨ 返信文を生成する'
         )}
       </button>
-      <p className="text-center text-xs text-stone-400 mt-2">
-        {remainingToday > 0
-          ? `本日あと ${remainingToday} 回利用できます（無料）`
-          : '本日の無料利用回数を使い切りました'}
-      </p>
+      {remainingToday >= 0 && (
+        <p className="text-center text-xs text-stone-400 mt-2">
+          {remainingToday > 0
+            ? `本日あと ${remainingToday} 回利用できます（無料）`
+            : '本日の無料利用回数を使い切りました'}
+        </p>
+      )}
     </div>
   )
 }

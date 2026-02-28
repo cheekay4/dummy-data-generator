@@ -57,12 +57,6 @@ export default function Header() {
             /* ログイン済み */
             <>
               <Link
-                href="/pricing"
-                className="hidden sm:block text-stone-500 hover:text-stone-800 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
-              >
-                料金
-              </Link>
-              <Link
                 href="/generator"
                 className="hidden sm:block bg-amber-500 hover:bg-amber-600 text-white px-4 py-1.5 rounded-xl text-sm font-medium transition-colors"
               >
@@ -73,6 +67,12 @@ export default function Header() {
                 className="text-stone-700 hover:text-stone-900 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors font-medium"
               >
                 マイページ
+              </Link>
+              <Link
+                href="/pricing"
+                className="hidden sm:block text-stone-500 hover:text-stone-800 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
+              >
+                料金
               </Link>
               <button
                 onClick={handleSignOut}
@@ -85,18 +85,6 @@ export default function Header() {
             /* 未ログイン */
             <>
               <Link
-                href="/pricing"
-                className="hidden sm:block text-stone-500 hover:text-stone-800 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
-              >
-                料金
-              </Link>
-              <a
-                href="/#faq"
-                className="hidden sm:block text-stone-500 hover:text-stone-800 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
-              >
-                FAQ
-              </a>
-              <Link
                 href="/generator"
                 className="hidden sm:block bg-amber-500 hover:bg-amber-600 text-white px-4 py-1.5 rounded-xl text-sm font-medium transition-colors"
               >
@@ -108,6 +96,18 @@ export default function Header() {
               >
                 ログイン
               </button>
+              <Link
+                href="/pricing"
+                className="hidden sm:block text-stone-500 hover:text-stone-800 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
+              >
+                料金
+              </Link>
+              <a
+                href="/#faq"
+                className="hidden sm:block text-stone-500 hover:text-stone-800 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
+              >
+                FAQ
+              </a>
             </>
           )}
         </nav>

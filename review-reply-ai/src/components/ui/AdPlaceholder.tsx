@@ -10,13 +10,6 @@ const SIZE_MAP = {
 }
 
 export default function AdPlaceholder({ size, className = '' }: AdPlaceholderProps) {
-  const { width, height, label } = SIZE_MAP[size]
-  return (
-    <div
-      className={`flex items-center justify-center bg-stone-100 border border-dashed border-stone-300 rounded-lg text-stone-400 text-xs ${className}`}
-      style={{ width: '100%', maxWidth: width, height, margin: '0 auto' }}
-    >
-      {label}
-    </div>
-  )
+  // 広告未設定時は何も表示しない（広告コード挿入時にここを差し替える）
+  return null
 }

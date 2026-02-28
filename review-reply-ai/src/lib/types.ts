@@ -121,3 +121,44 @@ export interface ReplyHistory {
   selected_reply: string | null
   created_at: string
 }
+
+// --- Admin types ---
+
+export interface AdminStats {
+  totalUsers: number
+  newUsersThisWeek: number
+  proCount: number
+  generationsToday: number
+  anonymousTrialsToday: number
+  activeUsersToday: number
+  recentSignups: { email: string; created_at: string }[]
+}
+
+export interface AdminUser {
+  id: string
+  email: string
+  display_name: string | null
+  plan: Plan
+  created_at: string
+  usageToday: number
+  profileCount: number
+}
+
+export interface AdminUserDetail extends AdminUser {
+  replyProfiles: ReplyProfile[]
+  recentUsage: { date: string; count: number }[]
+  recentHistory: ReplyHistory[]
+  subscription: {
+    stripe_subscription_id: string | null
+    status: string | null
+  } | null
+}
+
+export interface AdminAuditLog {
+  id: string
+  admin_id: string
+  action: string
+  target_id: string | null
+  details: Record<string, unknown>
+  created_at: string
+}

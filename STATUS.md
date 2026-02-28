@@ -160,6 +160,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-01 | MyReplyTone 管理者ダッシュボード実装（/admin KPI・ユーザー管理CRUD・認証バグ修正）デプロイ完了 | Claude Code |
 | 2026-02-28 | MyReplyTone HowItWorks性格診断推し整合修正・STEP3リンク化・UXテスト方法論2基準追加 | Claude Code |
 | 2026-02-28 | MyReplyTone UXテスト🔴4件修正（ナビ順序・広告非表示・料金表修正・残回数初期値）デプロイ完了 | Claude Code |
 | 2026-02-28 | MyReplyTone ブランドリニューアル・ファビコン・Supabaseメールテンプレ日本語化・rate limit Supabase永続化・AuthModal UI改善 | Claude Code |

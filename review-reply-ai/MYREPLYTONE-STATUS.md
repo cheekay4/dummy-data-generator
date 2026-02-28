@@ -3,7 +3,7 @@
 > このファイルは `review-reply-ai`（旧URL: review-reply-ai-nu.vercel.app → 新URL: myreplytone.com）の
 > Single Source of Truth。このプロジェクトが中心プロダクトのため、詳細ログを別ファイルで管理する。
 
-最終更新: 2026-02-28（GA4設定・Search Console登録・ドメイン接続・全デプロイ完了）
+最終更新: 2026-02-28（ブランドリニューアル・ファビコン・メールテンプレ・rate limit修正完了）
 
 ---
 
@@ -241,12 +241,16 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 項目 | 完了日 |
 |------|--------|
-| ドメイン `myreplytone.com` Vercel 接続 | 2026-02-28 |
-| さくらインターネット DNS 設定（A/CNAME） | 2026-02-28 |
-| Supabase Redirect URL・Site URL 更新 | 2026-02-28 |
-| Google Search Console 登録・所有権確認 | 2026-02-28 |
-| sitemap.xml 送信 | 2026-02-28 |
+| ファビコン（icon.tsx / apple-icon.tsx）波形アイコン | 2026-02-28 |
+| Supabase マジックリンク メールテンプレ日本語化 | 2026-02-28 |
+| サービス名 MyReplyTone + AI口コミ返信ジェネレーター 併記 | 2026-02-28 |
+| ロゴ刷新（AudioWaveform アイコン + 2行テキスト） | 2026-02-28 |
+| AuthModal UX改善（ボタン文言・送信後メッセージ） | 2026-02-28 |
+| rate limit: Supabase永続化（anonymous_trial_usage テーブル・3回/日） | 2026-02-28 |
 | GA4 `G-8Z4CYXXR5N` 設定・本番反映 | 2026-02-28 |
+| Google Search Console 登録・所有権確認・sitemap.xml 送信 | 2026-02-28 |
+| ドメイン `myreplytone.com` Vercel 接続・DNS・SSL | 2026-02-28 |
+| Supabase Redirect URL・Site URL 更新 | 2026-02-28 |
 | Vercel 環境変数 `NEXT_PUBLIC_APP_URL=https://myreplytone.com` | 2026-02-28 |
 
 ### 🟡 中優先度
@@ -271,7 +275,9 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
-| 2026-02-28 | GA4（G-8Z4CYXXR5N）Vercel環境変数設定・デプロイ反映。Search Console sitemap.xml送信完了 | 最新 |
+| 2026-02-28 | ファビコン追加（icon.tsx/apple-icon.tsx 波形アイコン）・Supabaseメールテンプレ日本語化 | 最新 |
+| 2026-02-28 | サービス名 MyReplyTone に統一・ロゴ刷新（AudioWaveform）・AI口コミ返信ジェネレーター併記・rate limit Supabase永続化（3回/日）・AuthModal UI改善 | b3ecf8c |
+| 2026-02-28 | GA4（G-8Z4CYXXR5N）Vercel環境変数設定・デプロイ反映。Search Console sitemap.xml送信完了 | 54618af |
 | 2026-02-28 | Google Search Console 所有権確認完了（HTMLファイル + メタタグ2方式）| ce6b1d2 / 572c85a |
 | 2026-02-28 | Supabase Site URL・Redirect URL を myreplytone.com に更新 | 手動 |
 | 2026-02-28 | さくらインターネット DNS設定（A: 76.76.21.21 / CNAME: cname.vercel-dns.com）・SSL自動発行 | 手動 |

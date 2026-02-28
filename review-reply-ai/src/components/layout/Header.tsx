@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import AuthButton from '@/components/auth/AuthButton'
 
 export default function Header() {
   return (
@@ -19,10 +20,11 @@ export default function Header() {
           </a>
           <a
             href="/generator"
-            className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-1.5 rounded-xl text-sm font-medium transition-colors"
+            className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-1.5 rounded-xl text-sm font-medium transition-colors hidden sm:block"
           >
             今すぐ試す
           </a>
+          <AuthButton />
         </nav>
       </div>
     </header>

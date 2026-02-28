@@ -3,7 +3,12 @@
 import { useGeneratorStore } from '@/stores/generatorStore'
 import type { GenerateReplyRequest } from '@/lib/types'
 
-export default function SubmitButton() {
+interface SubmitButtonProps {
+  profileId: string | null
+  modifierId: string | null
+}
+
+export default function SubmitButton({ profileId, modifierId }: SubmitButtonProps) {
   const {
     reviewText,
     rating,
@@ -32,6 +37,8 @@ export default function SubmitButton() {
       tone,
       shopName: shopName || undefined,
       shopDescription: shopDescription || undefined,
+      profileId: profileId ?? undefined,
+      modifierId: modifierId ?? undefined,
       source: 'web',
     }
 
@@ -81,7 +88,7 @@ export default function SubmitButton() {
       <p className="text-center text-xs text-stone-400 mt-2">
         {remainingToday > 0
           ? `本日あと ${remainingToday} 回利用できます（無料）`
-          : '本日の無料利用回数（3回）を使い切りました'}
+          : '本日の無料利用回数を使い切りました'}
       </p>
     </div>
   )

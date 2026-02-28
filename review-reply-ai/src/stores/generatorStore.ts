@@ -9,7 +9,6 @@ import type {
 type Step = 'form' | 'loading' | 'result'
 
 interface GeneratorState {
-  // Form fields
   reviewText: string
   rating: number
   platform: Platform
@@ -17,14 +16,14 @@ interface GeneratorState {
   tone: Tone
   shopName: string
   shopDescription: string
+  profileId: string | null
+  modifierId: string | null
 
-  // UI state
   step: Step
   result: GenerateReplyResult | null
   error: string | null
   remainingToday: number
 
-  // Actions
   setReviewText: (v: string) => void
   setRating: (v: number) => void
   setPlatform: (v: Platform) => void
@@ -32,6 +31,8 @@ interface GeneratorState {
   setTone: (v: Tone) => void
   setShopName: (v: string) => void
   setShopDescription: (v: string) => void
+  setProfileId: (v: string | null) => void
+  setModifierId: (v: string | null) => void
   setStep: (v: Step) => void
   setResult: (result: GenerateReplyResult, remaining: number) => void
   setError: (msg: string) => void
@@ -46,10 +47,12 @@ const DEFAULT_STATE = {
   tone: '丁寧' as Tone,
   shopName: '',
   shopDescription: '',
+  profileId: null,
+  modifierId: null,
   step: 'form' as const,
   result: null,
   error: null,
-  remainingToday: 3,
+  remainingToday: 1,
 }
 
 export const useGeneratorStore = create<GeneratorState>((set) => ({
@@ -62,6 +65,8 @@ export const useGeneratorStore = create<GeneratorState>((set) => ({
   setTone: (v) => set({ tone: v }),
   setShopName: (v) => set({ shopName: v }),
   setShopDescription: (v) => set({ shopDescription: v }),
+  setProfileId: (v) => set({ profileId: v }),
+  setModifierId: (v) => set({ modifierId: v }),
   setStep: (v) => set({ step: v }),
   setResult: (result, remaining) =>
     set({ result, remainingToday: remaining, step: 'result', error: null }),

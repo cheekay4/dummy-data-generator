@@ -22,15 +22,61 @@ export type Tone = '丁寧' | 'フレンドリー' | 'カジュアル'
 
 export type Sentiment = 'positive' | 'negative' | 'mixed'
 
+export type AxisKey = 'agreeableness' | 'extraversion' | 'conscientiousness' | 'openness'
+
+export type DISCType = 'D' | 'I' | 'S' | 'C'
+
+export type CreationMethod = 'text_learning' | 'diagnosis'
+
+export type Plan = 'free' | 'pro'
+
+export interface UserProfile {
+  id: string
+  email: string | null
+  display_name: string | null
+  stripe_customer_id: string | null
+  plan: Plan
+  created_at: string
+}
+
+export interface ReplyProfile {
+  id: string
+  user_id: string
+  profile_name: string
+  agreeableness: number   // 0-5, 0.5刻み
+  extraversion: number    // 0-5, 0.5刻み
+  conscientiousness: number // 0-5, 0.5刻み
+  openness: number        // 0-5, 0.5刻み
+  disc_type: DISCType | null
+  analysis_text: string | null
+  speaking_style: string | null
+  creation_method: CreationMethod
+  shop_name: string | null
+  shop_description: string | null
+  business_type: string
+  is_default: boolean
+  created_at: string
+  updated_at: string
+}
+
 export interface ReplyPattern {
   label: string
   reply: string
+}
+
+export interface CustomerAnalysis {
+  estimatedDemographic: string
+  priorities: string[]
+  visitMotivation: string
+  repeatLikelihood: number // 1-5
+  insight: string
 }
 
 export interface GenerateReplyResult {
   sentiment: Sentiment
   patterns: [ReplyPattern, ReplyPattern]
   tips: string
+  customerAnalysis: CustomerAnalysis
 }
 
 export interface GenerateReplyRequest {
@@ -41,9 +87,37 @@ export interface GenerateReplyRequest {
   tone: Tone
   shopName?: string
   shopDescription?: string
+  profileId?: string
+  modifierId?: string
   source: 'web' | 'api'
 }
 
 export type GenerateReplyResponse =
   | { success: true; data: GenerateReplyResult; remainingToday: number }
   | { success: false; error: string; remainingToday?: number }
+
+export interface AnalyzeWritingResult {
+  scores: {
+    agreeableness: number
+    extraversion: number
+    conscientiousness: number
+    openness: number
+  }
+  analysis: string
+  speaking_patterns: string[]
+  disc_type: DISCType
+}
+
+export interface ReplyHistory {
+  id: string
+  user_id: string
+  review_text: string
+  rating: number
+  platform: string | null
+  business_type: string | null
+  tone: string | null
+  profile_id: string | null
+  generated_replies: ReplyPattern[]
+  selected_reply: string | null
+  created_at: string
+}

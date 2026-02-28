@@ -1,27 +1,48 @@
-const STEPS = [
-  { num: '01', title: '口コミを貼り付け', desc: 'Google・食べログ等から口コミをコピーして貼り付け。星評価も選択。' },
-  { num: '02', title: '業種とトーンを選択', desc: '飲食・美容・クリニックなど8業種から選び、返信のトーンを設定。' },
-  { num: '03', title: 'AIが返信案を2パターン提案', desc: '感謝重視・再来店促進など2種類の返信文が数秒で生成されます。' },
-]
-
 export default function HowItWorks() {
+  const steps = [
+    {
+      step: '01',
+      title: 'あなたの文章をAIに学習させる（1分）',
+      description: '過去の口コミ返信やメールを2〜3件コピペするだけ。AIがあなたの書き方のクセ・人柄を自動分析。',
+      sub: '「文章がない？」→ 10問の性格診断でもOK',
+      icon: '📝',
+    },
+    {
+      step: '02',
+      title: 'クチコミを貼り付ける',
+      description: 'Google口コミ・食べログ・ホットペッパーなど、どのプラットフォームの口コミでもOK。',
+      sub: '星評価と業種を選ぶだけ',
+      icon: '⭐',
+    },
+    {
+      step: '03',
+      title: 'あなたらしい返信が2パターン届く',
+      description: 'テンプレ感ゼロの、あなたの人柄が伝わる返信が自動生成されます。',
+      sub: '手直しのコツも無料で見られます →',
+      icon: '✉️',
+    },
+  ]
+
   return (
     <section className="py-16 px-4 bg-stone-50">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-stone-800 text-center mb-10">
-          3ステップで完了
+      <div className="max-w-3xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold text-stone-800 text-center mb-12">
+          たった3ステップで完成
         </h2>
-        <div className="grid md:grid-cols-3 gap-6 relative">
-          {STEPS.map((step, i) => (
-            <div key={step.num} className="relative">
-              <div className="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm h-full">
-                <div className="font-mono text-3xl font-bold text-amber-300 mb-3">{step.num}</div>
-                <h3 className="font-bold text-stone-800 mb-2">{step.title}</h3>
-                <p className="text-stone-500 text-sm leading-relaxed">{step.desc}</p>
+        <div className="space-y-6">
+          {steps.map((step, i) => (
+            <div key={i} className="flex gap-5 bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl">
+                  {step.icon}
+                </div>
               </div>
-              {i < 2 && (
-                <div className="hidden md:block absolute top-8 -right-3 z-10 text-stone-300 text-xl">→</div>
-              )}
+              <div>
+                <p className="text-xs font-bold text-amber-500 mb-1">STEP {step.step}</p>
+                <h3 className="font-bold text-stone-800 mb-1">{step.title}</h3>
+                <p className="text-sm text-stone-500 mb-1">{step.description}</p>
+                <p className="text-xs text-amber-600">{step.sub}</p>
+              </div>
             </div>
           ))}
         </div>

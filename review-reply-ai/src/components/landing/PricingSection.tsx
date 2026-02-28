@@ -1,67 +1,120 @@
 export default function PricingSection() {
+  const plans = [
+    {
+      name: 'お試し',
+      price: '0',
+      sub: 'ログイン不要',
+      badge: null,
+      features: ['AI返信1回', '基本返信のみ', '客層分析なし'],
+      cta: '今すぐ試す',
+      ctaHref: '/generator',
+      variant: 'outline' as const,
+    },
+    {
+      name: 'Free',
+      price: '0',
+      sub: 'ログインで無料',
+      badge: '★ おすすめ',
+      features: [
+        'AI返信5回/日',
+        'プロファイル1名分',
+        '客層分析',
+        '手直しアドバイス（無制限）',
+      ],
+      cta: '無料で始める',
+      ctaHref: '/generator',
+      variant: 'primary' as const,
+    },
+    {
+      name: 'Pro',
+      price: '390',
+      sub: '1日たった13円',
+      badge: null,
+      features: [
+        'AI返信 無制限',
+        'プロファイル5名分',
+        '補助スタイル5種',
+        '返信の重複回避',
+        '履歴保存90日',
+        '多言語返信',
+        '広告なし',
+        '手直しアドバイス',
+      ],
+      cta: 'Proを始める',
+      ctaHref: '/pricing',
+      variant: 'dark' as const,
+    },
+  ]
+
   return (
     <section id="pricing" className="py-16 px-4 bg-stone-50">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-stone-800 text-center mb-4">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold text-stone-800 text-center mb-3">
           シンプルな料金プラン
         </h2>
-        <p className="text-stone-500 text-center mb-10">いつでも解約可能</p>
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* Free */}
-          <div className="bg-white border border-stone-200 rounded-2xl p-8 shadow-sm">
-            <p className="text-stone-500 text-sm font-medium mb-2">無料プラン</p>
-            <div className="flex items-baseline gap-1 mb-6">
-              <span className="text-4xl font-bold text-stone-800">¥0</span>
-              <span className="text-stone-400">/月</span>
-            </div>
-            <ul className="space-y-3 text-sm text-stone-600 mb-8">
-              {['1日3回まで利用可能', '2パターンの返信生成', '全プラットフォーム対応', '全業種対応'].map((f) => (
-                <li key={f} className="flex items-center gap-2">
-                  <span className="text-amber-500">✓</span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <a
-              href="#generator"
-              className="block text-center border border-amber-500 text-amber-600 hover:bg-amber-50 font-medium py-3 rounded-xl transition-colors"
+        <p className="text-stone-500 text-center mb-10 text-sm">いつでも解約可能 · クレジットカード不要で始められる</p>
+
+        <div className="grid md:grid-cols-3 gap-5">
+          {plans.map((plan) => (
+            <div
+              key={plan.name}
+              className={`rounded-2xl p-7 relative ${
+                plan.variant === 'primary'
+                  ? 'bg-white border-2 border-amber-400 shadow-md'
+                  : plan.variant === 'dark'
+                  ? 'bg-stone-800 text-white'
+                  : 'bg-white border border-stone-200'
+              }`}
             >
-              無料で試す
-            </a>
-          </div>
-          {/* Pro */}
-          <div className="bg-amber-500 rounded-2xl p-8 shadow-md relative overflow-hidden">
-            <div className="absolute top-4 right-4 bg-white text-amber-600 text-xs font-bold px-2 py-1 rounded-full">
-              おすすめ
+              {plan.badge && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
+                  {plan.badge}
+                </div>
+              )}
+
+              <p className={`text-sm font-medium mb-2 ${plan.variant === 'dark' ? 'text-stone-400' : 'text-stone-500'}`}>
+                {plan.name}
+              </p>
+              <div className="flex items-baseline gap-1 mb-1">
+                <span className={`text-3xl font-bold ${plan.variant === 'dark' ? 'text-white' : 'text-stone-800'}`}>
+                  ¥{plan.price}
+                </span>
+                {plan.price !== '0' && (
+                  <span className={`text-sm ${plan.variant === 'dark' ? 'text-stone-400' : 'text-stone-400'}`}>/月</span>
+                )}
+              </div>
+              <p className={`text-xs mb-6 ${plan.variant === 'dark' ? 'text-stone-400' : 'text-stone-400'}`}>
+                {plan.sub}
+              </p>
+
+              <ul className="space-y-2 mb-7">
+                {plan.features.map((f) => (
+                  <li
+                    key={f}
+                    className={`flex items-center gap-2 text-sm ${
+                      plan.variant === 'dark' ? 'text-stone-300' : 'text-stone-600'
+                    }`}
+                  >
+                    <span className={plan.variant === 'dark' ? 'text-amber-400' : 'text-amber-500'}>✓</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={plan.ctaHref}
+                className={`block text-center font-medium py-3 rounded-xl text-sm transition-colors ${
+                  plan.variant === 'primary'
+                    ? 'bg-amber-500 hover:bg-amber-600 text-white'
+                    : plan.variant === 'dark'
+                    ? 'bg-amber-500 hover:bg-amber-600 text-white'
+                    : 'border border-stone-300 hover:border-amber-400 hover:text-amber-600 text-stone-600'
+                }`}
+              >
+                {plan.cta}
+              </a>
             </div>
-            <p className="text-amber-100 text-sm font-medium mb-2">Proプラン</p>
-            <div className="flex items-baseline gap-1 mb-6">
-              <span className="text-4xl font-bold text-white">¥390</span>
-              <span className="text-amber-200">/月</span>
-            </div>
-            <ul className="space-y-3 text-sm text-amber-50 mb-8">
-              {[
-                '無制限で利用可能',
-                '2パターンの返信生成',
-                '全プラットフォーム対応',
-                '全業種対応',
-                '返信履歴の保存',
-                'お店プロフィール保存（3件）',
-                '広告非表示',
-              ].map((f) => (
-                <li key={f} className="flex items-center gap-2">
-                  <span className="text-white">✓</span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <button
-              disabled
-              className="block w-full text-center bg-white text-amber-600 font-bold py-3 rounded-xl opacity-70 cursor-not-allowed"
-            >
-              近日公開予定
-            </button>
-          </div>
+          ))}
         </div>
       </div>
     </section>

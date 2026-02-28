@@ -275,7 +275,8 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
-| 2026-02-28 | UXテスト🔴4件修正: Headerナビ順序CTA先頭化・広告プレースホルダー非表示・料金表お試し3回/日に修正・残回数初期値センチネル化 | 最新 |
+| 2026-02-28 | HowItWorks修正: STEP1性格診断メイン化(Brain icon)・STEP3 /adviceリンク化・UXテスト方法論にメッセージ整合性+クリッカブル錯覚基準追加 | 最新 |
+| 2026-02-28 | UXテスト🔴4件修正: Headerナビ順序CTA先頭化・広告プレースホルダー非表示・料金表お試し3回/日に修正・残回数初期値センチネル化 | - |
 | 2026-02-28 | ファビコン追加（icon.tsx/apple-icon.tsx 波形アイコン）・Supabaseメールテンプレ日本語化 | - |
 | 2026-02-28 | サービス名 MyReplyTone に統一・ロゴ刷新（AudioWaveform）・AI口コミ返信ジェネレーター併記・rate limit Supabase永続化（3回/日）・AuthModal UI改善 | b3ecf8c |
 | 2026-02-28 | GA4（G-8Z4CYXXR5N）Vercel環境変数設定・デプロイ反映。Search Console sitemap.xml送信完了 | 54618af |

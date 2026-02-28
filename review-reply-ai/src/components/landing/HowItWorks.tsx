@@ -1,4 +1,5 @@
-import { PenLine, Star, Mail } from 'lucide-react'
+import { Brain, Star, Mail } from 'lucide-react'
+import Link from 'next/link'
 
 export default function HowItWorks() {
   return (
@@ -11,14 +12,14 @@ export default function HowItWorks() {
           <div className="flex gap-5 bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
             <div className="flex-shrink-0">
               <div className="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center">
-                <PenLine className="w-6 h-6 text-amber-600" />
+                <Brain className="w-6 h-6 text-amber-600" />
               </div>
             </div>
             <div>
               <p className="text-xs font-bold text-amber-500 mb-1">STEP 01</p>
-              <h3 className="font-bold text-stone-800 mb-1">あなたの文章をAIに学習させる（1分）</h3>
-              <p className="text-sm text-stone-500 mb-1">過去の口コミ返信やメールを2〜3件コピペするだけ。AIがあなたの書き方のクセ・人柄を自動分析。</p>
-              <p className="text-xs text-amber-600">「文章がない？」→ 10問の性格診断でもOK</p>
+              <h3 className="font-bold text-stone-800 mb-1">AIにあなたの性格を教える（2分）</h3>
+              <p className="text-sm text-stone-500 mb-1">10問の性格診断に答えるだけ。日常の行動パターンからAIがあなたの返信スタイルを自動分析します。</p>
+              <p className="text-xs text-amber-600">過去の返信文がある方は「テキスト学習」でさらに精度UP</p>
             </div>
           </div>
 
@@ -46,7 +47,7 @@ export default function HowItWorks() {
               <p className="text-xs font-bold text-amber-500 mb-1">STEP 03</p>
               <h3 className="font-bold text-stone-800 mb-1">あなたらしい返信が2パターン届く</h3>
               <p className="text-sm text-stone-500 mb-1">テンプレ感ゼロの、あなたの人柄が伝わる返信が自動生成されます。</p>
-              <p className="text-xs text-amber-600">手直しのコツも無料で見られます →</p>
+              <Link href="/advice" className="text-xs text-amber-600 hover:underline">手直しのコツも無料で見られます →</Link>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@
 > このファイルは `review-reply-ai`（旧URL: review-reply-ai-nu.vercel.app → 新URL: myreplytone.com）の
 > Single Source of Truth。このプロジェクトが中心プロダクトのため、詳細ログを別ファイルで管理する。
 
-最終更新: 2026-02-28
+最終更新: 2026-02-28（GA4設定・Search Console登録・ドメイン接続・全デプロイ完了）
 
 ---
 
@@ -232,11 +232,22 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 ### 🔴 高優先度
 
-| 項目 | 説明 |
-|------|------|
-| Vercel環境変数更新 | `NEXT_PUBLIC_APP_URL=https://myreplytone.com` に変更 |
-| Supabase Redirect URL更新 | `https://myreplytone.com/auth/callback` を追加 |
-| Stripe 本番切替 | テスト → 本番（全プロジェクト共通） |
+| 項目 | 説明 | 状態 |
+|------|------|------|
+| Stripe 本番切替 | テスト → 本番（全プロジェクト共通） | 保留中 |
+| sales-agent メール配信開始 | myreplytone.com 向けリード獲得メール初回送信 | 未着手 |
+
+### ✅ 完了済み
+
+| 項目 | 完了日 |
+|------|--------|
+| ドメイン `myreplytone.com` Vercel 接続 | 2026-02-28 |
+| さくらインターネット DNS 設定（A/CNAME） | 2026-02-28 |
+| Supabase Redirect URL・Site URL 更新 | 2026-02-28 |
+| Google Search Console 登録・所有権確認 | 2026-02-28 |
+| sitemap.xml 送信 | 2026-02-28 |
+| GA4 `G-8Z4CYXXR5N` 設定・本番反映 | 2026-02-28 |
+| Vercel 環境変数 `NEXT_PUBLIC_APP_URL=https://myreplytone.com` | 2026-02-28 |
 
 ### 🟡 中優先度
 
@@ -260,7 +271,12 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
-| 2026-02-28 | Phase 2-D: ドメインをmyreplytone.comに変更。layout/robots/sitemap のフォールバックURL更新 | 最新 |
+| 2026-02-28 | GA4（G-8Z4CYXXR5N）Vercel環境変数設定・デプロイ反映。Search Console sitemap.xml送信完了 | 最新 |
+| 2026-02-28 | Google Search Console 所有権確認完了（HTMLファイル + メタタグ2方式）| ce6b1d2 / 572c85a |
+| 2026-02-28 | Supabase Site URL・Redirect URL を myreplytone.com に更新 | 手動 |
+| 2026-02-28 | さくらインターネット DNS設定（A: 76.76.21.21 / CNAME: cname.vercel-dns.com）・SSL自動発行 | 手動 |
+| 2026-02-28 | Vercel カスタムドメイン登録（myreplytone.com / www.myreplytone.com）・NEXT_PUBLIC_APP_URL更新 | 5497b4c |
+| 2026-02-28 | Phase 2-D: ドメインをmyreplytone.comに変更。layout/robots/sitemap のフォールバックURL更新 | 5497b4c |
 | 2026-02-28 | Phase 2-C: 絵文字→lucide-react全置換・Headerナビ2状態対応・性格診断推奨化・Stripe/Supabaseパッケージ追加・Stripe APIバージョン更新 | a54724d |
 | 2026-02-28 | Phase 2-B: 未ログイン向け/diagnosisページ新規作成・匿名診断→ログイン後インポートフロー実装 | 8ca9d42 |
 | 2026-02-28 | Phase 2-A: HeroSection文言修正・CTAリファイン・Noto Serif JP追加・ProfileMethodSelector診断推奨化 | e029d89 |

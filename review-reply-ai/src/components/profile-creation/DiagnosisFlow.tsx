@@ -10,9 +10,10 @@ interface Props {
   businessType?: string
   onSaved: () => void
   onBack: () => void
+  isAnonymous?: boolean
 }
 
-export default function DiagnosisFlow({ businessType, onSaved, onBack }: Props) {
+export default function DiagnosisFlow({ businessType, onSaved, onBack, isAnonymous = false }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [accumulated, setAccumulated] = useState<Record<AxisKey, number>>({
     agreeableness: 0,
@@ -52,6 +53,7 @@ export default function DiagnosisFlow({ businessType, onSaved, onBack }: Props) 
         businessType={businessType}
         creationMethod="diagnosis"
         onSaved={onSaved}
+        isAnonymous={isAnonymous}
       />
     )
   }

@@ -35,8 +35,8 @@ export default function HeroSection() {
           テンプレ感ゼロの、心のこもった口コミ返信を自動生成します。
         </p>
 
-        {/* CTAボタン */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
+        {/* メインCTAボタン */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-4">
           <a
             href="/generator"
             className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold px-8 py-4 rounded-xl text-base transition-colors shadow-md hover:shadow-lg"
@@ -49,6 +49,18 @@ export default function HeroSection() {
           >
             プロファイルを作って始める
           </button>
+        </div>
+
+        {/* 性格診断CTA */}
+        <div className="mb-8">
+          <a
+            href="/diagnosis"
+            className="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-amber-600 transition-colors border border-stone-200 hover:border-amber-300 bg-white rounded-full px-5 py-2.5 shadow-sm hover:shadow"
+          >
+            <span>🧠</span>
+            <span>まず性格診断をやってみる（2分・登録不要）</span>
+            <span className="text-stone-300">→</span>
+          </a>
         </div>
 
         {showAuthModal && (
@@ -64,7 +76,7 @@ export default function HeroSection() {
             <span>✨</span> 1日5回まで無料
           </span>
           <span className="flex items-center gap-1.5">
-            <span>📝</span> あなたの文章からAIが学習
+            <span>🧠</span> 2分で性格診断
           </span>
           <span className="flex items-center gap-1.5">
             <span>⭐</span> 8業種対応

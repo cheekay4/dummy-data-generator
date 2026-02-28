@@ -1,19 +1,23 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { isSupabaseConfigured, createClient } from '@/lib/supabase/client'
 import { mapToDISC, DISC_LABELS } from '@/lib/constants'
 import PersonalityRadar from '@/components/profile/PersonalityRadar'
+import AuthModal from '@/components/auth/AuthModal'
 import type { AxisKey, DISCType, CreationMethod } from '@/lib/types'
 import type { AnalyzeWritingResult } from '@/lib/types'
 import { getSampleReview, getSampleReply } from './sampleReplies'
 
+const PENDING_DIAGNOSIS_KEY = 'rr_pending_diagnosis'
+
 interface Props {
   scores: Record<AxisKey, number>
-  analysisData?: AnalyzeWritingResult | null  // テキスト学習の場合
+  analysisData?: AnalyzeWritingResult | null
   businessType?: string
   creationMethod: CreationMethod
   onSaved: () => void
+  isAnonymous?: boolean
 }
 
 export default function ProfileResult({
@@ -22,10 +26,12 @@ export default function ProfileResult({
   businessType = '飲食店（カフェ・レストラン・居酒屋）',
   creationMethod,
   onSaved,
+  isAnonymous = false,
 }: Props) {
   const [profileName, setProfileName] = useState('')
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [showAuthModal, setShowAuthModal] = useState(false)
 
   const disc = mapToDISC(scores) as DISCType
   const discLabel = DISC_LABELS[disc]
@@ -35,6 +41,18 @@ export default function ProfileResult({
 
   const sampleReview = getSampleReview(businessType)
   const sampleReply = getSampleReply(businessType, disc)
+
+  // 匿名モードでは診断結果を sessionStorage に保存（ログイン後のインポート用）
+  useEffect(() => {
+    if (!isAnonymous) return
+    const payload = JSON.stringify({
+      scores,
+      disc,
+      businessType,
+      creationMethod,
+    })
+    sessionStorage.setItem(PENDING_DIAGNOSIS_KEY, payload)
+  }, [isAnonymous, scores, disc, businessType, creationMethod])
 
   async function handleSave() {
     if (!profileName.trim()) {
@@ -79,6 +97,7 @@ export default function ProfileResult({
     if (dbError) {
       setError(dbError.message)
     } else {
+      sessionStorage.removeItem(PENDING_DIAGNOSIS_KEY)
       onSaved()
     }
   }
@@ -89,6 +108,11 @@ export default function ProfileResult({
       <div className="text-center">
         <p className="text-2xl mb-2">📊</p>
         <h2 className="text-xl font-bold text-stone-800">あなたの返信DNAができました</h2>
+        {isAnonymous && (
+          <p className="text-sm text-amber-600 mt-1 font-medium">
+            診断完了！保存して実際の口コミ返信に使ってみましょう
+          </p>
+        )}
       </div>
 
       {/* レーダーチャート + スコア */}
@@ -125,7 +149,7 @@ export default function ProfileResult({
         </div>
       </div>
 
-      {/* 分析テキスト */}
+      {/* 分析テキスト（テキスト学習のみ） */}
       {analysis && (
         <div className="border border-stone-200 rounded-2xl p-5">
           <p className="text-xs font-medium text-stone-400 uppercase tracking-wide mb-2">
@@ -169,30 +193,54 @@ export default function ProfileResult({
         参考タイプ: {discLabel.name}寄り — {discLabel.description}
       </p>
 
-      {/* プロファイル名入力 */}
-      <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">
-          このプロファイルに名前をつけてください
-        </label>
-        <input
-          type="text"
-          value={profileName}
-          onChange={(e) => setProfileName(e.target.value)}
-          placeholder="例）うちの店長、わたし、田中"
-          className="w-full border border-stone-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400"
-        />
-        {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
-        <p className="text-xs text-stone-400 mt-1">あとからスライダーで微調整もできます</p>
-      </div>
+      {/* 保存セクション：匿名 vs ログイン済みで分岐 */}
+      {isAnonymous ? (
+        <div className="border-2 border-amber-300 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 text-center">
+          <p className="font-bold text-stone-800 mb-1">この診断結果を保存して使う</p>
+          <p className="text-sm text-stone-600 mb-4">
+            無料アカウントを作ると、この返信DNAで毎日5回まで口コミ返信を自動生成できます。
+          </p>
+          <button
+            onClick={() => setShowAuthModal(true)}
+            className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-xl text-sm transition-colors shadow-md"
+          >
+            無料で保存して口コミ返信に使う →
+          </button>
+          <p className="text-xs text-stone-400 mt-2">登録無料 · クレジットカード不要 · 1分で完了</p>
+        </div>
+      ) : (
+        <>
+          <div>
+            <label className="block text-sm font-medium text-stone-700 mb-1">
+              このプロファイルに名前をつけてください
+            </label>
+            <input
+              type="text"
+              value={profileName}
+              onChange={(e) => setProfileName(e.target.value)}
+              placeholder="例）うちの店長、わたし、田中"
+              className="w-full border border-stone-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400"
+            />
+            {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+            <p className="text-xs text-stone-400 mt-1">あとからスライダーで微調整もできます</p>
+          </div>
 
-      {/* 保存ボタン */}
-      <button
-        onClick={handleSave}
-        disabled={saving || !profileName.trim()}
-        className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-xl text-sm transition-colors disabled:opacity-50 shadow-md"
-      >
-        {saving ? '保存中...' : 'このプロファイルで始める →'}
-      </button>
+          <button
+            onClick={handleSave}
+            disabled={saving || !profileName.trim()}
+            className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-xl text-sm transition-colors disabled:opacity-50 shadow-md"
+          >
+            {saving ? '保存中...' : 'このプロファイルで始める →'}
+          </button>
+        </>
+      )}
+
+      {showAuthModal && (
+        <AuthModal
+          onClose={() => setShowAuthModal(false)}
+          nextPath="/profile/create?import=diagnosis"
+        />
+      )}
     </div>
   )
 }

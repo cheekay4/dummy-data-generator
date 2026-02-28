@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'プライバシーポリシー | AI口コミ返信ジェネレーター',
+  title: 'プライバシーポリシー | MyReplyTone',
   robots: { index: false },
 }
 
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-lg font-bold text-stone-800 mb-3">1. 収集する情報</h2>
-          <p>本サービス（AI口コミ返信ジェネレーター）は、以下の情報を収集する場合があります。</p>
+          <p>本サービス（MyReplyTone）は、以下の情報を収集する場合があります。</p>
           <ul className="list-disc pl-5 mt-2 space-y-1">
             <li>入力された口コミ本文・星評価・業種・プラットフォーム・トーン設定</li>
             <li>任意入力のお店名・お店の特徴</li>

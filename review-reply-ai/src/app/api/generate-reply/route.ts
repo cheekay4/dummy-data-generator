@@ -6,9 +6,7 @@ import type { GenerateReplyRequest, GenerateReplyResult, ReplyProfile } from '@/
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
-// In-memory rate limiting for trial (no login): IP -> { count, date }
-const rateLimitMap = new Map<string, { count: number; date: string }>()
-const TRIAL_LIMIT = 1
+const TRIAL_LIMIT = 3
 
 function getToday(): string {
   // JST基準
@@ -17,22 +15,40 @@ function getToday(): string {
   return jst.toISOString().split('T')[0]
 }
 
-function getRemainingTrial(ip: string): number {
-  const entry = rateLimitMap.get(ip)
-  const today = getToday()
-  if (!entry || entry.date !== today) return TRIAL_LIMIT
-  return Math.max(0, TRIAL_LIMIT - entry.count)
+async function hashIp(ip: string): Promise<string> {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(ip + process.env.NEXT_PUBLIC_SUPABASE_URL)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('')
 }
 
-function consumeTrial(ip: string): boolean {
+async function getRemainingTrial(ip: string, admin: ReturnType<typeof getSupabaseAdmin>): Promise<number> {
   const today = getToday()
-  const entry = rateLimitMap.get(ip)
-  if (!entry || entry.date !== today) {
-    rateLimitMap.set(ip, { count: 1, date: today })
-    return true
-  }
-  if (entry.count >= TRIAL_LIMIT) return false
-  entry.count++
+  const ipHash = await hashIp(ip)
+  const { data } = await admin
+    .from('anonymous_trial_usage')
+    .select('count')
+    .eq('ip_hash', ipHash)
+    .eq('usage_date', today)
+    .single()
+  return Math.max(0, TRIAL_LIMIT - (data?.count ?? 0))
+}
+
+async function consumeTrial(ip: string, admin: ReturnType<typeof getSupabaseAdmin>): Promise<boolean> {
+  const today = getToday()
+  const ipHash = await hashIp(ip)
+  const { data } = await admin
+    .from('anonymous_trial_usage')
+    .select('count')
+    .eq('ip_hash', ipHash)
+    .eq('usage_date', today)
+    .single()
+  const current = data?.count ?? 0
+  if (current >= TRIAL_LIMIT) return false
+  await admin.from('anonymous_trial_usage').upsert(
+    { ip_hash: ipHash, usage_date: today, count: current + 1 },
+    { onConflict: 'ip_hash,usage_date' }
+  )
   return true
 }
 
@@ -267,21 +283,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, data: result, remainingToday: Infinity })
   }
 
-  // 未ログイン（お試し）: IPベース1回/日
-  if (getRemainingTrial(ip) <= 0) {
+  // 未ログイン（お試し）: IPベース Supabase永続化 3回/日
+  const admin = getSupabaseAdmin()
+  const remaining = await getRemainingTrial(ip, admin)
+
+  if (remaining <= 0) {
     return NextResponse.json(
       {
         success: false,
-        error: 'お試し利用は1日1回までです。ログインすると1日5回まで無料でご利用いただけます。',
+        error: `お試し利用は1日${TRIAL_LIMIT}回までです。ログインすると1日5回まで無料でご利用いただけます。`,
         remainingToday: 0,
       },
       { status: 429 }
     )
   }
 
-  if (!consumeTrial(ip)) {
+  const consumed = await consumeTrial(ip, admin)
+  if (!consumed) {
     return NextResponse.json(
-      { success: false, error: 'お試し利用は1日1回までです。', remainingToday: 0 },
+      { success: false, error: `お試し利用は1日${TRIAL_LIMIT}回までです。`, remainingToday: 0 },
       { status: 429 }
     )
   }
@@ -294,11 +314,11 @@ export async function POST(request: NextRequest) {
       result = await callClaude(body, null, [])
     } catch {
       return NextResponse.json(
-        { success: false, error: '返信の生成に失敗しました。しばらくしてからもう一度お試しください。', remainingToday: 0 },
+        { success: false, error: '返信の生成に失敗しました。しばらくしてからもう一度お試しください。', remainingToday: remaining - 1 },
         { status: 500 }
       )
     }
   }
 
-  return NextResponse.json({ success: true, data: result, remainingToday: 0 })
+  return NextResponse.json({ success: true, data: result, remainingToday: remaining - 1 })
 }

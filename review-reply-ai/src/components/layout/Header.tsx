@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Star } from 'lucide-react'
+import { AudioWaveform } from 'lucide-react'
 import { isSupabaseConfigured, createClient } from '@/lib/supabase/client'
 import AuthModal from '@/components/auth/AuthModal'
 import type { User } from '@supabase/supabase-js'
@@ -38,8 +38,15 @@ export default function Header() {
       <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
         {/* ロゴ */}
         <Link href="/" className="flex items-center gap-2">
-          <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
-          <span className="font-bold text-stone-800 text-sm md:text-base">AI口コミ返信ジェネレーター</span>
+          <div className="w-7 h-7 bg-amber-500 rounded-lg flex items-center justify-center flex-shrink-0">
+            <AudioWaveform className="w-4 h-4 text-white" />
+          </div>
+          <div className="flex flex-col leading-tight">
+            <span className="font-bold tracking-tight text-stone-900 text-sm">
+              MyReply<span className="text-amber-500">Tone</span>
+            </span>
+            <span className="text-[10px] text-stone-400 font-normal hidden sm:block">AI口コミ返信ジェネレーター</span>
+          </div>
         </Link>
 
         {/* ナビ */}

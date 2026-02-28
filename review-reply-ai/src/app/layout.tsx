@@ -8,20 +8,20 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://myreplytone.com'
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export const metadata: Metadata = {
-  title: 'AI口コミ返信ジェネレーター | あなたの人柄でGoogle口コミ・食べログに返信',
-  description: 'Google口コミ・食べログ・ホットペッパーの口コミに、あなたの返信スタイルでAIが自動返信。性格診断またはメール文章から「返信プロファイル」を作成。ログインで1日5回無料。飲食店・美容院・クリニック・ホテル対応。',
+  title: 'MyReplyTone | AI口コミ返信ジェネレーター',
+  description: 'Google口コミ・食べログ・ホットペッパーの口コミに、あなたの返信スタイルでAIが自動返信。性格診断で「返信プロファイル」を作成。ログインで1日5回無料。飲食店・美容院・クリニック・ホテル対応。',
   keywords: '口コミ 返信 AI, Google口コミ 返信 自動, 口コミ返信 テンプレート, 食べログ 返信, レビュー 返信 自動生成, MEO対策, 口コミ管理',
   openGraph: {
-    title: 'AI口コミ返信ジェネレーター | あなたらしい返信をAIが自動生成',
+    title: 'MyReplyTone | あなたらしい口コミ返信をAIが自動生成',
     description: '性格診断や過去の文章からAIがあなたの返信スタイルを学習。テンプレ感ゼロの口コミ返信を自動生成。ログインで1日5回無料。',
     type: 'website',
     locale: 'ja_JP',
     url: APP_URL,
-    siteName: 'AI口コミ返信ジェネレーター',
+    siteName: 'MyReplyTone',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI口コミ返信ジェネレーター',
+    title: 'MyReplyTone',
     description: '性格診断でAIがあなたらしい口コミ返信を自動生成。1日5回無料。',
   },
   verification: {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 const webAppSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'AI口コミ返信ジェネレーター',
+  name: 'MyReplyTone',
   url: APP_URL,
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',

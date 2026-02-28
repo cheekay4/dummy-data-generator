@@ -4,10 +4,10 @@ import GeneratorWorkspace from '@/components/generator/GeneratorWorkspace'
 import AdPlaceholder from '@/components/ui/AdPlaceholder'
 
 export const metadata: Metadata = {
-  title: '口コミ返信を生成する | AI口コミ返信ジェネレーター',
+  title: '口コミ返信を生成する | MyReplyTone',
   description: '口コミを貼り付けて業種・トーンを選ぶだけ。AIが返信文を2パターン即座に生成。Google・食べログ・ホットペッパー対応。1日3回無料。',
   openGraph: {
-    title: '口コミ返信を今すぐ生成 | AI口コミ返信ジェネレーター',
+    title: '口コミ返信を今すぐ生成 | MyReplyTone',
     description: '口コミを貼り付けて業種・トーンを選ぶだけ。AIが返信文を2パターン即座に生成。',
     type: 'website',
     locale: 'ja_JP',

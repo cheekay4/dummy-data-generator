@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: '利用規約 | AI口コミ返信ジェネレーター',
+  title: '利用規約 | MyReplyTone',
   robots: { index: false },
 }
 
@@ -16,7 +16,7 @@ export default function TermsPage() {
 
         <section>
           <h2 className="text-lg font-bold text-stone-800 mb-3">第1条（適用）</h2>
-          <p>本規約は、AI口コミ返信ジェネレーター（以下「本サービス」）の利用条件を定めるものです。ユーザーは本規約に同意した上で本サービスをご利用ください。</p>
+          <p>本規約は、MyReplyTone（以下「本サービス」）の利用条件を定めるものです。ユーザーは本規約に同意した上で本サービスをご利用ください。</p>
         </section>
 
         <section>

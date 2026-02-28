@@ -8,6 +8,7 @@ import AuthModal from '@/components/auth/AuthModal'
 import type { AxisKey, DISCType, CreationMethod } from '@/lib/types'
 import type { AnalyzeWritingResult } from '@/lib/types'
 import { getSampleReview, getSampleReply } from './sampleReplies'
+import { BarChart2, Lightbulb } from 'lucide-react'
 
 const PENDING_DIAGNOSIS_KEY = 'rr_pending_diagnosis'
 
@@ -106,7 +107,7 @@ export default function ProfileResult({
     <div className="space-y-6">
       {/* ヘッダー */}
       <div className="text-center">
-        <p className="text-2xl mb-2">📊</p>
+        <BarChart2 className="w-7 h-7 text-amber-500 mx-auto mb-2" />
         <h2 className="text-xl font-bold text-stone-800">あなたの返信DNAができました</h2>
         {isAnonymous && (
           <p className="text-sm text-amber-600 mt-1 font-medium">
@@ -159,7 +160,7 @@ export default function ProfileResult({
 
           {speakingPatterns.length > 0 && (
             <div className="mt-3 pt-3 border-t border-stone-100">
-              <p className="text-xs font-medium text-stone-500 mb-2">💡 AIが見つけたあなたの「クセ」</p>
+              <p className="text-xs font-medium text-stone-500 mb-2 flex items-center gap-1"><Lightbulb className="w-3.5 h-3.5" /> AIが見つけたあなたの「クセ」</p>
               <ul className="space-y-1">
                 {speakingPatterns.map((p, i) => (
                   <li key={i} className="text-sm text-stone-600 flex items-start gap-1.5">

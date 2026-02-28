@@ -9,6 +9,7 @@ import ReplyCard from './ReplyCard'
 import CustomerAnalysis from './CustomerAnalysis'
 import EditAdviceBanner from './EditAdviceBanner'
 import AuthModal from '@/components/auth/AuthModal'
+import { Sparkles, Star, Check, RefreshCw, PenLine } from 'lucide-react'
 
 export default function ReplyResults() {
   const { result, rating, setStep } = useGeneratorStore()
@@ -62,7 +63,7 @@ export default function ReplyResults() {
       {showAuthCTA && (
         <div className="border-2 border-amber-300 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6">
           <div className="flex items-start gap-3 mb-4">
-            <span className="text-2xl flex-shrink-0">🎭</span>
+            <Sparkles className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
             <div>
               <p className="font-bold text-stone-800 mb-1">この返信を、もっとあなたらしくできます</p>
               <p className="text-sm text-stone-600">
@@ -73,12 +74,12 @@ export default function ReplyResults() {
           </div>
           <div className="bg-white rounded-xl p-3 mb-4 border border-amber-100">
             <div className="flex items-center gap-2 text-xs text-stone-500 mb-2">
-              <span>✨</span>プロファイルを作ると変わること
+              <Star className="w-3.5 h-3.5 text-amber-400" />プロファイルを作ると変わること
             </div>
             <ul className="text-xs text-stone-600 space-y-1">
-              <li>✅ あなた独自の口調・言葉遣いで返信</li>
-              <li>✅ 1日5回まで無料で生成</li>
-              <li>✅ お客様の特徴分析（客層・来店動機）</li>
+              <li className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />あなた独自の口調・言葉遣いで返信</li>
+              <li className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />1日5回まで無料で生成</li>
+              <li className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />お客様の特徴分析（客層・来店動機）</li>
             </ul>
           </div>
           <button
@@ -104,13 +105,13 @@ export default function ReplyResults() {
           onClick={() => setStep('form')}
           className="flex-1 flex items-center justify-center gap-2 border border-stone-300 hover:border-amber-400 hover:text-amber-600 text-stone-600 py-3 rounded-xl font-medium transition-all"
         >
-          🔄 もう一度生成
+          <RefreshCw className="w-4 h-4" /> もう一度生成
         </button>
         <button
           onClick={() => setStep('form')}
           className="flex-1 flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-xl font-medium transition-colors shadow-sm"
         >
-          ✏️ 新しい口コミを入力
+          <PenLine className="w-4 h-4" /> 新しい口コミを入力
         </button>
       </div>
     </div>

@@ -10,6 +10,7 @@ import ProfileResult from '@/components/profile-creation/ProfileResult'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { AxisKey } from '@/lib/types'
+import { Lock } from 'lucide-react'
 
 const PENDING_DIAGNOSIS_KEY = 'rr_pending_diagnosis'
 
@@ -70,7 +71,7 @@ function ProfileCreateInner() {
     return (
       <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
         <div className="bg-white border border-stone-200 rounded-2xl p-8 max-w-sm text-center">
-          <p className="text-4xl mb-3">🔐</p>
+          <div className="w-14 h-14 bg-stone-100 rounded-2xl flex items-center justify-center mx-auto mb-3"><Lock className="w-7 h-7 text-stone-400" /></div>
           <h1 className="text-xl font-bold text-stone-800 mb-2">ログインが必要です</h1>
           <p className="text-sm text-stone-500 mb-5">
             プロファイルを作成するには、まずログインしてください。

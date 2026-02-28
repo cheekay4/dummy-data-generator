@@ -1,3 +1,5 @@
+import { Star } from 'lucide-react'
+
 export default function Footer() {
   return (
     <footer className="bg-stone-800 text-stone-300 mt-24">
@@ -5,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between gap-8">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-xl">⭐</span>
+              <Star className="w-5 h-5 text-amber-400 fill-amber-400" />
               <span className="font-bold text-white">AI口コミ返信ジェネレーター</span>
             </div>
             <p className="text-sm text-stone-400 max-w-xs">

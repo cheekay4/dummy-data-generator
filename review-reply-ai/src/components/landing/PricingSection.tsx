@@ -1,3 +1,5 @@
+import { Check } from 'lucide-react'
+
 export default function PricingSection() {
   const plans = [
     {
@@ -95,7 +97,7 @@ export default function PricingSection() {
                       plan.variant === 'dark' ? 'text-stone-300' : 'text-stone-600'
                     }`}
                   >
-                    <span className={plan.variant === 'dark' ? 'text-amber-400' : 'text-amber-500'}>✓</span>
+                    <Check className={`w-4 h-4 flex-shrink-0 ${plan.variant === 'dark' ? 'text-amber-400' : 'text-amber-500'}`} />
                     {f}
                   </li>
                 ))}

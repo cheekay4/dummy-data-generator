@@ -12,6 +12,7 @@ import ShopProfile from './ShopProfile'
 import SubmitButton from './SubmitButton'
 import ReplyResults from '@/components/results/ReplyResults'
 import ProfileSelector from '@/components/profile/ProfileSelector'
+import { Sparkles, X } from 'lucide-react'
 
 const ONBOARDING_DISMISSED_KEY = 'rr_onboarding_dismissed'
 
@@ -72,7 +73,7 @@ export default function GeneratorWorkspace() {
               <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300 rounded-2xl p-5">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
-                    <span className="text-2xl flex-shrink-0">🎭</span>
+                    <Sparkles className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="font-bold text-stone-800 mb-1">まず「返信DNA」を登録しましょう</p>
                       <p className="text-sm text-stone-600 mb-3">
@@ -92,7 +93,7 @@ export default function GeneratorWorkspace() {
                     className="text-stone-300 hover:text-stone-500 text-lg flex-shrink-0 mt-0.5"
                     aria-label="閉じる"
                   >
-                    ✕
+                    <X className="w-4 h-4" />
                   </button>
                 </div>
               </div>

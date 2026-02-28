@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import DiagnosisFlow from '@/components/profile-creation/DiagnosisFlow'
 import type { Metadata } from 'next'
+import { Brain, Check } from 'lucide-react'
 
 export default function DiagnosisPage() {
   const router = useRouter()
@@ -19,7 +20,7 @@ export default function DiagnosisPage() {
           </Link>
 
           <div className="bg-white border border-stone-200 rounded-2xl p-8 shadow-sm text-center">
-            <p className="text-4xl mb-4">🧠</p>
+            <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-4"><Brain className="w-8 h-8 text-amber-600" /></div>
             <h1 className="text-2xl font-bold text-stone-800 mb-2">返信スタイル診断</h1>
             <p className="text-stone-500 text-sm mb-6 leading-relaxed">
               10問の質問に答えるだけ。<br />
@@ -29,19 +30,19 @@ export default function DiagnosisPage() {
 
             <div className="bg-stone-50 rounded-xl p-4 mb-6 text-left space-y-2">
               <div className="flex items-center gap-2 text-sm text-stone-600">
-                <span className="text-emerald-500">✓</span>
+                <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 所要時間：約2分
               </div>
               <div className="flex items-center gap-2 text-sm text-stone-600">
-                <span className="text-emerald-500">✓</span>
+                <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 登録不要・完全無料
               </div>
               <div className="flex items-center gap-2 text-sm text-stone-600">
-                <span className="text-emerald-500">✓</span>
+                <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 接客・お店に関する質問は一切なし
               </div>
               <div className="flex items-center gap-2 text-sm text-stone-600">
-                <span className="text-emerald-500">✓</span>
+                <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 結果はあなたの「返信DNA」として保存できます
               </div>
             </div>

@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     title: 'AI口コミ返信ジェネレーター',
     description: '性格診断でAIがあなたらしい口コミ返信を自動生成。1日5回無料。',
   },
+  verification: {
+    google: 'BwNu2bn0NAxEJNZF4ZoBOwCwCxoPtRzOOlr5e1h_eao',
+  },
   robots: {
     index: true,
     follow: true,

@@ -3,7 +3,7 @@
 > このファイルはプロジェクトの現在状態を記録するSST（Single Source of Truth）。
 > Claude Code は毎セッション開始時に読み込み、変更時に即反映すること。
 
-最終更新: 2026-02-23（AI口コミ返信ジェネレーター review-reply-ai Phase 1 MVP実装完了。npm run build ✅）
+最終更新: 2026-02-28（myreplytone.com ドメイン設定完了。Phase 2全実装済み。詳細は review-reply-ai/MYREPLYTONE-STATUS.md 参照）
 
 ---
 
@@ -16,7 +16,7 @@
 | tools24.jp 開発者ツール群 | https://tools24-rho.vercel.app | ✅ LIVE | tools24 |
 | 敬語メールライター | https://keigo-tools.vercel.app | ✅ LIVE | keigo-tools |
 | 契約書チェッカー | https://contract-tools-theta.vercel.app | ✅ LIVE | contract-tools |
-| AI口コミ返信ジェネレーター | https://review-reply-ai-nu.vercel.app | ✅ LIVE | review-reply-ai |
+| AI口コミ返信ジェネレーター | https://myreplytone.com | ✅ LIVE | review-reply-ai |
 
 ---
 
@@ -160,6 +160,8 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-02-28 | myreplytone.com ドメイン変更。絵文字→lucide-react全置換・Headerナビ2状態・性格診断推奨化・Stripe/Supabaseパッケージ追加。npm run build ✅ git push ✅ 詳細ログ: review-reply-ai/MYREPLYTONE-STATUS.md | Claude Code |
+| 2026-02-28 | review-reply-ai Phase 2完全実装（UX動線/性格診断/Post-AHA/SEO/認証/課金/客層分析）。npm run build ✅ git push ✅ | Claude Code |
 | 2026-02-28 | review-reply-ai Phase 2 全実装完了。Big Five 4軸プロファイル（テキスト学習+10問診断）・客層分析・補助スタイル5種・Supabase認証+課金+レート制限・LP全面刷新・/profile/createページ・/api/analyze-writing API。npm run build ✅ | Claude Code |
 | 2026-02-28 | DemoForge ローカルE2Eテスト完了。URL入力→LP解析→計画生成→Playwright自動操作→FFmpeg動画生成→MP4出力まで全パイプライン動作確認。未対応: 音声・操作可視化 | Claude Code |
 | 2026-02-28 | DemoForge Phase 1 全実装完了（1-A〜1-E）。Next.js 16 + Tailwind v4 + Zustand v5 + Playwright + Claude Vision + VOICEVOX + FFmpegワーカー。npm run build ✅ | Claude Code |

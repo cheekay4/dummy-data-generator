@@ -4,7 +4,7 @@ import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://review-reply-ai-nu.vercel.app'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://myreplytone.com'
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export const metadata: Metadata = {

@@ -19,47 +19,52 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="bg-gradient-to-b from-amber-50 to-stone-50 pt-16 pb-20 px-4">
-      <div className="max-w-3xl mx-auto text-center">
-        {/* メインキャッチコピー（ランダム表示） */}
+    <section className="bg-gradient-to-b from-amber-50 to-stone-50 pt-20 pb-24 px-4">
+      <div className="max-w-2xl mx-auto text-center">
+
+        {/* キャッチコピー */}
         <h1
-          className="text-3xl md:text-4xl font-bold text-stone-900 leading-tight mb-5"
+          className="text-3xl md:text-4xl font-bold text-stone-900 leading-snug mb-6 tracking-tight"
           style={{ fontFamily: '"Noto Serif JP", serif' }}
         >
           {catchcopy}
         </h1>
 
         {/* サブコピー */}
-        <p className="text-stone-600 text-base md:text-lg mb-8 leading-relaxed max-w-xl mx-auto">
-          過去のメールや返信をAIが分析して、あなたの返信スタイルを学習。
-          テンプレ感ゼロの、心のこもった口コミ返信を自動生成します。
+        <p className="text-stone-500 text-base md:text-lg mb-10 leading-relaxed">
+          口コミを貼り付けるだけで、AIが返信文を自動生成。
+          <br className="hidden sm:block" />
+          性格診断でAIにあなたのスタイルを教えると、
+          <br className="hidden sm:block" />
+          <span className="text-stone-700 font-medium">テンプレ感のない、あなたらしい返信</span>に変わります。
         </p>
 
-        {/* メインCTAボタン */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-4">
+        {/* CTAボタン群：縦積み・中央揃え */}
+        <div className="flex flex-col items-center gap-3 mb-6">
           <a
             href="/generator"
-            className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold px-8 py-4 rounded-xl text-base transition-colors shadow-md hover:shadow-lg"
+            className="w-full max-w-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-2xl text-base transition-colors shadow-md hover:shadow-lg text-center"
           >
             今すぐ無料で試す
           </a>
           <button
             onClick={() => setShowAuthModal(true)}
-            className="inline-block border-2 border-amber-400 text-amber-700 hover:bg-amber-50 font-bold px-8 py-4 rounded-xl text-base transition-colors"
+            className="w-full max-w-xs border-2 border-amber-400 text-amber-700 hover:bg-amber-50 font-bold py-4 rounded-2xl text-base transition-colors text-center"
           >
-            プロファイルを作って始める
+            AIにあなたを覚えさせる（無料）
           </button>
         </div>
 
-        {/* 性格診断CTA */}
-        <div className="mb-8">
+        {/* 性格診断ゴーストリンク */}
+        <div className="mb-10">
           <a
             href="/diagnosis"
-            className="inline-flex items-center gap-2 text-sm text-stone-500 hover:text-amber-600 transition-colors border border-stone-200 hover:border-amber-300 bg-white rounded-full px-5 py-2.5 shadow-sm hover:shadow"
+            className="inline-flex items-center gap-1.5 text-sm text-stone-400 hover:text-amber-600 transition-colors"
           >
             <span>🧠</span>
-            <span>まず性格診断をやってみる（2分・登録不要）</span>
-            <span className="text-stone-300">→</span>
+            <span className="underline underline-offset-4 decoration-stone-300">
+              先に性格診断だけやってみる（2分・登録不要）
+            </span>
           </a>
         </div>
 
@@ -70,21 +75,11 @@ export default function HeroSection() {
           />
         )}
 
-        {/* バッジ */}
-        <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-stone-500">
-          <span className="flex items-center gap-1.5">
-            <span>✨</span> 1日5回まで無料
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span>🧠</span> 2分で性格診断
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span>⭐</span> 8業種対応
-          </span>
-          <span className="flex items-center gap-1.5">
-            <span>🌏</span> 多言語OK
-          </span>
-        </div>
+        {/* トラストバッジ：ドット区切りフラットテキスト */}
+        <p className="text-xs text-stone-400 tracking-wide">
+          登録無料&nbsp;&nbsp;·&nbsp;&nbsp;1日5回まで無料&nbsp;&nbsp;·&nbsp;&nbsp;8業種対応&nbsp;&nbsp;·&nbsp;&nbsp;日英中韓対応
+        </p>
+
       </div>
     </section>
   )

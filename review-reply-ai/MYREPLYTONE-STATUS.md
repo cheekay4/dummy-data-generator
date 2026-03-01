@@ -3,7 +3,7 @@
 > このファイルは `review-reply-ai`（旧URL: review-reply-ai-nu.vercel.app → 新URL: myreplytone.com）の
 > Single Source of Truth。このプロジェクトが中心プロダクトのため、詳細ログを別ファイルで管理する。
 
-最終更新: 2026-03-01（AdSense所有権確認修正・営業用説明資料作成・デプロイ完了）
+最終更新: 2026-03-01（sales-agent プロダクト分離 UAT完了）
 
 ---
 
@@ -275,6 +275,7 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
+| 2026-03-01 | sales-agent プロダクト分離 UAT全16テスト合格（Vercelキャッシュ→強制再デプロイで解決） | a0bd9ff |
 | 2026-03-01 | AdSense所有権確認修正（next/script→head直接配置）・営業用説明資料(docs/sales-deck.md)作成 | 4039de5 |
 | 2026-03-01 | sales-agent プロダクト分離: DB product列追加・Web reply/followup/discover/cron全ルートproduct対応・LeadsTable商品バッジ+フィルタタブ・CLI ProductConfig動的プロンプト+rr-*テンプレ登録+--productフラグ+業種自動判定・メール文面ルール7項追加（改行/AI臭排除/敬語/呼称等） | - |
 | 2026-03-01 | LP性格診断推し整合性統一: Header CTA→/diagnosis・FeatureCards1枚目→トーン再現・PricingSection Free CTA→/diagnosis・中間CTA主従逆転・Footer機能カテゴリ整理+性格診断リンク追加・FAQSection id="faq"バグ修正・AdSenseコード導入 | - |

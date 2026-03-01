@@ -9,6 +9,12 @@ interface LeadInput {
   estimated_scale?: string
   discovery_method?: string
   source_query?: string
+  google_place_id?: string
+  google_rating?: number | null
+  google_review_count?: number | null
+  phone?: string | null
+  address?: string | null
+  google_maps_url?: string | null
 }
 
 export async function POST(req: NextRequest) {
@@ -30,6 +36,12 @@ export async function POST(req: NextRequest) {
       discovery_method: lead.discovery_method ?? 'manual',
       source_query: lead.source_query,
       status: 'new',
+      google_place_id: lead.google_place_id,
+      google_rating: lead.google_rating,
+      google_review_count: lead.google_review_count,
+      phone: lead.phone,
+      address: lead.address,
+      google_maps_url: lead.google_maps_url,
     })
 
     if (error?.code === '23505') {

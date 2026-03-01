@@ -1,5 +1,41 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+
+interface Candidate {
+  name: string
+  email: string | null
+  website_url: string
+  industry: string
+  estimated_scale: string
+  has_line_official: boolean
+  source_url: string
+  google_place_id?: string
+  google_rating?: number | null
+  google_review_count?: number | null
+  phone?: string | null
+  address?: string | null
+  google_maps_url?: string | null
+  source: 'google_places' | 'tavily' | 'mock'
+}
+
+const STORAGE_KEY = 'autodiscover_state'
+
+interface StoredState {
+  candidates: Candidate[]
+  selected: string[]
+  note: string
+  addResult: { added: number; skipped: number } | null
+}
+
+function loadStored(): StoredState | null {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY)
+    if (!raw) return null
+    return JSON.parse(raw) as StoredState
+  } catch {
+    return null
+  }
+}
 
 const INDUSTRIES = [
   { value: 'restaurant', label: '飲食店（カフェ/レストラン/テイクアウト）' },
@@ -24,16 +60,6 @@ const SCALES = [
   { value: 'large', label: '中堅以上（31人〜）' },
 ]
 
-interface Candidate {
-  name: string
-  email: string | null
-  website_url: string
-  industry: string
-  estimated_scale: string
-  has_line_official: boolean
-  source_url: string
-}
-
 export default function AutoDiscoverTab() {
   const [industry, setIndustry] = useState('restaurant')
   const [region, setRegion] = useState('東京都')
@@ -47,6 +73,23 @@ export default function AutoDiscoverTab() {
   const [addLoading, setAddLoading] = useState(false)
   const [addResult, setAddResult] = useState<{ added: number; skipped: number } | null>(null)
   const [note, setNote] = useState('')
+
+  // sessionStorage から復元（初回マウント時）
+  useEffect(() => {
+    const stored = loadStored()
+    if (stored) {
+      setCandidates(stored.candidates)
+      setSelected(new Set(stored.selected))
+      setNote(stored.note)
+      setAddResult(stored.addResult)
+    }
+  }, [])
+
+  // 検索結果を sessionStorage に保存
+  const saveState = useCallback((c: Candidate[], sel: Set<string>, n: string, ar: { added: number; skipped: number } | null) => {
+    const state: StoredState = { candidates: c, selected: [...sel], note: n, addResult: ar }
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state)) } catch { /* ignore */ }
+  }, [])
 
   function toggleScale(v: string) {
     setScales((prev) => prev.includes(v) ? prev.filter((s) => s !== v) : [...prev, v])
@@ -66,10 +109,12 @@ export default function AutoDiscoverTab() {
       })
       const data = await res.json()
       const list: Candidate[] = data.candidates ?? []
+      const noteText = data.note ?? ''
+      const sel = new Set(list.filter((c) => c.email).map((c) => c.website_url))
       setCandidates(list)
-      if (data.note) setNote(data.note)
-      // デフォルトでメールあり候補を全選択
-      setSelected(new Set(list.filter((c) => c.email).map((c) => c.website_url)))
+      setNote(noteText)
+      setSelected(sel)
+      saveState(list, sel, noteText, null)
     } finally {
       setLoading(false)
     }
@@ -89,12 +134,20 @@ export default function AutoDiscoverTab() {
           industry: c.industry,
           estimated_scale: c.estimated_scale,
           discovery_method: 'auto_discover',
+          google_place_id: c.google_place_id,
+          google_rating: c.google_rating,
+          google_review_count: c.google_review_count,
+          phone: c.phone,
+          address: c.address,
+          google_maps_url: c.google_maps_url,
         })),
       }),
     })
     const data = await res.json()
-    setAddResult({ added: data.added ?? 0, skipped: data.skipped ?? 0 })
+    const result = { added: data.added ?? 0, skipped: data.skipped ?? 0 }
+    setAddResult(result)
     setAddLoading(false)
+    saveState(candidates, selected, note, result)
   }
 
   const withEmail = candidates.filter((c) => c.email)
@@ -211,21 +264,47 @@ export default function AutoDiscoverTab() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <p className="text-sm font-semibold text-stone-900 truncate">{c.name}</p>
+                    {c.google_rating != null && (
+                      <span className="text-xs bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded-full shrink-0">
+                        ★ {c.google_rating}{c.google_review_count != null && ` (${c.google_review_count})`}
+                      </span>
+                    )}
                     {c.has_line_official && (
                       <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full shrink-0">LINE公式</span>
                     )}
-                    <span className="text-xs text-stone-400 shrink-0">{c.estimated_scale}</span>
+                    <span className={`text-xs px-1.5 py-0.5 rounded-full shrink-0 ${
+                      c.source === 'google_places' ? 'bg-blue-50 text-blue-600' :
+                      c.source === 'tavily' ? 'bg-purple-50 text-purple-600' :
+                      'bg-stone-100 text-stone-500'
+                    }`}>
+                      {c.source === 'google_places' ? 'Google Places' : c.source === 'tavily' ? 'Tavily' : 'Mock'}
+                    </span>
                   </div>
                   {c.email ? (
                     <p className="text-xs text-stone-500 font-mono mt-0.5">{c.email}</p>
                   ) : (
                     <p className="text-xs text-red-400 mt-0.5">メール未検出 — 追加不可</p>
                   )}
-                  <a href={c.website_url} target="_blank" rel="noopener noreferrer"
-                    className="text-xs text-indigo-400 hover:underline truncate block mt-0.5"
-                    onClick={(e) => e.stopPropagation()}>
-                    {c.website_url}
-                  </a>
+                  {c.address && (
+                    <p className="text-xs text-stone-400 mt-0.5 truncate">{c.address}</p>
+                  )}
+                  <div className="flex items-center gap-3 mt-0.5 flex-wrap">
+                    {c.phone && (
+                      <span className="text-xs text-stone-400">{c.phone}</span>
+                    )}
+                    <a href={c.website_url} target="_blank" rel="noopener noreferrer"
+                      className="text-xs text-indigo-400 hover:underline truncate"
+                      onClick={(e) => e.stopPropagation()}>
+                      {c.website_url}
+                    </a>
+                    {c.google_maps_url && (
+                      <a href={c.google_maps_url} target="_blank" rel="noopener noreferrer"
+                        className="text-xs text-blue-500 hover:underline shrink-0"
+                        onClick={(e) => e.stopPropagation()}>
+                        Maps で確認
+                      </a>
+                    )}
+                  </div>
                 </div>
               </label>
             ))}

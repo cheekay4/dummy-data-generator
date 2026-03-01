@@ -40,9 +40,9 @@ export default function CampaignsPage() {
         ))}
       </div>
 
-      {tab === 'discover' && <AutoDiscoverTab />}
-      {tab === 'url'      && <UrlScrapeTab />}
-      {tab === 'manual'   && <ManualAddTab />}
+      <div className={tab === 'discover' ? '' : 'hidden'}><AutoDiscoverTab /></div>
+      <div className={tab === 'url'      ? '' : 'hidden'}><UrlScrapeTab /></div>
+      <div className={tab === 'manual'   ? '' : 'hidden'}><ManualAddTab /></div>
     </div>
   )
 }

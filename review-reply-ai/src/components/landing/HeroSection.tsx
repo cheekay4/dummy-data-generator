@@ -3,15 +3,15 @@
 import { useState, useEffect } from 'react'
 import AuthModal from '@/components/auth/AuthModal'
 
-const HERO_CATCHCOPIES = [
-  '自動口コミ返信に、あなたの"人柄"をインストール。',
-  'あなたの"ありがとう"、AIがちゃんとお客様に届けます。',
-  '口コミ返信が苦手でも大丈夫。あなたの性格、AIが再現します。',
-  'お客様が嬉しくなる返信、あなたの人柄から作ります。',
+const HERO_CATCHCOPIES: [string, string][] = [
+  ['自動口コミ返信に、', 'あなたの"人柄"をインストール。'],
+  ['あなたの"ありがとう"、', 'AIがちゃんとお客様に届けます。'],
+  ['口コミ返信が苦手でも大丈夫。', 'あなたの性格、AIが再現します。'],
+  ['お客様が嬉しくなる返信、', 'あなたの人柄から作ります。'],
 ]
 
 export default function HeroSection() {
-  const [catchcopy, setCatchcopy] = useState(HERO_CATCHCOPIES[0])
+  const [catchcopy, setCatchcopy] = useState<[string, string]>(HERO_CATCHCOPIES[0])
   const [showAuthModal, setShowAuthModal] = useState(false)
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function HeroSection() {
           className="text-3xl md:text-4xl font-bold text-stone-900 leading-snug mb-6 tracking-tight"
           style={{ fontFamily: '"Noto Serif JP", serif' }}
         >
-          {catchcopy}
+          {catchcopy[0]}<br className="hidden sm:block" />{catchcopy[1]}
         </h1>
 
         {/* サブコピー */}

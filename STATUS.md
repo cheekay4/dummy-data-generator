@@ -160,6 +160,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-01 | MyReplyTone FAQ段落分け・Pro解約FAQ誤解防止修正（プロファイル制限/履歴閲覧条件明記・3箇所統一） | Claude Code |
 | 2026-03-01 | sales-agent: UAT完了・Cron設定(send+check-replies)・E2Eテスト送信成功・返信AI処理確認・共通署名追加・関連ページURL自動挿入・Markdown禁止ルール追加 | Claude Code |
 | 2026-03-01 | MyReplyTone FAQ充実(13問)+faqSchema同期・AdSense準拠(contact/プラポリ/利用規約/sitemap)・MsgScore同対応 | Claude Code |
 | 2026-03-01 | sales-agent プロダクト分離 UAT全16テスト合格（Vercelキャッシュ問題修正含む） | Claude Code |

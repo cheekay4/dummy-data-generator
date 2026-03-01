@@ -1,12 +1,13 @@
 import { env } from '../config/env.js';
+import { getProduct, type ProductId } from '../config/products.js';
 
 const UNSUBSCRIBE_EMAIL = env.SENDER_EMAIL;
-const SITE_URL = 'https://msgscore.jp';
 
 /**
  * 特定電子メール法に基づくフッターを付与する
  */
-function buildLegalFooter(): { text: string; html: string } {
+function buildLegalFooter(productId: ProductId = 'msgscore'): { text: string; html: string } {
+  const p = getProduct(productId);
   const text = [
     '',
     '---',
@@ -16,7 +17,7 @@ function buildLegalFooter(): { text: string; html: string } {
     `このメールの配信を停止するには、以下のアドレスへ空のメールを送信してください。`,
     `${UNSUBSCRIBE_EMAIL}（件名: unsubscribe）`,
     '',
-    `MsgScore: ${SITE_URL}`,
+    `${p.name}: ${p.url}`,
   ].join('\n');
 
   const html = `
@@ -26,7 +27,7 @@ function buildLegalFooter(): { text: string; html: string } {
   このメールの配信を停止するには
   <a href="mailto:${UNSUBSCRIBE_EMAIL}?subject=unsubscribe" style="color:#9ca3af;">こちらへメール</a>
   をお送りください。<br>
-  <a href="${SITE_URL}" style="color:#9ca3af;">MsgScore</a>
+  <a href="${p.url}" style="color:#9ca3af;">${p.name}</a>
 </p>
 `;
 
@@ -39,8 +40,9 @@ function buildLegalFooter(): { text: string; html: string } {
 export function buildBaseEmail(
   bodyText: string,
   bodyHtml: string,
+  productId: ProductId = 'msgscore',
 ): { bodyText: string; bodyHtml: string } {
-  const footer = buildLegalFooter();
+  const footer = buildLegalFooter(productId);
 
   return {
     bodyText: bodyText + footer.text,

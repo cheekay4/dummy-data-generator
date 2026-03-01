@@ -1,6 +1,16 @@
 'use client'
 import type { Lead, LeadStatus } from '@/lib/types'
 
+const PHASE_LABELS: Record<string, { label: string; emoji: string }> = {
+  initial:      { label: '初期',     emoji: '⚪' },
+  discovery:    { label: '発見',     emoji: '🔵' },
+  qualified:    { label: '見込み',   emoji: '🟢' },
+  evaluation:   { label: '検討中',   emoji: '🟣' },
+  negotiation:  { label: '交渉中',   emoji: '🟡' },
+  closed_lost:  { label: '失注',     emoji: '🔴' },
+  paused:       { label: '一時停止', emoji: '⏸️' },
+}
+
 const STATUS_LABELS: Record<LeadStatus, { label: string; color: string }> = {
   new:          { label: '新規',       color: 'bg-stone-100 text-stone-600' },
   analyzed:     { label: '分析済',     color: 'bg-blue-100 text-blue-700' },
@@ -10,6 +20,7 @@ const STATUS_LABELS: Record<LeadStatus, { label: string; color: string }> = {
   replied:      { label: '返信あり',   color: 'bg-emerald-100 text-emerald-700' },
   declined:     { label: '辞退',       color: 'bg-red-100 text-red-600' },
   unsubscribed: { label: '配信停止',   color: 'bg-stone-100 text-stone-500' },
+  bounced:      { label: 'バウンス',   color: 'bg-red-50 text-red-500' },
 }
 
 export default function LeadsTable({ leads }: { leads: Lead[] }) {
@@ -32,7 +43,7 @@ export default function LeadsTable({ leads }: { leads: Lead[] }) {
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-stone-100 bg-stone-50">
-            {['企業名', 'メール', '業種', 'ICP', 'ステータス', '追加日'].map((h) => (
+            {['企業名', 'メール', '商品', '業種', 'ICP', 'ステータス', 'フェーズ', '追加日'].map((h) => (
               <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-stone-500 uppercase tracking-wider">
                 {h}
               </th>
@@ -53,6 +64,15 @@ export default function LeadsTable({ leads }: { leads: Lead[] }) {
                   ) : lead.company_name}
                 </td>
                 <td className="px-4 py-3 text-stone-600 font-mono text-xs">{lead.email}</td>
+                <td className="px-4 py-3">
+                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                    lead.product === 'msgscore'
+                      ? 'bg-indigo-100 text-indigo-700'
+                      : 'bg-amber-100 text-amber-700'
+                  }`}>
+                    {lead.product === 'msgscore' ? 'MsgScore' : 'AI口コミ返信'}
+                  </span>
+                </td>
                 <td className="px-4 py-3 text-stone-500">{lead.industry ?? '—'}</td>
                 <td className="px-4 py-3">
                   {lead.icp_score != null ? (
@@ -65,6 +85,12 @@ export default function LeadsTable({ leads }: { leads: Lead[] }) {
                   <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusInfo.color}`}>
                     {statusInfo.label}
                   </span>
+                </td>
+                <td className="px-4 py-3 text-xs">
+                  {lead.conversation_phase && lead.conversation_phase !== 'initial' ? (() => {
+                    const phase = PHASE_LABELS[lead.conversation_phase] ?? { label: lead.conversation_phase, emoji: '⚪' }
+                    return <span>{phase.emoji} {phase.label}</span>
+                  })() : <span className="text-stone-300">—</span>}
                 </td>
                 <td className="px-4 py-3 text-stone-400 text-xs">
                   {new Date(lead.created_at).toLocaleDateString('ja-JP')}

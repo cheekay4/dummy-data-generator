@@ -3,7 +3,7 @@
 > このファイルはプロジェクトの現在状態を記録するSST（Single Source of Truth）。
 > Claude Code は毎セッション開始時に読み込み、変更時に即反映すること。
 
-最終更新: 2026-03-01（MyReplyTone LP性格診断推し整合性統一・AdSense導入・デプロイ完了）
+最終更新: 2026-03-01（sales-agent プロダクト分離 MsgScore/AI口コミ 全レイヤー実装完了）
 
 ---
 
@@ -160,6 +160,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-01 | sales-agent プロダクト分離（MsgScore/AI口コミ）: DB migration・Web全レイヤーproduct通し・UI商品バッジ+フィルタ・CLI --productフラグ+テンプレ分岐+業種自動判定・メール文面ルール改善 | Claude Code |
 | 2026-03-01 | MyReplyTone LP性格診断推し整合性統一（Header/FeatureCards/Pricing/Footer/FAQ）+ AdSense導入 | Claude Code |
 | 2026-03-01 | sales-agent-web 返信モジュール全8フェーズ実装完了（Phase4フォローアップ〜Phase8 VoC）＋Vercelデプロイ・動作確認済み | Claude Code |
 | 2026-03-01 | sales-agent-web Google Places API 3段階パイプライン（Places→メール抽出→Tavily補助）Vercel本番デプロイ完了 | Claude Code |

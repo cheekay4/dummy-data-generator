@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { env } from '../config/env.js';
 import { CLAUDE_MODEL } from '../config/constants.js';
 import type { Industry, IndustryDetail } from '../types/index.js';
+import type { ProductId } from '../config/products.js';
 
 const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
 
@@ -10,6 +11,7 @@ interface AnalysisResult {
   industry: Industry;
   icp_score: number;
   industry_detail: IndustryDetail;
+  recommended_product: ProductId;
 }
 
 /**
@@ -44,7 +46,8 @@ ${pageContent.slice(0, 3000)}
     "sns_platforms": ["Instagram", "X"]
   },
   "personalization_angle": "この企業にアプローチする際の最適な切り口（1文）",
-  "icp_score": 0
+  "icp_score": 0,
+  "recommended_product": "msgscore | review-reply-ai"
 }
 
 ## ICP（理想顧客プロファイル）スコア基準
@@ -53,7 +56,12 @@ ${pageContent.slice(0, 3000)}
 - SNS活発（週3回以上更新） → +15
 - 従業員10名以下（小規模） → +15
 - メールアドレスが公開されている → +10
-- 飲食/EC/ジムのいずれか → +10`;
+- 飲食/EC/ジムのいずれか → +10
+
+## recommended_product の判定基準
+- 口コミが重要な業種（飲食・美容・ホテル・クリニック・ジム・教室等）→ "review-reply-ai"
+- メール配信・LINE配信が多い業種（EC・SaaS等）→ "msgscore"
+- 迷ったら "review-reply-ai"`;
 
   const message = await client.messages.create({
     model: CLAUDE_MODEL,
@@ -75,6 +83,7 @@ ${pageContent.slice(0, 3000)}
     online_presence: IndustryDetail['online_presence'];
     personalization_angle: string;
     icp_score: number;
+    recommended_product?: ProductId;
   };
 
   return {
@@ -89,5 +98,6 @@ ${pageContent.slice(0, 3000)}
       online_presence: parsed.online_presence,
       personalization_angle: parsed.personalization_angle,
     },
+    recommended_product: parsed.recommended_product ?? 'review-reply-ai',
   };
 }

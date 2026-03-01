@@ -10,10 +10,12 @@ import {
   saveDraft,
 } from '../services/lead-db.js';
 import { SAFETY } from '../config/constants.js';
+import type { ProductId } from '../config/products.js';
 
 interface GenerateOptions {
   limit: number;
   minIcp: number;
+  product?: ProductId;
 }
 
 /**
@@ -74,6 +76,7 @@ export async function generateCommand(options: GenerateOptions): Promise<void> {
         industry: analysis.industry,
         industry_detail: analysis.industry_detail,
         icp_score: analysis.icp_score,
+        product: options.product ?? lead.product ?? analysis.recommended_product,
       };
 
       const draftList = await generateEmailDrafts(updatedLead);

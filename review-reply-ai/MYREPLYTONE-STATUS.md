@@ -3,7 +3,7 @@
 > このファイルは `review-reply-ai`（旧URL: review-reply-ai-nu.vercel.app → 新URL: myreplytone.com）の
 > Single Source of Truth。このプロジェクトが中心プロダクトのため、詳細ログを別ファイルで管理する。
 
-最終更新: 2026-03-01（LP性格診断推し整合性統一・AdSense導入・デプロイ完了）
+最終更新: 2026-03-01（sales-agent プロダクト分離 MsgScore/AI口コミ 全レイヤー実装完了）
 
 ---
 
@@ -275,6 +275,7 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
+| 2026-03-01 | sales-agent プロダクト分離: DB product列追加・Web reply/followup/discover/cron全ルートproduct対応・LeadsTable商品バッジ+フィルタタブ・CLI ProductConfig動的プロンプト+rr-*テンプレ登録+--productフラグ+業種自動判定・メール文面ルール7項追加（改行/AI臭排除/敬語/呼称等） | - |
 | 2026-03-01 | LP性格診断推し整合性統一: Header CTA→/diagnosis・FeatureCards1枚目→トーン再現・PricingSection Free CTA→/diagnosis・中間CTA主従逆転・Footer機能カテゴリ整理+性格診断リンク追加・FAQSection id="faq"バグ修正・AdSenseコード導入 | - |
 | 2026-03-01 | sales-agent-web Phase4-8実装: フォローアップ・ナレッジ管理・2段階返信・マルチターン・VoC収集。Vercelデプロイ・動作確認済み | 最新 |
 | 2026-03-01 | 管理者ダッシュボード実装: /admin KPIカード・ユーザー管理(一覧/詳細/プラン変更/削除)・admin認証基盤・認証バグ修正(client.ts)・Vercel ADMIN_EMAILS設定・migration_003作成 | - |

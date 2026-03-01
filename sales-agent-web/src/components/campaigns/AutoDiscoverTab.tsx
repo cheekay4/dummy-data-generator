@@ -16,6 +16,19 @@ interface Candidate {
   address?: string | null
   google_maps_url?: string | null
   source: 'google_places' | 'tavily' | 'mock'
+  product?: string
+}
+
+// 業種 → プロダクト自動判定
+const INDUSTRY_PRODUCT_DEFAULT: Record<string, string> = {
+  restaurant:  'review-reply-ai',
+  beauty:      'review-reply-ai',
+  gym:         'review-reply-ai',
+  realestate:  'review-reply-ai',
+  school:      'review-reply-ai',
+  ec:          'msgscore',
+  saas:        'msgscore',
+  other:       'review-reply-ai',
 }
 
 const STORAGE_KEY = 'autodiscover_state'
@@ -62,6 +75,7 @@ const SCALES = [
 
 export default function AutoDiscoverTab() {
   const [industry, setIndustry] = useState('restaurant')
+  const [product, setProduct] = useState('review-reply-ai')
   const [region, setRegion] = useState('東京都')
   const [subRegion, setSubRegion] = useState('')
   const [scales, setScales] = useState<string[]>(['individual', 'small'])
@@ -105,7 +119,7 @@ export default function AutoDiscoverTab() {
       const res = await fetch('/api/discover', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ industry, region, sub_region: subRegion, scale: scales, keyword, limit }),
+        body: JSON.stringify({ industry, region, sub_region: subRegion, scale: scales, keyword, limit, product }),
       })
       const data = await res.json()
       const list: Candidate[] = data.candidates ?? []
@@ -140,6 +154,7 @@ export default function AutoDiscoverTab() {
           phone: c.phone,
           address: c.address,
           google_maps_url: c.google_maps_url,
+          product: c.product ?? product,
         })),
       }),
     })
@@ -157,12 +172,24 @@ export default function AutoDiscoverTab() {
     <div className="bg-white rounded-2xl border border-stone-200 p-6">
       <h2 className="text-lg font-semibold text-stone-900 mb-5">🔍 ターゲット自動探索</h2>
 
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-3 gap-4 mb-4">
         <div>
           <label className="block text-sm font-medium text-stone-700 mb-1">業界</label>
-          <select value={industry} onChange={(e) => setIndustry(e.target.value)}
+          <select value={industry} onChange={(e) => {
+            const v = e.target.value
+            setIndustry(v)
+            setProduct(INDUSTRY_PRODUCT_DEFAULT[v] ?? 'review-reply-ai')
+          }}
             className="w-full border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-400 bg-white">
             {INDUSTRIES.map((i) => <option key={i.value} value={i.value}>{i.label}</option>)}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-stone-700 mb-1">対象プロダクト</label>
+          <select value={product} onChange={(e) => setProduct(e.target.value)}
+            className="w-full border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-400 bg-white">
+            <option value="review-reply-ai">AI口コミ返信ジェネレーター</option>
+            <option value="msgscore">MsgScore</option>
           </select>
         </div>
         <div>

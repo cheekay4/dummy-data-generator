@@ -4,6 +4,7 @@ import { CLAUDE_MODEL, SAFETY } from '../config/constants.js';
 import { buildBaseEmail } from '../templates/base.js';
 import { getIndustryTemplate } from '../templates/industries/index.js';
 import { scoreEmailSubject, MSGSCORE_LOW_SCORE_THRESHOLD } from './msgscore-client.js';
+import { getProduct, type ProductId } from '../config/products.js';
 import type { Lead, EmailDraft } from '../types/index.js';
 
 const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
@@ -15,13 +16,14 @@ interface GeneratedEmail {
   personalization_score: number;
 }
 
-function buildVariantAPrompt(lead: Lead): string {
+function buildVariantAPrompt(lead: Lead, productId: ProductId): string {
   const hooksText = lead.personalization_hooks
     .map((h) => `- [${h.type}] ${h.content}`)
     .join('\n');
+  const p = getProduct(productId);
 
   return `あなたはRikuという個人開発者の代筆者です。
-Rikuが作ったWebサービス「MsgScore」を紹介するメールを書いてください。
+Rikuが作ったWebサービス「${p.name}」を紹介するメールを書いてください。
 
 ## Rikuの人物像
 - 20代後半の個人開発者
@@ -29,10 +31,10 @@ Rikuが作ったWebサービス「MsgScore」を紹介するメールを書い�
 - 文体は丁寧だが堅苦しくない（ですます調、適度にカジュアル）
 - 売り込みが苦手。「良いもの作ったので見てほしい」というスタンス
 
-## MsgScoreとは
-メール・LINE配信文をAIがスコアリングし、開封率・CTR・CV数を予測するツール。
-無料で使える（Free: 5回/日）。Pro版は月980円。
-URL: https://msgscore.jp
+## ${p.name}とは
+${p.tagline}
+無料で使える（${p.priceFree}）。Pro版は${p.pricePro}。
+URL: ${p.url}
 
 ## 送信先企業の情報
 会社名: ${lead.company_name}
@@ -52,46 +54,74 @@ ${lead.industry_detail.personalization_angle}
 ${hooksText || '（なし）'}
 
 ## メール要件
-1. 件名: 15〜25文字。相手の社名 or 業態を含む。疑問形 or 提案形。
-2. 冒頭: 自己紹介1文 + 相手のビジネスへの具体的言及1文
-3. 本題: MsgScoreの紹介（相手のペインポイントに紐づけて）
-   - 「御社の{業態}において、{ペインポイント}は課題ではないでしょうか」的な導入
-   - MsgScoreがどう解決するか（具体例1つ）
-4. CTA: 低ハードル（「まずは無料で1通試してみてください」）
+1. 件名: 14〜20文字。相手の社名 or 業態を含む。疑問形 or 提案形。
+2. 冒頭: なぜこの企業に連絡したかを1文で + 自己紹介1文（テンプレ一斉送信感を排除）
+3. 本題: MsgScoreの紹介（相手のペインポイントに紐づけて、具体例1つ）
+4. CTA: Yes/Noで答えられる具体的な行動を1つ（「まずは無料で1通試してみませんか？」）
 5. 署名: Rikuの名前 + MsgScore URL
-6. フッター: 特定電子メール法に基づく表示（テンプレートで付与するため不要）
+6. フッター: テンプレートで付与するため不要
+
+## メール文面ルール（必須）
+
+### 改行
+- 1文ごとに改行する（句点「。」で改行）
+- 1行が25文字を超える場合は読点や文節の切れ目で折り返す
+- 段落（話題の塊）ごとに空行を1行入れる
+
+### 文字数
+- 本文400文字以内（署名・フッター除く）
+
+### AI臭の排除（以下の表現は使用禁止）
+- 「これにより」「それにより」→ 削除 or 具体的に
+- 「〜することが可能です」→「〜できます」
+- 「包括的」「多角的」「総合的」「最適化」→ 具体的に
+- 「非常に重要」「非常に有効」→ なぜかを書く
+- 「サポート」「ソリューション」「アプローチ」→ 日本語で具体的に
+- 「価値を最大化」「〜を実現」→ 具体的成果・数字で
+- 「ぜひ」は1メール1回まで
+
+### 語尾
+- 同じ語尾を3回連続させない（です/ます/ください を意識的にバラす）
+
+### 敬語
+- 「です・ます」ベース。1文に敬語表現は1つまで
+- 「〜させていただく」は1メール1回まで
+- 過剰敬語禁止（「お伺いさせていただきます」→「伺います」）
+
+### 呼称
+- 企業名は「${lead.company_name}様」で統一（「さん」「御社」は使わない）
 
 ## 禁止事項
 - 「突然のメール失礼いたします」
 - 「お忙しいところ恐れ入りますが」
-- 3段落を超える長文
 - 箇条書きの羅列
 - URLを2つ以上含める
 
 ## 出力形式（JSONのみ）
 {
-  "subject": "件名",
-  "body_text": "プレーンテキスト版（フッターなし）",
+  "subject": "件名（14〜20文字）",
+  "body_text": "プレーンテキスト版（フッターなし・400文字以内）",
   "body_html": "<p>HTML版（シンプルなHTMLタグのみ）</p>",
   "personalization_score": 0
 }`;
 }
 
-function buildVariantBPrompt(lead: Lead): string {
+function buildVariantBPrompt(lead: Lead, productId: ProductId): string {
   const hooksText = lead.personalization_hooks
     .map((h) => `- [${h.type}] ${h.content}`)
     .join('\n');
+  const p = getProduct(productId);
 
   return `あなたはRikuという個人開発者の代筆者です。
-Rikuが作ったWebサービス「MsgScore」を紹介するメールの【バリエーションB】を書いてください。
+Rikuが作ったWebサービス「${p.name}」を紹介するメールの【バリエーションB】を書いてください。
 
 バリエーションBは、より直接的・簡潔で、件名に具体的な数字や問いを使ったアプローチです。
 また、本文の末尾にP.S.として「このメールはAIを使って書いています」という一文を入れてください。
 
-## MsgScoreとは
-メール・LINE配信文をAIがスコアリングし、開封率・CTR・CV数を予測するツール。
-無料で使える（Free: 5回/日）。Pro版は月980円。
-URL: https://msgscore.jp
+## ${p.name}とは
+${p.tagline}
+無料で使える（${p.priceFree}）。Pro版は${p.pricePro}。
+URL: ${p.url}
 
 ## 送信先企業の情報
 会社名: ${lead.company_name}
@@ -104,22 +134,50 @@ URL: https://msgscore.jp
 ${hooksText || '（なし）'}
 
 ## メール要件（バリエーションB）
-1. 件名: 20文字以内。数字（例：「3秒でわかる」）か直接的な問い（例：「開封率、測ってますか？」）を使う
+1. 件名: 14〜20文字。数字（例：「3秒でわかる」）か直接的な問い（例：「開封率、測ってますか？」）を使う
 2. 冒頭: 結論から入る。自己紹介は最小限（1文以内）
 3. 本題: 1〜2文で MsgScore のメリットを端的に
-4. CTA: 「無料で試す → https://msgscore.jp」の形式
+4. CTA: 「無料で試す → ${p.url}」の形式
 5. P.S.: 「P.S. このメールはAIを使って下書きしました。変な文があればご容赦ください！」
+
+## メール文面ルール（必須）
+
+### 改行
+- 1文ごとに改行する（句点「。」で改行）
+- 1行が25文字を超える場合は読点や文節の切れ目で折り返す
+- 段落（話題の塊）ごとに空行を1行入れる
+
+### 文字数
+- 本文400文字以内（署名・フッター除く）
+
+### AI臭の排除（以下の表現は使用禁止）
+- 「これにより」「それにより」→ 削除 or 具体的に
+- 「〜することが可能です」→「〜できます」
+- 「包括的」「多角的」「総合的」「最適化」→ 具体的に
+- 「非常に重要」「非常に有効」→ なぜかを書く
+- 「サポート」「ソリューション」「アプローチ」→ 日本語で具体的に
+- 「価値を最大化」「〜を実現」→ 具体的成果・数字で
+- 「ぜひ」は1メール1回まで
+
+### 語尾
+- 同じ語尾を3回連続させない（です/ます/ください を意識的にバラす）
+
+### 敬語
+- 「です・ます」ベース。1文に敬語表現は1つまで
+- 「〜させていただく」は1メール1回まで
+
+### 呼称
+- 企業名は「${lead.company_name}様」で統一（「さん」「御社」は使わない）
 
 ## 禁止事項
 - 「突然のメール失礼いたします」
 - 「お忙しいところ恐れ入りますが」
-- 3段落以上
 - URLを2つ以上含める
 
 ## 出力形式（JSONのみ）
 {
-  "subject": "件名",
-  "body_text": "プレーンテキスト版（フッターなし）",
+  "subject": "件名（14〜20文字）",
+  "body_text": "プレーンテキスト版（フッターなし・400文字以内）",
   "body_html": "<p>HTML版</p>",
   "personalization_score": 0
 }`;
@@ -139,8 +197,8 @@ async function generateWithClaude(prompt: string): Promise<GeneratedEmail> {
   return JSON.parse(jsonMatch[0]) as GeneratedEmail;
 }
 
-function applyFooter(generated: GeneratedEmail): Pick<EmailDraft, 'body_text' | 'body_html'> {
-  const { bodyText, bodyHtml } = buildBaseEmail(generated.body_text, generated.body_html);
+function applyFooter(generated: GeneratedEmail, productId: ProductId = 'msgscore'): Pick<EmailDraft, 'body_text' | 'body_html'> {
+  const { bodyText, bodyHtml } = buildBaseEmail(generated.body_text, generated.body_html, productId);
   return { body_text: bodyText, body_html: bodyHtml };
 }
 
@@ -151,14 +209,15 @@ function applyFooter(generated: GeneratedEmail): Pick<EmailDraft, 'body_text' | 
  * - 各バリアントを MsgScore API でスコアリング（失敗時はスキップ）
  */
 export async function generateEmailDrafts(lead: Lead): Promise<EmailDraft[]> {
+  const productId: ProductId = lead.product ?? 'msgscore';
   const drafts: EmailDraft[] = [];
 
   // ── Variant A ──────────────────────────────────────────
-  let generatedA = await generateWithClaude(buildVariantAPrompt(lead));
+  let generatedA = await generateWithClaude(buildVariantAPrompt(lead, productId));
   let attemptA = 1;
 
   if (generatedA.personalization_score < SAFETY.PERSONALIZATION_SCORE_MIN) {
-    const template = getIndustryTemplate(lead.industry);
+    const template = getIndustryTemplate(lead.industry, productId);
     generatedA = {
       subject: template.subject(lead),
       body_text: template.bodyText(lead),
@@ -169,7 +228,7 @@ export async function generateEmailDrafts(lead: Lead): Promise<EmailDraft[]> {
   }
 
   const scoreA = await scoreEmailSubject(generatedA.subject);
-  const { body_text: bodyTextA, body_html: bodyHtmlA } = applyFooter(generatedA);
+  const { body_text: bodyTextA, body_html: bodyHtmlA } = applyFooter(generatedA, productId);
 
   drafts.push({
     lead_id: lead.id,
@@ -186,9 +245,9 @@ export async function generateEmailDrafts(lead: Lead): Promise<EmailDraft[]> {
 
   // ── Variant B ──────────────────────────────────────────
   try {
-    const generatedB = await generateWithClaude(buildVariantBPrompt(lead));
+    const generatedB = await generateWithClaude(buildVariantBPrompt(lead, productId));
     const scoreB = await scoreEmailSubject(generatedB.subject);
-    const { body_text: bodyTextB, body_html: bodyHtmlB } = applyFooter(generatedB);
+    const { body_text: bodyTextB, body_html: bodyHtmlB } = applyFooter(generatedB, productId);
 
     drafts.push({
       lead_id: lead.id,

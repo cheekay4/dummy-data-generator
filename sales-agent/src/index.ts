@@ -52,12 +52,14 @@ program
   .command('scrape <url>')
   .description('URLをスクレイピングしてリードを収集する')
   .option('-d, --depth <number>', 'クロール深度', '0')
+  .option('-p, --product <product>', '対象プロダクト (msgscore | review-reply-ai)')
   .option('--min-icp <number>', 'ICP スコア最低値（分析後フィルタ）', String(SAFETY.ICP_SCORE_THRESHOLD))
   .action(async (url: string, opts) => {
     try {
       await scrapeCommand(url, {
         depth: parseInt(opts.depth, 10),
         minIcp: parseInt(opts.minIcp, 10),
+        product: opts.product,
       });
     } catch (err) {
       console.error(chalk.red('エラー:'), err instanceof Error ? err.message : err);
@@ -69,12 +71,14 @@ program
   .command('generate')
   .description('未分析リードを分析しメールドラフトを生成する')
   .option('-l, --limit <number>', '処理件数の上限', '20')
+  .option('-p, --product <product>', '対象プロダクト (msgscore | review-reply-ai)')
   .option('--min-icp <number>', 'ICP スコア最低値', String(SAFETY.ICP_SCORE_THRESHOLD))
   .action(async (opts) => {
     try {
       await generateCommand({
         limit: parseInt(opts.limit, 10),
         minIcp: parseInt(opts.minIcp, 10),
+        product: opts.product,
       });
     } catch (err) {
       console.error(chalk.red('エラー:'), err instanceof Error ? err.message : err);
@@ -113,6 +117,7 @@ program
   .requiredOption('-u, --url <url>', '起点URL')
   .option('-d, --depth <number>', 'クロール深度', '0')
   .option('-l, --limit <number>', '生成件数上限', '20')
+  .option('-p, --product <product>', '対象プロダクト (msgscore | review-reply-ai)')
   .option('--min-icp <number>', 'ICP スコア最低値', String(SAFETY.ICP_SCORE_THRESHOLD))
   .action(async (opts) => {
     try {
@@ -121,6 +126,7 @@ program
         depth: parseInt(opts.depth, 10),
         limit: parseInt(opts.limit, 10),
         minIcp: parseInt(opts.minIcp, 10),
+        product: opts.product,
       });
     } catch (err) {
       console.error(chalk.red('エラー:'), err instanceof Error ? err.message : err);

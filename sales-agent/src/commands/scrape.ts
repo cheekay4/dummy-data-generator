@@ -4,30 +4,18 @@ import { scrapeWithDepth } from '../services/scraper.js';
 import { extractEmailsFromText, validateEmails } from '../services/email-extractor.js';
 import { getExistingEmails, upsertLeads } from '../services/lead-db.js';
 import { SAFETY } from '../config/constants.js';
+import type { ProductId } from '../config/products.js';
 
 interface ScrapeOptions {
   depth: number;
   minIcp: number;
+  product?: ProductId;
 }
 
 /**
  * URLをスクレイピングしてリードを収集する
  */
 export async function scrapeCommand(url: string, options: ScrapeOptions): Promise<void> {
-  // URL バリデーション（Playwright に渡す前に確認）
-  try {
-    const parsed = new URL(url);
-    if (!['http:', 'https:'].includes(parsed.protocol)) {
-      console.log(chalk.red(`エラー: URL は http:// または https:// で始まる必要があります: ${url}`));
-      console.log(chalk.yellow('例: node dist/index.js scrape https://example.com'));
-      return;
-    }
-  } catch {
-    console.log(chalk.red(`エラー: 無効な URL です: ${url}`));
-    console.log(chalk.yellow('例: node dist/index.js scrape https://example.com'));
-    return;
-  }
-
   const spinner = ora(`スクレイピング中: ${url}`).start();
 
   try {
@@ -69,6 +57,7 @@ export async function scrapeCommand(url: string, options: ScrapeOptions): Promis
       email: e.address,
       website_url: sourceMap.get(e.address) ?? url,
       industry: 'other' as const,
+      product: options.product,
       industry_detail: {
         business_type: '未分析',
         key_services: [],

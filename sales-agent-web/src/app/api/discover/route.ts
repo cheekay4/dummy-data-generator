@@ -29,6 +29,19 @@ export interface Candidate {
   address?: string | null
   google_maps_url?: string | null
   source: 'google_places' | 'tavily' | 'mock'
+  product: string
+}
+
+// 業種 → プロダクト自動判定
+const INDUSTRY_PRODUCT_MAP: Record<string, string> = {
+  restaurant:  'review-reply-ai',
+  beauty:      'review-reply-ai',
+  gym:         'review-reply-ai',
+  realestate:  'review-reply-ai',
+  school:      'review-reply-ai',
+  ec:          'msgscore',
+  saas:        'msgscore',
+  other:       'review-reply-ai',
 }
 
 interface TavilyResult {
@@ -39,14 +52,17 @@ interface TavilyResult {
 }
 
 export async function POST(req: NextRequest) {
-  const { industry, region, sub_region, scale, keyword, limit = 20 } = await req.json() as {
+  const { industry, region, sub_region, scale, keyword, limit = 20, product: reqProduct } = await req.json() as {
     industry: string
     region: string
     sub_region?: string
     scale: string[]
     keyword?: string
     limit?: number
+    product?: string
   }
+
+  const product = reqProduct ?? INDUSTRY_PRODUCT_MAP[industry] ?? 'review-reply-ai'
 
   const googleApiKey = process.env.GOOGLE_PLACES_API_KEY
   const tavilyApiKey = process.env.TAVILY_API_KEY
@@ -63,6 +79,7 @@ export async function POST(req: NextRequest) {
         has_line_official: true,
         source_url: 'https://www.google.com/search',
         source: 'mock',
+        product,
       },
       {
         name: `${sub_region ?? region}の個人事業主B`,
@@ -73,6 +90,7 @@ export async function POST(req: NextRequest) {
         has_line_official: false,
         source_url: 'https://www.google.com/search',
         source: 'mock',
+        product,
       },
     ]
     return NextResponse.json({
@@ -122,6 +140,7 @@ export async function POST(req: NextRequest) {
         address: place.formattedAddress,
         google_maps_url: place.googleMapsUri,
         source: 'google_places',
+        product,
       })
     }
   }
@@ -230,6 +249,7 @@ export async function POST(req: NextRequest) {
               has_line_official: item.content?.includes('LINE') ?? false,
               source_url: 'https://tavily.com',
               source: 'tavily',
+              product,
             })
 
             if (candidates.length >= limit) break

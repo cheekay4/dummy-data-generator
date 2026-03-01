@@ -1,12 +1,14 @@
 import chalk from 'chalk';
 import { generateCommand } from './generate.js';
 import { SAFETY } from '../config/constants.js';
+import type { ProductId } from '../config/products.js';
 
 interface PipelineOptions {
   url: string;
   depth: number;
   minIcp: number;
   limit: number;
+  product?: ProductId;
 }
 
 /**
@@ -19,13 +21,13 @@ export async function pipelineCommand(options: PipelineOptions): Promise<void> {
   // Step 1: Scrape
   console.log(chalk.bold('Step 1: スクレイピング'));
   const { scrapeCommand } = await import('./scrape.js');
-  await scrapeCommand(options.url, { depth: options.depth, minIcp: options.minIcp });
+  await scrapeCommand(options.url, { depth: options.depth, minIcp: options.minIcp, product: options.product });
 
   console.log('');
 
   // Step 2: Generate
   console.log(chalk.bold('Step 2: 分析 & ドラフト生成'));
-  await generateCommand({ limit: options.limit, minIcp: options.minIcp });
+  await generateCommand({ limit: options.limit, minIcp: options.minIcp, product: options.product });
 
   console.log('');
   console.log(chalk.bold('─'.repeat(50)));

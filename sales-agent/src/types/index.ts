@@ -1,3 +1,5 @@
+import type { ProductId } from '../config/products.js';
+
 export type Industry = 'ec_retail' | 'restaurant' | 'gym' | 'saas' | 'other';
 
 export type LeadStatus =
@@ -49,6 +51,7 @@ export interface Lead {
   status: LeadStatus;
   icp_score: number;
   personalization_hooks: PersonalizationHook[];
+  product?: ProductId;
   created_at: string;
   updated_at: string;
 }

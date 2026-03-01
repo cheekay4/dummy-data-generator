@@ -15,6 +15,7 @@ interface LeadInput {
   phone?: string | null
   address?: string | null
   google_maps_url?: string | null
+  product?: string
 }
 
 export async function POST(req: NextRequest) {
@@ -42,6 +43,7 @@ export async function POST(req: NextRequest) {
       phone: lead.phone,
       address: lead.address,
       google_maps_url: lead.google_maps_url,
+      product: lead.product ?? 'review-reply-ai',
     })
 
     if (error?.code === '23505') {

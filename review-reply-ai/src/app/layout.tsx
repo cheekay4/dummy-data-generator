@@ -90,18 +90,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
         />
+        {/* Google AdSense — head内に配置（所有権確認にはSSR出力が必要） */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2432747666538345"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="min-h-screen flex flex-col bg-stone-50">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-
-        {/* Google AdSense */}
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2432747666538345"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
 
         {/* Google Analytics */}
         {GA_ID && (

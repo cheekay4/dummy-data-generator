@@ -20,6 +20,7 @@ export async function generateReplyDraft(params: {
   knowledgeHits?: KnowledgeHit[]
   conversationHistory?: { role: 'us' | 'them'; body: string }[]
   product?: string
+  bothProductContext?: string
 }): Promise<{ subject: string; body: string }> {
   const { lead, analysis, originalReplyBody, originalSubject, knowledgeHits, conversationHistory } = params
   const productId = (params.product ?? lead.product ?? 'review-reply-ai') as ProductId
@@ -53,10 +54,11 @@ export async function generateReplyDraft(params: {
 - 「良いものを作ったので使ってほしい」というスタンス
 - 売り込みは控えめ
 
-## 紹介している商品（この商品についてのみ回答すること）
+${params.bothProductContext ? `## 紹介している商品（両方について回答すること）
+${params.bothProductContext}` : `## 紹介している商品（この商品についてのみ回答すること）
 ${productConfig.name}: ${productConfig.tagline}
 URL: ${productConfig.url}
-料金: ${productConfig.priceFree} / Pro ${productConfig.pricePro}
+料金: ${productConfig.priceFree} / Pro ${productConfig.pricePro}`}
 
 ## 返信先
 会社名: ${lead.company_name}

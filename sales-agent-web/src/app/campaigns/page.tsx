@@ -3,14 +3,16 @@ import { useState } from 'react'
 import AutoDiscoverTab from '@/components/campaigns/AutoDiscoverTab'
 import UrlScrapeTab from '@/components/campaigns/UrlScrapeTab'
 import ManualAddTab from '@/components/campaigns/ManualAddTab'
+import InboundReplyTab from '@/components/campaigns/InboundReplyTab'
 
 const TABS = [
   { id: 'discover', label: '🔍 自動探索',   desc: '業種・地域から候補を自動発見' },
   { id: 'url',      label: '🔗 URL指定',    desc: 'URLを直接スクレイプ（CLI）' },
   { id: 'manual',   label: '✏️ 手動追加',  desc: 'リードを直接入力' },
+  { id: 'inbound',  label: '📩 受信登録',   desc: '受信メールをAI処理' },
 ] as const
 
-type TabId = 'discover' | 'url' | 'manual'
+type TabId = 'discover' | 'url' | 'manual' | 'inbound'
 
 export default function CampaignsPage() {
   const [tab, setTab] = useState<TabId>('discover')
@@ -43,6 +45,7 @@ export default function CampaignsPage() {
       <div className={tab === 'discover' ? '' : 'hidden'}><AutoDiscoverTab /></div>
       <div className={tab === 'url'      ? '' : 'hidden'}><UrlScrapeTab /></div>
       <div className={tab === 'manual'   ? '' : 'hidden'}><ManualAddTab /></div>
+      <div className={tab === 'inbound'  ? '' : 'hidden'}><InboundReplyTab /></div>
     </div>
   )
 }

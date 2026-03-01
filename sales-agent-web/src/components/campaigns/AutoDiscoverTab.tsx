@@ -119,7 +119,7 @@ export default function AutoDiscoverTab() {
       const res = await fetch('/api/discover', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ industry, region, sub_region: subRegion, scale: scales, keyword, limit, product }),
+        body: JSON.stringify({ industry, region, sub_region: subRegion, scale: scales, keyword, limit, product: product === 'both' ? 'review-reply-ai' : product }),
       })
       const data = await res.json()
       const list: Candidate[] = data.candidates ?? []
@@ -154,7 +154,7 @@ export default function AutoDiscoverTab() {
           phone: c.phone,
           address: c.address,
           google_maps_url: c.google_maps_url,
-          product: c.product ?? product,
+          product: c.product ?? (product === 'both' ? 'review-reply-ai' : product),
         })),
       }),
     })
@@ -186,11 +186,20 @@ export default function AutoDiscoverTab() {
         </div>
         <div>
           <label className="block text-sm font-medium text-stone-700 mb-1">対象プロダクト</label>
-          <select value={product} onChange={(e) => setProduct(e.target.value)}
-            className="w-full border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-400 bg-white">
-            <option value="review-reply-ai">AI口コミ返信ジェネレーター</option>
-            <option value="msgscore">MsgScore</option>
-          </select>
+          <div className="grid grid-cols-3 gap-1.5">
+            <button type="button" onClick={() => setProduct('review-reply-ai')}
+              className={`rounded-xl px-2 py-2.5 text-xs font-medium border transition-colors ${product === 'review-reply-ai' ? 'bg-amber-50 border-amber-400 text-amber-700' : 'bg-white border-stone-200 text-stone-500 hover:border-stone-300'}`}>
+              AI口コミ返信
+            </button>
+            <button type="button" onClick={() => setProduct('msgscore')}
+              className={`rounded-xl px-2 py-2.5 text-xs font-medium border transition-colors ${product === 'msgscore' ? 'bg-indigo-50 border-indigo-400 text-indigo-700' : 'bg-white border-stone-200 text-stone-500 hover:border-stone-300'}`}>
+              MsgScore
+            </button>
+            <button type="button" onClick={() => setProduct('both')}
+              className={`rounded-xl px-2 py-2.5 text-xs font-medium border transition-colors ${product === 'both' ? 'bg-emerald-50 border-emerald-400 text-emerald-700' : 'bg-white border-stone-200 text-stone-500 hover:border-stone-300'}`}>
+              両方
+            </button>
+          </div>
         </div>
         <div>
           <label className="block text-sm font-medium text-stone-700 mb-1">地域</label>

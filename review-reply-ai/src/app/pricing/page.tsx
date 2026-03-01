@@ -160,7 +160,7 @@ export default function PricingPage() {
             {[
               { q: 'いつでも解約できますか？', a: 'はい、Stripeのカスタマーポータルからいつでも解約できます。解約後も月末まで利用可能です。' },
               { q: 'クレジットカード以外で支払えますか？', a: 'Stripeが対応している各種カード（VISA/Mastercard/JCB/AMEX）でお支払いいただけます。' },
-              { q: 'Proをキャンセルするとデータは消えますか？', a: 'プロファイルのデータは残ります。履歴データは90日分が閲覧できなくなります（削除ではなく非表示）。' },
+              { q: 'Proをキャンセルするとデータは消えますか？', a: 'プロファイルのデータは削除されずに残ります。ただしFreeプランではプロファイルの新規作成が1件までに制限されます。履歴データも削除はされませんが、Freeプランでは閲覧できなくなります（再度Proに戻ると閲覧可能です）。' },
             ].map((item) => (
               <div key={item.q} className="bg-white border border-stone-200 rounded-xl p-4">
                 <p className="font-medium text-stone-800 mb-1 text-sm">Q: {item.q}</p>

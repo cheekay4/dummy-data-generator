@@ -3,68 +3,144 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'プライバシーポリシー | MyReplyTone',
-  robots: { index: false },
+  description: 'MyReplyTone（AI口コミ返信ジェネレーター）のプライバシーポリシー。収集する情報、利用目的、第三者提供、Cookie、データ保存期間について。',
 }
 
 export default function PrivacyPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-16">
       <h1 className="text-2xl font-bold text-stone-800 mb-2">プライバシーポリシー</h1>
-      <p className="text-stone-400 text-sm mb-10">最終更新: 2026年2月23日</p>
+      <p className="text-stone-400 text-sm mb-10">最終更新: 2026年3月1日</p>
 
       <div className="prose prose-stone max-w-none space-y-8 text-stone-600 text-sm leading-relaxed">
 
         <section>
-          <h2 className="text-lg font-bold text-stone-800 mb-3">1. 収集する情報</h2>
-          <p>本サービス（MyReplyTone）は、以下の情報を収集する場合があります。</p>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">1. はじめに</h2>
+          <p>MyReplyTone（以下「本サービス」）は、tools24.jp が運営するAI口コミ返信ジェネレーターです。本プライバシーポリシーは、本サービスをご利用いただく際に収集する情報の種類、利用目的、管理方法について説明します。</p>
+          <p className="mt-2">本サービスをご利用いただくことで、本ポリシーの内容に同意いただいたものとみなします。</p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">2. 収集する情報</h2>
+          <p>本サービスでは、以下の情報を収集する場合があります。</p>
+
+          <h3 className="text-base font-bold text-stone-700 mt-4 mb-2">2-1. ユーザーが直接提供する情報</h3>
           <ul className="list-disc pl-5 mt-2 space-y-1">
             <li>入力された口コミ本文・星評価・業種・プラットフォーム・トーン設定</li>
             <li>任意入力のお店名・お店の特徴</li>
-            <li>アクセスログ（IPアドレス、ブラウザ種別、参照元URL、アクセス日時）</li>
-            <li>レート制限管理のためのIPアドレス（サーバーメモリ上で当日のみ保持）</li>
+            <li>性格診断の回答内容および診断結果（Big Five スコア）</li>
+            <li>テキスト学習のために入力された過去のメール・返信文</li>
+            <li>アカウント登録時のメールアドレス</li>
+            <li>返信プロファイルの名称・業種設定・パラメータ調整値</li>
+          </ul>
+
+          <h3 className="text-base font-bold text-stone-700 mt-4 mb-2">2-2. 自動的に収集する情報</h3>
+          <ul className="list-disc pl-5 mt-2 space-y-1">
+            <li>アクセスログ（IPアドレス、ブラウザ種別、OS、参照元URL、アクセス日時）</li>
+            <li>レート制限管理のためのIPアドレスハッシュ（Supabaseデータベースに保存）</li>
+            <li>Google Analytics によるアクセス解析データ（匿名化された利用統計）</li>
+            <li>Cookie 情報（認証セッション、解析、広告配信に使用）</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-stone-800 mb-3">2. 情報の利用目的</h2>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">3. 情報の利用目的</h2>
+          <p>収集した情報は、以下の目的のために利用します。</p>
+          <ul className="list-disc pl-5 mt-2 space-y-1">
+            <li>AIによる口コミ返信文の生成（入力内容を Anthropic Claude API に送信）</li>
+            <li>性格診断・テキスト学習による返信プロファイルの作成</li>
+            <li>無料利用回数の管理（未ログイン: 3回/日、ログイン: 5回/日）</li>
+            <li>ユーザーアカウントの認証・管理（Google OAuth / マジックリンク）</li>
+            <li>サービスの改善・新機能の開発</li>
+            <li>不正利用の検知・防止</li>
+            <li>アクセス解析によるサービス品質の向上</li>
+            <li>広告の配信・最適化（Google AdSense）</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">4. 第三者への提供</h2>
+          <p>収集した個人情報は、以下の場合を除き、第三者に提供・販売することはありません。</p>
+          <ul className="list-disc pl-5 mt-2 space-y-1">
+            <li><strong>Anthropic（Claude API）:</strong> 入力された口コミ内容および返信プロファイル情報は、返信文生成のために Anthropic の API に送信されます。Anthropic の利用規約およびプライバシーポリシーが適用されます。</li>
+            <li><strong>Google（Analytics / AdSense）:</strong> 匿名化されたアクセス解析データおよび広告配信のための Cookie 情報が Google に送信されます。</li>
+            <li><strong>Supabase:</strong> ユーザーアカウント情報、返信プロファイル、利用履歴はデータベースホスティングサービス Supabase 上に保存されます。</li>
+            <li><strong>Stripe:</strong> 有料プラン（Pro）のお支払い情報は決済サービス Stripe が処理します。クレジットカード番号は本サービスのサーバーには保存されません。</li>
+            <li><strong>法令に基づく場合:</strong> 法令に基づく開示要求があった場合。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">5. データの保存期間</h2>
           <ul className="list-disc pl-5 space-y-1">
-            <li>AIによる口コミ返信文の生成（Anthropic Claude APIに送信）</li>
-            <li>無料利用回数の管理（1日3回制限）</li>
-            <li>サービスの改善・不正利用の防止</li>
-            <li>アクセス解析（Google Analyticsを利用予定）</li>
+            <li><strong>口コミ入力内容（未ログインユーザー）:</strong> API 送信後、サーバーには保存しません</li>
+            <li><strong>生成された返信文（ログインユーザー）:</strong> Pro プランは90日間保存。Free プランは保存なし</li>
+            <li><strong>返信プロファイル:</strong> ユーザーが削除するまで保存</li>
+            <li><strong>IPアドレスハッシュ（レート制限用）:</strong> 翌日0時に自動リセット</li>
+            <li><strong>アクセスログ:</strong> 最大90日間保存後、自動削除</li>
+            <li><strong>アカウント情報:</strong> ユーザーが退会するまで保存</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-stone-800 mb-3">3. 第三者への提供</h2>
-          <p>入力内容はAI返信生成のためAnthropicのAPIに送信されます。Anthropicのプライバシーポリシーが適用されます。それ以外の第三者への販売・提供は行いません。</p>
-          <p className="mt-2">ただし、法令に基づく開示要求があった場合はこの限りではありません。</p>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">6. Cookie・解析ツール・広告</h2>
+          <p>本サービスでは、以下の目的で Cookie およびトラッキング技術を使用します。</p>
+
+          <h3 className="text-base font-bold text-stone-700 mt-4 mb-2">6-1. 必須 Cookie</h3>
+          <p>ユーザー認証セッションの維持に使用します。これらの Cookie を無効にすると、ログイン機能が正常に動作しない場合があります。</p>
+
+          <h3 className="text-base font-bold text-stone-700 mt-4 mb-2">6-2. Google Analytics</h3>
+          <p>サービスの利用状況を把握し改善するため、Google Analytics を使用しています。Google Analytics は Cookie を使用して匿名の利用統計を収集します。収集されたデータは Google のプライバシーポリシーに従って管理されます。</p>
+
+          <h3 className="text-base font-bold text-stone-700 mt-4 mb-2">6-3. Google AdSense</h3>
+          <p>本サービスでは、Google AdSense による広告を配信しています。AdSense は Cookie を使用して、ユーザーの興味・関心に基づいた広告を表示する場合があります。パーソナライズド広告を無効にするには、<a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-700 underline">Google の広告設定</a>から変更できます。</p>
+
+          <h3 className="text-base font-bold text-stone-700 mt-4 mb-2">6-4. Cookie の管理</h3>
+          <p>ブラウザの設定により、Cookie の受け入れを拒否することができます。ただし、一部の機能が正常に動作しなくなる可能性があります。</p>
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-stone-800 mb-3">4. データの保存期間</h2>
-          <ul className="list-disc pl-5 space-y-1">
-            <li>入力された口コミ内容：当サービスのサーバーには保存しません（APIに送信後、即座に破棄）</li>
-            <li>IPアドレス（レート制限用）：当日23:59に自動消去</li>
-            <li>アクセスログ：最大90日間</li>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">7. ユーザーの権利</h2>
+          <p>ユーザーは以下の権利を有します。</p>
+          <ul className="list-disc pl-5 mt-2 space-y-1">
+            <li><strong>アクセス権:</strong> ご自身の個人データへのアクセスを要求できます</li>
+            <li><strong>訂正権:</strong> 不正確な個人データの訂正を要求できます</li>
+            <li><strong>削除権:</strong> マイページからアカウントおよび関連データの削除が可能です</li>
+            <li><strong>データポータビリティ:</strong> ご自身のデータの提供を要求できます</li>
+          </ul>
+          <p className="mt-2">上記の権利行使については、<a href="/contact" className="text-amber-600 hover:text-amber-700 underline">お問い合わせページ</a>からご連絡ください。</p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">8. 未成年者の利用</h2>
+          <p>本サービスは、13歳未満のお子様を対象としていません。13歳未満の方からの個人情報の収集を意図的に行うことはありません。13歳未満のお子様が個人情報を提供したことが判明した場合、速やかに削除いたします。</p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">9. セキュリティ</h2>
+          <p>本サービスでは、個人情報の保護のために以下の対策を講じています。</p>
+          <ul className="list-disc pl-5 mt-2 space-y-1">
+            <li>SSL/TLS による通信の暗号化</li>
+            <li>パスワードのハッシュ化保存（Supabase Auth による管理）</li>
+            <li>アクセス制御の実装（管理者権限の分離）</li>
+            <li>定期的なセキュリティレビュー</li>
+          </ul>
+          <p className="mt-2">ただし、インターネット上の通信において完全なセキュリティを保証することはできません。</p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">10. お問い合わせ</h2>
+          <p>プライバシーに関するご質問・ご要望は、以下の連絡先までお問い合わせください。</p>
+          <ul className="list-none mt-2 space-y-1">
+            <li>運営: tools24.jp</li>
+            <li>メール: <a href="mailto:support@tools24.jp" className="text-amber-600 hover:text-amber-700 underline">support@tools24.jp</a></li>
+            <li>お問い合わせページ: <a href="/contact" className="text-amber-600 hover:text-amber-700 underline">https://myreplytone.com/contact</a></li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-stone-800 mb-3">5. Cookie・解析ツール</h2>
-          <p>本サービスは、Google Analytics等の解析ツールを使用する場合があります。これらのツールはCookieを使用して匿名の利用統計を収集します。ブラウザの設定でCookieを無効化することができます。</p>
-          <p className="mt-2">また、Google AdSenseによる広告配信を行う場合があります。AdSenseはCookieを使用して、ユーザーの興味に基づいた広告を表示します。</p>
-        </section>
-
-        <section>
-          <h2 className="text-lg font-bold text-stone-800 mb-3">6. お問い合わせ</h2>
-          <p>プライバシーに関するご質問は、下記の連絡先までお問い合わせください。</p>
-          <p className="mt-2">運営者連絡先：本サービスのフッターまたはGitHubのIssueからご連絡ください。</p>
-        </section>
-
-        <section>
-          <h2 className="text-lg font-bold text-stone-800 mb-3">7. ポリシーの変更</h2>
-          <p>本ポリシーは予告なく変更される場合があります。重要な変更がある場合はトップページでお知らせします。</p>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">11. ポリシーの変更</h2>
+          <p>本ポリシーは、法令の改正やサービス内容の変更に伴い、予告なく変更される場合があります。重要な変更がある場合はトップページまたはメールでお知らせします。変更後も本サービスを継続してご利用いただいた場合、変更後のポリシーに同意いただいたものとみなします。</p>
         </section>
       </div>
 

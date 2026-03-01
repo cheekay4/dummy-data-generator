@@ -30,8 +30,9 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <p className="font-medium text-white mb-3">法的情報</p>
+              <p className="font-medium text-white mb-3">サポート</p>
               <ul className="space-y-2">
+                <li><a href="/contact" className="hover:text-amber-400 transition-colors">お問い合わせ</a></li>
                 <li><a href="/privacy" className="hover:text-amber-400 transition-colors">プライバシーポリシー</a></li>
                 <li><a href="/terms" className="hover:text-amber-400 transition-colors">利用規約</a></li>
               </ul>

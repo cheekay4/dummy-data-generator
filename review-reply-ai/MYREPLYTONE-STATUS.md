@@ -275,6 +275,7 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
+| 2026-03-01 | FAQ充実（8→13問）・faqSchema同期・AdSense準拠（/contact新設・プラポリ/利用規約拡充・sitemap更新）・MsgScore同対応 | - |
 | 2026-03-01 | sales-agent プロダクト分離 UAT全16テスト合格（Vercelキャッシュ→強制再デプロイで解決） | a0bd9ff |
 | 2026-03-01 | AdSense所有権確認修正（next/script→head直接配置）・営業用説明資料(docs/sales-deck.md)作成 | 4039de5 |
 | 2026-03-01 | sales-agent プロダクト分離: DB product列追加・Web reply/followup/discover/cron全ルートproduct対応・LeadsTable商品バッジ+フィルタタブ・CLI ProductConfig動的プロンプト+rr-*テンプレ登録+--productフラグ+業種自動判定・メール文面ルール7項追加（改行/AI臭排除/敬語/呼称等） | - |

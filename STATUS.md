@@ -160,6 +160,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-01 | MyReplyTone FAQ充実(13問)+faqSchema同期・AdSense準拠(contact/プラポリ/利用規約/sitemap)・MsgScore同対応 | Claude Code |
 | 2026-03-01 | sales-agent プロダクト分離 UAT全16テスト合格（Vercelキャッシュ問題修正含む） | Claude Code |
 | 2026-03-01 | MyReplyTone AdSense所有権確認修正（head直接配置）・営業用説明資料作成 | Claude Code |
 | 2026-03-01 | sales-agent プロダクト分離（MsgScore/AI口コミ）: DB migration・Web全レイヤーproduct通し・UI商品バッジ+フィルタ・CLI --productフラグ+テンプレ分岐+業種自動判定・メール文面ルール改善 | Claude Code |

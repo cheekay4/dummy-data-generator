@@ -1,62 +1,100 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import AuthModal from '@/components/auth/AuthModal'
+import { motion } from 'framer-motion'
+import { ArrowRight, Star } from 'lucide-react'
 
-const HERO_CATCHCOPIES: [string, string][] = [
-  ['自動口コミ返信に、', 'あなたの"人柄"をインストール。'],
-  ['あなたの"ありがとう"、', 'AIがちゃんとお客様に届けます。'],
-  ['口コミ返信が苦手でも大丈夫。', 'あなたの性格、AIが再現します。'],
-  ['お客様が嬉しくなる返信、', 'あなたの人柄から作ります。'],
-]
+const SAMPLE_REVIEW = {
+  rating: 4,
+  text: '料理がとても美味しかったです。雰囲気も良く、また来たいと思います。ただ、少し待ち時間が長かったのが残念です。',
+}
+
+const SAMPLE_REPLY =
+  'この度はご来店いただきありがとうございます。お料理と雰囲気を気に入っていただけて嬉しいです。お待たせしてしまった点は申し訳ございません。オペレーション改善に取り組んでまいります。またのご来店を心よりお待ちしております。'
 
 export default function HeroSection() {
-  const [catchcopy, setCatchcopy] = useState<[string, string]>(HERO_CATCHCOPIES[0])
-  const [showAuthModal, setShowAuthModal] = useState(false)
-
-  useEffect(() => {
-    setCatchcopy(HERO_CATCHCOPIES[Math.floor(Math.random() * HERO_CATCHCOPIES.length)])
-  }, [])
-
   return (
-    <section className="bg-gradient-to-b from-amber-50 to-stone-50 pt-20 pb-24 px-4">
+    <section className="bg-gradient-to-b from-amber-50 to-stone-50 pt-16 pb-20 px-4">
       <div className="max-w-2xl mx-auto text-center">
 
-        {/* キャッチコピー */}
+        {/* ペルソナ呼びかけ */}
+        <p className="text-xs text-amber-600 font-medium tracking-wide mb-4">
+          飲食店・美容室・クリニック・ホテルの口コミ返信に
+        </p>
+
+        {/* メインヘッドライン */}
         <h1
-          className="text-3xl md:text-4xl font-bold text-stone-900 leading-snug mb-6 tracking-tight"
+          className="text-3xl md:text-4xl font-bold text-stone-900 leading-snug mb-4 tracking-tight"
           style={{ fontFamily: '"Noto Serif JP", serif' }}
         >
-          {catchcopy[0]}<br className="hidden sm:block" />{catchcopy[1]}
+          口コミ返信を、<br className="hidden sm:block" />あなたらしく自動生成。
         </h1>
 
         {/* サブコピー */}
-        <p className="text-stone-500 text-base md:text-lg mb-10 leading-relaxed">
-          口コミを貼り付けるだけで、AIが返信文を自動生成。
-          <br className="hidden sm:block" />
-          性格診断でAIにあなたのスタイルを教えると、
-          <br className="hidden sm:block" />
-          <span className="text-stone-700 font-medium">テンプレ感のない、あなたらしい返信</span>に変わります。
+        <p className="text-stone-500 text-base mb-10 leading-relaxed max-w-lg mx-auto">
+          口コミを貼るだけ。性格診断で学んだあなたのトーンで、
+          <span className="text-stone-700 font-medium">テンプレ感ゼロの返信</span>をAIが作ります。
         </p>
 
-        {/* CTAボタン群：縦積み・中央揃え */}
-        <div className="flex flex-col items-center gap-3 mb-6">
-          <a
-            href="/generator"
-            className="w-full max-w-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-2xl text-base transition-colors shadow-md hover:shadow-lg text-center"
+        {/* Before → After デモ */}
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-10 max-w-xl mx-auto">
+          {/* Before: 口コミ */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="w-full sm:flex-1 bg-white border border-stone-200 rounded-xl p-4 text-left shadow-sm"
           >
-            今すぐ無料で試す
-          </a>
-          <button
-            onClick={() => setShowAuthModal(true)}
-            className="w-full max-w-xs border-2 border-amber-400 text-amber-700 hover:bg-amber-50 font-bold py-4 rounded-2xl text-base transition-colors text-center"
+            <div className="flex items-center gap-1 mb-2">
+              <span className="text-xs text-stone-400 font-medium mr-1">お客様</span>
+              {Array.from({ length: 5 }, (_, i) => (
+                <Star
+                  key={i}
+                  className={`w-3 h-3 ${i < SAMPLE_REVIEW.rating ? 'text-amber-400 fill-amber-400' : 'text-stone-200'}`}
+                />
+              ))}
+            </div>
+            <p className="text-sm text-stone-600 leading-relaxed line-clamp-3">
+              {SAMPLE_REVIEW.text}
+            </p>
+          </motion.div>
+
+          {/* 矢印 */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: 0.5 }}
+            className="flex-shrink-0"
           >
-            AIにあなたを覚えさせる（無料）
-          </button>
+            <div className="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center shadow-md">
+              <ArrowRight className="w-4 h-4 text-white sm:block hidden" />
+              <ArrowRight className="w-4 h-4 text-white sm:hidden rotate-90" />
+            </div>
+          </motion.div>
+
+          {/* After: 返信 */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="w-full sm:flex-1 bg-amber-50 border border-amber-200 rounded-xl p-4 text-left shadow-sm"
+          >
+            <p className="text-xs text-amber-600 font-medium mb-2">AI生成された返信</p>
+            <p className="text-sm text-stone-700 leading-relaxed line-clamp-3">
+              {SAMPLE_REPLY}
+            </p>
+          </motion.div>
         </div>
 
-        {/* 性格診断ゴーストリンク */}
-        <div className="mb-10">
+        {/* CTA */}
+        <a
+          href="/generator"
+          className="inline-block w-full max-w-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-2xl text-base transition-colors shadow-md hover:shadow-lg text-center mb-4"
+        >
+          今すぐ無料で試す
+        </a>
+
+        {/* 性格診断リンク */}
+        <div className="mb-8">
           <a
             href="/diagnosis"
             className="inline-flex items-center gap-1.5 text-sm text-stone-400 hover:text-amber-600 transition-colors"
@@ -68,14 +106,7 @@ export default function HeroSection() {
           </a>
         </div>
 
-        {showAuthModal && (
-          <AuthModal
-            onClose={() => setShowAuthModal(false)}
-            nextPath="/profile/create"
-          />
-        )}
-
-        {/* トラストバッジ：ドット区切りフラットテキスト */}
+        {/* トラストバッジ */}
         <p className="text-xs text-stone-400 tracking-wide">
           登録無料&nbsp;&nbsp;·&nbsp;&nbsp;1日5回まで無料&nbsp;&nbsp;·&nbsp;&nbsp;8業種対応&nbsp;&nbsp;·&nbsp;&nbsp;日英中韓対応
         </p>

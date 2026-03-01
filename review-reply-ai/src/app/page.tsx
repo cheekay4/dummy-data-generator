@@ -71,6 +71,9 @@ export default function Home() {
       {/* 悩みセクション */}
       <section className="py-12 px-4 bg-white">
         <div className="max-w-2xl mx-auto">
+          <p className="text-xs text-stone-400 text-center mb-2 tracking-wide">
+            飲食店・美容室・クリニック・ホテルのオーナー様へ
+          </p>
           <h2 className="text-xl font-bold text-stone-800 text-center mb-6">
             こんな悩み、ありませんか？
           </h2>
@@ -95,6 +98,22 @@ export default function Home() {
 
       <FeatureCards />
       <HowItWorks />
+      {/* 利用実績 */}
+      <section className="py-8 px-4 bg-white border-y border-stone-100">
+        <div className="max-w-md mx-auto flex justify-around text-center">
+          {[
+            { value: '8', label: '対応業種' },
+            { value: '4', label: '対応言語' },
+            { value: '5回/日', label: '無料で使える' },
+          ].map((item) => (
+            <div key={item.label}>
+              <p className="text-2xl font-bold text-stone-800">{item.value}</p>
+              <p className="text-xs text-stone-400 mt-0.5">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <TextLearningDemo />
       <CustomerAnalysisDemo />
 
@@ -109,7 +128,14 @@ export default function Home() {
           >
             無料で返信文を生成する →
           </a>
-          <p className="text-stone-400 text-sm mt-3">クレジットカード不要 · いつでも解約OK</p>
+          <div className="mt-4">
+            <a
+              href="/diagnosis"
+              className="text-sm text-stone-400 hover:text-amber-600 underline underline-offset-4 decoration-stone-300 transition-colors"
+            >
+              先に性格診断をやってみる（2分・登録不要）
+            </a>
+          </div>
         </div>
       </section>
 

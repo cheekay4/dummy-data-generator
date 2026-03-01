@@ -1,14 +1,12 @@
 import { createClient } from '@/lib/supabase/server'
 
-function getAdminEmails(): string[] {
-  return (process.env.ADMIN_EMAILS ?? '')
-    .split(',')
-    .map((e) => e.trim())
-    .filter(Boolean)
-}
+const ALLOWED_ADMIN_EMAILS: readonly string[] = [
+  'cheekay.no.4@gmail.com',
+  'tools24.riku@gmail.com',
+] as const
 
 export function isAdminEmail(email: string): boolean {
-  return getAdminEmails().includes(email)
+  return ALLOWED_ADMIN_EMAILS.includes(email)
 }
 
 export async function getAdminUser() {

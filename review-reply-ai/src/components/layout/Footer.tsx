@@ -36,6 +36,7 @@ export default function Footer() {
                 <li><a href="/privacy" className="hover:text-amber-400 transition-colors">プライバシーポリシー</a></li>
                 <li><a href="/terms" className="hover:text-amber-400 transition-colors">利用規約</a></li>
                 <li><a href="/releases" className="hover:text-amber-400 transition-colors">リリースノート</a></li>
+                <li><a href="/tokushoho" className="hover:text-amber-400 transition-colors">特定商取引法に基づく表記</a></li>
               </ul>
             </div>
           </div>

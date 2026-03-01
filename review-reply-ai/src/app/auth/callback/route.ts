@@ -12,7 +12,10 @@ export async function GET(request: Request) {
     if (!error) {
       return NextResponse.redirect(`${origin}${next}`)
     }
+    // エラー詳細をクエリパラメータで渡す
+    const msg = encodeURIComponent(error.message)
+    return NextResponse.redirect(`${origin}/auth/error?message=${msg}`)
   }
 
-  return NextResponse.redirect(`${origin}/auth/error`)
+  return NextResponse.redirect(`${origin}/auth/error?message=${encodeURIComponent('認証コードがありません')}`)
 }

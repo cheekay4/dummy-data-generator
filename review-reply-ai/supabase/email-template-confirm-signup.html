@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyReplyTone 登録確認</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f4;font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f4;padding:40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;">
+
+          <!-- ヘッダー -->
+          <tr>
+            <td align="center" style="padding-bottom:24px;">
+              <table cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background:#f59e0b;border-radius:10px;width:36px;height:36px;text-align:center;vertical-align:middle;">
+                    <span style="color:white;font-size:18px;font-weight:bold;line-height:36px;">≋</span>
+                  </td>
+                  <td style="padding-left:10px;vertical-align:middle;">
+                    <span style="font-size:18px;font-weight:bold;color:#1c1917;letter-spacing:-0.3px;">MyReply<span style="color:#f59e0b;">Tone</span></span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- メイン -->
+          <tr>
+            <td style="background:#ffffff;border-radius:16px;padding:40px 36px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+
+              <p style="margin:0 0 8px;font-size:22px;font-weight:bold;color:#1c1917;line-height:1.4;">
+                ご登録ありがとうございます
+              </p>
+              <p style="margin:0 0 32px;font-size:14px;color:#78716c;line-height:1.7;">
+                MyReplyTone（AI口コミ返信ジェネレーター）へのご登録ありがとうございます。<br>
+                下のボタンをタップして、メールアドレスを確認してください。
+              </p>
+
+              <!-- CTA ボタン -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
+                <tr>
+                  <td align="center">
+                    <a href="{{ .ConfirmationURL }}"
+                       style="display:inline-block;background:#f59e0b;color:#ffffff;font-size:15px;font-weight:bold;text-decoration:none;padding:14px 40px;border-radius:12px;letter-spacing:0.3px;">
+                      メールアドレスを確認する →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- 区切り -->
+              <hr style="border:none;border-top:1px solid #e7e5e4;margin:0 0 24px;">
+
+              <!-- URL テキスト -->
+              <p style="margin:0 0 8px;font-size:12px;color:#a8a29e;">
+                ボタンが機能しない場合は、以下のURLをブラウザに貼り付けてください：
+              </p>
+              <p style="margin:0 0 24px;font-size:11px;color:#78716c;word-break:break-all;line-height:1.6;">
+                {{ .ConfirmationURL }}
+              </p>
+
+              <!-- 注意書き -->
+              <div style="background:#fef9f0;border-radius:10px;padding:16px 20px;">
+                <p style="margin:0;font-size:12px;color:#92400e;line-height:1.7;">
+                  ⚠️ このリンクは<strong>1回限り有効</strong>で、<strong>24時間で失効</strong>します。<br>
+                  アカウントを作成した覚えがない場合は、このメールを無視してください。
+                </p>
+              </div>
+
+            </td>
+          </tr>
+
+          <!-- フッター -->
+          <tr>
+            <td align="center" style="padding-top:24px;">
+              <p style="margin:0;font-size:12px;color:#a8a29e;line-height:1.8;">
+                MyReplyTone — AI口コミ返信ジェネレーター<br>
+                <a href="https://myreplytone.com" style="color:#a8a29e;text-decoration:underline;">myreplytone.com</a>
+                &nbsp;·&nbsp;
+                <a href="https://myreplytone.com/privacy" style="color:#a8a29e;text-decoration:underline;">プライバシーポリシー</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

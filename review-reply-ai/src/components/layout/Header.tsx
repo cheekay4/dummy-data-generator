@@ -68,12 +68,12 @@ export default function Header() {
               >
                 マイページ
               </Link>
-              <Link
-                href="/pricing"
+              <a
+                href="/#pricing"
                 className="hidden sm:block text-stone-500 hover:text-stone-800 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
               >
                 料金
-              </Link>
+              </a>
               <button
                 onClick={handleSignOut}
                 className="text-stone-400 hover:text-stone-600 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
@@ -85,10 +85,10 @@ export default function Header() {
             /* 未ログイン */
             <>
               <Link
-                href="/generator"
+                href="/diagnosis"
                 className="hidden sm:block bg-amber-500 hover:bg-amber-600 text-white px-4 py-1.5 rounded-xl text-sm font-medium transition-colors"
               >
-                今すぐ試す
+                無料で性格診断
               </Link>
               <button
                 onClick={() => setShowAuthModal(true)}
@@ -96,12 +96,12 @@ export default function Header() {
               >
                 ログイン
               </button>
-              <Link
-                href="/pricing"
+              <a
+                href="/#pricing"
                 className="hidden sm:block text-stone-500 hover:text-stone-800 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
               >
                 料金
-              </Link>
+              </a>
               <a
                 href="/#faq"
                 className="hidden sm:block text-stone-500 hover:text-stone-800 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"

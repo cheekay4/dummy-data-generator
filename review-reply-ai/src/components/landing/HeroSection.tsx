@@ -31,8 +31,8 @@ export default function HeroSection() {
 
         {/* サブコピー */}
         <p className="text-stone-500 text-base mb-10 leading-relaxed max-w-lg mx-auto">
-          口コミを貼るだけ。性格診断で学んだあなたのトーンで、
-          <span className="text-stone-700 font-medium">テンプレ感ゼロの返信</span>をAIが作ります。
+          2分の性格診断であなたのトーンをAIが学習。口コミを貼れば、
+          <span className="text-stone-700 font-medium">テンプレ感ゼロの返信</span>を自動生成します。
         </p>
 
         {/* Before → After デモ */}
@@ -85,23 +85,22 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* CTA */}
+        {/* CTA: 性格診断が主導線 */}
         <a
-          href="/generator"
+          href="/diagnosis"
           className="inline-block w-full max-w-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 rounded-2xl text-base transition-colors shadow-md hover:shadow-lg text-center mb-4"
         >
-          今すぐ無料で試す
+          まず性格診断してみる（2分・無料）
         </a>
 
-        {/* 性格診断リンク */}
+        {/* 補助リンク: すぐ生成したい人向け */}
         <div className="mb-8">
           <a
-            href="/diagnosis"
+            href="/generator"
             className="inline-flex items-center gap-1.5 text-sm text-stone-400 hover:text-amber-600 transition-colors"
           >
-            <span>🧠</span>
             <span className="underline underline-offset-4 decoration-stone-300">
-              先に性格診断だけやってみる（2分・登録不要）
+              診断なしで今すぐ返信を生成する →
             </span>
           </a>
         </div>

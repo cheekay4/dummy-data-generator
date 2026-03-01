@@ -3,7 +3,7 @@
 > このファイルはプロジェクトの現在状態を記録するSST（Single Source of Truth）。
 > Claude Code は毎セッション開始時に読み込み、変更時に即反映すること。
 
-最終更新: 2026-02-28（MyReplyTone UXテスト🔴4件修正・本番デプロイ完了。詳細は review-reply-ai/MYREPLYTONE-STATUS.md 参照）
+最終更新: 2026-03-01（MyReplyTone LP性格診断推し整合性統一・AdSense導入・デプロイ完了）
 
 ---
 
@@ -160,6 +160,9 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-01 | MyReplyTone LP性格診断推し整合性統一（Header/FeatureCards/Pricing/Footer/FAQ）+ AdSense導入 | Claude Code |
+| 2026-03-01 | sales-agent-web 返信モジュール全8フェーズ実装完了（Phase4フォローアップ〜Phase8 VoC）＋Vercelデプロイ・動作確認済み | Claude Code |
+| 2026-03-01 | sales-agent-web Google Places API 3段階パイプライン（Places→メール抽出→Tavily補助）Vercel本番デプロイ完了 | Claude Code |
 | 2026-03-01 | MyReplyTone 管理者ダッシュボード実装（/admin KPI・ユーザー管理CRUD・認証バグ修正）デプロイ完了 | Claude Code |
 | 2026-02-28 | MyReplyTone HowItWorks性格診断推し整合修正・STEP3リンク化・UXテスト方法論2基準追加 | Claude Code |
 | 2026-02-28 | MyReplyTone UXテスト🔴4件修正（ナビ順序・広告非表示・料金表修正・残回数初期値）デプロイ完了 | Claude Code |

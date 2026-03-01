@@ -23,8 +23,8 @@ export default function PricingSection() {
         '客層分析',
         '手直しアドバイス（無制限）',
       ],
-      cta: '無料で始める',
-      ctaHref: '/generator',
+      cta: '無料で性格診断する',
+      ctaHref: '/diagnosis',
       variant: 'primary' as const,
     },
     {

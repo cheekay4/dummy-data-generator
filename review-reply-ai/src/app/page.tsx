@@ -120,20 +120,20 @@ export default function Home() {
       {/* CTA section */}
       <section className="py-14 px-4 bg-amber-50 border-y border-amber-100">
         <div className="max-w-xl mx-auto text-center">
-          <p className="text-stone-700 font-medium mb-2">まずは1回、無料で試してみてください。</p>
-          <p className="text-stone-500 text-sm mb-6">登録不要で今すぐ体験。ログインで毎日5回まで無料。</p>
+          <p className="text-stone-700 font-medium mb-2">まずは性格診断から。2分であなたのトーンをAIに覚えさせましょう。</p>
+          <p className="text-stone-500 text-sm mb-6">登録不要・完全無料。診断後すぐに口コミ返信を生成できます。</p>
           <a
-            href="/generator"
+            href="/diagnosis"
             className="inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold px-10 py-4 rounded-xl text-lg transition-colors shadow-md hover:shadow-lg"
           >
-            無料で返信文を生成する →
+            無料で性格診断してみる →
           </a>
           <div className="mt-4">
             <a
-              href="/diagnosis"
+              href="/generator"
               className="text-sm text-stone-400 hover:text-amber-600 underline underline-offset-4 decoration-stone-300 transition-colors"
             >
-              先に性格診断をやってみる（2分・登録不要）
+              診断なしで今すぐ返信を生成する
             </a>
           </div>
         </div>

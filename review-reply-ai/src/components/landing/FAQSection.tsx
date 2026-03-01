@@ -41,7 +41,7 @@ export default function FAQSection() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section className="py-16 px-4 bg-white">
+    <section id="faq" className="py-16 px-4 bg-white">
       <div className="max-w-2xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-bold text-stone-800 text-center mb-10">
           よくある質問

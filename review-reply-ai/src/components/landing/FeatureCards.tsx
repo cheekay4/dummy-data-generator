@@ -1,4 +1,4 @@
-import { ClipboardPaste, Building2, ShieldCheck } from 'lucide-react'
+import { Brain, Building2, ShieldCheck } from 'lucide-react'
 
 export default function FeatureCards() {
   return (
@@ -10,10 +10,10 @@ export default function FeatureCards() {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-stone-50 border border-stone-200 rounded-2xl p-6 hover:shadow-md transition-shadow">
             <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center mb-4">
-              <ClipboardPaste className="w-5 h-5 text-amber-500" />
+              <Brain className="w-5 h-5 text-amber-500" />
             </div>
-            <h3 className="font-bold text-stone-800 mb-2">口コミを貼るだけ</h3>
-            <p className="text-stone-600 text-sm leading-relaxed">星評価と本文をコピペするだけで3秒で返信案が2パターン届きます。</p>
+            <h3 className="font-bold text-stone-800 mb-2">あなたのトーンを再現</h3>
+            <p className="text-stone-600 text-sm leading-relaxed">2分の性格診断でAIがあなたの文体を学習。テンプレ感ゼロの返信を自動生成します。</p>
           </div>
 
           <div className="bg-stone-50 border border-stone-200 rounded-2xl p-6 hover:shadow-md transition-shadow">

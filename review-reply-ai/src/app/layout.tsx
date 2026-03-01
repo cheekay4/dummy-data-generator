@@ -96,6 +96,13 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
 
+        {/* Google AdSense */}
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2432747666538345"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         {/* Google Analytics */}
         {GA_ID && (
           <>

@@ -3,7 +3,7 @@
 > このファイルは `review-reply-ai`（旧URL: review-reply-ai-nu.vercel.app → 新URL: myreplytone.com）の
 > Single Source of Truth。このプロジェクトが中心プロダクトのため、詳細ログを別ファイルで管理する。
 
-最終更新: 2026-02-28（UXテスト🔴4件修正・デプロイ完了）
+最終更新: 2026-03-01（LP性格診断推し整合性統一・AdSense導入・デプロイ完了）
 
 ---
 
@@ -275,7 +275,9 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
-| 2026-03-01 | 管理者ダッシュボード実装: /admin KPIカード・ユーザー管理(一覧/詳細/プラン変更/削除)・admin認証基盤・認証バグ修正(client.ts)・Vercel ADMIN_EMAILS設定・migration_003作成 | 最新 |
+| 2026-03-01 | LP性格診断推し整合性統一: Header CTA→/diagnosis・FeatureCards1枚目→トーン再現・PricingSection Free CTA→/diagnosis・中間CTA主従逆転・Footer機能カテゴリ整理+性格診断リンク追加・FAQSection id="faq"バグ修正・AdSenseコード導入 | - |
+| 2026-03-01 | sales-agent-web Phase4-8実装: フォローアップ・ナレッジ管理・2段階返信・マルチターン・VoC収集。Vercelデプロイ・動作確認済み | 最新 |
+| 2026-03-01 | 管理者ダッシュボード実装: /admin KPIカード・ユーザー管理(一覧/詳細/プラン変更/削除)・admin認証基盤・認証バグ修正(client.ts)・Vercel ADMIN_EMAILS設定・migration_003作成 | - |
 | 2026-02-28 | HowItWorks修正: STEP1性格診断メイン化(Brain icon)・STEP3 /adviceリンク化・UXテスト方法論にメッセージ整合性+クリッカブル錯覚基準追加 | - |
 | 2026-02-28 | UXテスト🔴4件修正: Headerナビ順序CTA先頭化・広告プレースホルダー非表示・料金表お試し3回/日に修正・残回数初期値センチネル化 | - |
 | 2026-02-28 | ファビコン追加（icon.tsx/apple-icon.tsx 波形アイコン）・Supabaseメールテンプレ日本語化 | - |

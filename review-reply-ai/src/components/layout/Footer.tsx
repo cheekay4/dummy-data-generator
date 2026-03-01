@@ -21,11 +21,12 @@ export default function Footer() {
           </div>
           <div className="flex gap-12 text-sm">
             <div>
-              <p className="font-medium text-white mb-3">ツール</p>
+              <p className="font-medium text-white mb-3">機能</p>
               <ul className="space-y-2">
-                <li><a href="#generator" className="hover:text-amber-400 transition-colors">口コミ返信生成</a></li>
-                <li><a href="#pricing" className="hover:text-amber-400 transition-colors">料金プラン</a></li>
-                <li><a href="#faq" className="hover:text-amber-400 transition-colors">よくある質問</a></li>
+                <li><a href="/diagnosis" className="hover:text-amber-400 transition-colors">性格診断</a></li>
+                <li><a href="/generator" className="hover:text-amber-400 transition-colors">口コミ返信生成</a></li>
+                <li><a href="/#pricing" className="hover:text-amber-400 transition-colors">料金プラン</a></li>
+                <li><a href="/#faq" className="hover:text-amber-400 transition-colors">よくある質問</a></li>
               </ul>
             </div>
             <div>

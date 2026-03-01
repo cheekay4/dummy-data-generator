@@ -126,7 +126,7 @@ export default function TermsPage() {
           <p>本規約に関するお問い合わせは、以下の連絡先までお願いいたします。</p>
           <ul className="list-none mt-2 space-y-1">
             <li>運営: tools24.jp</li>
-            <li>メール: <a href="mailto:support@tools24.jp" className="text-amber-600 hover:text-amber-700 underline">support@tools24.jp</a></li>
+            <li>メール: <a href="mailto:tools24.riku@gmail.com" className="text-amber-600 hover:text-amber-700 underline">tools24.riku@gmail.com</a></li>
             <li>お問い合わせページ: <a href="/contact" className="text-amber-600 hover:text-amber-700 underline">https://myreplytone.com/contact</a></li>
           </ul>
         </section>

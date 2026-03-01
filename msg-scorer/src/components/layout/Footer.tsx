@@ -27,8 +27,9 @@ export default function Footer() {
               </nav>
             </div>
             <div>
-              <p className="text-xs font-medium text-stone-300 mb-3 uppercase tracking-wider">法的情報</p>
+              <p className="text-xs font-medium text-stone-300 mb-3 uppercase tracking-wider">サポート</p>
               <nav className="flex flex-col gap-2">
+                <Link href="/contact" className="text-sm hover:text-stone-200 transition-colors">お問い合わせ</Link>
                 <Link href="/privacy" className="text-sm hover:text-stone-200 transition-colors">プライバシーポリシー</Link>
                 <Link href="/terms" className="text-sm hover:text-stone-200 transition-colors">利用規約</Link>
               </nav>

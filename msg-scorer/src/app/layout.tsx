@@ -71,6 +71,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="ja" className={`${outfit.variable} ${notoSansJP.variable} ${dmMono.variable}`}>
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2432747666538345"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="text-stone-900 antialiased">
         {gaId && <GoogleAnalytics gaId={gaId} />}
         <Header />

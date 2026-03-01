@@ -31,11 +31,11 @@ export default function ContactPage() {
             以下のメールアドレスまでお問い合わせください。件名に「MyReplyTone」と記載いただけるとスムーズです。
           </p>
           <a
-            href="mailto:support@tools24.jp"
+            href="mailto:tools24.riku@gmail.com"
             className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium text-sm transition-colors"
           >
             <Mail className="w-4 h-4" />
-            support@tools24.jp
+            tools24.riku@gmail.com
           </a>
         </div>
 
@@ -113,7 +113,7 @@ export default function ContactPage() {
           </div>
           <div className="flex gap-4">
             <dt className="text-stone-400 w-24 flex-shrink-0">メール</dt>
-            <dd><a href="mailto:support@tools24.jp" className="text-amber-600 hover:text-amber-700">support@tools24.jp</a></dd>
+            <dd><a href="mailto:tools24.riku@gmail.com" className="text-amber-600 hover:text-amber-700">tools24.riku@gmail.com</a></dd>
           </div>
         </dl>
       </div>

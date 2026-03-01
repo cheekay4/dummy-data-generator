@@ -64,11 +64,6 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://msgscore.jp' },
-  icons: {
-    icon: [
-      { url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='white'/%3E%3Cpath d='M16 4L28 16L16 28L4 16Z' fill='%234F46E5'/%3E%3C/svg%3E", type: 'image/svg+xml' },
-    ],
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -77,7 +72,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja" className={`${outfit.variable} ${notoSansJP.variable} ${dmMono.variable}`}>
       <head>
-        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='white'/%3E%3Cpath d='M16 4L28 16L16 28L4 16Z' fill='%234F46E5'/%3E%3C/svg%3E" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2432747666538345"

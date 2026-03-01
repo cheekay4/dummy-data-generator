@@ -3,7 +3,7 @@
 > このファイルは `review-reply-ai`（旧URL: review-reply-ai-nu.vercel.app → 新URL: myreplytone.com）の
 > Single Source of Truth。このプロジェクトが中心プロダクトのため、詳細ログを別ファイルで管理する。
 
-最終更新: 2026-03-01（sales-agent プロダクト分離 UAT完了）
+最終更新: 2026-03-01（sales-agent E2Eテスト完了・Cron設定・署名追加）
 
 ---
 
@@ -275,6 +275,7 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
+| 2026-03-01 | sales-agent: UAT完了・Cron設定・E2Eテスト送信成功・共通署名(両プロダクト併記)・関連ページURL自動挿入・Markdown禁止ルール | - |
 | 2026-03-01 | FAQ充実（8→13問）・faqSchema同期・AdSense準拠（/contact新設・プラポリ/利用規約拡充・sitemap更新）・MsgScore同対応 | - |
 | 2026-03-01 | sales-agent プロダクト分離 UAT全16テスト合格（Vercelキャッシュ→強制再デプロイで解決） | a0bd9ff |
 | 2026-03-01 | AdSense所有権確認修正（next/script→head直接配置）・営業用説明資料(docs/sales-deck.md)作成 | 4039de5 |

@@ -8,6 +8,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import type { Lead, EmailType } from '@/lib/types'
 import { PRODUCTS, type ProductId } from '@/config/products'
+import { EMAIL_SIGNATURE } from '@/lib/email-signature'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
@@ -119,7 +120,7 @@ ${typeGuidance[followupType] ?? ''}
       ? parsed.subject
       : (originalSubject.startsWith('Re:') ? originalSubject : `Re: ${originalSubject}`)
 
-    const bodyText = parsed.body
+    const bodyText = parsed.body + '\n\n' + EMAIL_SIGNATURE
     const bodyHtml = bodyText
       .split('\n')
       .map((line: string) => (line === '' ? '<br>' : `<p style="margin:0">${line}</p>`))
@@ -132,11 +133,12 @@ ${typeGuidance[followupType] ?? ''}
       ? `${lead.company_name}様へ — ご確認のお願い`
       : (originalSubject.startsWith('Re:') ? originalSubject : `Re: ${originalSubject}`)
 
-    const bodyHtml = text
+    const bodyTextWithSig = text + '\n\n' + EMAIL_SIGNATURE
+    const bodyHtml = bodyTextWithSig
       .split('\n')
       .map((line: string) => (line === '' ? '<br>' : `<p style="margin:0">${line}</p>`))
       .join('')
 
-    return { subject, bodyText: text, bodyHtml }
+    return { subject, bodyText: bodyTextWithSig, bodyHtml }
   }
 }

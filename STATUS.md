@@ -3,7 +3,7 @@
 > このファイルはプロジェクトの現在状態を記録するSST（Single Source of Truth）。
 > Claude Code は毎セッション開始時に読み込み、変更時に即反映すること。
 
-最終更新: 2026-03-01（sales-agent プロダクト分離 UAT完了）
+最終更新: 2026-03-01（sales-agent E2Eテスト完了・Cron設定・署名追加）
 
 ---
 
@@ -160,6 +160,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-01 | sales-agent: UAT完了・Cron設定(send+check-replies)・E2Eテスト送信成功・返信AI処理確認・共通署名追加・関連ページURL自動挿入・Markdown禁止ルール追加 | Claude Code |
 | 2026-03-01 | MyReplyTone FAQ充実(13問)+faqSchema同期・AdSense準拠(contact/プラポリ/利用規約/sitemap)・MsgScore同対応 | Claude Code |
 | 2026-03-01 | sales-agent プロダクト分離 UAT全16テスト合格（Vercelキャッシュ問題修正含む） | Claude Code |
 | 2026-03-01 | MyReplyTone AdSense所有権確認修正（head直接配置）・営業用説明資料作成 | Claude Code |

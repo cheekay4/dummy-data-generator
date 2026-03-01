@@ -8,6 +8,7 @@ import type { Lead } from '@/lib/types'
 import type { IntentAnalysis } from './intent-classifier'
 import type { KnowledgeHit } from './knowledge-search'
 import { PRODUCTS, type ProductId } from '@/config/products'
+import { EMAIL_SIGNATURE } from '@/lib/email-signature'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
@@ -107,10 +108,22 @@ ${knowledgeHits.map((h) => `Q: ${h.question}\nA: ${h.answer}`).join('\n\n')}` : 
 ### 呼称
 - 企業名は「${lead.company_name}様」で統一（「さん」「御社」は使わない）
 
+### 書式
+- Markdown記法（**太字**、##見出し、- 箇条書き）は一切使用禁止
+- 箇条書きにしたい場合は「、」で繋げるか、改行のみで列挙する
+- プレーンテキストのメールとして自然に読める形式で書く
+
+## 関連ページURL（質問内容に応じて本文中に挿入すること）
+- 料金について聞かれたら → ${productConfig.url}/pricing
+- 機能・使い方について → ${productConfig.url}/generator
+- 性格診断・トーン設定 → ${productConfig.url}/diagnosis
+- 使い方ガイド → ${productConfig.url}/advice
+- トップページ → ${productConfig.url}
+※ 質問に関連するページURLを1つだけ本文中に自然に含める。2つ以上は不可。
+
 ## 禁止事項
 - 「突然のご連絡失礼いたします」
 - 「お忙しいところ恐れ入りますが」
-- URLを2つ以上含める
 - クリシェ的な営業文句
 
 ## 出力
@@ -122,7 +135,8 @@ ${knowledgeHits.map((h) => `Q: ${h.question}\nA: ${h.answer}`).join('\n\n')}` : 
     messages: [{ role: 'user', content: prompt }],
   })
 
-  const body = message.content[0]?.type === 'text' ? message.content[0].text.trim() : ''
+  const rawBody = message.content[0]?.type === 'text' ? message.content[0].text.trim() : ''
+  const body = rawBody + '\n\n' + EMAIL_SIGNATURE
   const subject = originalSubject.startsWith('Re:') ? originalSubject : `Re: ${originalSubject}`
 
   return { subject, body }

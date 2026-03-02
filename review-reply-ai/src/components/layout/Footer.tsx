@@ -1,4 +1,4 @@
-import { AudioWaveform } from 'lucide-react'
+import { AudioWaveform, Shield, Lock } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -41,7 +41,36 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="border-t border-stone-700 mt-8 pt-6 text-sm text-stone-500 text-center">
+
+        {/* セキュリティ・信頼性バッジ */}
+        <div className="border-t border-stone-700 mt-8 pt-6">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-stone-400">
+            <a
+              href="https://www.ipa.go.jp/security/security-action/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-stone-300 transition-colors"
+            >
+              <Shield className="w-4 h-4 text-blue-400" />
+              <span>SECURITY ACTION 一つ星宣言</span>
+            </a>
+            <span className="flex items-center gap-2">
+              <Lock className="w-4 h-4 text-emerald-400" />
+              <span>セキュリティヘッダー A+ 対応</span>
+            </span>
+            <a
+              href="/privacy#data-detail"
+              className="flex items-center gap-2 hover:text-stone-300 transition-colors"
+            >
+              <svg className="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span>データ透明性ポリシー公開</span>
+            </a>
+          </div>
+        </div>
+
+        <div className="border-t border-stone-700 mt-6 pt-6 text-sm text-stone-500 text-center">
           © {new Date().getFullYear()} MyReplyTone. All rights reserved.
         </div>
       </div>

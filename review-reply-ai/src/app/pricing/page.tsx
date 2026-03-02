@@ -169,6 +169,41 @@ export default function PricingPage() {
             ))}
           </div>
         </div>
+
+        {/* 信頼性・セキュリティセクション */}
+        <div className="mt-16 pt-12 border-t border-stone-200">
+          <h2 className="text-xl font-bold text-stone-800 mb-6 text-center">安心してご利用いただくために</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white border border-stone-200 rounded-xl p-5 text-center">
+              <div className="w-10 h-10 mx-auto mb-3 bg-blue-50 rounded-full flex items-center justify-center">
+                <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-stone-800 text-sm mb-1">SECURITY ACTION 宣言</h3>
+              <p className="text-xs text-stone-500">IPA（情報処理推進機構）の制度に基づき、情報セキュリティ対策に取り組むことを宣言しています。</p>
+            </div>
+            <div className="bg-white border border-stone-200 rounded-xl p-5 text-center">
+              <div className="w-10 h-10 mx-auto mb-3 bg-emerald-50 rounded-full flex items-center justify-center">
+                <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-stone-800 text-sm mb-1">セキュリティヘッダー A+</h3>
+              <p className="text-xs text-stone-500">CSP・HSTS・Permissions-Policy など、業界推奨のセキュリティヘッダーを全ページに設定済み。</p>
+            </div>
+            <div className="bg-white border border-stone-200 rounded-xl p-5 text-center">
+              <div className="w-10 h-10 mx-auto mb-3 bg-amber-50 rounded-full flex items-center justify-center">
+                <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-stone-800 text-sm mb-1">データ透明性ポリシー</h3>
+              <p className="text-xs text-stone-500">何のデータを送り、何を保存しないか。<a href="/privacy" className="text-amber-600 hover:text-amber-700 underline">プライバシーポリシー</a>で具体的に公開しています。</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}

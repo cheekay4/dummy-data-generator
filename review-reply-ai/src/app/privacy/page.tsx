@@ -120,16 +120,101 @@ export default function PrivacyPage() {
           <h2 className="text-lg font-bold text-stone-800 mb-3">9. セキュリティ</h2>
           <p>本サービスでは、個人情報の保護のために以下の対策を講じています。</p>
           <ul className="list-disc pl-5 mt-2 space-y-1">
-            <li>SSL/TLS による通信の暗号化</li>
+            <li>SSL/TLS による通信の暗号化（全通信HTTPS）</li>
             <li>パスワードのハッシュ化保存（Supabase Auth による管理）</li>
-            <li>アクセス制御の実装（管理者権限の分離）</li>
-            <li>定期的なセキュリティレビュー</li>
+            <li>アクセス制御の実装（RLS: Row Level Security による行レベルのデータ隔離）</li>
+            <li>セキュリティヘッダーの設定（CSP, HSTS, X-Frame-Options 等）</li>
+            <li>IPA「SECURITY ACTION」一つ星を宣言</li>
           </ul>
           <p className="mt-2">ただし、インターネット上の通信において完全なセキュリティを保証することはできません。</p>
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-stone-800 mb-3">10. お問い合わせ</h2>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">10. データの取り扱い詳細</h2>
+          <p>本サービスがどのデータを外部に送信し、何を送信・保存しないかを具体的に説明します。</p>
+
+          <h3 className="text-base font-bold text-stone-700 mt-4 mb-2">10-1. AI（Claude API）への送信データ</h3>
+          <div className="mt-2 space-y-3">
+            <div>
+              <p className="font-medium text-stone-700">送信するもの:</p>
+              <ul className="list-disc pl-5 mt-1 space-y-1">
+                <li>口コミテキスト本文、星評価、業種、プラットフォーム名</li>
+                <li>トーン設定（フォーマル / カジュアルなど）</li>
+                <li>返信プロファイルの性格パラメータ（Big Five スコア値のみ）</li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-medium text-stone-700">送信しないもの:</p>
+              <ul className="list-disc pl-5 mt-1 space-y-1">
+                <li>メールアドレス・アカウント情報</li>
+                <li>IPアドレス・ブラウザ情報</li>
+                <li>決済情報・クレジットカード番号</li>
+                <li>閲覧履歴・アクセスログ</li>
+              </ul>
+            </div>
+            <div className="bg-stone-50 border border-stone-200 rounded-lg p-3">
+              <p className="text-stone-600"><strong>Anthropic のデータポリシー:</strong> Claude API 経由で送信されたデータは、Anthropic のモデル学習に使用されません（<a href="https://www.anthropic.com/api-data-usage" target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-700 underline">Anthropic API Data Usage Policy</a>）。</p>
+            </div>
+          </div>
+
+          <h3 className="text-base font-bold text-stone-700 mt-4 mb-2">10-2. サーバーへのデータ保存範囲</h3>
+          <div className="overflow-x-auto mt-2">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-stone-200">
+                  <th className="text-left py-2 pr-4 font-medium text-stone-700">データ</th>
+                  <th className="text-center py-2 px-3 font-medium text-stone-700">未ログイン</th>
+                  <th className="text-center py-2 px-3 font-medium text-stone-700">Free</th>
+                  <th className="text-center py-2 px-3 font-medium text-stone-700">Pro</th>
+                </tr>
+              </thead>
+              <tbody className="text-stone-600">
+                <tr className="border-b border-stone-100">
+                  <td className="py-2 pr-4">口コミテキスト（入力内容）</td>
+                  <td className="text-center py-2 px-3">保存しない</td>
+                  <td className="text-center py-2 px-3">保存しない</td>
+                  <td className="text-center py-2 px-3">保存しない</td>
+                </tr>
+                <tr className="border-b border-stone-100">
+                  <td className="py-2 pr-4">生成された返信文</td>
+                  <td className="text-center py-2 px-3">保存しない</td>
+                  <td className="text-center py-2 px-3">保存しない</td>
+                  <td className="text-center py-2 px-3">90日間</td>
+                </tr>
+                <tr className="border-b border-stone-100">
+                  <td className="py-2 pr-4">返信プロファイル</td>
+                  <td className="text-center py-2 px-3">-</td>
+                  <td className="text-center py-2 px-3">1件まで</td>
+                  <td className="text-center py-2 px-3">5件まで</td>
+                </tr>
+                <tr className="border-b border-stone-100">
+                  <td className="py-2 pr-4">メールアドレス</td>
+                  <td className="text-center py-2 px-3">不要</td>
+                  <td className="text-center py-2 px-3">保存</td>
+                  <td className="text-center py-2 px-3">保存</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 className="text-base font-bold text-stone-700 mt-4 mb-2">10-3. データベースの保護</h3>
+          <ul className="list-disc pl-5 mt-2 space-y-1">
+            <li><strong>RLS（Row Level Security）:</strong> すべてのテーブルで有効化済み。認証済みユーザーは自分のデータのみアクセス可能で、他のユーザーのデータを閲覧・変更することはできません</li>
+            <li><strong>暗号化:</strong> データベースは保存時暗号化（encryption at rest）が適用されています</li>
+            <li><strong>ホスティング:</strong> Supabase（インフラ: AWS）上で運用</li>
+          </ul>
+
+          <h3 className="text-base font-bold text-stone-700 mt-4 mb-2">10-4. 決済情報の安全性</h3>
+          <ul className="list-disc pl-5 mt-2 space-y-1">
+            <li>クレジットカード番号は本サービスのサーバーを<strong>一切経由しません</strong></li>
+            <li>決済処理は Stripe（PCI DSS Level 1 準拠）が直接行います</li>
+            <li>ブラウザから Stripe のサーバーに直接送信され、本サービスは Stripe 顧客ID のみを保持します</li>
+            <li>プラン変更・解約は Stripe カスタマーポータルから直接操作でき、本サービスを介しません</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">11. お問い合わせ</h2>
           <p>プライバシーに関するご質問・ご要望は、以下の連絡先までお問い合わせください。</p>
           <ul className="list-none mt-2 space-y-1">
             <li>運営: tools24.jp</li>
@@ -139,7 +224,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-stone-800 mb-3">11. ポリシーの変更</h2>
+          <h2 className="text-lg font-bold text-stone-800 mb-3">12. ポリシーの変更</h2>
           <p>本ポリシーは、法令の改正やサービス内容の変更に伴い、予告なく変更される場合があります。重要な変更がある場合はトップページまたはメールでお知らせします。変更後も本サービスを継続してご利用いただいた場合、変更後のポリシーに同意いただいたものとみなします。</p>
         </section>
       </div>

@@ -37,6 +37,7 @@ export default function Footer() {
                 <li><a href="/terms" className="hover:text-amber-400 transition-colors">利用規約</a></li>
                 <li><a href="/releases" className="hover:text-amber-400 transition-colors">リリースノート</a></li>
                 <li><a href="/tokushoho" className="hover:text-amber-400 transition-colors">特定商取引法に基づく表記</a></li>
+                <li><a href="/security-policy" className="hover:text-amber-400 transition-colors">情報セキュリティ基本方針</a></li>
               </ul>
             </div>
           </div>
@@ -46,13 +47,11 @@ export default function Footer() {
         <div className="border-t border-stone-700 mt-8 pt-6">
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-stone-400">
             <a
-              href="https://www.ipa.go.jp/security/security-action/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/security-policy"
               className="flex items-center gap-2 hover:text-stone-300 transition-colors"
             >
               <Shield className="w-4 h-4 text-blue-400" />
-              <span>SECURITY ACTION 一つ星宣言</span>
+              <span>SECURITY ACTION ★★ 二つ星宣言</span>
             </a>
             <span className="flex items-center gap-2">
               <Lock className="w-4 h-4 text-emerald-400" />

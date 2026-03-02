@@ -180,8 +180,8 @@ export default function PricingPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="font-bold text-stone-800 text-sm mb-1">SECURITY ACTION 宣言</h3>
-              <p className="text-xs text-stone-500">IPA（情報処理推進機構）の制度に基づき、情報セキュリティ対策に取り組むことを宣言しています。</p>
+              <h3 className="font-bold text-stone-800 text-sm mb-1">SECURITY ACTION ★★</h3>
+              <p className="text-xs text-stone-500">IPA（情報処理推進機構）の制度に基づき、情報セキュリティ対策に取り組むことを宣言。<a href="/security-policy" className="text-amber-600 hover:text-amber-700 underline">基本方針を公開</a>しています。</p>
             </div>
             <div className="bg-white border border-stone-200 rounded-xl p-5 text-center">
               <div className="w-10 h-10 mx-auto mb-3 bg-emerald-50 rounded-full flex items-center justify-center">

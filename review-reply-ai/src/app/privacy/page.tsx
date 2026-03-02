@@ -124,7 +124,7 @@ export default function PrivacyPage() {
             <li>パスワードのハッシュ化保存（Supabase Auth による管理）</li>
             <li>アクセス制御の実装（RLS: Row Level Security による行レベルのデータ隔離）</li>
             <li>セキュリティヘッダーの設定（CSP, HSTS, X-Frame-Options 等）</li>
-            <li>IPA「SECURITY ACTION」一つ星を宣言</li>
+            <li>IPA「SECURITY ACTION」二つ星を宣言（<a href="/security-policy" className="text-amber-600 hover:text-amber-700 underline">情報セキュリティ基本方針</a>を公開）</li>
           </ul>
           <p className="mt-2">ただし、インターネット上の通信において完全なセキュリティを保証することはできません。</p>
         </section>

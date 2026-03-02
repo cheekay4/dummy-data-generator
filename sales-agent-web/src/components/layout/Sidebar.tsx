@@ -8,6 +8,8 @@ const NAV = [
   { href: '/leads', label: 'リード', emoji: '👥' },
   { href: '/drafts', label: '承認待ち', emoji: '✉️' },
   { href: '/replies', label: '返信', emoji: '💬' },
+  { href: '/voc', label: 'VoC', emoji: '📊' },
+  { href: '/settings/knowledge', label: 'ナレッジ', emoji: '📚' },
   { href: '/settings', label: '設定', emoji: '⚙️' },
 ]
 

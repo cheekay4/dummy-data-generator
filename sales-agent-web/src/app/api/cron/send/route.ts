@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 import { sendEmail } from '@/lib/gmail'
+import { getUnsubscribeUrl } from '@/lib/hmac'
 import type { SalesEmail } from '@/lib/types'
 
 const DAILY_LIMIT = 20
 const MIN_INTERVAL_MS = 60_000 // 60秒
 
 /**
- * Cron エンドポイント: 承認済みメールを送信する（Step 7）
+ * Cron エンドポイント: 承認済みメールを送信する
  * Vercel Cron または外部スケジューラーから Authorization: Bearer {CRON_SECRET} で呼び出す
  */
 export async function POST(req: NextRequest) {
@@ -55,11 +56,17 @@ export async function POST(req: NextRequest) {
     }
 
     try {
+      // 配信停止フッターを追加
+      const unsubUrl = getUnsubscribeUrl(email.lead_id)
+      const footerText = `\n\n──\nこのメールの配信停止: ${unsubUrl}`
+      const footerHtml = `<hr style="margin-top:24px;border:none;border-top:1px solid #e7e5e4"><p style="font-size:11px;color:#a8a29e;margin-top:8px">このメールの配信を停止するには<a href="${unsubUrl}" style="color:#a8a29e">こちら</a>をクリックしてください。</p>`
+
       const { messageId, threadId } = await sendEmail({
         to: email.lead.email,
         subject: email.subject,
-        bodyText: email.body_text,
-        bodyHtml: email.body_html,
+        bodyText: email.body_text + footerText,
+        bodyHtml: email.body_html + footerHtml,
+        leadId: email.lead_id,
       })
 
       // 送信済みに更新
@@ -84,6 +91,19 @@ export async function POST(req: NextRequest) {
         { date: today, emails_sent: todaySent + sent + 1 },
         { onConflict: 'date' }
       )
+
+      // フォローアップ1を4日後にキュー（初回メールのみ）
+      if (!email.email_type || email.email_type === 'initial') {
+        const scheduledAt = new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString()
+        await supabase.from('sales_next_actions').insert({
+          lead_id: email.lead_id,
+          email_id: email.id,
+          action_type: 'followup_1',
+          scheduled_at: scheduledAt,
+          status: 'pending',
+          context: { original_subject: email.subject, original_body: email.body_text },
+        })
+      }
 
       sent++
 

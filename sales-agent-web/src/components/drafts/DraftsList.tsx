@@ -2,6 +2,12 @@
 import { useState, useCallback } from 'react'
 import type { SalesEmail } from '@/lib/types'
 
+const EMAIL_TYPE_BADGES: Record<string, { label: string; color: string }> = {
+  followup_1:  { label: '🔄 フォローアップ1', color: 'bg-blue-50 text-blue-700' },
+  followup_2:  { label: '🔄 フォローアップ2', color: 'bg-blue-50 text-blue-700' },
+  reapproach:  { label: '🔁 再アプローチ',    color: 'bg-purple-50 text-purple-700' },
+}
+
 function MsgScoreBadge({ score }: { score?: number }) {
   if (score == null) return null
   const color =
@@ -76,6 +82,11 @@ function DraftCard({
               {lead?.industry && <span className="text-xs text-stone-500">{lead.industry}</span>}
               {lead?.icp_score != null && (
                 <span className={`text-xs font-semibold ${icpColor}`}>ICP: {lead.icp_score}</span>
+              )}
+              {draft.email_type && EMAIL_TYPE_BADGES[draft.email_type] && (
+                <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${EMAIL_TYPE_BADGES[draft.email_type]!.color}`}>
+                  {EMAIL_TYPE_BADGES[draft.email_type]!.label}
+                </span>
               )}
               {draft.variant && (
                 <span className="text-xs bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full font-medium">

@@ -7,14 +7,23 @@ async function getStats() {
   const today = new Date().toISOString().split('T')[0]
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
 
-  const [statsRes, draftsRes, repliesRes, leadsRes] = await Promise.all([
+  const [statsRes, draftsRes, repliesRes, leadsRes, allLeadsRes] = await Promise.all([
     supabase.from('sales_daily_stats').select('*').gte('date', sevenDaysAgo).order('date'),
     supabase.from('sales_emails').select('id', { count: 'exact', head: true }).eq('status', 'draft'),
     supabase.from('sales_replies').select('id', { count: 'exact', head: true }).eq('human_approved', false),
     supabase.from('sales_leads').select('id', { count: 'exact', head: true }).in('status', ['new', 'analyzed']),
+    supabase.from('sales_leads').select('conversation_phase'),
   ])
 
   const todayStats = (statsRes.data as DailyStats[] | null)?.find((s) => s.date === today)
+
+  // ファネル集計
+  const phases = (allLeadsRes.data ?? []) as { conversation_phase: string | null }[]
+  const funnel: Record<string, number> = {}
+  for (const l of phases) {
+    const p = l.conversation_phase ?? 'initial'
+    funnel[p] = (funnel[p] ?? 0) + 1
+  }
 
   return {
     weeklyStats: (statsRes.data as DailyStats[] | null) ?? [],
@@ -22,6 +31,7 @@ async function getStats() {
     pendingDrafts: draftsRes.count ?? 0,
     pendingReplies: repliesRes.count ?? 0,
     pendingLeads: leadsRes.count ?? 0,
+    funnel,
   }
 }
 
@@ -83,6 +93,36 @@ export default async function DashboardPage() {
           </div>
         )}
       </div>
+
+      {/* ファネル */}
+      {Object.keys(stats.funnel).length > 1 && (
+        <div className="bg-white rounded-2xl border border-stone-200 p-6 mb-6">
+          <h2 className="text-sm font-semibold text-stone-700 mb-4">会話フェーズファネル</h2>
+          <div className="flex items-end gap-3">
+            {[
+              { key: 'initial', label: '初期', color: 'bg-stone-300' },
+              { key: 'discovery', label: '発見', color: 'bg-blue-400' },
+              { key: 'qualified', label: '見込み', color: 'bg-green-400' },
+              { key: 'evaluation', label: '検討', color: 'bg-purple-400' },
+              { key: 'negotiation', label: '交渉', color: 'bg-amber-400' },
+              { key: 'closed_lost', label: '失注', color: 'bg-red-300' },
+            ].map(({ key, label, color }) => {
+              const count = stats.funnel[key] ?? 0
+              const maxCount = Math.max(...Object.values(stats.funnel), 1)
+              return (
+                <div key={key} className="flex-1 flex flex-col items-center gap-1">
+                  <p className="text-sm font-bold text-stone-700">{count}</p>
+                  <div
+                    className={`w-full ${color} rounded-t-md`}
+                    style={{ height: `${Math.max((count / maxCount) * 80, 4)}px` }}
+                  />
+                  <p className="text-[10px] text-stone-500">{label}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
 
       {/* クイックアクション */}
       <div className="grid grid-cols-3 gap-4">

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
 import Script from 'next/script'
 import './globals.css'
 import Header from '@/components/layout/Header'
@@ -72,11 +73,13 @@ const webAppSchema = {
   ],
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const nonce = (await headers()).get('x-nonce') ?? ''
+
   return (
     <html lang="ja">
       <head>
@@ -87,11 +90,13 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <script
+          nonce={nonce}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
         />
-        {/* Google AdSense — head内に配置（所有権確認にはSSR出力が必要） */}
+        {/* Google AdSense */}
         <script
+          nonce={nonce}
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2432747666538345"
           crossOrigin="anonymous"
@@ -106,10 +111,11 @@ export default function RootLayout({
         {GA_ID && (
           <>
             <Script
+              nonce={nonce}
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
               strategy="afterInteractive"
             />
-            <Script id="ga-init" strategy="afterInteractive">
+            <Script nonce={nonce} id="ga-init" strategy="afterInteractive">
               {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}');`}
             </Script>
           </>

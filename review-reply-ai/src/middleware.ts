@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https: 'unsafe-inline'`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "img-src 'self' data: blob: https: http:",
+    "img-src 'self' data: blob: https:",
     "font-src 'self' https://fonts.gstatic.com data:",
     "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://pagead2.googlesyndication.com https://accounts.google.com https://adservice.google.com",
     "frame-src https://js.stripe.com https://accounts.google.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://td.doubleclick.net",

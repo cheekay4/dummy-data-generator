@@ -32,6 +32,7 @@ export default function Footer() {
                 <Link href="/contact" className="text-sm hover:text-stone-200 transition-colors">お問い合わせ</Link>
                 <Link href="/privacy" className="text-sm hover:text-stone-200 transition-colors">プライバシーポリシー</Link>
                 <Link href="/terms" className="text-sm hover:text-stone-200 transition-colors">利用規約</Link>
+                <Link href="/tokushoho" className="text-sm hover:text-stone-200 transition-colors">特定商取引法に基づく表記</Link>
               </nav>
             </div>
           </div>

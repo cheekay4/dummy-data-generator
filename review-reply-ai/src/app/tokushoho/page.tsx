@@ -10,7 +10,7 @@ export default function TokushohoPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-16">
       <h1 className="text-2xl font-bold text-stone-800 mb-2">特定商取引法に基づく表記</h1>
-      <p className="text-stone-400 text-sm mb-10">最終更新: 2026年3月1日</p>
+      <p className="text-stone-400 text-sm mb-10">最終更新: 2026年3月2日</p>
 
       <div className="space-y-6 text-stone-600 text-sm leading-relaxed">
         <dl className="divide-y divide-stone-200">
@@ -38,7 +38,14 @@ export default function TokushohoPage() {
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
             <dt className="font-bold text-stone-800">販売価格</dt>
-            <dd className="mt-1 sm:mt-0 sm:col-span-2">Proプラン: 月額390円（税込）</dd>
+            <dd className="mt-1 sm:mt-0 sm:col-span-2">
+              Freeプラン: 無料（1日5回まで）<br />
+              Proプラン: 月額390円（税込）
+            </dd>
+          </div>
+          <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt className="font-bold text-stone-800">商品代金以外の必要料金</dt>
+            <dd className="mt-1 sm:mt-0 sm:col-span-2">なし（インターネット接続に必要な通信費はお客様のご負担となります）</dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
             <dt className="font-bold text-stone-800">支払方法</dt>
@@ -46,19 +53,23 @@ export default function TokushohoPage() {
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
             <dt className="font-bold text-stone-800">支払時期</dt>
-            <dd className="mt-1 sm:mt-0 sm:col-span-2">申込時に初回課金、以降毎月自動更新</dd>
+            <dd className="mt-1 sm:mt-0 sm:col-span-2">お申込み時にクレジットカードへ即時課金。以降、毎月同日に自動更新されます。</dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
             <dt className="font-bold text-stone-800">サービス提供時期</dt>
-            <dd className="mt-1 sm:mt-0 sm:col-span-2">決済完了後、即時利用可能</dd>
+            <dd className="mt-1 sm:mt-0 sm:col-span-2">決済完了後、即時ご利用いただけます。</dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-            <dt className="font-bold text-stone-800">返品・キャンセル</dt>
-            <dd className="mt-1 sm:mt-0 sm:col-span-2">デジタルサービスのため返品不可。マイページからいつでも解約可能。解約後は次の課金日をもってFreeプランに移行します。</dd>
+            <dt className="font-bold text-stone-800">返品・交換・キャンセルについて</dt>
+            <dd className="mt-1 sm:mt-0 sm:col-span-2">
+              デジタルサービスの性質上、返品・交換はお受けしておりません。<br />
+              サブスクリプションの解約はマイページからいつでも可能です。解約後は現在の課金期間の終了日までProプランの機能をご利用いただけ、その後Freeプランに移行します。<br />
+              サービスの不具合によりご利用いただけなかった場合は、<a href="mailto:tools24.riku@gmail.com" className="text-amber-600 hover:text-amber-700 underline">tools24.riku@gmail.com</a> までご連絡ください。状況を確認のうえ、返金等の対応をいたします。
+            </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
             <dt className="font-bold text-stone-800">動作環境</dt>
-            <dd className="mt-1 sm:mt-0 sm:col-span-2">モダンブラウザ（Chrome, Safari, Firefox, Edge 最新版）</dd>
+            <dd className="mt-1 sm:mt-0 sm:col-span-2">モダンブラウザ（Chrome, Safari, Firefox, Edge 最新版）。スマートフォン・タブレット対応。</dd>
           </div>
         </dl>
       </div>

@@ -275,6 +275,7 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
+| 2026-03-03 | セキュリティ信頼性向上3施策: SECURITY ACTION二つ星(/security-policy新規)・Mozilla Observatory A+(105点, nonce CSP)・プライバシー透明性強化(データ取り扱い詳細)・Footer/Pricing信頼性バッジ・MsgScoreファビコン変更・Stripe追加審査提出・IPA二つ星申込完了 | dbfa52f |
 | 2026-03-01 | sales-agent: 受信メール登録(InboundReplyTab)+「両方」プロダクト(全3タブ)+manual-create API+bothProductContext | - |
 | 2026-03-01 | FAQ回答の段落分け（string[]化）・Pro解約FAQ誤解防止修正（プロファイル制限・履歴閲覧不可を明記、3箇所統一）・プロファイル数/履歴日数の具体化・pricing FAQ同期 | 9aea729 |
 | 2026-03-01 | sales-agent: UAT完了・Cron設定・E2Eテスト送信成功・共通署名(両プロダクト併記)・関連ページURL自動挿入・Markdown禁止ルール | - |

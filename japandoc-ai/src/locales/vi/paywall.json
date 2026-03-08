@@ -1,0 +1,22 @@
+{
+  "title": "Quét thêm tài liệu",
+  "subtitle": "Bạn đã sử dụng hết 3 lượt quét miễn phí hôm nay. Nâng cấp để tiếp tục!",
+  "unlimitedAccess": "Truy cập không giới hạn",
+  "creditPacks": "Hoặc mua gói tín dụng",
+  "or": "hoặc",
+  "freeHint": "Hướng dẫn phát âm luôn miễn phí — không giới hạn!",
+  "restorePurchases": "Khôi phục giao dịch",
+  "maybeLater": "Để sau",
+  "premium": "Premium",
+  "recommended": "ĐỀ XUẤT",
+  "trialMonthly": "Dùng thử miễn phí 7 ngày",
+  "trialYearly": "Tiết kiệm 2 tháng",
+  "perMonth": "/tháng",
+  "perYear": "/năm",
+  "scans": "{{count}} lượt quét",
+  "perScan": "{{price}}/lượt",
+  "featUnlimited": "Quét không giới hạn",
+  "featHistory": "Lịch sử đầy đủ",
+  "featDeadlines": "Thông báo hạn chót",
+  "featNoAds": "Không quảng cáo"
+}

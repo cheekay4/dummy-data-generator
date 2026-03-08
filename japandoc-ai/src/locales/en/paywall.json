@@ -1,0 +1,22 @@
+{
+  "title": "Scan more documents",
+  "subtitle": "You've used all 3 free scans today. Upgrade to keep scanning!",
+  "unlimitedAccess": "Unlimited Access",
+  "creditPacks": "Or buy scan credits",
+  "or": "or",
+  "freeHint": "Pronunciation guide is always free — no limit!",
+  "restorePurchases": "Restore Purchases",
+  "maybeLater": "Maybe later",
+  "premium": "Premium",
+  "recommended": "RECOMMENDED",
+  "trialMonthly": "7-day free trial",
+  "trialYearly": "Save 2 months",
+  "perMonth": "/month",
+  "perYear": "/year",
+  "scans": "{{count}} scans",
+  "perScan": "{{price}}/scan",
+  "featUnlimited": "Unlimited scans",
+  "featHistory": "Full history",
+  "featDeadlines": "Deadline notifications",
+  "featNoAds": "No ads"
+}

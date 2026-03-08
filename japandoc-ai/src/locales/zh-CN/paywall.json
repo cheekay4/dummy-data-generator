@@ -1,0 +1,22 @@
+{
+  "title": "扫描更多文档",
+  "subtitle": "您今天已用完3次免费扫描。升级以继续使用！",
+  "unlimitedAccess": "无限访问",
+  "creditPacks": "或购买扫描次数",
+  "or": "或",
+  "freeHint": "发音指南始终免费 — 无限制！",
+  "restorePurchases": "恢复购买",
+  "maybeLater": "以后再说",
+  "premium": "Premium",
+  "recommended": "推荐",
+  "trialMonthly": "7天免费试用",
+  "trialYearly": "节省2个月",
+  "perMonth": "/月",
+  "perYear": "/年",
+  "scans": "{{count}} 次扫描",
+  "perScan": "{{price}}/次",
+  "featUnlimited": "无限扫描",
+  "featHistory": "完整历史记录",
+  "featDeadlines": "截止日期提醒",
+  "featNoAds": "无广告"
+}

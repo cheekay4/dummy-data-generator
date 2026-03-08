@@ -1,0 +1,22 @@
+{
+  "title": "Mag-scan ng higit pa",
+  "subtitle": "Nagamit mo na ang 3 libreng scan ngayong araw. Mag-upgrade para magpatuloy!",
+  "unlimitedAccess": "Walang limitasyong access",
+  "creditPacks": "O bumili ng scan credits",
+  "or": "o",
+  "freeHint": "Ang pronunciation guide ay palaging libre — walang limit!",
+  "restorePurchases": "Ibalik ang mga binili",
+  "maybeLater": "Mamaya na lang",
+  "premium": "Premium",
+  "recommended": "INIREREKOMENDA",
+  "trialMonthly": "7 araw na libreng trial",
+  "trialYearly": "Makatipid ng 2 buwan",
+  "perMonth": "/buwan",
+  "perYear": "/taon",
+  "scans": "{{count}} scan",
+  "perScan": "{{price}}/scan",
+  "featUnlimited": "Walang limitasyong scan",
+  "featHistory": "Buong kasaysayan",
+  "featDeadlines": "Mga paalala sa deadline",
+  "featNoAds": "Walang ads"
+}

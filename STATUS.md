@@ -3,7 +3,7 @@
 > このファイルはプロジェクトの現在状態を記録するSST（Single Source of Truth）。
 > Claude Code は毎セッション開始時に読み込み、変更時に即反映すること。
 
-最終更新: 2026-03-01（受信メール登録機能・「両方」プロダクト選択・ManualAdd/Discover/Inbound全タブ対応）
+最終更新: 2026-03-07（JapanDoc AI Phase 1-D 実装完了）
 
 ---
 
@@ -17,6 +17,9 @@
 | 敬語メールライター | https://keigo-tools.vercel.app | ✅ LIVE | keigo-tools |
 | 契約書チェッカー | https://contract-tools-theta.vercel.app | ✅ LIVE | contract-tools |
 | AI口コミ返信ジェネレーター | https://myreplytone.com | ✅ LIVE | review-reply-ai |
+| 引き継ぎAI | https://hikitsugi-ai.vercel.app | ✅ LIVE（Phase 1-B） | hikitsugi-ai |
+| JapanDoc AI API | https://japandoc-api.vercel.app | ✅ LIVE | japandoc-api |
+| JapanDoc AI | — | 🔧 開発中（Phase 1-A~D コード完了、UXテスト済み） | japandoc-ai |
 
 ---
 
@@ -160,6 +163,15 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-08 | JapanDoc AI: UXペルソナテスト実施(6ペルソナ12画面)→致命的3件+重要7件を全修正(APIエラーUI・オフライン検知・WCAG AAコントラスト・タッチターゲット・オンボーディング戻るボタン・ペイウォールi18n完全対応)。プライバシーポリシーページ作成+japandoc-apiデプロイ | Claude Code |
+| 2026-03-08 | JapanDoc AI: CORS修正(corsJson再帰バグ+ステータスコード形式)+ポート競合解決(3000→3001)。Web経由ギャラリー→Claude Vision API実データ解析✅動作確認。精度・速度に課題あり→改善候補記録済み | Claude Code |
+| 2026-03-07 | JapanDoc AI Phase 1-C+1-D実装完了: expo-sqlite/localStorage DB・履歴一覧(フィルタ・検索・お気に入り)・期限トラッキング・通知スケジュール・無料3回/日制限・ペイウォール画面(サブスク+クレジットパック)・クレジット残高管理・/api/verify-receipt骨格。全13ルート build ✅ | Claude Code |
+| 2026-03-07 | JapanDoc AI Phase 1-B実装完了: japandoc-api (Next.js Edge Function) + Claude Vision API (claude-sonnet-4-20250514) + カテゴリ別プロンプト(6種) + レート制限 + scan-api連携 + モックフォールバック。両プロジェクト build ✅ | Claude Code |
+| 2026-03-07 | hikitsugi-ai Phase 1-C完了: Supabase Auth・Stripe課金(Pro¥1980/Team¥4980)・DB永続化・ダッシュボード・共有リンク・利用制限・PDF出力。npm run build ✅ Vercelデプロイ済み | Claude Code |
+| 2026-03-07 | JapanDoc AI Phase 1-A実装完了: React Native + Expo SDK 55 + NativeWind v4 + zustand + i18next。オンボーディング3画面(母国語選択→目的→デモ) + カメラUI + ボトムシート結果表示 + 設定画面 + 4言語対応(en/vi/zh-CN/fil) + モックOCR/辞書。expo export ✅ | Claude Code |
+| 2026-03-05 | hikitsugi-ai Phase 1-A実装完了: Next.js 16 + Tailwind v4 + Zustand v5 + Framer Motion。LP(8セクション) + テンプレート選択 + チャットUI + 静的ページ。npm run build ✅ | Claude Code |
+| 2026-03-04 | sales-agent-web: プロンプト全面改修（自己紹介排除・価値提供型・スパム感排除）・デプロイ済み | Claude Code |
+| 2026-03-04 | sales-agent-web: 初回ドラフト生成機能(Web UI)・再生成ボタン・性格診断推しプロンプト・冒頭挨拶固定・パスワード保護(middleware) | Claude Code |
 | 2026-03-03 | MyReplyTone セキュリティ信頼性向上: SECURITY ACTION二つ星・Mozilla Observatory A+(105点)・プライバシー透明性強化・nonce CSP・MsgScoreファビコン変更・Stripe追加審査提出・IPA二つ星申込完了 | Claude Code |
 | 2026-03-01 | MyReplyTone FAQ段落分け・Pro解約FAQ誤解防止修正（プロファイル制限/履歴閲覧条件明記・3箇所統一） | Claude Code |
 | 2026-03-01 | sales-agent: UAT完了・Cron設定(send+check-replies)・E2Eテスト送信成功・返信AI処理確認・共通署名追加・関連ページURL自動挿入・Markdown禁止ルール追加 | Claude Code |
@@ -173,6 +185,7 @@
 | 2026-03-01 | sales-agent-web Google Places API 3段階パイプライン（Places→メール抽出→Tavily補助）Vercel本番デプロイ完了 | Claude Code |
 | 2026-03-01 | MyReplyTone 管理者ダッシュボード実装（/admin KPI・ユーザー管理CRUD・認証バグ修正）デプロイ完了 | Claude Code |
 | 2026-02-28 | MyReplyTone HowItWorks性格診断推し整合修正・STEP3リンク化・UXテスト方法論2基準追加 | Claude Code |
+| 2026-03-05 | hikitsugi-ai Phase 1-B実装完了・Vercelデプロイ（https://hikitsugi-ai.vercel.app）。Claude AIインタビュー・ストリーミングマニュアル生成・ReactMarkdown表示。npm run build ✅ | Claude Code |
 | 2026-02-28 | MyReplyTone UXテスト🔴4件修正（ナビ順序・広告非表示・料金表修正・残回数初期値）デプロイ完了 | Claude Code |
 | 2026-02-28 | MyReplyTone ブランドリニューアル・ファビコン・Supabaseメールテンプレ日本語化・rate limit Supabase永続化・AuthModal UI改善 | Claude Code |
 | 2026-02-28 | GA4(G-8Z4CYXXR5N)設定・Search Console登録・sitemap送信・Supabase URL更新・DNS設定・myreplytone.com 本番完全稼働 | Claude Code |

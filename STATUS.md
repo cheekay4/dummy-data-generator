@@ -17,7 +17,7 @@
 | 敬語メールライター | https://keigo-tools.vercel.app | ✅ LIVE | keigo-tools |
 | 契約書チェッカー | https://contract-tools-theta.vercel.app | ✅ LIVE | contract-tools |
 | AI口コミ返信ジェネレーター | https://myreplytone.com | ✅ LIVE | review-reply-ai |
-| 引き継ぎAI | https://hikitsugi-ai.vercel.app | ✅ LIVE（Phase 1-B） | hikitsugi-ai |
+| 引き継ぎAI | https://hikitsugi-ai.vercel.app | ✅ LIVE（Phase 1-C） | hikitsugi-ai |
 | ScanLingo API | https://japandoc-api.vercel.app | ✅ LIVE | japandoc-api |
 | ScanLingo | — | 🔧 開発中（Phase 1-A~D コード完了、UXテスト済み） | japandoc-ai |
 
@@ -163,6 +163,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-08 | hikitsugi-ai Phase 1-C完了(Supabase Auth+Stripe+DB永続化+Dashboard+共有リンク+利用制限)・myreplytone GA4修正(nonce-CSP対応のSSRスクリプトに変更) | Claude Code |
 | 2026-03-08 | ScanLingo: アプリアイコン設定(うさぎりんご1024x1024+favicon+splash+Android adaptive)+権限テキストをグローバル対応+スプラッシュ/Android背景色ダークテーマ統一 | Claude Code |
 | 2026-03-08 | ScanLingo: サービス名リネーム(JapanDoc AI→ScanLingo)。app.json/IAP ID/DB名/プライバシーポリシー等11ファイル更新+再デプロイ | Claude Code |
 | 2026-03-08 | JapanDoc AI: UXペルソナテスト実施(6ペルソナ12画面)→致命的3件+重要7件を全修正(APIエラーUI・オフライン検知・WCAG AAコントラスト・タッチターゲット・オンボーディング戻るボタン・ペイウォールi18n完全対応)。プライバシーポリシーページ作成+japandoc-apiデプロイ | Claude Code |

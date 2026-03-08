@@ -275,6 +275,8 @@ Google・食べログ・ホットペッパー・じゃらん・一休・楽天�
 
 | 日付 | 内容 | コミット |
 |------|------|---------|
+| 2026-03-08 | GA4データ収集修正: `<Script strategy="afterInteractive">` → SSRレンダリング `<script nonce>` に変更（nonce-CSP対応）・hikitsugi-ai Phase 1-C実装完了（Supabase Auth + Stripe + DB永続化 + Dashboard + 共有リンク + 利用制限） | - |
+| 2026-03-04 | sales-agent-web: 初回ドラフト生成(Web UI)+再生成+性格診断推しプロンプト+冒頭挨拶固定+パスワード保護(proxy.ts middleware) | - |
 | 2026-03-03 | セキュリティ信頼性向上3施策: SECURITY ACTION二つ星(/security-policy新規)・Mozilla Observatory A+(105点, nonce CSP)・プライバシー透明性強化(データ取り扱い詳細)・Footer/Pricing信頼性バッジ・MsgScoreファビコン変更・Stripe追加審査提出・IPA二つ星申込完了 | dbfa52f |
 | 2026-03-01 | sales-agent: 受信メール登録(InboundReplyTab)+「両方」プロダクト(全3タブ)+manual-create API+bothProductContext | - |
 | 2026-03-01 | FAQ回答の段落分け（string[]化）・Pro解約FAQ誤解防止修正（プロファイル制限・履歴閲覧不可を明記、3箇所統一）・プロファイル数/履歴日数の具体化・pricing FAQ同期 | 9aea729 |

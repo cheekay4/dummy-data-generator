@@ -1,0 +1,10 @@
+{
+  "name": "引き継ぎAI",
+  "short_name": "引き継ぎAI",
+  "description": "AIが聞き出す、業務マニュアル自動生成",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafaf9",
+  "theme_color": "#475569",
+  "icons": []
+}

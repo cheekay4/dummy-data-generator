@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — JapanDoc AI',
-  description: 'Privacy Policy for JapanDoc AI mobile application',
+  title: 'Privacy Policy — ScanLingo',
+  description: 'Privacy Policy for ScanLingo mobile application',
 };
 
 export default function PrivacyPage() {
@@ -12,7 +12,7 @@ export default function PrivacyPage() {
       <p style={{ color: '#666', marginBottom: 32 }}>Last updated: March 8, 2026</p>
 
       <p>
-        This Privacy Policy explains how JapanDoc AI (&quot;we&quot;, &quot;us&quot;, or &quot;the App&quot;) collects, uses, and protects
+        This Privacy Policy explains how ScanLingo (&quot;we&quot;, &quot;us&quot;, or &quot;the App&quot;) collects, uses, and protects
         your information when you use our mobile application.
       </p>
 
@@ -144,7 +144,7 @@ export default function PrivacyPage() {
       </Section>
 
       <div style={{ borderTop: '1px solid #e5e5e5', marginTop: 48, paddingTop: 24, color: '#999', fontSize: 14 }}>
-        <p>JapanDoc AI is operated by tools24.jp</p>
+        <p>ScanLingo is operated by tools24.jp</p>
       </div>
     </div>
   );

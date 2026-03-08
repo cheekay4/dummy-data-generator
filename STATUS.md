@@ -18,8 +18,8 @@
 | 契約書チェッカー | https://contract-tools-theta.vercel.app | ✅ LIVE | contract-tools |
 | AI口コミ返信ジェネレーター | https://myreplytone.com | ✅ LIVE | review-reply-ai |
 | 引き継ぎAI | https://hikitsugi-ai.vercel.app | ✅ LIVE（Phase 1-B） | hikitsugi-ai |
-| JapanDoc AI API | https://japandoc-api.vercel.app | ✅ LIVE | japandoc-api |
-| JapanDoc AI | — | 🔧 開発中（Phase 1-A~D コード完了、UXテスト済み） | japandoc-ai |
+| ScanLingo API | https://japandoc-api.vercel.app | ✅ LIVE | japandoc-api |
+| ScanLingo | — | 🔧 開発中（Phase 1-A~D コード完了、UXテスト済み） | japandoc-ai |
 
 ---
 
@@ -163,6 +163,8 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-08 | ScanLingo: アプリアイコン設定(うさぎりんご1024x1024+favicon+splash+Android adaptive)+権限テキストをグローバル対応+スプラッシュ/Android背景色ダークテーマ統一 | Claude Code |
+| 2026-03-08 | ScanLingo: サービス名リネーム(JapanDoc AI→ScanLingo)。app.json/IAP ID/DB名/プライバシーポリシー等11ファイル更新+再デプロイ | Claude Code |
 | 2026-03-08 | JapanDoc AI: UXペルソナテスト実施(6ペルソナ12画面)→致命的3件+重要7件を全修正(APIエラーUI・オフライン検知・WCAG AAコントラスト・タッチターゲット・オンボーディング戻るボタン・ペイウォールi18n完全対応)。プライバシーポリシーページ作成+japandoc-apiデプロイ | Claude Code |
 | 2026-03-08 | JapanDoc AI: CORS修正(corsJson再帰バグ+ステータスコード形式)+ポート競合解決(3000→3001)。Web経由ギャラリー→Claude Vision API実データ解析✅動作確認。精度・速度に課題あり→改善候補記録済み | Claude Code |
 | 2026-03-07 | JapanDoc AI Phase 1-C+1-D実装完了: expo-sqlite/localStorage DB・履歴一覧(フィルタ・検索・お気に入り)・期限トラッキング・通知スケジュール・無料3回/日制限・ペイウォール画面(サブスク+クレジットパック)・クレジット残高管理・/api/verify-receipt骨格。全13ルート build ✅ | Claude Code |

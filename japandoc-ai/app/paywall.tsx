@@ -5,15 +5,15 @@ import { useTranslation } from 'react-i18next';
 import { useUserStore } from '@/src/stores/user-store';
 
 const CREDIT_PACKS = [
-  { id: 'japandoc.credits.5', scans: 5, price: 160, priceDisplay: '¥160' },
-  { id: 'japandoc.credits.30', scans: 30, price: 500, priceDisplay: '¥500' },
-  { id: 'japandoc.credits.100', scans: 100, price: 1500, priceDisplay: '¥1,500' },
-  { id: 'japandoc.credits.300', scans: 300, price: 3500, priceDisplay: '¥3,500' },
+  { id: 'scanlingo.credits.5', scans: 5, price: 160, priceDisplay: '¥160' },
+  { id: 'scanlingo.credits.30', scans: 30, price: 500, priceDisplay: '¥500' },
+  { id: 'scanlingo.credits.100', scans: 100, price: 1500, priceDisplay: '¥1,500' },
+  { id: 'scanlingo.credits.300', scans: 300, price: 3500, priceDisplay: '¥3,500' },
 ];
 
 const SUBSCRIPTIONS = [
-  { id: 'japandoc.premium.monthly', priceDisplay: '¥980', trialKey: 'trialMonthly', yearly: false },
-  { id: 'japandoc.premium.yearly', priceDisplay: '¥9,800', trialKey: 'trialYearly', yearly: true },
+  { id: 'scanlingo.premium.monthly', priceDisplay: '¥980', trialKey: 'trialMonthly', yearly: false },
+  { id: 'scanlingo.premium.yearly', priceDisplay: '¥9,800', trialKey: 'trialYearly', yearly: true },
 ];
 
 function CreditPackCard({

@@ -1,4 +1,4 @@
-# JapanDoc AI — 手動タスク一覧
+# ScanLingo — 手動タスク一覧
 
 コード実装は Phase 1-A〜1-D 全て完了。以下は手動で対応が必要な項目。
 
@@ -6,32 +6,31 @@
 
 ## 1. Apple Developer Account（前提条件）
 
-- [ ] Apple Developer Program に登録（年額 $99 / ¥12,980）
+- [x] Apple Developer Program に登録（年額 $99 / ¥12,980）✅ 2026-03-08
 - [ ] App Store Connect にアプリを作成
-- [ ] Bundle ID を決定（例: com.tools24.japandoc-ai）
+- [ ] Bundle ID を決定（例: com.tools24.scanlingo）
 
 ## 2. 環境変数の設定
 
-- [ ] `japandoc-api/.env.local` に `ANTHROPIC_API_KEY=sk-ant-...` を設定
-  - Claude API コンソール: https://console.anthropic.com/
-- [ ] japandoc-api を Vercel にデプロイし、本番URLを取得
-- [ ] `japandoc-ai/.env.local` の `EXPO_PUBLIC_API_URL` を本番URLに変更
+- [x] `japandoc-api/.env.local` に `ANTHROPIC_API_KEY` を設定 ✅
+- [x] japandoc-api を Vercel にデプロイ済み: https://japandoc-api.vercel.app ✅
+- [x] `japandoc-ai/.env.local` の `EXPO_PUBLIC_API_URL` を本番URLに設定済み ✅
 
 ## 3. App Store Connect — IAP 商品作成
 
 ### Consumable（クレジットパック）
 | Product ID | 内容 | 価格 |
 |-----------|------|------|
-| japandoc.credits.5 | 5スキャン | ¥160 |
-| japandoc.credits.30 | 30スキャン | ¥500 |
-| japandoc.credits.100 | 100スキャン | ¥1,500 |
-| japandoc.credits.300 | 300スキャン | ¥3,500 |
+| scanlingo.credits.5 | 5スキャン | ¥160 |
+| scanlingo.credits.30 | 30スキャン | ¥500 |
+| scanlingo.credits.100 | 100スキャン | ¥1,500 |
+| scanlingo.credits.300 | 300スキャン | ¥3,500 |
 
 ### Auto-Renewable Subscription
 | Product ID | 内容 | 価格 |
 |-----------|------|------|
-| japandoc.premium.monthly | Premium月額 | ¥980/月（7日間無料トライアル） |
-| japandoc.premium.yearly | Premium年額 | ¥9,800/年 |
+| scanlingo.premium.monthly | Premium月額 | ¥980/月（7日間無料トライアル） |
+| scanlingo.premium.yearly | Premium年額 | ¥9,800/年 |
 
 - [ ] サブスクリプショングループを作成
 - [ ] 各商品を登録
@@ -73,7 +72,7 @@ npx expo install react-native-google-mobile-ads
 
 ## 7. App Store メタデータ
 
-- [ ] アプリアイコン（1024x1024 PNG）
+- [x] アプリアイコン（1024x1024 PNG）✅ うさぎりんごデザイン
 - [ ] スクリーンショット作成:
   - 6.7インチ（iPhone 15 Pro Max）x 5枚
   - 6.1インチ（iPhone 15 Pro）x 5枚

@@ -6,9 +6,9 @@
 
 ## 1. Apple Developer Account（前提条件）
 
-- [x] Apple Developer Program に登録（年額 $99 / ¥12,980）✅ 2026-03-08
-- [ ] App Store Connect にアプリを作成
-- [ ] Bundle ID を決定（例: com.tools24.scanlingo）
+- [x] Apple Developer Program に登録（年額 $99 / ¥12,980）✅ 2026-03-08（購入処理中、最大48h）
+- [ ] App Store Connect にアプリを作成（← 購入完了後）
+- [x] Bundle ID を決定: `com.tools24.scanlingo` ✅
 
 ## 2. 環境変数の設定
 
@@ -102,8 +102,9 @@ eas build --platform ios
 eas submit --platform ios
 ```
 
-- [ ] eas.json の設定（development / preview / production プロファイル）
-- [ ] app.json に bundleIdentifier を設定
+- [x] eas.json の設定（development / preview / production プロファイル）✅
+- [x] app.json に bundleIdentifier を設定: `com.tools24.scanlingo` ✅
+- [x] EASプロジェクトリンク済み: @cheekay4/scanlingo (ID: f58a5a16-9393-40fe-b1e6-4b7083ff6306) ✅
 - [ ] TestFlight で内部テスト実施
 - [ ] 外部テスター（ベトナム語 / 中国語話者）に配布して多言語テスト
 

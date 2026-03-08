@@ -13,20 +13,27 @@
       "backgroundColor": "#0F0F13"
     },
     "ios": {
+      "bundleIdentifier": "com.tools24.scanlingo",
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "Camera is used to scan and translate foreign-language documents",
-        "NSPhotoLibraryUsageDescription": "Photo library access is used to scan foreign-language documents from existing photos"
+        "NSPhotoLibraryUsageDescription": "Photo library access is used to scan foreign-language documents from existing photos",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
+      "package": "com.tools24.scanlingo",
       "adaptiveIcon": {
         "backgroundColor": "#0F0F13",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -52,6 +59,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "f58a5a16-9393-40fe-b1e6-4b7083ff6306"
+      }
+    },
+    "owner": "cheekay4"
   }
 }

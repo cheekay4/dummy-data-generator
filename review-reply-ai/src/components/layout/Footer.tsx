@@ -30,6 +30,15 @@ export default function Footer() {
               </ul>
             </div>
             <div>
+              <p className="font-medium text-white mb-3">ガイド</p>
+              <ul className="space-y-2">
+                <li><a href="/guide/google-review-reply" className="hover:text-amber-400 transition-colors">Google口コミ返信の書き方</a></li>
+                <li><a href="/guide/negative-review" className="hover:text-amber-400 transition-colors">悪い口コミへの対応方法</a></li>
+                <li><a href="/guide/meo" className="hover:text-amber-400 transition-colors">MEO対策の基本</a></li>
+                <li><a href="/guide/industry-tips" className="hover:text-amber-400 transition-colors">業種別・返信のコツ</a></li>
+              </ul>
+            </div>
+            <div>
               <p className="font-medium text-white mb-3">サポート</p>
               <ul className="space-y-2">
                 <li><a href="/contact" className="hover:text-amber-400 transition-colors">お問い合わせ</a></li>

@@ -83,11 +83,11 @@
 - AuthModal（Google OAuth + マジックリンク）
 - proxy.ts（認証ミドルウェア）
 
-### Phase 1-D: 音声 + 高度機能（未着手）
-- 音声チャット（Web Speech API）
-- ブラウザ録音（MediaRecorder）
-- 音声ファイルアップロード + Whisper文字起こし
-- GA4設定
+### Phase 1-D: 音声 + 高度機能 ✅ 完了（2026-03-14）
+- 音声チャット（Web Speech API, ja-JP, SSR対応）→ VoiceRecorder.tsx + InputArea.tsx マイクボタン
+- /api/transcribe: Supabase Auth認証 + Groq Whisper対応（TRANSCRIBE_PROVIDER=groq で有効化）
+- GA4設定: NEXT_PUBLIC_GA_ID 環境変数で条件付き有効化
+- チャットUIデザイン改善: AIバブル(bg-white/shadow)・ユーザーバブル(indigo-600)・bg-neutral-50
 
 ### Phase 1-A/B 手作業での設定 🔴 未完了（後でやる）
 
@@ -107,6 +107,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-14 | Phase 1-D完了（音声入力UI/Web Speech API・Transcribe API/Groq Whisper・GA4・チャットUIデザイン改善）Agent Teams 3体構成で実装 |
 | 2026-03-07 | Phase 1-C完了・Vercelデプロイ（Supabase Auth + Stripe + DB永続化 + Dashboard + 共有リンク + 利用制限） |
 | 2026-03-06 | Phase 1-B完了・Vercelデプロイ・UIデザイン改善（Header非表示・バブル改善・emeraldバッジ等） |
 | 2026-03-05 | Phase 1-A完了（UI基盤・LP・インタビューチャット・SEO） |

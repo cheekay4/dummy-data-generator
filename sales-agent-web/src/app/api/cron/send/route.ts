@@ -11,12 +11,17 @@ const MIN_INTERVAL_MS = 60_000 // 60秒
  * Cron エンドポイント: 承認済みメールを送信する
  * Vercel Cron または外部スケジューラーから Authorization: Bearer {CRON_SECRET} で呼び出す
  */
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   // 認証チェック
   const cronSecret = process.env.CRON_SECRET
   const auth = req.headers.get('authorization')
   if (!cronSecret || auth !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
+  // キルスイッチ: SEND_ENABLED=true の場合のみ実行
+  if (process.env.SEND_ENABLED !== 'true') {
+    return NextResponse.json({ ok: true, sent: 0, reason: '一時停止中 (SEND_ENABLED != true)' })
   }
 
   // 今日の送信数チェック
@@ -56,6 +61,20 @@ export async function POST(req: NextRequest) {
     }
 
     try {
+      // 送信前に 'sending' ステータスにロック（二重送信防止）
+      // 他のCronインスタンスが同じメールを処理しないよう楽観ロック
+      const { data: locked } = await supabase
+        .from('sales_emails')
+        .update({ status: 'sending' })
+        .eq('id', email.id)
+        .eq('status', 'approved') // approved のままの場合のみ更新
+        .select('id')
+
+      if (!locked?.length) {
+        // 他インスタンスが先に処理済み → スキップ
+        continue
+      }
+
       // 配信停止フッターを追加
       const unsubUrl = getUnsubscribeUrl(email.lead_id)
       const footerText = `\n\n──\nこのメールの配信停止: ${unsubUrl}`
@@ -113,6 +132,12 @@ export async function POST(req: NextRequest) {
       }
     } catch (err) {
       errors.push(`email_id=${email.id}: ${err instanceof Error ? err.message : String(err)}`)
+      // 送信失敗時は 'sending' → 'approved' に戻して次回リトライ可能にする
+      await supabase
+        .from('sales_emails')
+        .update({ status: 'approved' })
+        .eq('id', email.id)
+        .eq('status', 'sending')
     }
   }
 

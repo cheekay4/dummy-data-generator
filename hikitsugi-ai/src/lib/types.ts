@@ -66,3 +66,5 @@ export interface ExtractedKnowledgeItem {
 export interface ExtractedKnowledge {
   sections: ExtractedKnowledgeItem[]
 }
+
+export type TranscribeResponse = { text: string } | { error: string }

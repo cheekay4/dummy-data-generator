@@ -287,7 +287,7 @@ export default function InterviewPage() {
     <>
       {isGenerating && <GeneratingOverlay />}
 
-      <div className="flex h-screen overflow-hidden bg-stone-50">
+      <div className="flex h-screen overflow-hidden bg-neutral-50">
         {/* Main chat area */}
         <div className="flex flex-col flex-1 min-w-0">
           {/* Interview header */}
@@ -321,7 +321,7 @@ export default function InterviewPage() {
 
           {/* Chat messages */}
           <div className="flex-1 overflow-y-auto py-6">
-            <div className="max-w-2xl mx-auto px-4 space-y-5">
+            <div className="max-w-2xl mx-auto px-4 space-y-6">
               {messages.map((msg) => (
                 <ChatBubble key={msg.id} message={msg} />
               ))}

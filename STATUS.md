@@ -163,6 +163,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-14 | ScanLingo: カメラ修正（expo-dev-client追加・GestureHandlerRootView二重ネスト解消・CameraView onMountError/loading改善・eas.json整備）Agent Teams 3体。npx expo export --platform web ✅ | Claude Code |
 | 2026-03-14 | hikitsugi-ai Phase 1-D完了（音声入力UI+Transcribe API+GA4+チャットデザイン改善）Agent Teams 3体で実装・レビュー・デプロイ | Claude Code |
 | 2026-03-08 | hikitsugi-ai Phase 1-C完了(Supabase Auth+Stripe+DB永続化+Dashboard+共有リンク+利用制限)・myreplytone GA4修正(nonce-CSP対応のSSRスクリプトに変更) | Claude Code |
 | 2026-03-08 | ScanLingo: アプリアイコン設定(うさぎりんご1024x1024+favicon+splash+Android adaptive)+権限テキストをグローバル対応+スプラッシュ/Android背景色ダークテーマ統一 | Claude Code |

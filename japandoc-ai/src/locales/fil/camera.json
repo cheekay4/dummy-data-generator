@@ -1,0 +1,22 @@
+{
+  "targetLanguage": "Japanese",
+  "flashAuto": "Auto",
+  "flashOn": "On",
+  "flashOff": "Off",
+  "reading": "Binabasa...",
+  "understanding": "Iniintindi...",
+  "almostReady": "Halos handa na...",
+  "noTextDetected": "Walang nakitang Japanese text",
+  "connectToInternet": "Kumonekta sa internet para mag-scan",
+  "blurryImage": "Malabo ang larawan. I-tap para subukan muli.",
+  "darkImage": "Masyadong madilim ang larawan. Subukan sa mas maliwanag.",
+  "webModeMessage": "Hindi available ang camera sa browser.\nPumili ng larawan o subukan ang demo.",
+  "cameraPermissionMessage": "Kailangan ng camera access para mag-scan ng Japanese text.",
+  "selectFromGallery": "Pumili mula sa Gallery",
+  "tryDemo": "Subukan ang Demo",
+  "grantCameraPermission": "Payagan ang Camera",
+  "scanFailed": "Hindi nag-scan",
+  "tryAgain": "Subukan muli",
+  "openSettings": "Buksan ang Settings",
+  "loadingCamera": "Nilo-load ang camera..."
+}

@@ -1,0 +1,22 @@
+{
+  "targetLanguage": "Tiếng Nhật",
+  "flashAuto": "Tự động",
+  "flashOn": "Bật",
+  "flashOff": "Tắt",
+  "reading": "Đang đọc...",
+  "understanding": "Đang phân tích...",
+  "almostReady": "Sắp xong...",
+  "noTextDetected": "Không phát hiện văn bản tiếng Nhật",
+  "connectToInternet": "Kết nối internet để quét",
+  "blurryImage": "Ảnh bị mờ. Chạm để thử lại.",
+  "darkImage": "Ảnh có thể quá tối. Hãy thử nơi sáng hơn.",
+  "webModeMessage": "Camera không khả dụng trong trình duyệt.\nChọn ảnh hoặc thử bản demo.",
+  "cameraPermissionMessage": "Cần quyền truy cập camera để quét văn bản tiếng Nhật.",
+  "selectFromGallery": "Chọn từ Thư viện",
+  "tryDemo": "Thử quét Demo",
+  "grantCameraPermission": "Cấp quyền Camera",
+  "scanFailed": "Quét thất bại",
+  "tryAgain": "Thử lại",
+  "openSettings": "Mở Cài đặt",
+  "loadingCamera": "Đang tải camera..."
+}

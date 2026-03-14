@@ -1,0 +1,22 @@
+{
+  "targetLanguage": "Japanese",
+  "flashAuto": "Auto",
+  "flashOn": "On",
+  "flashOff": "Off",
+  "reading": "Reading...",
+  "understanding": "Understanding...",
+  "almostReady": "Almost ready...",
+  "noTextDetected": "No Japanese text detected",
+  "connectToInternet": "Connect to internet to scan",
+  "blurryImage": "Blurry image. Tap to retry.",
+  "darkImage": "Image may be too dark. Try better lighting.",
+  "webModeMessage": "Camera is not available in browser mode.\nPick a photo or try the demo.",
+  "cameraPermissionMessage": "Camera access is needed to scan Japanese text.",
+  "selectFromGallery": "Select from Gallery",
+  "tryDemo": "Try Demo Scan",
+  "grantCameraPermission": "Grant Camera Permission",
+  "scanFailed": "Scan failed",
+  "tryAgain": "Try again",
+  "openSettings": "Open Settings",
+  "loadingCamera": "Loading camera..."
+}

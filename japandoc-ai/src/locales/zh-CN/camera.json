@@ -1,0 +1,22 @@
+{
+  "targetLanguage": "日语",
+  "flashAuto": "自动",
+  "flashOn": "开",
+  "flashOff": "关",
+  "reading": "正在读取...",
+  "understanding": "正在分析...",
+  "almostReady": "即将完成...",
+  "noTextDetected": "未检测到日语文字",
+  "connectToInternet": "请连接网络进行扫描",
+  "blurryImage": "图片模糊，请重新拍摄。",
+  "darkImage": "图片太暗，请改善光线。",
+  "webModeMessage": "浏览器模式下无法使用摄像头。\n请选择照片或试用演示。",
+  "cameraPermissionMessage": "需要摄像头权限来扫描日语文字。",
+  "selectFromGallery": "从相册选择",
+  "tryDemo": "试用演示扫描",
+  "grantCameraPermission": "授予摄像头权限",
+  "scanFailed": "扫描失败",
+  "tryAgain": "重试",
+  "openSettings": "打开设置",
+  "loadingCamera": "正在加载摄像头..."
+}

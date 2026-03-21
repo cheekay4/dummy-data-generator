@@ -100,6 +100,7 @@ export async function searchPlaces(opts: {
   const body: Record<string, unknown> = {
     textQuery,
     languageCode: 'ja',
+    regionCode: 'JP',
     maxResultCount: maxResults,
   }
 

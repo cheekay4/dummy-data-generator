@@ -1,4 +1,5 @@
-import { AudioWaveform, Shield, Lock } from 'lucide-react'
+import Image from 'next/image'
+import { AudioWaveform, Lock } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -19,7 +20,7 @@ export default function Footer() {
               あなたらしい返信文をAIが即座に生成。
             </p>
           </div>
-          <div className="flex gap-12 text-sm">
+          <div className="flex flex-wrap gap-8 md:gap-12 text-sm">
             <div>
               <p className="font-medium text-white mb-3">機能</p>
               <ul className="space-y-2">
@@ -36,15 +37,25 @@ export default function Footer() {
                 <li><a href="/guide/negative-review" className="hover:text-amber-400 transition-colors">悪い口コミへの対応方法</a></li>
                 <li><a href="/guide/meo" className="hover:text-amber-400 transition-colors">MEO対策の基本</a></li>
                 <li><a href="/guide/industry-tips" className="hover:text-amber-400 transition-colors">業種別・返信のコツ</a></li>
+                <li><a href="/guide" className="hover:text-amber-400 transition-colors">全ガイドを見る →</a></li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-medium text-white mb-3">コラム</p>
+              <ul className="space-y-2">
+                <li><a href="/blog/why-review-reply-matters-2026" className="hover:text-amber-400 transition-colors">口コミ返信の重要性</a></li>
+                <li><a href="/blog/ai-review-reply-comparison" className="hover:text-amber-400 transition-colors">AI返信ツール比較</a></li>
+                <li><a href="/blog/google-review-increase-tips" className="hover:text-amber-400 transition-colors">口コミを増やすコツ</a></li>
+                <li><a href="/blog" className="hover:text-amber-400 transition-colors">全記事を見る →</a></li>
               </ul>
             </div>
             <div>
               <p className="font-medium text-white mb-3">サポート</p>
               <ul className="space-y-2">
                 <li><a href="/contact" className="hover:text-amber-400 transition-colors">お問い合わせ</a></li>
+                <li><a href="/about" className="hover:text-amber-400 transition-colors">運営者情報</a></li>
                 <li><a href="/privacy" className="hover:text-amber-400 transition-colors">プライバシーポリシー</a></li>
                 <li><a href="/terms" className="hover:text-amber-400 transition-colors">利用規約</a></li>
-                <li><a href="/releases" className="hover:text-amber-400 transition-colors">リリースノート</a></li>
                 <li><a href="/tokushoho" className="hover:text-amber-400 transition-colors">特定商取引法に基づく表記</a></li>
                 <li><a href="/security-policy" className="hover:text-amber-400 transition-colors">情報セキュリティ基本方針</a></li>
               </ul>
@@ -59,7 +70,7 @@ export default function Footer() {
               href="/security-policy"
               className="flex items-center gap-2 hover:text-stone-300 transition-colors"
             >
-              <Shield className="w-4 h-4 text-blue-400" />
+              <Image src="/images/security-action-2star.png" alt="SECURITY ACTION 二つ星" width={20} height={20} className="flex-shrink-0" />
               <span>SECURITY ACTION ★★ 二つ星宣言</span>
             </a>
             <span className="flex items-center gap-2">

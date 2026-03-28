@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import { blogPosts } from '@/lib/blog-posts'
 import HeroSection from '@/components/landing/HeroSection'
 import FeatureCards from '@/components/landing/FeatureCards'
 import HowItWorks from '@/components/landing/HowItWorks'
@@ -109,6 +111,22 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
+      name: '食べログやホットペッパーの口コミにも対応していますか？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'はい、対応しています。MyReplyToneはGoogle口コミ、食べログ、ホットペッパービューティー、じゃらん、一休.com、Retty、トリップアドバイザーなど、主要な口コミプラットフォームの返信文を生成できます。口コミのテキストを貼り付けるだけで、プラットフォームを問わずあなたのトーンに合った返信文を生成します。',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '他のAIツール（ChatGPT等）との違いは何ですか？',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: '最大の違いは「パーソナライズ」です。ChatGPTなどの汎用AIは毎回プロンプトで指示する必要がありますが、MyReplyToneは性格診断やテキスト学習であなたの返信スタイルを一度覚えると、それ以降は口コミを貼り付けるだけでテンプレ感のない返信を自動生成します。また、8業種の特性を学習しているため、医療広告ガイドラインや飲食店特有の表現など、業種ごとの注意点も自動で考慮します。',
+      },
+    },
+    {
+      '@type': 'Question',
       name: 'Proプランはいつでも解約できますか？',
       acceptedAnswer: {
         '@type': 'Answer',
@@ -205,6 +223,54 @@ export default function Home() {
 
       <PricingSection />
       <FAQSection />
+
+      {/* 口コミ対策ガイド */}
+      <section className="py-16 px-4 bg-stone-50 border-y border-stone-100">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-stone-800 text-center mb-2">口コミ対策ガイド</h2>
+          <p className="text-sm text-stone-500 text-center mb-8">口コミ返信のノウハウを無料公開しています</p>
+          <div className="grid sm:grid-cols-3 gap-4">
+            <Link href="/guide/google-review-reply" className="border border-stone-200 bg-white rounded-2xl p-5 hover:border-amber-200 hover:bg-amber-50 transition-colors group">
+              <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">基本</span>
+              <p className="font-bold text-stone-800 group-hover:text-amber-700 transition-colors text-sm mt-2 mb-1">Google口コミ返信の書き方</p>
+              <p className="text-xs text-stone-500">良い口コミ・悪い口コミ別の返信構成と例文</p>
+            </Link>
+            <Link href="/guide/negative-review" className="border border-stone-200 bg-white rounded-2xl p-5 hover:border-amber-200 hover:bg-amber-50 transition-colors group">
+              <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">対応</span>
+              <p className="font-bold text-stone-800 group-hover:text-amber-700 transition-colors text-sm mt-2 mb-1">悪い口コミへの対応方法</p>
+              <p className="text-xs text-stone-500">炎上させずに誠実に返す4ステップ</p>
+            </Link>
+            <Link href="/guide/meo" className="border border-stone-200 bg-white rounded-2xl p-5 hover:border-amber-200 hover:bg-amber-50 transition-colors group">
+              <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">MEO</span>
+              <p className="font-bold text-stone-800 group-hover:text-amber-700 transition-colors text-sm mt-2 mb-1">MEO対策と口コミ管理</p>
+              <p className="text-xs text-stone-500">Googleマップ上位表示のポイント</p>
+            </Link>
+          </div>
+          <div className="text-center mt-6">
+            <Link href="/guide" className="text-sm text-amber-600 hover:text-amber-700 font-medium">全10本のガイドを見る →</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 最新のコラム */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-stone-800 text-center mb-2">最新の記事</h2>
+          <p className="text-sm text-stone-500 text-center mb-8">口コミ対策に役立つコラムをお届けします</p>
+          <div className="grid sm:grid-cols-3 gap-4">
+            {blogPosts.slice(0, 3).map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="border border-stone-100 rounded-2xl p-5 hover:border-amber-200 hover:bg-amber-50 transition-colors group">
+                <p className="text-xs text-stone-400 mb-2">{post.publishedAt}</p>
+                <p className="font-bold text-stone-800 group-hover:text-amber-700 transition-colors text-sm mb-2">{post.title}</p>
+                <p className="text-xs text-stone-500 line-clamp-2">{post.description}</p>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-6">
+            <Link href="/blog" className="text-sm text-amber-600 hover:text-amber-700 font-medium">全記事を見る →</Link>
+          </div>
+        </div>
+      </section>
 
       {/* AdSense rectangle before footer */}
       <div className="py-8 flex justify-center bg-white">

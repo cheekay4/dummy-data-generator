@@ -10,9 +10,22 @@ export const metadata: Metadata = {
   },
 }
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Google口コミ返信の書き方完全ガイド',
+  description: 'Google口コミへの返信方法を良い口コミ・悪い口コミ別に解説。返信が必要な理由、守るべきルール、すぐ使える例文テンプレートを無料公開。',
+  author: { '@type': 'Organization', name: 'tools24.jp', url: 'https://tools24.jp' },
+  publisher: { '@type': 'Organization', name: 'MyReplyTone', url: 'https://myreplytone.com' },
+  datePublished: '2025-06-01',
+  dateModified: '2026-03-29',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://myreplytone.com/guide/google-review-reply' },
+}
+
 export default function GoogleReviewReplyPage() {
   return (
     <div className="min-h-screen bg-white py-12 px-4">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
           <Link href="/guide" className="text-sm text-stone-400 hover:text-stone-600">
@@ -124,6 +137,24 @@ export default function GoogleReviewReplyPage() {
                 当日の状況を確認し、お待たせしない提供体制とスタッフへの接客指導を改めて徹底いたします。いただいたご意見を真摯に受け止め、より良いお店づくりに努めてまいります。<br /><br />
                 またの機会がございましたら、改善した姿をご覧いただけますと幸いです。」
               </p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-stone-800 mb-3 pb-2 border-b border-stone-100">関連ガイド</h2>
+            <div className="space-y-3">
+              <Link href="/guide/negative-review" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">対応</span>
+                <p className="font-medium text-stone-700 mt-2">悪い口コミへの対応方法——炎上させずに誠実に返す技術</p>
+              </Link>
+              <Link href="/guide/review-reply-examples" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">例文集</span>
+                <p className="font-medium text-stone-700 mt-2">【2026年版】口コミ返信テンプレート30選</p>
+              </Link>
+              <Link href="/guide/meo" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">MEO</span>
+                <p className="font-medium text-stone-700 mt-2">MEO対策と口コミ管理の基本</p>
+              </Link>
             </div>
           </section>
 

@@ -103,10 +103,10 @@ export default function Header() {
                 料金
               </a>
               <a
-                href="/#faq"
+                href="/guide"
                 className="hidden sm:block text-stone-500 hover:text-stone-800 px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors"
               >
-                FAQ
+                ガイド
               </a>
             </>
           )}

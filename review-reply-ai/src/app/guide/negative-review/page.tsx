@@ -10,9 +10,22 @@ export const metadata: Metadata = {
   },
 }
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: '悪い口コミへの対応方法——炎上させずに誠実に返す技術',
+  description: '低評価・クレーム口コミに正しく対応するための4ステップ。NGパターン・心構え・業種別の注意点をわかりやすく解説。',
+  author: { '@type': 'Organization', name: 'tools24.jp', url: 'https://tools24.jp' },
+  publisher: { '@type': 'Organization', name: 'MyReplyTone', url: 'https://myreplytone.com' },
+  datePublished: '2025-06-01',
+  dateModified: '2026-03-29',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://myreplytone.com/guide/negative-review' },
+}
+
 export default function NegativeReviewPage() {
   return (
     <div className="min-h-screen bg-white py-12 px-4">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
           <Link href="/guide" className="text-sm text-stone-400 hover:text-stone-600">
@@ -139,6 +152,24 @@ export default function NegativeReviewPage() {
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-stone-800 mb-3 pb-2 border-b border-stone-100">関連ガイド</h2>
+            <div className="space-y-3">
+              <Link href="/guide/star-rating-meaning" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">戦略</span>
+                <p className="font-medium text-stone-700 mt-2">星評価の本当の意味——★1〜★5それぞれに最適な返信戦略</p>
+              </Link>
+              <Link href="/guide/review-reply-template" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">テクニック</span>
+                <p className="font-medium text-stone-700 mt-2">口コミ返信の「型」——どんな口コミにも使える5つの返信フレームワーク</p>
+              </Link>
+              <Link href="/guide/review-psychology" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">マーケティング</span>
+                <p className="font-medium text-stone-700 mt-2">口コミ心理学——返信が行動を変える理由</p>
+              </Link>
             </div>
           </section>
 

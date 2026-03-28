@@ -34,6 +34,42 @@ const guides = [
     desc: '業種ごとに異なる口コミの特徴と、読まれる返信文を書くための具体的なテクニック。',
     tag: '業種別',
   },
+  {
+    href: '/guide/tabelog-review-reply',
+    title: '食べログの口コミ返信ガイド——Google口コミとの違いと書き方のコツ',
+    desc: '食べログ特有の点数システムや常連レビュアーへの対応方法、すぐ使える返信例文を紹介。',
+    tag: '食べログ',
+  },
+  {
+    href: '/guide/hotpepper-review-reply',
+    title: 'ホットペッパービューティーの口コミ返信ガイド——美容サロン向け完全マニュアル',
+    desc: '予約連動の特徴を活かした返信テクニック。仕上がり不満への対応や新規予約につなげるコツ。',
+    tag: 'ホットペッパー',
+  },
+  {
+    href: '/guide/review-reply-examples',
+    title: '【2026年版】口コミ返信テンプレート30選——コピペで使える業種別例文集',
+    desc: '飲食店・美容院・クリニック・ホテルなど7業種の口コミ返信例文を高評価・低評価別に30本掲載。',
+    tag: '例文集',
+  },
+  {
+    href: '/guide/review-reply-template',
+    title: '口コミ返信の「型」——どんな口コミにも使える5つの返信フレームワーク',
+    desc: '基本型・クレーム対応型・アップセル型・質問型・短文型の5つのフレームワークをBefore/After付きで解説。',
+    tag: 'テクニック',
+  },
+  {
+    href: '/guide/review-psychology',
+    title: '口コミ心理学——なぜ人は口コミを書くのか、そして返信が行動を変えるのか',
+    desc: '口コミを書く心理的動機と、返信が見込み客・既存客の行動に与える影響を心理学の観点から解説。',
+    tag: 'マーケティング',
+  },
+  {
+    href: '/guide/star-rating-meaning',
+    title: '星評価の本当の意味——★1〜★5それぞれに最適な返信戦略',
+    desc: '星1から星5まで、各評価の口コミに最適な返信方法を解説。返信の優先順位と各星評価の返信例文付き。',
+    tag: '戦略',
+  },
 ]
 
 export default function GuidePage() {
@@ -42,8 +78,8 @@ export default function GuidePage() {
       <div className="max-w-2xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-stone-800 mb-3">口コミ返信ガイド</h1>
-          <p className="text-stone-500">
-            Google口コミ・食べログ・ホットペッパーの返信に役立つノウハウを無料公開しています。
+          <p className="text-stone-500 leading-relaxed">
+            口コミ返信は、お客様との信頼関係を築く大切なコミュニケーションです。しかし、「何を書けばいいかわからない」「悪い口コミにどう返せばいいか不安」というオーナー様の声をたくさんいただいています。このガイドシリーズでは、Google口コミ・食べログ・ホットペッパーの返信ノウハウを、業種別・プラットフォーム別・星評価別に体系的にまとめています。すべて無料で公開していますので、ぜひ口コミ返信の参考にしてください。
           </p>
         </div>
 

@@ -133,9 +133,22 @@ const industries = [
   },
 ]
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: '業種別・口コミ返信のコツ（飲食・美容・クリニック・ホテル）',
+  description: '飲食店・美容院・クリニック・ホテル・整体サロン・不動産など業種ごとの口コミ特徴と、読まれる返信文を書くための具体的なテクニックを解説。',
+  author: { '@type': 'Organization', name: 'tools24.jp', url: 'https://tools24.jp' },
+  publisher: { '@type': 'Organization', name: 'MyReplyTone', url: 'https://myreplytone.com' },
+  datePublished: '2025-06-01',
+  dateModified: '2026-03-29',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://myreplytone.com/guide/industry-tips' },
+}
+
 export default function IndustryTipsPage() {
   return (
     <div className="min-h-screen bg-white py-12 px-4">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
           <Link href="/guide" className="text-sm text-stone-400 hover:text-stone-600">
@@ -192,6 +205,24 @@ export default function IndustryTipsPage() {
               </div>
             </section>
           ))}
+
+          <section>
+            <h2 className="text-xl font-bold text-stone-800 mb-3 pb-2 border-b border-stone-100">関連ガイド</h2>
+            <div className="space-y-3">
+              <Link href="/guide/tabelog-review-reply" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">食べログ</span>
+                <p className="font-medium text-stone-700 mt-2">食べログの口コミ返信ガイド</p>
+              </Link>
+              <Link href="/guide/hotpepper-review-reply" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">ホットペッパー</span>
+                <p className="font-medium text-stone-700 mt-2">ホットペッパービューティーの口コミ返信ガイド</p>
+              </Link>
+              <Link href="/guide/review-reply-examples" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">例文集</span>
+                <p className="font-medium text-stone-700 mt-2">【2026年版】口コミ返信テンプレート30選</p>
+              </Link>
+            </div>
+          </section>
 
           <div className="border border-amber-200 bg-amber-50 rounded-2xl p-6 text-center">
             <p className="font-medium text-stone-800 mb-2">業種を選ぶだけで最適な返信文を自動生成</p>

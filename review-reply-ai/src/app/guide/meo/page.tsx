@@ -10,9 +10,22 @@ export const metadata: Metadata = {
   },
 }
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'MEO対策と口コミ管理の基本——飲食店・店舗オーナー向け',
+  description: 'Googleマップの上位表示に直結するMEO対策を解説。口コミ返信がMEOに与える影響、具体的な対策チェックリスト、Googleビジネスプロフィールの最適化方法。',
+  author: { '@type': 'Organization', name: 'tools24.jp', url: 'https://tools24.jp' },
+  publisher: { '@type': 'Organization', name: 'MyReplyTone', url: 'https://myreplytone.com' },
+  datePublished: '2025-06-01',
+  dateModified: '2026-03-29',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://myreplytone.com/guide/meo' },
+}
+
 export default function MeoPage() {
   return (
     <div className="min-h-screen bg-white py-12 px-4">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
           <Link href="/guide" className="text-sm text-stone-400 hover:text-stone-600">
@@ -139,6 +152,20 @@ export default function MeoPage() {
                   <p className="text-stone-500">{item.desc}</p>
                 </div>
               ))}
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-stone-800 mb-3 pb-2 border-b border-stone-100">関連ガイド</h2>
+            <div className="space-y-3">
+              <Link href="/guide/google-review-reply" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">基本</span>
+                <p className="font-medium text-stone-700 mt-2">Google口コミ返信の書き方完全ガイド</p>
+              </Link>
+              <Link href="/guide/review-psychology" className="block bg-stone-50 rounded-xl p-4 hover:bg-amber-50 transition-colors">
+                <span className="text-xs font-medium bg-amber-100 text-amber-700 rounded-full px-2.5 py-0.5">マーケティング</span>
+                <p className="font-medium text-stone-700 mt-2">口コミ心理学——返信が行動を変える理由</p>
+              </Link>
             </div>
           </section>
 

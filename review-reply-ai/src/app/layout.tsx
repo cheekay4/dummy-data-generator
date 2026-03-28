@@ -8,6 +8,7 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://myreplytone.com'
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://myreplytone.com'),
   title: 'MyReplyTone | AI口コミ返信ジェネレーター',
   description: 'Google口コミ・食べログ・ホットペッパーの口コミに、あなたの返信スタイルでAIが自動返信。性格診断で「返信プロファイル」を作成。ログインで1日5回無料。飲食店・美容院・クリニック・ホテル対応。',
   keywords: '口コミ 返信 AI, Google口コミ 返信 自動, 口コミ返信 テンプレート, 食べログ 返信, レビュー 返信 自動生成, MEO対策, 口コミ管理',
@@ -39,6 +40,20 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: APP_URL,
+  },
+}
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'MyReplyTone',
+  url: 'https://myreplytone.com',
+  description: 'AI口コミ返信ジェネレーター',
+  inLanguage: 'ja',
+  publisher: {
+    '@type': 'Organization',
+    name: 'tools24.jp',
+    url: 'https://tools24.jp',
   },
 }
 
@@ -87,6 +102,11 @@ export default async function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@700&family=DM+Mono:wght@400;500&display=swap"
           rel="stylesheet"
+        />
+        <script
+          nonce={nonce}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
         />
         <script
           nonce={nonce}

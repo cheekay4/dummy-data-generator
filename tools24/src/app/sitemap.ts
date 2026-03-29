@@ -1,7 +1,17 @@
 import type { MetadataRoute } from "next";
+import { allTools } from "@/lib/tools-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://tools24.jp";
+
+  const toolPages: MetadataRoute.Sitemap = allTools
+    .filter((t) => t.status === "live" && !t.external)
+    .map((t) => ({
+      url: `${baseUrl}${t.href}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    }));
 
   return [
     {
@@ -10,42 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
-    {
-      url: `${baseUrl}/json-formatter`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/cron-expression-builder`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/regex-tester`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/dummy-data-generator`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/wareki-converter`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/encode-decode`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
+    ...toolPages,
     {
       url: `${baseUrl}/privacy`,
       lastModified: new Date("2026-02-01"),

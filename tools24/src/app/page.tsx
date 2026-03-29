@@ -1,74 +1,22 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AdPlaceholder } from "@/components/common/ad-placeholder";
+import { SearchBox } from "@/components/home/search-box";
+import { PopularTools } from "@/components/home/popular-tools";
+import { HomeClient } from "@/components/home/home-client";
 
 export const metadata: Metadata = {
-  title: "tools24.jp — 便利なWebツールを無料で",
+  title: "tools24.jp — 登録不要・無料のオンラインツール集",
   description:
-    "JSON整形、文字数カウント、正規表現テスト、ダミーデータ生成など、開発者向けの便利ツールが全て無料・ブラウザ完結で使えます。",
+    "JSON整形、画像圧縮、文字数カウント、ふりがな変換、ダミーデータ生成など、便利なオンラインツールが全て無料・ブラウザ完結で使えます。データ送信なし。",
   openGraph: {
-    title: "tools24.jp — 便利なWebツールを無料で",
+    title: "tools24.jp — 登録不要・無料のオンラインツール集",
     description:
-      "JSON整形、文字数カウント、正規表現テスト、ダミーデータ生成など、開発者向けの便利ツールが全て無料・ブラウザ完結で使えます。",
+      "JSON整形、画像圧縮、文字数カウント、ふりがな変換、ダミーデータ生成など、便利なオンラインツールが全て無料・ブラウザ完結で使えます。",
     url: "https://tools24.jp",
   },
 };
 
-const tools: { title: string; description: string; href: string; icon: string; status: "live" | "coming-soon" }[] = [
-  {
-    title: "JSON整形ツール",
-    description: "JSONの整形・圧縮・変換をブラウザだけで",
-    href: "/json-formatter",
-    icon: "{ }",
-    status: "live" as const,
-  },
-  {
-    title: "文字数カウンター",
-    description: "文字数・単語数・行数をリアルタイムカウント",
-    href: "/character-counter",
-    icon: "📝",
-    status: "coming-soon" as const,
-  },
-  {
-    title: "正規表現テスター",
-    description: "正規表現をリアルタイムでテスト・解説",
-    href: "/regex-tester",
-    icon: "/.*/",
-    status: "live" as const,
-  },
-  {
-    title: "ダミーデータ生成",
-    description: "日本のリアルなテストデータを瞬時に生成",
-    href: "/dummy-data-generator",
-    icon: "🗂️",
-    status: "live" as const,
-  },
-  {
-    title: "Cron式ビルダー",
-    description: "Cron式を日本語で組み立て・解説",
-    href: "/cron-expression-builder",
-    icon: "⏰",
-    status: "live" as const,
-  },
-  {
-    title: "和暦・西暦変換",
-    description: "令和・平成・昭和↔西暦・UNIX時間を一括変換",
-    href: "/wareki-converter",
-    icon: "📅",
-    status: "live" as const,
-  },
-  {
-    title: "エンコード・デコード",
-    description: "Base64・URL・JWT・ハッシュ・Unicode変換",
-    href: "/encode-decode",
-    icon: "🔐",
-    status: "live" as const,
-  },
-];
-
-export default function HomePage() {
+export default function HomePage(): React.ReactElement {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* 広告 */}
@@ -76,56 +24,33 @@ export default function HomePage() {
         <AdPlaceholder slot="top-banner" width={728} height={90} />
       </div>
 
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">便利なWebツール</h1>
-          <p className="text-muted-foreground">
-            開発者向けの無料ツール集。全てブラウザで完結、データ送信なし。
+      <div className="max-w-3xl mx-auto space-y-8">
+        {/* Hero */}
+        <header className="text-center">
+          <h1 className="text-2xl font-medium sm:text-3xl">tools24.jp</h1>
+          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+            登録不要・無料のオンラインツール集。
+            <br className="sm:hidden" />
+            入力データはすべてブラウザ内で処理。外部送信なし。
           </p>
-        </div>
+        </header>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {tools.map((tool) => {
-            const isComingSoon = tool.status === "coming-soon";
-            const card = (
-              <Card
-                className={`h-full transition-colors ${
-                  isComingSoon
-                    ? "opacity-60 cursor-not-allowed"
-                    : "hover:border-primary/50 hover:shadow-sm cursor-pointer"
-                }`}
-              >
-                <CardHeader>
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <span
-                      className="text-3xl font-mono font-bold text-muted-foreground/70"
-                      aria-hidden
-                    >
-                      {tool.icon}
-                    </span>
-                    {isComingSoon && (
-                      <Badge variant="secondary" className="text-xs">
-                        近日公開
-                      </Badge>
-                    )}
-                  </div>
-                  <CardTitle className="text-lg">{tool.title}</CardTitle>
-                  <CardDescription>{tool.description}</CardDescription>
-                </CardHeader>
-              </Card>
-            );
+        {/* Search */}
+        <SearchBox />
 
-            if (isComingSoon) {
-              return <div key={tool.href}>{card}</div>;
-            }
+        {/* Popular Tools */}
+        <PopularTools />
 
-            return (
-              <Link key={tool.href} href={tool.href} className="block">
-                {card}
-              </Link>
-            );
-          })}
-        </div>
+        {/* Category Navigation + Tool Lists */}
+        <HomeClient />
+      </div>
+
+      {/* Footer SEO text */}
+      <div className="mx-auto mt-16 max-w-3xl">
+        <p className="text-xs leading-relaxed text-muted-foreground">
+          tools24.jp
+          は、開発者・ビジネスユーザー向けの無料オンラインツール集です。JSON整形、画像圧縮、文字数カウント、正規表現テスト、ダミーデータ生成など、日常業務で使えるツールを提供しています。すべてのツールはブラウザ内で完結し、データがサーバーに送信されることはありません。
+        </p>
       </div>
 
       {/* 広告 */}

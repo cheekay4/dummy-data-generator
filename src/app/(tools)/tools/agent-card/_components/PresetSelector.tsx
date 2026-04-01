@@ -9,11 +9,11 @@ interface PresetSelectorProps {
 
 export function PresetSelector({ onSelect, activePreset }: PresetSelectorProps): JSX.Element {
   return (
-    <div className="mb-4">
-      <label className="block mb-2 font-mono text-[9px] tracking-wide text-fude uppercase">
+    <div className="mb-6">
+      <label className="block mb-3 font-mono text-[11px] tracking-[1.65px] text-[rgba(255,255,255,0.5)] uppercase font-bold">
         テンプレート
       </label>
-      <div className="flex flex-wrap gap-1.5">
+      <div className="flex flex-wrap gap-2">
         {presets.map((preset) => {
           const isActive = activePreset === preset.id;
           return (
@@ -22,16 +22,20 @@ export function PresetSelector({ onSelect, activePreset }: PresetSelectorProps):
               type="button"
               onClick={() => onSelect(preset.id)}
               className={`
-                px-3 py-1 rounded-full font-sora text-[11px]
-                border transition-colors duration-150
+                group relative overflow-hidden
+                px-5 py-2.5 rounded-full font-sora text-[13px] font-semibold
+                transition-all duration-300
                 ${isActive
-                  ? 'bg-sumi text-kinari border-sumi'
-                  : 'bg-kinari-surface text-fude border-washi hover:bg-washi-light hover:text-sumi'
+                  ? 'bg-gradient-to-r from-[#1E4D7B] to-[#D84835] text-white shadow-lg'
+                  : 'bg-[rgba(20,20,20,0.6)] text-[rgba(255,255,255,0.6)] border border-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.2)] hover:text-white backdrop-blur-xl'
                 }
               `}
               title={preset.description}
             >
-              {preset.label}
+              {isActive && (
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              )}
+              <span className="relative">{preset.label}</span>
             </button>
           );
         })}

@@ -10,7 +10,7 @@ import { Toggle } from '@/components/ui/Toggle';
 import { Button } from '@/components/ui/Button';
 import { SkillsFieldArray } from './SkillsFieldArray';
 import { InterfacesFieldArray } from './InterfacesFieldArray';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
 interface GeneratorFormProps {
   form: UseFormReturn<AgentCard>;
@@ -27,12 +27,23 @@ export function GeneratorForm({ form, activeStep, onStepChange }: GeneratorFormP
 
   return (
     <div>
-      <h2 className="font-sora font-semibold text-[16px] text-sumi tracking-tight mb-4">
+      {/* Step badge */}
+      <div className="relative inline-flex items-center gap-2 px-5 py-2 rounded-full overflow-hidden shadow-lg mb-6"
+        style={{ background: 'linear-gradient(170deg, #D84835, #D4AF37)' }}
+      >
+        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shimmer" />
+        <Sparkles size={16} className="text-white relative z-10" />
+        <span className="relative z-10 font-mono text-[11px] font-bold text-white tracking-[2.2px] uppercase">
+          STEP {stepIndex + 1} OF {GENERATOR_STEPS.length}
+        </span>
+      </div>
+
+      <h2 className="font-sora font-bold text-[40px] md:text-[56px] text-white tracking-[-1.68px] leading-tight mb-4">
         {GENERATOR_STEPS.find((s) => s.id === activeStep)?.label}
       </h2>
 
       {activeStep === 'basic' && (
-        <div className="space-y-4">
+        <div className="space-y-6">
           <FieldGroup label="エージェント名" required>
             <Input
               {...register('name')}
@@ -72,8 +83,8 @@ export function GeneratorForm({ form, activeStep, onStepChange }: GeneratorFormP
       )}
 
       {activeStep === 'provider' && (
-        <div className="space-y-4">
-          <p className="text-[11px] text-fude mb-3">
+        <div className="space-y-6">
+          <p className="text-[16px] text-[rgba(255,255,255,0.6)] leading-relaxed mb-4">
             プロバイダー情報は任意です。公開時に組織情報を明示したい場合に入力してください。
           </p>
           <FieldGroup label="組織名">
@@ -98,7 +109,7 @@ export function GeneratorForm({ form, activeStep, onStepChange }: GeneratorFormP
       )}
 
       {activeStep === 'capabilities' && (
-        <div className="space-y-4">
+        <div className="space-y-6">
           <FieldGroup label="ストリーミング対応">
             <Toggle
               value={watch('capabilities.streaming')}
@@ -121,7 +132,7 @@ export function GeneratorForm({ form, activeStep, onStepChange }: GeneratorFormP
       )}
 
       {activeStep === 'io-modes' && (
-        <div className="space-y-4">
+        <div className="space-y-6">
           <FieldGroup label="デフォルト入力モード" required>
             <ModeSelector
               modes={INPUT_OUTPUT_MODES}
@@ -129,7 +140,7 @@ export function GeneratorForm({ form, activeStep, onStepChange }: GeneratorFormP
               onChange={(v) => setValue('defaultInputModes', v, { shouldValidate: true })}
             />
             {errors.defaultInputModes?.message && (
-              <p className="mt-1 text-[10px] text-shu">{errors.defaultInputModes.message}</p>
+              <p className="mt-1.5 text-[11px] text-[#ef4444] font-mono">{errors.defaultInputModes.message}</p>
             )}
           </FieldGroup>
           <FieldGroup label="デフォルト出力モード" required>
@@ -139,7 +150,7 @@ export function GeneratorForm({ form, activeStep, onStepChange }: GeneratorFormP
               onChange={(v) => setValue('defaultOutputModes', v, { shouldValidate: true })}
             />
             {errors.defaultOutputModes?.message && (
-              <p className="mt-1 text-[10px] text-shu">{errors.defaultOutputModes.message}</p>
+              <p className="mt-1.5 text-[11px] text-[#ef4444] font-mono">{errors.defaultOutputModes.message}</p>
             )}
           </FieldGroup>
         </div>
@@ -150,27 +161,37 @@ export function GeneratorForm({ form, activeStep, onStepChange }: GeneratorFormP
       )}
 
       {/* Navigation buttons */}
-      <div className="flex justify-between mt-8 pt-4 border-t border-washi">
+      <div className="flex justify-between mt-10 pt-6 border-t border-[rgba(255,255,255,0.1)]">
         {prevStep ? (
           <Button
-            variant="ghost"
+            variant="secondary"
             size="sm"
             onClick={() => onStepChange(prevStep.id as GeneratorStep)}
           >
-            <ChevronLeft size={14} />
-            {prevStep.label}
+            <ChevronLeft size={16} />
+            Previous Step
           </Button>
         ) : (
           <div />
         )}
-        {nextStep && (
+        {nextStep ? (
           <Button
             variant="primary"
             size="sm"
             onClick={() => onStepChange(nextStep.id as GeneratorStep)}
           >
             {nextStep.label}
-            <ChevronRight size={14} />
+            <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </Button>
+        ) : (
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => {/* Generate */}}
+          >
+            <Sparkles size={16} />
+            Generate Agent Card
+            <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Button>
         )}
       </div>
@@ -189,10 +210,20 @@ function FieldGroup({
 }): JSX.Element {
   return (
     <div>
-      <label className="block mb-1.5 font-mono text-[9px] tracking-wide text-fude uppercase">
-        {label}
-        {required && <span className="text-shu ml-0.5">*</span>}
-      </label>
+      <div className="flex items-center gap-3 mb-3">
+        <label className="font-mono text-[11px] tracking-[1.65px] text-[rgba(255,255,255,0.5)] uppercase font-bold">
+          {label}
+        </label>
+        {required ? (
+          <span className="px-2.5 py-1 text-[10px] font-mono font-bold uppercase tracking-[1.5px] bg-[rgba(251,44,54,0.1)] border border-[rgba(251,44,54,0.3)] text-[#ef4444] rounded-[10px]">
+            必須
+          </span>
+        ) : (
+          <span className="px-2.5 py-1 text-[10px] font-mono font-bold uppercase tracking-[1.5px] bg-[rgba(106,114,130,0.1)] border border-[rgba(106,114,130,0.3)] text-[rgba(255,255,255,0.5)] rounded-[10px]">
+            任意
+          </span>
+        )}
+      </div>
       {children}
     </div>
   );
@@ -216,7 +247,7 @@ function ModeSelector({
   };
 
   return (
-    <div className="flex flex-wrap gap-1.5">
+    <div className="flex flex-wrap gap-2">
       {modes.map((mode) => {
         const isSelected = selected.includes(mode.value);
         return (
@@ -225,10 +256,10 @@ function ModeSelector({
             type="button"
             onClick={() => toggle(mode.value)}
             className={`
-              px-2 py-1 font-mono text-[10px] rounded-[4px] border transition-colors
+              px-4 py-2 font-mono text-[12px] rounded-xl border-2 transition-all duration-300
               ${isSelected
-                ? 'bg-sumi text-kinari border-sumi'
-                : 'bg-kinari-surface text-fude border-washi hover:bg-washi-light'
+                ? 'bg-gradient-to-r from-[#1E4D7B] to-[#D84835] text-white border-transparent'
+                : 'bg-[rgba(255,255,255,0.03)] text-[rgba(255,255,255,0.5)] border-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.2)]'
               }
             `}
           >

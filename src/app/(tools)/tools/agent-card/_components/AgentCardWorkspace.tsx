@@ -22,8 +22,8 @@ import { Check, AlertCircle } from 'lucide-react';
 const CodeEditorLazy = dynamic(() => import('./CodeEditor'), {
   ssr: false,
   loading: () => (
-    <div className="h-[400px] bg-kinari border border-washi rounded-[4px] flex items-center justify-center text-fude text-[11px] font-mono">
-      エディタを読み込み中...
+    <div className="h-[400px] bg-[rgba(17,24,39,0.6)] border-2 border-[rgba(255,255,255,0.1)] rounded-2xl flex items-center justify-center text-[rgba(255,255,255,0.4)] text-[13px] font-mono">
+      Loading editor...
     </div>
   ),
 });
@@ -109,7 +109,6 @@ export function AgentCardWorkspace(): JSX.Element {
     if (v.supportedInterfaces?.length > 0 && v.supportedInterfaces[0]?.url) completed.add('interfaces');
     if (v.defaultInputModes?.length > 0 && v.defaultOutputModes?.length > 0) completed.add('io-modes');
     if (v.skills?.length > 0 && v.skills[0]?.id) completed.add('skills');
-    // provider and capabilities are optional, always "complete"
     completed.add('provider');
     completed.add('capabilities');
     return completed;
@@ -119,63 +118,84 @@ export function AgentCardWorkspace(): JSX.Element {
     <div className="max-w-[1400px] mx-auto">
       {/* Desktop layout */}
       <div className="hidden lg:flex">
-        {/* Left nav - 130px */}
-        <div className="w-[130px] flex-shrink-0 border-r border-washi bg-kinari-warm">
-          <div className="sticky top-0 pt-4 pb-4">
-            <div className="px-3 mb-3">
-              <span className="font-mono text-[8px] tracking-wide text-fude-muted uppercase">
-                generator
-              </span>
-            </div>
-            <StepNav
-              steps={GENERATOR_STEPS}
-              activeStep={activeView === 'generator' ? activeStep : ''}
-              completedSteps={completedSteps}
-              onStepClick={(step) => {
-                setActiveView('generator');
-                setActiveStep(step as GeneratorStep);
-              }}
-            />
-            <div className="mt-4 px-3">
-              <div className="border-t border-washi pt-3">
-                <span className="font-mono text-[8px] tracking-wide text-fude-muted uppercase">
-                  validator
+        {/* Left nav - 320px */}
+        <div className="w-[320px] flex-shrink-0 border-r border-[rgba(255,255,255,0.1)] bg-[rgba(10,10,10,0.95)]">
+          <div className="sticky top-0 flex flex-col h-screen">
+            <div className="flex-1 pt-8 px-8">
+              <div className="mb-6">
+                <span className="font-mono text-[13px] tracking-[1.95px] text-[rgba(255,255,255,0.5)] uppercase font-bold">
+                  Generation Steps
                 </span>
               </div>
+              <StepNav
+                steps={GENERATOR_STEPS}
+                activeStep={activeView === 'generator' ? activeStep : ''}
+                completedSteps={completedSteps}
+                onStepClick={(step) => {
+                  setActiveView('generator');
+                  setActiveStep(step as GeneratorStep);
+                }}
+              />
+              <div className="mt-6">
+                <div className="border-t border-[rgba(255,255,255,0.1)] pt-4">
+                  <span className="font-mono text-[13px] tracking-[1.95px] text-[rgba(255,255,255,0.5)] uppercase font-bold">
+                    Validator
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => setActiveView('validator')}
+                className={`
+                  w-full text-left px-4 py-3 mt-2
+                  rounded-[14px] border
+                  font-sora text-[14px] font-semibold
+                  transition-all duration-300
+                  ${activeView === 'validator'
+                    ? 'bg-[rgba(139,92,246,0.15)] border-[rgba(139,92,246,0.3)] text-white shadow-lg'
+                    : 'border-transparent text-[rgba(255,255,255,0.6)] hover:bg-[rgba(255,255,255,0.03)]'
+                  }
+                `}
+              >
+                JSON検証
+              </button>
             </div>
-            <button
-              onClick={() => setActiveView('validator')}
-              className={`
-                w-full text-left px-3 py-1.5
-                font-sora text-[11px]
-                transition-colors duration-150
-                ${activeView === 'validator'
-                  ? 'bg-kinari-surface border-r-2 border-shu text-sumi font-medium'
-                  : 'text-fude hover:text-sumi hover:bg-washi-light'
-                }
-              `}
-            >
-              JSON検証
-            </button>
+
+            {/* Progress bar */}
+            <div className="border-t border-[rgba(255,255,255,0.1)] px-8 py-6">
+              <div className="flex items-center justify-between mb-3">
+                <span className="font-mono text-[12px] font-semibold text-[rgba(255,255,255,0.5)]">
+                  Overall Progress
+                </span>
+                <span className="font-mono text-[14px] font-bold text-white">
+                  {Math.round((completedSteps.size / GENERATOR_STEPS.length) * 100)}%
+                </span>
+              </div>
+              <div className="h-2.5 bg-[rgba(255,255,255,0.1)] rounded-full overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-[#1E4D7B] to-[#D84835] transition-all duration-500"
+                  style={{ width: `${(completedSteps.size / GENERATOR_STEPS.length) * 100}%` }}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Center - flex 1 */}
         <div className="flex-1 min-w-0">
           {/* Top bar */}
-          <div className="flex items-center justify-between px-4 py-2 border-b border-washi">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(255,255,255,0.1)]">
+            <div className="flex items-center gap-3">
               {activeView === 'generator' && (
                 <>
                   <button
                     onClick={() => setViewMode('gui')}
-                    className={`px-2 py-0.5 font-sora text-[11px] rounded-[4px] transition-colors ${viewMode === 'gui' ? 'bg-sumi text-kinari' : 'text-fude hover:text-sumi'}`}
+                    className={`px-4 py-2 font-sora text-[13px] font-semibold rounded-xl transition-all duration-300 ${viewMode === 'gui' ? 'bg-gradient-to-r from-[#1E4D7B] to-[#D84835] text-white' : 'text-[rgba(255,255,255,0.5)] hover:text-white'}`}
                   >
                     GUI
                   </button>
                   <button
                     onClick={() => setViewMode('code')}
-                    className={`px-2 py-0.5 font-mono text-[11px] rounded-[4px] transition-colors ${viewMode === 'code' ? 'bg-sumi text-kinari' : 'text-fude hover:text-sumi'}`}
+                    className={`px-4 py-2 font-mono text-[13px] font-semibold rounded-xl transition-all duration-300 ${viewMode === 'code' ? 'bg-gradient-to-r from-[#1E4D7B] to-[#D84835] text-white' : 'text-[rgba(255,255,255,0.5)] hover:text-white'}`}
                   >
                     Code
                   </button>
@@ -186,7 +206,7 @@ export function AgentCardWorkspace(): JSX.Element {
           </div>
 
           {/* Content */}
-          <div className="p-4">
+          <div className="p-6 md:px-16 lg:px-[60px] py-12">
             {activeView === 'generator' && viewMode === 'gui' && (
               <>
                 {activeStep === 'basic' && (
@@ -214,30 +234,32 @@ export function AgentCardWorkspace(): JSX.Element {
           </div>
         </div>
 
-        {/* Right panel - 200px */}
-        <div className="w-[200px] flex-shrink-0 bg-sumi border-l border-sumi-light">
-          <div className="sticky top-0">
-            <div className="flex items-center justify-between px-3 py-2 border-b border-sumi-light">
-              <span className="font-mono text-[10px] text-fude-light">
-                agent-card.json
+        {/* Right panel - 480px */}
+        <div className="w-[480px] flex-shrink-0 bg-[rgba(10,10,10,0.95)] border-l border-[rgba(255,255,255,0.1)]">
+          <div className="sticky top-0 flex flex-col h-screen">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(255,255,255,0.1)]">
+              <span className="font-mono text-[13px] tracking-[1.95px] text-[rgba(255,255,255,0.5)] uppercase font-bold">
+                JSON Preview
               </span>
-              <div className="flex items-center gap-1">
-                <span className={`w-1.5 h-1.5 rounded-full ${isValid ? 'bg-valid' : 'bg-invalid'}`} />
-                <span className="font-mono text-[9px] text-fude-light">live</span>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#D84835] opacity-80 animate-pulse" />
+                <span className="font-mono text-[11px] text-[rgba(255,255,255,0.4)]">Live</span>
               </div>
             </div>
-            <JsonPreview json={jsonOutput} />
-            <div className="px-3 py-2 border-t border-sumi-light">
-              <div className="flex items-center gap-1.5">
+            <div className="flex-1 overflow-auto p-6">
+              <JsonPreview json={jsonOutput} />
+            </div>
+            <div className="px-6 py-5 border-t border-[rgba(255,255,255,0.1)]">
+              <div className="flex items-center gap-2 mb-3">
                 {isValid ? (
                   <>
-                    <Check size={11} className="text-valid" />
-                    <span className="font-mono text-[9px] text-valid">valid</span>
+                    <Check size={14} className="text-valid" />
+                    <span className="font-mono text-[12px] text-valid font-semibold">Valid A2A Agent Card</span>
                   </>
                 ) : (
                   <>
-                    <AlertCircle size={11} className="text-invalid" />
-                    <span className="font-mono text-[9px] text-invalid">
+                    <AlertCircle size={14} className="text-invalid" />
+                    <span className="font-mono text-[12px] text-invalid font-semibold">
                       {!validationResult.success
                         ? `${validationResult.error.issues.length} errors`
                         : 'invalid'}
@@ -248,9 +270,10 @@ export function AgentCardWorkspace(): JSX.Element {
               {activeView === 'generator' && (
                 <button
                   onClick={handleValidateJson}
-                  className="mt-2 w-full text-left font-sora text-[10px] text-fude hover:text-kinari transition-colors"
+                  className="w-full py-3.5 rounded-2xl font-sora text-[15px] font-bold text-white text-center transition-all duration-300 hover:scale-[1.02]"
+                  style={{ background: 'linear-gradient(170deg, #1E4D7B, #D84835)' }}
                 >
-                  このJSONを検証 &rarr;
+                  Download JSON
                 </button>
               )}
             </div>
@@ -260,12 +283,12 @@ export function AgentCardWorkspace(): JSX.Element {
 
       {/* Mobile layout */}
       <div className="lg:hidden">
-        <div className="px-4 py-2 border-b border-washi">
+        <div className="px-4 py-3 border-b border-[rgba(255,255,255,0.1)]">
           <Tabs
             tabs={[
-              { id: 'form', label: 'フォーム' },
+              { id: 'form', label: 'Form' },
               { id: 'json', label: 'JSON' },
-              { id: 'validate', label: '検証' },
+              { id: 'validate', label: 'Validate' },
             ]}
             activeTab={mobileTab}
             onTabChange={setMobileTab}
@@ -275,16 +298,16 @@ export function AgentCardWorkspace(): JSX.Element {
           {mobileTab === 'form' && (
             <>
               <PresetSelector onSelect={handlePresetSelect} activePreset={null} />
-              <div className="mt-3 flex gap-1 overflow-x-auto pb-2">
+              <div className="mt-4 flex gap-2 overflow-x-auto pb-3">
                 {GENERATOR_STEPS.map((step) => (
                   <button
                     key={step.id}
                     onClick={() => setActiveStep(step.id as GeneratorStep)}
                     className={`
-                      flex-shrink-0 px-2 py-1 font-sora text-[10px] rounded-[4px] border
+                      flex-shrink-0 px-4 py-2 font-sora text-[12px] font-semibold rounded-xl border-2 transition-all duration-300
                       ${activeStep === step.id
-                        ? 'bg-sumi text-kinari border-sumi'
-                        : 'text-fude border-washi hover:bg-washi-light'}
+                        ? 'bg-gradient-to-r from-[#1E4D7B] to-[#D84835] text-white border-transparent'
+                        : 'text-[rgba(255,255,255,0.5)] border-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.2)]'}
                     `}
                   >
                     {step.label}
@@ -295,9 +318,9 @@ export function AgentCardWorkspace(): JSX.Element {
             </>
           )}
           {mobileTab === 'json' && (
-            <div className="bg-sumi rounded-[6px] overflow-hidden">
-              <div className="px-3 py-2 border-b border-sumi-light flex items-center justify-between">
-                <span className="font-mono text-[10px] text-fude-light">agent-card.json</span>
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="font-mono text-[13px] text-[rgba(255,255,255,0.5)]">agent-card.json</span>
                 <ExportActions json={jsonOutput} />
               </div>
               <JsonPreview json={jsonOutput} />
@@ -317,44 +340,37 @@ export function AgentCardWorkspace(): JSX.Element {
 
 function StaticGuide(): JSX.Element {
   return (
-    <div className="border-t border-washi bg-kinari-warm">
-      <div className="max-w-[800px] mx-auto px-4 py-12">
-        <h2 className="font-sora font-semibold text-[18px] text-sumi tracking-tight">
+    <div className="border-t border-[rgba(255,255,255,0.1)]">
+      <div className="max-w-[800px] mx-auto px-4 md:px-8 py-16">
+        <h2 className="font-sora font-bold text-[32px] text-white tracking-tight">
           エージェントカード（Agent Card）とは
         </h2>
-        <p className="mt-3 text-[13px] text-fude leading-relaxed">
+        <p className="mt-4 text-[16px] text-[rgba(255,255,255,0.6)] leading-[1.8]">
           Agent CardはA2A（Agent-to-Agent）プロトコル v1.0の中核要素です。
           エージェントの能力・接続先・認証情報をJSON形式で宣言する「エージェントの名刺」として機能します。
-          <code className="font-mono text-[11px] bg-washi px-1 py-0.5 rounded-[2px]">
+          <code className="font-mono text-[13px] bg-[rgba(17,24,39,0.6)] px-2 py-0.5 rounded-lg border border-[rgba(255,255,255,0.1)]">
             /.well-known/agent-card.json
           </code>
           に配置してWebで公開します。
         </p>
 
-        <h3 className="mt-8 font-sora font-semibold text-[16px] text-sumi">設置方法</h3>
-        <ol className="mt-3 space-y-3 text-[13px] text-fude">
-          <li className="flex gap-2">
-            <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center bg-sumi text-kinari text-[10px] font-mono rounded-[4px]">1</span>
-            <span>上のジェネレーターでAgent Cardを作成し、JSONファイルをダウンロード</span>
-          </li>
-          <li className="flex gap-2">
-            <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center bg-sumi text-kinari text-[10px] font-mono rounded-[4px]">2</span>
-            <span>
-              Webサーバーの
-              <code className="font-mono text-[11px] bg-washi px-1 py-0.5 rounded-[2px]">/.well-known/</code>
-              ディレクトリに
-              <code className="font-mono text-[11px] bg-washi px-1 py-0.5 rounded-[2px]">agent-card.json</code>
-              を配置
-            </span>
-          </li>
-          <li className="flex gap-2">
-            <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center bg-sumi text-kinari text-[10px] font-mono rounded-[4px]">3</span>
-            <span>Content-Typeを<code className="font-mono text-[11px] bg-washi px-1 py-0.5 rounded-[2px]">application/json</code>で配信されるよう設定</span>
-          </li>
+        <h3 className="mt-12 font-sora font-bold text-[24px] text-white">設置方法</h3>
+        <ol className="mt-4 space-y-4 text-[16px] text-[rgba(255,255,255,0.6)]">
+          {['上のジェネレーターでAgent Cardを作成し、JSONファイルをダウンロード',
+            'Webサーバーの /.well-known/ ディレクトリに agent-card.json を配置',
+            'Content-Typeを application/json で配信されるよう設定'
+          ].map((text, i) => (
+            <li key={i} className="flex gap-4">
+              <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-[14px] font-mono text-[14px] font-bold text-white bg-gradient-to-br from-[#1E4D7B] to-[#D84835]">
+                {i + 1}
+              </span>
+              <span className="pt-1">{text}</span>
+            </li>
+          ))}
         </ol>
 
-        <h3 className="mt-8 font-sora font-semibold text-[16px] text-sumi">よくある質問</h3>
-        <div className="mt-3 space-y-4">
+        <h3 className="mt-12 font-sora font-bold text-[24px] text-white">よくある質問</h3>
+        <div className="mt-4 space-y-3">
           {[
             {
               q: 'データは外部に送信されますか？',
@@ -377,11 +393,11 @@ function StaticGuide(): JSX.Element {
               a: 'A2Aプロトコル v1.0に準拠しています。プロトコルバージョン0.3との互換性も維持しています。',
             },
           ].map((faq, i) => (
-            <details key={i} className="group border border-washi rounded-[4px]">
-              <summary className="px-3 py-2 font-sora text-[12px] text-sumi cursor-pointer hover:bg-washi-light transition-colors">
+            <details key={i} className="group bg-[rgba(20,20,20,0.6)] border-2 border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden">
+              <summary className="px-6 py-4 font-sora text-[15px] font-semibold text-white cursor-pointer hover:bg-[rgba(255,255,255,0.03)] transition-colors">
                 {faq.q}
               </summary>
-              <p className="px-3 pb-3 text-[12px] text-fude leading-relaxed">
+              <p className="px-6 pb-5 text-[15px] text-[rgba(255,255,255,0.6)] leading-[1.8]">
                 {faq.a}
               </p>
             </details>

@@ -17,7 +17,6 @@ function tokenizeJson(json: string): JsonToken[][] {
     const tokens: JsonToken[] = [];
     let remaining = line;
     while (remaining.length > 0) {
-      // Key (quoted string followed by colon)
       const keyMatch = remaining.match(/^(\s*)"([^"]*)"(\s*:)/);
       if (keyMatch) {
         if (keyMatch[1]) tokens.push({ type: 'punctuation', value: keyMatch[1] });
@@ -26,7 +25,6 @@ function tokenizeJson(json: string): JsonToken[][] {
         remaining = remaining.slice(keyMatch[0].length);
         continue;
       }
-      // String value
       const strMatch = remaining.match(/^(\s*)"([^"]*)"/);
       if (strMatch) {
         if (strMatch[1]) tokens.push({ type: 'punctuation', value: strMatch[1] });
@@ -34,7 +32,6 @@ function tokenizeJson(json: string): JsonToken[][] {
         remaining = remaining.slice(strMatch[0].length);
         continue;
       }
-      // Number
       const numMatch = remaining.match(/^(\s*)(-?\d+\.?\d*)/);
       if (numMatch) {
         if (numMatch[1]) tokens.push({ type: 'punctuation', value: numMatch[1] });
@@ -42,7 +39,6 @@ function tokenizeJson(json: string): JsonToken[][] {
         remaining = remaining.slice(numMatch[0].length);
         continue;
       }
-      // Boolean / null
       const boolMatch = remaining.match(/^(\s*)(true|false|null)/);
       if (boolMatch) {
         if (boolMatch[1]) tokens.push({ type: 'punctuation', value: boolMatch[1] });
@@ -50,7 +46,6 @@ function tokenizeJson(json: string): JsonToken[][] {
         remaining = remaining.slice(boolMatch[0].length);
         continue;
       }
-      // Punctuation (brackets, commas, etc.)
       tokens.push({ type: 'punctuation', value: remaining[0] });
       remaining = remaining.slice(1);
     }
@@ -63,26 +58,44 @@ const colorMap: Record<JsonToken['type'], string> = {
   string: 'text-code-string',
   number: 'text-code-number',
   boolean: 'text-code-number',
-  null: 'text-fude',
-  punctuation: 'text-fude-light',
+  null: 'text-[rgba(255,255,255,0.3)]',
+  punctuation: 'text-[#e5e7eb]',
 };
 
 export function JsonPreview({ json }: JsonPreviewProps): JSX.Element {
   const tokenized = useMemo(() => tokenizeJson(json), [json]);
 
   return (
-    <div className="overflow-auto max-h-[calc(100vh-200px)] p-3">
-      <pre className="font-mono text-[10px] leading-[1.6]">
-        {tokenized.map((line, lineIdx) => (
-          <div key={lineIdx}>
-            {line.map((token, tokenIdx) => (
-              <span key={tokenIdx} className={colorMap[token.type]}>
-                {token.value}
-              </span>
+    <div className="bg-[rgba(17,24,39,0.6)] border-2 border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden shadow-2xl">
+      {/* macOS dots header */}
+      <div className="flex items-center gap-3 px-6 py-3 bg-[rgba(31,41,55,0.8)] border-b border-[rgba(255,255,255,0.1)]">
+        <div className="w-3 h-3 rounded-full bg-[#ef4444]" />
+        <div className="w-3 h-3 rounded-full bg-[#f59e0b]" />
+        <div className="w-3 h-3 rounded-full bg-[#10b981]" />
+        <span className="ml-3 font-mono text-[12px] font-semibold text-[rgba(255,255,255,0.6)]">
+          agent-card.json
+        </span>
+      </div>
+      {/* Glow effect */}
+      <div className="relative">
+        <div
+          className="absolute -inset-1 opacity-30 blur-xl rounded-2xl pointer-events-none"
+          style={{ background: 'linear-gradient(160deg, #1E4D7B, #D84835)' }}
+        />
+        <div className="relative bg-[rgba(17,24,39,0.9)] overflow-auto max-h-[calc(100vh-200px)] p-6">
+          <pre className="font-mono text-[13px] leading-[1.8]">
+            {tokenized.map((line, lineIdx) => (
+              <div key={lineIdx}>
+                {line.map((token, tokenIdx) => (
+                  <span key={tokenIdx} className={colorMap[token.type]}>
+                    {token.value}
+                  </span>
+                ))}
+              </div>
             ))}
-          </div>
-        ))}
-      </pre>
+          </pre>
+        </div>
+      </div>
     </div>
   );
 }

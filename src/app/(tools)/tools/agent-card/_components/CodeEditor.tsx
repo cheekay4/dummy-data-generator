@@ -12,46 +12,48 @@ interface CodeEditorProps {
 
 const darkTheme = EditorView.theme({
   '&': {
-    backgroundColor: '#1C1C1C',
-    color: '#FAFAF5',
+    backgroundColor: 'rgba(17, 24, 39, 0.9)',
+    color: '#e5e7eb',
   },
   '.cm-gutters': {
-    backgroundColor: '#1C1C1C',
-    borderRight: '1px solid #2A2A2C',
-    color: '#555555',
+    backgroundColor: 'rgba(17, 24, 39, 0.9)',
+    borderRight: '1px solid rgba(255, 255, 255, 0.1)',
+    color: 'rgba(255, 255, 255, 0.3)',
   },
   '.cm-activeLine': {
-    backgroundColor: '#2A2A2C44',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
   },
   '.cm-activeLineGutter': {
-    backgroundColor: '#2A2A2C',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
   },
   '&.cm-focused .cm-cursor': {
-    borderLeftColor: '#C0392B',
+    borderLeftColor: '#D84835',
   },
   '.cm-selectionBackground': {
-    backgroundColor: '#C0392B22',
+    backgroundColor: 'rgba(216, 72, 53, 0.15)',
   },
   '&.cm-focused .cm-selectionBackground': {
-    backgroundColor: '#C0392B33',
+    backgroundColor: 'rgba(216, 72, 53, 0.25)',
   },
 });
 
 export default function CodeEditor({ value, onChange, readOnly = false }: CodeEditorProps): JSX.Element {
   return (
-    <CodeMirror
-      value={value}
-      onChange={onChange}
-      extensions={[json(), darkTheme]}
-      readOnly={readOnly}
-      height="400px"
-      className="rounded-[4px] overflow-hidden border border-sumi-light"
-      basicSetup={{
-        lineNumbers: true,
-        foldGutter: true,
-        bracketMatching: true,
-        closeBrackets: true,
-      }}
-    />
+    <div className="rounded-2xl overflow-hidden border-2 border-[rgba(255,255,255,0.1)]">
+      <CodeMirror
+        value={value}
+        onChange={onChange}
+        extensions={[json(), darkTheme]}
+        readOnly={readOnly}
+        height="400px"
+        className="bg-[rgba(17,24,39,0.9)]"
+        basicSetup={{
+          lineNumbers: true,
+          foldGutter: true,
+          bracketMatching: true,
+          closeBrackets: true,
+        }}
+      />
+    </div>
   );
 }

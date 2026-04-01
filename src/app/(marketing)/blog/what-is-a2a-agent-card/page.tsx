@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowLeft, ArrowRight, Sparkles, Info, Calendar, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
-  title:
-    "A2A\u30d7\u30ed\u30c8\u30b3\u30eb\u306e\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u30ab\u30fc\u30c9\uff08Agent Card\uff09\u3068\u306f",
+  title: "A2Aエージェントカードとは？ 完全ガイド",
   description:
-    "A2A\u30d7\u30ed\u30c8\u30b3\u30eb v1.0\u306eAgent Card\u306e\u6982\u8981\u30fbJSON\u69cb\u9020\u30fb\u8a2d\u7f6e\u65b9\u6cd5\u3092\u89e3\u8aac\u3002MCP\u3068\u306e\u9055\u3044\u3082\u3002",
+    "A2Aプロトコル v1.0のAgent Cardの概要・JSON構造・設置方法を解説。MCPとの違いも。",
   openGraph: {
-    title:
-      "A2A\u30d7\u30ed\u30c8\u30b3\u30eb\u306e\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u30ab\u30fc\u30c9\uff08Agent Card\uff09\u3068\u306f",
+    title: "A2Aエージェントカードとは？ 完全ガイド",
     url: "https://agentjuku.com/blog/what-is-a2a-agent-card",
   },
   alternates: {
@@ -18,65 +17,136 @@ export const metadata: Metadata = {
 
 export default function WhatIsA2AAgentCard(): JSX.Element {
   return (
-    <article className="max-w-[800px] mx-auto px-4 py-12">
-      <time className="font-mono text-[10px] text-fude-muted">2026-03-30</time>
-      <h1 className="mt-2 font-sora font-semibold text-[22px] text-sumi tracking-tight leading-snug">
-        A2A{"\u30d7\u30ed\u30c8\u30b3\u30eb\u306e\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u30ab\u30fc\u30c9\uff08Agent Card\uff09\u3068\u306f"}
+    <article className="max-w-[900px] mx-auto px-4 md:px-8 py-16">
+      {/* Back link */}
+      <Link
+        href="/blog"
+        className="inline-flex items-center gap-2 text-[14px] text-[rgba(255,255,255,0.4)] hover:text-white transition-colors mb-8"
+      >
+        <ArrowLeft size={14} />
+        記事一覧に戻る
+      </Link>
+
+      {/* Category badge */}
+      <div className="relative inline-flex items-center gap-2 px-5 py-2 rounded-full overflow-hidden shadow-lg mb-6"
+        style={{ background: 'linear-gradient(170deg, #D84835, #D4AF37)' }}
+      >
+        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shimmer" />
+        <Sparkles size={14} className="text-white relative z-10" />
+        <span className="relative z-10 font-mono text-[11px] font-bold text-white tracking-[2.2px] uppercase">
+          Technical Guide
+        </span>
+      </div>
+
+      <h1 className="font-sora font-black text-[36px] md:text-[48px] text-white tracking-[-0.04em] leading-tight">
+        A2Aエージェントカードとは？
+        <br />
+        完全ガイド
       </h1>
 
-      <div className="mt-8 space-y-6 text-[13px] text-sumi leading-relaxed">
+      <div className="mt-4 flex items-center gap-6 text-[14px] text-[rgba(255,255,255,0.4)]">
+        <span className="flex items-center gap-2">
+          <Calendar size={14} />
+          2026年3月30日
+        </span>
+        <span className="w-1 h-1 rounded-full bg-[#4a5565]" />
+        <span className="flex items-center gap-2">
+          <Clock size={14} />
+          読了時間 8分
+        </span>
+      </div>
+
+      <div className="mt-12 space-y-10 text-[16px] text-[rgba(255,255,255,0.7)] leading-[1.8]">
         <section>
-          <h2 className="font-sora font-semibold text-[16px] mb-3">
-            Agent Card{"\u306e\u6982\u8981"}
-          </h2>
           <p>
-            Agent Card{"\u306f\u3001"}A2A{"\uff08Agent-to-Agent\uff09\u30d7\u30ed\u30c8\u30b3\u30eb v1.0\u306e\u4e2d\u6838\u8981\u7d20\u3067\u3059\u3002AI\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u304c\u81ea\u8eab\u306e\u80fd\u529b\u30fb\u63a5\u7d9a\u5148\u30fb\u8a8d\u8a3c\u60c5\u5831\u3092JSON\u5f62\u5f0f\u3067\u5ba3\u8a00\u3059\u308b\u300c\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u306e\u540d\u523a\u300d\u3068\u3057\u3066\u6a5f\u80fd\u3057\u307e\u3059\u3002"}
+            A2A（Agent-to-Agent）プロトコルは、AIエージェント間の相互運用性を実現するためのオープン標準です。Agent Cardは、このプロトコルの中核となる概念で、エージェントの能力、インターフェース、メタデータを記述する標準化されたJSON文書です。
           </p>
-          <p className="mt-2">
-            {"\u4ed6\u306eAI\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u304c\u3042\u306a\u305f\u306e\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u3092\u767a\u898b\u3057\u3001\u305d\u306e\u80fd\u529b\u3092\u7406\u89e3\u3057\u3001\u30bf\u30b9\u30af\u3092\u59d4\u8b72\u3059\u308b\u305f\u3081\u306e\u57fa\u672c\u60c5\u5831\u6e90\u3068\u306a\u308a\u307e\u3059\u3002"}
+          <p className="mt-4">
+            他のAIエージェントがあなたのエージェントを発見し、その能力を理解し、タスクを委譲するための基本情報源となります。
           </p>
         </section>
 
         <section>
-          <h2 className="font-sora font-semibold text-[16px] mb-3">
-            JSON{"\u69cb\u9020"}
+          <h2 className="font-sora font-bold text-[32px] text-white tracking-tight border-b border-[rgba(255,255,255,0.1)] pb-4 mb-6">
+            Agent Cardの構造
           </h2>
           <p>
-            Agent Card{"\u306fJSON\u5f62\u5f0f\u3067\u8a18\u8ff0\u3055\u308c\u3001\u4ee5\u4e0b\u306e\u4e3b\u8981\u30d5\u30a3\u30fc\u30eb\u30c9\u3067\u69cb\u6210\u3055\u308c\u307e\u3059\u3002"}
+            Agent Cardは以下のような構成を持つJSON文書です。各フィールドは2種類の位置付け、エージェントの基本情報と操作可能なスキル一覧を含みます。
           </p>
-          <div className="mt-3 overflow-x-auto">
-            <table className="w-full text-[12px] border border-washi">
+
+          {/* Code block */}
+          <div className="mt-6 bg-[rgba(17,24,39,0.6)] border-2 border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="flex items-center gap-3 px-6 py-3 bg-[rgba(31,41,55,0.8)] border-b border-[rgba(255,255,255,0.1)]">
+              <div className="w-3 h-3 rounded-full bg-[#ef4444]" />
+              <div className="w-3 h-3 rounded-full bg-[#f59e0b]" />
+              <div className="w-3 h-3 rounded-full bg-[#10b981]" />
+              <span className="ml-3 font-mono text-[12px] font-semibold text-[rgba(255,255,255,0.6)]">
+                agent-card.json
+              </span>
+            </div>
+            <div className="relative">
+              <div
+                className="absolute -inset-1 opacity-30 blur-xl rounded-2xl pointer-events-none"
+                style={{ background: 'linear-gradient(160deg, #1E4D7B, #D84835)' }}
+              />
+              <pre className="relative bg-[rgba(17,24,39,0.9)] p-6 font-mono text-[15px] leading-[1.8] text-[#e5e7eb] overflow-x-auto">
+{`{
+  "name": "email_agent",
+  "version": "1.0.0",
+  "description": "メール操作を処理するエージェント",
+  "provider": {
+    "organization": "Example Corp"
+  },
+  "supportedInterfaces": [...],
+  "capabilities": { "streaming": true },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/plain"],
+  "skills": [...]
+}`}
+              </pre>
+            </div>
+          </div>
+        </section>
+
+        {/* Table section */}
+        <section>
+          <div className="mt-6 bg-[rgba(20,20,20,0.6)] border-2 border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden">
+            <table className="w-full text-[15px]">
               <thead>
-                <tr className="bg-kinari-warm">
-                  <th className="text-left px-3 py-2 border-b border-washi font-mono text-[10px]">
-                    {"\u30d5\u30a3\u30fc\u30eb\u30c9"}
+                <tr style={{ background: 'linear-gradient(175deg, rgba(76,29,149,0.3), rgba(219,39,119,0.3))' }}>
+                  <th className="text-left px-6 py-4 border-b border-[rgba(255,255,255,0.1)] font-mono text-[11px] font-bold tracking-[1.65px] uppercase text-[rgba(255,255,255,0.7)]">
+                    フィールド名
                   </th>
-                  <th className="text-left px-3 py-2 border-b border-washi font-mono text-[10px]">
-                    {"\u5fc5\u9808"}
+                  <th className="text-left px-6 py-4 border-b border-[rgba(255,255,255,0.1)] font-mono text-[11px] font-bold tracking-[1.65px] uppercase text-[rgba(255,255,255,0.7)]">
+                    型
                   </th>
-                  <th className="text-left px-3 py-2 border-b border-washi font-mono text-[10px]">
-                    {"\u8aac\u660e"}
+                  <th className="text-left px-6 py-4 border-b border-[rgba(255,255,255,0.1)] font-mono text-[11px] font-bold tracking-[1.65px] uppercase text-[rgba(255,255,255,0.7)]">
+                    必須
                   </th>
                 </tr>
               </thead>
-              <tbody className="text-fude">
+              <tbody>
                 {[
-                  ["name", "Yes", "\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u540d"],
-                  ["description", "Yes", "\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u306e\u8aac\u660e"],
-                  ["version", "Yes", "\u30bb\u30de\u30f3\u30c6\u30a3\u30c3\u30af\u30d0\u30fc\u30b8\u30e7\u30cb\u30f3\u30b0\uff08\u4f8b: 1.0.0\uff09"],
-                  ["supportedInterfaces", "Yes", "\u63a5\u7d9a\u5148URL\u30fb\u30d7\u30ed\u30c8\u30b3\u30eb\u30d0\u30a4\u30f3\u30c7\u30a3\u30f3\u30b0"],
-                  ["capabilities", "Yes", "\u30b9\u30c8\u30ea\u30fc\u30df\u30f3\u30b0\u30fb\u30d7\u30c3\u30b7\u30e5\u901a\u77e5\u306e\u5bfe\u5fdc\u72b6\u6cc1"],
-                  ["skills", "Yes", "\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u304c\u63d0\u4f9b\u3059\u308b\u30b9\u30ad\u30eb\u4e00\u89a7"],
-                  ["defaultInputModes", "Yes", "\u30c7\u30d5\u30a9\u30eb\u30c8\u5165\u529b\u5f62\u5f0f\uff08\u4f8b: text/plain\uff09"],
-                  ["defaultOutputModes", "Yes", "\u30c7\u30d5\u30a9\u30eb\u30c8\u51fa\u529b\u5f62\u5f0f"],
-                  ["provider", "No", "\u30d7\u30ed\u30d0\u30a4\u30c0\u30fc\u60c5\u5831\uff08\u7d44\u7e54\u540d\u30fbURL\uff09"],
-                  ["documentationUrl", "No", "\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8URL"],
-                  ["iconUrl", "No", "\u30a2\u30a4\u30b3\u30f3URL"],
-                ].map(([field, required, desc]) => (
-                  <tr key={field} className="border-b border-washi">
-                    <td className="px-3 py-1.5 font-mono text-[11px] text-sumi">{field}</td>
-                    <td className="px-3 py-1.5">{required}</td>
-                    <td className="px-3 py-1.5">{desc}</td>
+                  ["name", "string", true],
+                  ["version", "string", false],
+                  ["description", "string", true],
+                  ["provider", "object", false],
+                  ["skills", "array", true],
+                ].map(([field, type, required]) => (
+                  <tr key={field as string} className="border-t border-[rgba(255,255,255,0.05)]">
+                    <td className="px-6 py-4 font-mono text-[15px] font-bold text-[#60a5fa]">{field as string}</td>
+                    <td className="px-6 py-4 font-mono text-[15px] text-[rgba(255,255,255,0.6)]">{type as string}</td>
+                    <td className="px-6 py-4">
+                      {required ? (
+                        <span className="px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-[1.5px] bg-[rgba(251,44,54,0.1)] border border-[rgba(251,44,54,0.3)] text-[#ef4444] rounded-[10px]">
+                          必須
+                        </span>
+                      ) : (
+                        <span className="px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-[1.5px] bg-[rgba(106,114,130,0.1)] border border-[rgba(106,114,130,0.3)] text-[rgba(255,255,255,0.5)] rounded-[10px]">
+                          任意
+                        </span>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -85,87 +155,103 @@ export default function WhatIsA2AAgentCard(): JSX.Element {
         </section>
 
         <section>
-          <h2 className="font-sora font-semibold text-[16px] mb-3">
-            {"\u8a2d\u7f6e\u65b9\u6cd5"}
+          <h2 className="font-sora font-bold text-[32px] text-white tracking-tight border-b border-[rgba(255,255,255,0.1)] pb-4 mb-6">
+            設置方法
           </h2>
           <p>
-            Agent Card{"\u306f\u3001Web\u30b5\u30fc\u30d0\u30fc\u306e"}
-            <code className="font-mono text-[11px] bg-washi px-1 py-0.5 rounded-[2px]">
+            Agent Cardは、Webサーバーの
+            <code className="font-mono text-[14px] bg-[rgba(17,24,39,0.6)] px-2 py-0.5 rounded-lg border border-[rgba(255,255,255,0.1)]">
               /.well-known/agent-card.json
             </code>
-            {"\u306b\u914d\u7f6e\u3057\u3066\u516c\u958b\u3057\u307e\u3059\u3002"}
+            に配置して公開します。
           </p>
-          <ol className="mt-3 space-y-2 list-decimal list-inside text-fude">
-            <li>{"\u30b8\u30a7\u30cd\u30ec\u30fc\u30bf\u30fc\u3067Agent Card\u3092\u4f5c\u6210\u3057\u3001JSON\u30d5\u30a1\u30a4\u30eb\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9"}</li>
-            <li>
-              <code className="font-mono text-[11px] bg-washi px-1 py-0.5 rounded-[2px]">
-                /.well-known/
-              </code>
-              {"\u30c7\u30a3\u30ec\u30af\u30c8\u30ea\u306b"}
-              <code className="font-mono text-[11px] bg-washi px-1 py-0.5 rounded-[2px]">
-                agent-card.json
-              </code>
-              {"\u3092\u914d\u7f6e"}
-            </li>
-            <li>
-              Content-Type{"\u3092"}
-              <code className="font-mono text-[11px] bg-washi px-1 py-0.5 rounded-[2px]">
-                application/json
-              </code>
-              {"\u3067\u914d\u4fe1\u3055\u308c\u308b\u3088\u3046\u8a2d\u5b9a"}
-            </li>
+          <ol className="mt-4 space-y-3 list-decimal list-inside text-[rgba(255,255,255,0.6)]">
+            <li>ジェネレーターでAgent Cardを作成し、JSONファイルをダウンロード</li>
+            <li>/.well-known/ ディレクトリに agent-card.json を配置</li>
+            <li>Content-Typeを application/json で配信されるよう設定</li>
           </ol>
         </section>
 
         <section>
-          <h2 className="font-sora font-semibold text-[16px] mb-3">
-            A2A{"\u3068"}MCP{"\u306e\u9055\u3044"}
+          <h2 className="font-sora font-bold text-[32px] text-white tracking-tight border-b border-[rgba(255,255,255,0.1)] pb-4 mb-6">
+            A2A vs MCP 比較
           </h2>
           <p>
-            MCP{"\uff08Model Context Protocol\uff09\u306fLLM\u3068\u30c4\u30fc\u30eb/\u30c7\u30fc\u30bf\u30bd\u30fc\u30b9\u306e\u63a5\u7d9a\u306b\u7279\u5316\u3057\u305f\u30d7\u30ed\u30c8\u30b3\u30eb\u3067\u3059\u3002\u4e00\u65b9\u3001A2A\u306f\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u540c\u58eb\u306e\u5bfe\u7b49\u306a\u9023\u643a\u306b\u7126\u70b9\u3092\u5f53\u3066\u3066\u3044\u307e\u3059\u3002"}
+            MCP（Model Context Protocol）はAnthropicが提唱するLLMとツール/データソースの接続に特化したプロトコルです。A2Aはエージェント間の対等な連携に焦点を当てています。
           </p>
-          <div className="mt-3 overflow-x-auto">
-            <table className="w-full text-[12px] border border-washi">
+          <div className="mt-6 bg-[rgba(20,20,20,0.6)] border-2 border-[rgba(255,255,255,0.1)] rounded-2xl overflow-hidden">
+            <table className="w-full text-[15px]">
               <thead>
-                <tr className="bg-kinari-warm">
-                  <th className="text-left px-3 py-2 border-b border-washi font-mono text-[10px]" />
-                  <th className="text-left px-3 py-2 border-b border-washi font-mono text-[10px]">A2A</th>
-                  <th className="text-left px-3 py-2 border-b border-washi font-mono text-[10px]">MCP</th>
+                <tr style={{ background: 'linear-gradient(175deg, rgba(76,29,149,0.3), rgba(219,39,119,0.3))' }}>
+                  <th className="text-left px-6 py-4 border-b border-[rgba(255,255,255,0.1)] font-mono text-[11px] font-bold tracking-[1.65px] uppercase text-[rgba(255,255,255,0.7)]" />
+                  <th className="text-left px-6 py-4 border-b border-[rgba(255,255,255,0.1)] font-mono text-[11px] font-bold tracking-[1.65px] uppercase text-[rgba(255,255,255,0.7)]">A2A</th>
+                  <th className="text-left px-6 py-4 border-b border-[rgba(255,255,255,0.1)] font-mono text-[11px] font-bold tracking-[1.65px] uppercase text-[rgba(255,255,255,0.7)]">MCP</th>
                 </tr>
               </thead>
-              <tbody className="text-fude">
+              <tbody className="text-[rgba(255,255,255,0.6)]">
                 {[
-                  ["\u76ee\u7684", "\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u9593\u9023\u643a", "LLM\u3068\u30c4\u30fc\u30eb\u63a5\u7d9a"],
-                  ["\u95a2\u4fc2\u6027", "\u5bfe\u7b49\uff08Peer-to-Peer\uff09", "\u30db\u30b9\u30c8-\u30af\u30e9\u30a4\u30a2\u30f3\u30c8"],
-                  ["\u767a\u898b", "Agent Card\u3067\u81ea\u5df1\u5ba3\u8a00", "\u30b5\u30fc\u30d0\u30fc\u304c\u30c4\u30fc\u30eb\u3092\u63d0\u4f9b"],
-                  ["\u63d0\u5531\u8005", "Google", "Anthropic"],
+                  ["主な目的", "エージェント間の相互運用性", "モデルコンテキスト管理"],
+                  ["提唱者", "Google", "Anthropic"],
+                  ["公開年", "2025年", "2024年"],
+                  ["通信方式", "HTTP API / WebSocket", "stdio/HTTP+SSE"],
+                  ["ユースケース", "マルチエージェント連携", "ツール・データソース統合"],
                 ].map(([label, a2a, mcp]) => (
-                  <tr key={label} className="border-b border-washi">
-                    <td className="px-3 py-1.5 font-medium text-sumi">{label}</td>
-                    <td className="px-3 py-1.5">{a2a}</td>
-                    <td className="px-3 py-1.5">{mcp}</td>
+                  <tr key={label} className="border-t border-[rgba(255,255,255,0.05)]">
+                    <td className="px-6 py-4 font-semibold text-white">{label}</td>
+                    <td className="px-6 py-4">{a2a}</td>
+                    <td className="px-6 py-4">{mcp}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="mt-3">
-            {"\u4e21\u30d7\u30ed\u30c8\u30b3\u30eb\u306f\u76f8\u4e92\u88dc\u5b8c\u7684\u306a\u95a2\u4fc2\u306b\u3042\u308a\u3001\u4f75\u7528\u304c\u53ef\u80fd\u3067\u3059\u3002"}
+          <p className="mt-4">
+            両プロトコルは相互補完的な関係にあり、コミュニティのフィードバックを得ながら仕様の改善が続けられています。
           </p>
         </section>
 
-        <div className="mt-8 p-4 bg-kinari-warm border border-washi rounded-[4px]">
-          <p className="font-sora font-semibold text-[13px] text-sumi">
-            {"\u4eca\u3059\u3050Agent Card\u3092\u4f5c\u6210"}
+        {/* Info Callout */}
+        <div className="border-2 border-[rgba(59,130,246,0.3)] rounded-2xl overflow-hidden"
+          style={{ background: 'linear-gradient(170deg, rgba(59,130,246,0.1), rgba(147,51,234,0.1))' }}
+        >
+          <div className="absolute -inset-1 opacity-20 blur-xl rounded-2xl pointer-events-none"
+            style={{ background: 'linear-gradient(170deg, #3b82f6, #9333ea)' }}
+          />
+          <div className="relative p-8 flex gap-5">
+            <div className="flex-shrink-0 w-12 h-12 rounded-[14px] flex items-center justify-center"
+              style={{ background: 'linear-gradient(135deg, #3b82f6, #9333ea)' }}
+            >
+              <Info size={24} className="text-white" />
+            </div>
+            <div>
+              <h4 className="font-sora font-bold text-[18px] text-[#60a5fa]">重要な情報</h4>
+              <p className="mt-2 text-[16px] text-[rgba(96,165,250,0.9)] leading-[1.8]">
+                A2Aプロトコルは2025年にGoogleが発表したオープン標準です。現在も仕様の改善が続けられています。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-8 p-8 rounded-2xl"
+          style={{ background: 'linear-gradient(170deg, rgba(30,77,123,0.2), rgba(216,72,53,0.2))' }}
+        >
+          <p className="font-sora font-bold text-[18px] text-white">
+            今すぐAgent Cardを作成
           </p>
-          <p className="mt-1 text-[12px] text-fude">
-            {"\u30d6\u30e9\u30a6\u30b6\u4e0a\u3067\u7c21\u5358\u306bAgent Card\u3092\u751f\u6210\u3067\u304d\u307e\u3059\u3002\u30c7\u30fc\u30bf\u5916\u90e8\u9001\u4fe1\u306a\u3057\u3002"}
+          <p className="mt-2 text-[15px] text-[rgba(255,255,255,0.6)]">
+            ブラウザ上で簡単にAgent Cardを生成できます。データ外部送信なし。
           </p>
           <Link
             href="/tools/agent-card"
-            className="inline-block mt-3 px-4 py-1.5 bg-shu text-kinari font-sora text-[12px] font-medium rounded-[4px] hover:opacity-90 transition-opacity"
+            className="group relative overflow-hidden inline-flex items-center gap-2 mt-5 px-8 py-4 rounded-2xl text-[15px] font-bold text-white transition-all duration-300 hover:scale-105"
+            style={{ background: 'linear-gradient(165deg, #D84835, #D4AF37)' }}
           >
-            {"\u30b8\u30a7\u30cd\u30ec\u30fc\u30bf\u30fc\u3092\u958b\u304f"} &rarr;
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <span className="relative z-10 inline-flex items-center gap-2">
+              Agent Card Generatorを開く
+              <ArrowRight size={16} />
+            </span>
           </Link>
         </div>
       </div>

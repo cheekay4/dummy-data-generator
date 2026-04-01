@@ -13,20 +13,20 @@ interface TabsProps {
 
 export function Tabs({ tabs, activeTab, onTabChange }: TabsProps): JSX.Element {
   return (
-    <div className="flex border-b border-washi">
+    <div className="flex border-b border-[rgba(255,255,255,0.1)]">
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
           className={`
-            px-3 py-1.5
-            font-sora text-[11px] font-medium
+            px-4 py-2.5
+            font-sora text-[13px] font-semibold
             border-b-2 -mb-px
-            transition-colors duration-150
+            transition-all duration-300
             ${
               activeTab === tab.id
-                ? 'border-shu text-sumi'
-                : 'border-transparent text-fude hover:text-sumi hover:border-washi'
+                ? 'border-[var(--brand-accent)] text-white'
+                : 'border-transparent text-[rgba(255,255,255,0.4)] hover:text-[rgba(255,255,255,0.7)] hover:border-[rgba(255,255,255,0.2)]'
             }
           `.trim()}
         >

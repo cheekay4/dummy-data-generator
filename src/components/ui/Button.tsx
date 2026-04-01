@@ -10,15 +10,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: 'bg-sumi text-kinari hover:bg-sumi-light border-sumi',
-  secondary: 'bg-kinari-surface text-sumi border-washi hover:bg-washi-light',
-  ghost: 'bg-transparent text-fude border-transparent hover:bg-washi-light hover:text-sumi',
-  danger: 'bg-shu text-kinari hover:opacity-90 border-shu',
+  primary: 'relative overflow-hidden bg-gradient-to-r from-[#1E4D7B] to-[#D84835] text-white border-transparent hover:scale-105 hover:shadow-2xl',
+  secondary: 'bg-[rgba(20,20,20,0.6)] text-white border-2 border-[rgba(255,255,255,0.2)] backdrop-blur-xl hover:bg-[rgba(40,40,40,0.8)] hover:border-[rgba(255,255,255,0.3)] hover:scale-105 hover:shadow-2xl',
+  ghost: 'bg-transparent text-[rgba(255,255,255,0.6)] border-transparent hover:text-white hover:bg-[rgba(255,255,255,0.05)]',
+  danger: 'bg-gradient-to-r from-[#ef4444] to-[#dc2626] text-white border-transparent hover:opacity-90',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'px-2.5 py-1 text-[11px]',
-  md: 'px-3.5 py-1.5 text-[12px]',
+  sm: 'px-5 py-3 text-[14px] rounded-xl',
+  md: 'px-10 py-5 text-[17px] rounded-2xl',
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -27,11 +27,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={`
-          inline-flex items-center justify-center gap-1.5
-          font-sora font-medium
-          border rounded-[4px]
-          transition-colors duration-150
-          disabled:opacity-40 disabled:cursor-not-allowed
+          group inline-flex items-center justify-center gap-2
+          font-sora font-bold
+          border
+          transition-all duration-300
+          disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100
           ${variantStyles[variant]}
           ${sizeStyles[size]}
           ${className}
@@ -39,7 +39,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         {...props}
       >
-        {children}
+        {variant === 'primary' && (
+          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none" />
+        )}
+        <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
       </button>
     );
   }

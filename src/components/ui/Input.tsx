@@ -11,21 +11,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           className={`
-            w-full px-3 py-1.5
-            bg-kinari-surface
-            border rounded-[4px]
-            font-sora text-[12px] text-sumi
-            placeholder:text-fude-light
-            focus:outline-none focus:border-sumi
-            transition-colors duration-150
-            disabled:bg-washi-light disabled:text-fude-muted disabled:border-fude-dim
-            ${error ? 'border-shu' : 'border-washi'}
+            w-full px-5 py-4
+            bg-[rgba(255,255,255,0.03)]
+            border-2 rounded-2xl
+            font-mono text-[15px] text-white
+            placeholder:text-[rgba(255,255,255,0.45)]
+            focus:outline-none focus:border-[var(--brand-accent)] focus:bg-[rgba(255,255,255,0.05)]
+            transition-all duration-300
+            disabled:opacity-40 disabled:cursor-not-allowed
+            ${error ? 'border-[#ef4444]' : 'border-[rgba(255,255,255,0.1)]'}
             ${className}
           `.trim()}
           {...props}
         />
         {error && (
-          <p className="mt-1 text-[10px] text-shu font-sora">{error}</p>
+          <p className="mt-1.5 text-[11px] text-[#ef4444] font-mono">{error}</p>
         )}
       </div>
     );

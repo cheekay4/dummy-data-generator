@@ -18,31 +18,31 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           ref={ref}
           className={`
-            w-full px-3 py-1.5
-            bg-kinari-surface
-            border rounded-[4px]
-            font-sora text-[12px] text-sumi
-            focus:outline-none focus:border-sumi
-            transition-colors duration-150
-            disabled:bg-washi-light disabled:text-fude-muted
-            ${error ? 'border-shu' : 'border-washi'}
+            w-full px-5 py-4
+            bg-[rgba(255,255,255,0.03)]
+            border-2 rounded-2xl
+            font-mono text-[15px] text-white
+            focus:outline-none focus:border-[var(--brand-accent)] focus:bg-[rgba(255,255,255,0.05)]
+            transition-all duration-300
+            disabled:opacity-40 disabled:cursor-not-allowed
+            ${error ? 'border-[#ef4444]' : 'border-[rgba(255,255,255,0.1)]'}
             ${className}
           `.trim()}
           {...props}
         >
           {placeholder && (
-            <option value="" disabled>
+            <option value="" disabled className="bg-[#0A0A0A] text-[rgba(255,255,255,0.5)]">
               {placeholder}
             </option>
           )}
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
+            <option key={opt.value} value={opt.value} className="bg-[#0A0A0A] text-white">
               {opt.label}
             </option>
           ))}
         </select>
         {error && (
-          <p className="mt-1 text-[10px] text-shu font-sora">{error}</p>
+          <p className="mt-1.5 text-[11px] text-[#ef4444] font-mono">{error}</p>
         )}
       </div>
     );

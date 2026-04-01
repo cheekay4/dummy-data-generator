@@ -1,0 +1,32 @@
+{
+  "name": "agentjuku",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "security:check": "grep -rn 'fetch\\|XMLHttpRequest\\|WebSocket\\|navigator.sendBeacon\\|eval(' src/ --include='*.ts' --include='*.tsx' | grep -v 'node_modules' | grep -v '.next' || echo 'No network calls found'",
+    "security:deps": "npm audit --audit-level=moderate"
+  },
+  "dependencies": {
+    "@codemirror/lang-json": "^6.0.2",
+    "@hookform/resolvers": "^5.2.2",
+    "@uiw/react-codemirror": "^4.25.9",
+    "lucide-react": "^1.7.0",
+    "next": "14.2.35",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.72.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

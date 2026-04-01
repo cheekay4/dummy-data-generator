@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/sora-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/sora-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/sora-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  background-color: #fafaf5;
+  color: #1c1c1c;
+  font-family: "Sora", sans-serif;
+}
+
+/* CodeMirror theme overrides for dark panel */
+.cm-editor {
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.cm-editor .cm-gutters {
+  background-color: #1c1c1c;
+  border-right: 1px solid #2a2a2c;
+}
+
+.cm-editor .cm-activeLineGutter {
+  background-color: #2a2a2c;
+}
+
+/* Custom scrollbar for dark panels */
+.dark-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dark-panel::-webkit-scrollbar-track {
+  background: #1c1c1c;
+}
+
+.dark-panel::-webkit-scrollbar-thumb {
+  background: #2a2a2c;
+  border-radius: 3px;
+}

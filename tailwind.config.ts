@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sora: ["Sora", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+        sora: ["var(--font-sans)", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
       },
       colors: {
         shu: {
@@ -36,18 +36,40 @@ const config: Config = {
           muted: "#C4BCB0",
           dim: "#D5CFC4",
         },
-        code: {
-          key: "#C0392B",
-          string: "#7A9F6A",
-          number: "#D4A843",
-          comment: "#555555",
+        brand: {
+          primary: "#1E4D7B",
+          accent: "#D84835",
+          highlight: "#D4AF37",
         },
-        valid: "#6AAF67",
-        invalid: "#C0392B",
+        code: {
+          key: "#60a5fa",
+          string: "#fbbf24",
+          number: "#34d399",
+          comment: "#6b7280",
+        },
+        valid: "#10b981",
+        invalid: "#ef4444",
       },
       letterSpacing: {
         tight: "-0.02em",
         wide: "0.04em",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translate(0, 0) rotate(0deg)" },
+          "33%": { transform: "translate(30px, -30px) rotate(5deg)" },
+          "66%": { transform: "translate(-20px, 20px) rotate(-5deg)" },
+        },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+      },
+      animation: {
+        "float-slow": "float 20s ease-in-out infinite",
+        "float-medium": "float 25s ease-in-out infinite reverse",
+        "float-fast": "float 30s ease-in-out infinite",
+        shimmer: "shimmer 2s ease-in-out infinite",
       },
     },
   },

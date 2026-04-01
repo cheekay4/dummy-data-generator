@@ -16,7 +16,7 @@ export function Header({ breadcrumb, actions }: HeaderProps): JSX.Element {
         <div className="absolute inset-0 bg-gradient-to-r from-[#D84835] via-[#D4AF37] to-[#1E4D7B]" />
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-shimmer" />
       </div>
-      <header className="border-b border-[#e5e5e5] bg-[rgba(255,255,255,0.9)] backdrop-blur-xl shadow-sm">
+      <header className="relative z-20 border-b border-[#e5e5e5] bg-[rgba(255,255,255,0.9)] backdrop-blur-xl shadow-sm">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-[74px] flex items-center justify-between">
           <div className="flex items-center gap-4">
             {/* Logo */}

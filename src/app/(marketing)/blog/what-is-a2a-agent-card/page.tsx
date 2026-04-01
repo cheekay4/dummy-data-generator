@@ -125,7 +125,7 @@ export default function WhatIsA2AAgentCard(): JSX.Element {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="text-[rgba(255,255,255,0.6)]">
                 {[
                   ["name", "string", true],
                   ["version", "string", false],
@@ -211,7 +211,7 @@ export default function WhatIsA2AAgentCard(): JSX.Element {
         </section>
 
         {/* Info Callout */}
-        <div className="border-2 border-[rgba(59,130,246,0.3)] rounded-2xl overflow-hidden"
+        <div className="relative border-2 border-[rgba(59,130,246,0.3)] rounded-2xl overflow-hidden"
           style={{ background: 'linear-gradient(170deg, rgba(59,130,246,0.1), rgba(147,51,234,0.1))' }}
         >
           <div className="absolute -inset-1 opacity-20 blur-xl rounded-2xl pointer-events-none"

@@ -1,103 +1,73 @@
-import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { RegexTester } from "@/components/regex-tester/regex-tester";
 import { RelatedTools } from "@/components/common/related-tools";
 import { AdPlaceholder } from "@/components/common/ad-placeholder";
 
-export const metadata: Metadata = {
-  title: "正規表現テスター - リアルタイムで正規表現をテスト・解説",
-  description:
-    "正規表現をリアルタイムでテスト。マッチ箇所のハイライト、日本語での解説、日本のデータ形式向けプリセット（郵便番号・電話番号・メール等）を搭載。",
-  keywords: [
-    "正規表現",
-    "regex",
-    "正規表現テスター",
-    "正規表現 テスト",
-    "regex tester",
-    "正規表現 日本語",
-    "正規表現 解説",
-  ],
-  openGraph: {
-    title: "正規表現テスター - リアルタイムで正規表現をテスト・解説 | tools24.jp",
-    description:
-      "正規表現をリアルタイムでテスト。マッチ箇所のハイライト、日本語での解説、日本のデータ形式向けプリセットを搭載。",
-    url: "https://tools24.jp/regex-tester",
-    type: "website",
-  },
-  alternates: {
-    canonical: "https://tools24.jp/regex-tester",
-  },
-  other: {
-    "application/ld+json": JSON.stringify([
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        name: "正規表現テスター",
-        url: "https://tools24.jp/regex-tester",
-        description:
-          "正規表現のリアルタイムテスト・ハイライト・日本語解説。ブラウザ完結でデータ送信なし。",
-        applicationCategory: "DeveloperApplication",
-        operatingSystem: "Any",
-        offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
-        inLanguage: "ja",
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "対応している正規表現エンジンは何ですか？",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "JavaScriptのRegExpエンジン（ECMAScript標準）を使用しています。",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "データはサーバーに送信されますか？",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "いいえ、全てブラウザ内で処理されます。入力データは外部に一切送信されません。",
-            },
-          },
-        ],
-      },
-    ]),
-  },
-};
+const baseUrl = "https://tools24.jp";
 
-export default function RegexTesterPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+  const toolUrl = locale === "ja" ? `${baseUrl}/regex-tester` : `${baseUrl}/en/regex-tester`;
+
+  return {
+    title: t("regexTester.title"),
+    description: t("regexTester.description"),
+    alternates: {
+      canonical: toolUrl,
+      languages: {
+        ja: `${baseUrl}/regex-tester`,
+        en: `${baseUrl}/en/regex-tester`,
+        "x-default": `${baseUrl}/regex-tester`,
+      },
+    },
+    openGraph: {
+      title: t("regexTester.title"),
+      description: t("regexTester.description"),
+      url: toolUrl,
+      type: "website",
+      locale: locale === "ja" ? "ja_JP" : "en_US",
+    },
+  };
+}
+
+export default async function RegexTesterPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const tTools = await getTranslations({ locale, namespace: "tools" });
+
   return (
     <div className="container mx-auto px-4 py-6">
-      {/* 広告: ヘッダー直下 */}
       <div className="flex justify-center mb-6">
         <AdPlaceholder slot="top-banner" width={728} height={90} />
       </div>
 
-      {/* パンくずリスト */}
-      <Breadcrumb items={[{ label: "正規表現テスター" }]} />
+      <Breadcrumb items={[{ label: tTools("regex-tester.title") }]} />
 
-      {/* ページタイトル */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-1">正規表現テスター</h1>
+        <h1 className="text-2xl font-bold mb-1">{tTools("regex-tester.title")}</h1>
         <p className="text-sm text-muted-foreground">
-          リアルタイムマッチ・ハイライト・日本語解説・置換プレビュー。ブラウザ完結でデータ送信なし。
+          {tTools("regex-tester.description")}
         </p>
       </div>
 
-      {/* メイン機能 */}
       <RegexTester />
 
-      {/* 広告 */}
       <div className="flex justify-center my-8">
         <AdPlaceholder slot="mid-rect" width={300} height={250} />
       </div>
 
-      {/* 関連ツール */}
       <RelatedTools currentPath="/regex-tester" />
 
-      {/* SEOコンテンツ */}
+      {/* SEO content (JA) */}
       <section className="mt-12 space-y-8 text-sm text-muted-foreground">
         <div>
           <h2 className="text-lg font-semibold text-foreground mb-2">正規表現とは</h2>
@@ -113,7 +83,6 @@ export default function RegexTesterPage() {
         <div>
           <h2 className="text-lg font-semibold text-foreground mb-3">正規表現の基本文法</h2>
 
-          {/* 文字クラス */}
           <h3 className="text-base font-semibold text-foreground mb-2">文字クラス・メタ文字</h3>
           <div className="overflow-x-auto mb-5">
             <table className="w-full text-left border-collapse text-xs">
@@ -147,7 +116,6 @@ export default function RegexTesterPage() {
             </table>
           </div>
 
-          {/* 量指定子 */}
           <h3 className="text-base font-semibold text-foreground mb-2">量指定子（繰り返し）</h3>
           <div className="overflow-x-auto mb-5">
             <table className="w-full text-left border-collapse text-xs">
@@ -176,7 +144,6 @@ export default function RegexTesterPage() {
             </table>
           </div>
 
-          {/* アンカー・グループ */}
           <h3 className="text-base font-semibold text-foreground mb-2">アンカー・グループ・その他</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
@@ -224,61 +191,19 @@ export default function RegexTesterPage() {
               </thead>
               <tbody>
                 {[
-                  [
-                    "郵便番号",
-                    "\\d{3}-\\d{4}",
-                    "数字3桁、ハイフン、数字4桁",
-                  ],
-                  [
-                    "携帯電話",
-                    "0[789]0-\\d{4}-\\d{4}",
-                    "090/080/070 から始まる形式",
-                  ],
-                  [
-                    "固定電話",
-                    "0\\d{1,4}-\\d{1,4}-\\d{4}",
-                    "市外局番1〜4桁の形式",
-                  ],
-                  [
-                    "メール",
-                    "[\\w.%+\\-]+@[\\w.\\-]+\\.[a-z]{2,}",
-                    "基本的なメールアドレス形式",
-                  ],
-                  [
-                    "ひらがな",
-                    "[\\u3040-\\u309F]+",
-                    "Unicode範囲でひらがなを検出（uフラグ推奨）",
-                  ],
-                  [
-                    "カタカナ",
-                    "[\\u30A0-\\u30FF]+",
-                    "Unicode範囲でカタカナを検出",
-                  ],
-                  [
-                    "漢字",
-                    "[\\u4E00-\\u9FFF]+",
-                    "CJK統合漢字の範囲",
-                  ],
-                  [
-                    "日付 YYYY/MM/DD",
-                    "\\d{4}/\\d{2}/\\d{2}",
-                    "スラッシュ区切り日付形式",
-                  ],
-                  [
-                    "マイナンバー",
-                    "\\b\\d{12}\\b",
-                    "12桁の数字（単語境界付き）",
-                  ],
-                  [
-                    "URL (HTTP/S)",
-                    "https?://[\\w/:%#$&?()~.=+\\-]+",
-                    "HTTP・HTTPS URL",
-                  ],
+                  ["郵便番号", "\\d{3}-\\d{4}", "数字3桁、ハイフン、数字4桁"],
+                  ["携帯電話", "0[789]0-\\d{4}-\\d{4}", "090/080/070 から始まる形式"],
+                  ["固定電話", "0\\d{1,4}-\\d{1,4}-\\d{4}", "市外局番1〜4桁の形式"],
+                  ["メール", "[\\w.%+\\-]+@[\\w.\\-]+\\.[a-z]{2,}", "基本的なメールアドレス形式"],
+                  ["ひらがな", "[\\u3040-\\u309F]+", "Unicode範囲でひらがなを検出（uフラグ推奨）"],
+                  ["カタカナ", "[\\u30A0-\\u30FF]+", "Unicode範囲でカタカナを検出"],
+                  ["漢字", "[\\u4E00-\\u9FFF]+", "CJK統合漢字の範囲"],
+                  ["日付 YYYY/MM/DD", "\\d{4}/\\d{2}/\\d{2}", "スラッシュ区切り日付形式"],
+                  ["マイナンバー", "\\b\\d{12}\\b", "12桁の数字（単語境界付き）"],
+                  ["URL (HTTP/S)", "https?://[\\w/:%#$&?()~.=+\\-]+", "HTTP・HTTPS URL"],
                 ].map(([usage, pattern, desc]) => (
                   <tr key={usage} className="border-b">
-                    <td className="px-3 py-2 border font-medium text-foreground">
-                      {usage}
-                    </td>
+                    <td className="px-3 py-2 border font-medium text-foreground">{usage}</td>
                     <td className="px-3 py-2 border font-mono">{pattern}</td>
                     <td className="px-3 py-2 border">{desc}</td>
                   </tr>
@@ -288,11 +213,8 @@ export default function RegexTesterPage() {
           </div>
         </div>
 
-        {/* FAQ */}
         <div>
-          <h2 className="text-lg font-semibold text-foreground mb-4">
-            よくある質問（FAQ）
-          </h2>
+          <h2 className="text-lg font-semibold text-foreground mb-4">よくある質問（FAQ）</h2>
           <div className="space-y-3">
             {[
               {
@@ -336,7 +258,6 @@ export default function RegexTesterPage() {
         </div>
       </section>
 
-      {/* 広告: フッター上 */}
       <div className="flex justify-center mt-12">
         <AdPlaceholder slot="footer-rect" width={336} height={280} />
       </div>

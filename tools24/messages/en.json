@@ -1,0 +1,239 @@
+{
+  "common": {
+    "siteName": "tools24.jp",
+    "tagline": "Free online tools. No sign-up. All data processed in your browser. Nothing sent to any server.",
+    "copy": "Copy",
+    "copied": "Copied to clipboard",
+    "download": "Download",
+    "clear": "Clear",
+    "reset": "Reset",
+    "input": "Input",
+    "output": "Output",
+    "convert": "Convert",
+    "generate": "Generate",
+    "loading": "Processing...",
+    "error": "Something went wrong",
+    "noData": "No data",
+    "browserOnly": "All data is processed in your browser. Nothing is sent to any server.",
+    "language": "Language",
+    "home": "Home",
+    "ad": "Ad",
+    "comingSoon": "Coming soon",
+    "showAll": "Show all",
+    "collapse": "Collapse",
+    "moreItems": "+{count} more",
+    "noResults": "No tools found",
+    "searchPlaceholder": "Search tools..."
+  },
+  "nav": {
+    "webTools": "Web Tools",
+    "devTools": "Developer Tools",
+    "aiTools": "AI Tools",
+    "taxTools": "Tax Tools (JA only)"
+  },
+  "footer": {
+    "copyright": "© 2026 tools24.jp",
+    "privacy": "Privacy Policy",
+    "tokushoho": "Legal Notice",
+    "contact": "Contact",
+    "tagline": "tools24.jp — Free online tools"
+  },
+  "home": {
+    "heroTitle": "tools24.jp",
+    "heroTagline": "Free online tools. No sign-up required.",
+    "heroTaglineSub": "All data processed in your browser. Nothing sent to any server.",
+    "popularLabel": "Popular tools",
+    "categoryAll": "All",
+    "categoryTools": "Tools",
+    "categoryAI": "AI Tools",
+    "categoryTax": "Tax Tools",
+    "seoText": "tools24.jp provides free browser-based tools for developers and professionals working with Japanese systems. JSON formatting, image compression, character counting, regex testing, dummy data generation, and more — all running entirely in your browser with no data sent to servers.",
+    "subgroupWeb": "Web",
+    "subgroupDev": "Developer"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "ariaLabel": "Breadcrumb"
+  },
+  "relatedTools": {
+    "heading": "More tools"
+  },
+  "tools": {
+    "image-compressor": {
+      "title": "Image Compressor & Resizer",
+      "description": "Compress and resize PNG/JPG/WebP images in your browser"
+    },
+    "character-counter": {
+      "title": "Character Counter",
+      "description": "Count characters, words, and lines in real time"
+    },
+    "furigana-converter": {
+      "title": "Furigana Converter",
+      "description": "Add furigana (reading aids) to kanji. Convert to hiragana, katakana, or romaji.",
+      "culturalContext": "Furigana (振り仮名) are small phonetic characters printed above kanji to show the correct reading. This tool automatically adds furigana to Japanese text — essential for Japanese language learners, document editing, and creating accessible reading materials."
+    },
+    "zenkaku-hankaku": {
+      "title": "Fullwidth ↔ Halfwidth Converter",
+      "description": "Convert between fullwidth and halfwidth characters",
+      "culturalContext": "Japanese text uses two character widths: fullwidth (全角) for standard Japanese characters and halfwidth (半角) for ASCII-compatible characters. Many Japanese business systems require specific width formats for data entry — this tool converts between them instantly."
+    },
+    "mojibake-fixer": {
+      "title": "Mojibake Fixer",
+      "description": "Detect and fix garbled Japanese text caused by encoding mismatches",
+      "culturalContext": "Mojibake (文字化け) refers to garbled text that appears when Japanese text is read with the wrong character encoding. This is extremely common when working with legacy Japanese files (Shift_JIS, EUC-JP) or transferring data between systems with different default encodings."
+    },
+    "digital-stamp": {
+      "title": "Digital Seal Maker (Hanko)",
+      "description": "Create digital Japanese seals (hanko) for documents",
+      "culturalContext": "In Japan, personal seals (判子/印鑑, hanko) are traditionally used instead of signatures to approve official documents, contracts, and forms. This tool creates digital versions for use in PDFs and electronic documents. Note: seals created here have no legal authority for official submissions."
+    },
+    "favicon-generator": {
+      "title": "Favicon Generator",
+      "description": "Generate favicons from any image in bulk"
+    },
+    "webp-converter": {
+      "title": "WebP Converter",
+      "description": "Convert images to WebP format"
+    },
+    "minify-tools": {
+      "title": "HTML/CSS/JS Minifier",
+      "description": "Minify HTML, CSS, and JavaScript code"
+    },
+    "json-formatter": {
+      "title": "JSON Formatter",
+      "description": "Format, validate, and convert JSON entirely in your browser"
+    },
+    "regex-tester": {
+      "title": "Regex Tester",
+      "description": "Test regular expressions in real time with live highlighting"
+    },
+    "dummy-data-generator": {
+      "title": "Dummy Data Generator",
+      "description": "Generate realistic Japanese test data instantly"
+    },
+    "cron-expression-builder": {
+      "title": "Cron Expression Builder",
+      "description": "Build cron expressions visually with plain-language explanations"
+    },
+    "wareki-converter": {
+      "title": "Japanese Era Converter",
+      "description": "Convert between Japanese imperial eras (Reiwa/Heisei/Showa) and Western calendar / UNIX time",
+      "culturalContext": "Japan uses a unique calendar system based on imperial eras (元号, gengō). The current era is Reiwa (令和), which began on May 1, 2019. Previous eras include Heisei (平成), Showa (昭和), Taisho (大正), and Meiji (明治). Era-based dates appear on government forms, contracts, ID cards, and official documents throughout Japan."
+    },
+    "encode-decode": {
+      "title": "Encode / Decode",
+      "description": "Base64, URL, JWT, hash, and Unicode conversion — all in your browser"
+    },
+    "data-masking": {
+      "title": "Data Masking",
+      "description": "Safely mask and anonymize personal information"
+    },
+    "contract-checker": {
+      "title": "Contract Checker",
+      "description": "AI-powered contract risk analysis"
+    },
+    "keigo-writer": {
+      "title": "Business Email Writer (Keigo)",
+      "description": "AI generates formal Japanese business emails"
+    },
+    "masking-ai": {
+      "title": "AI Data Masking",
+      "description": "AI-powered personal information detection and masking"
+    },
+    "income-tax": {
+      "title": "Income Tax Simulator",
+      "description": "Estimate income tax and residential tax from annual income (Japan)"
+    },
+    "medical": {
+      "title": "Medical Expense Deduction Calculator",
+      "description": "Calculate medical expense deductions and tax refunds (Japan)"
+    },
+    "furusato": {
+      "title": "Furusato Nozei Deduction Limit",
+      "description": "Calculate furusato nōzei (hometown tax donation) deduction limits (Japan)"
+    },
+    "side-job": {
+      "title": "Side Job Tax Filing Guide",
+      "description": "Guide to reporting side income for tax filing (Japan)"
+    },
+    "life-insurance": {
+      "title": "Life Insurance Premium Deduction",
+      "description": "Calculate life insurance premium deduction amounts (Japan)"
+    },
+    "housing-loan": {
+      "title": "Housing Loan Tax Credit",
+      "description": "Calculate housing loan tax credit amounts (Japan)"
+    },
+    "furusato-tracker": {
+      "title": "Furusato Nozei Tracker",
+      "description": "Track furusato nōzei donations and recipients (Japan)"
+    },
+    "checklist": {
+      "title": "Tax Filing Document Checklist",
+      "description": "Check required documents for Japanese tax filing"
+    },
+    "etax-guide": {
+      "title": "e-Tax Input Guide",
+      "description": "Step-by-step guide for e-Tax electronic filing (Japan)"
+    }
+  },
+  "meta": {
+    "home": {
+      "title": "tools24.jp — Free Online Developer Tools for Japan",
+      "description": "Free browser-based tools for developers working with Japanese systems. JSON formatter, regex tester, Japanese era converter, furigana converter, dummy data generator, and more. No sign-up, no data sent to servers."
+    },
+    "jsonFormatter": {
+      "title": "JSON Formatter & Validator — tools24.jp",
+      "description": "Format, validate, and convert JSON online. Supports minification, CSV/YAML/XML/TypeScript conversion, diff comparison. Free, no sign-up, nothing sent to servers."
+    },
+    "regexTester": {
+      "title": "Regex Tester — Live Regular Expression Testing — tools24.jp",
+      "description": "Test regular expressions in real time. Live match highlighting, Japanese data presets (postal codes, phone numbers, email), and plain-language explanations. Free, browser-based."
+    },
+    "cronBuilder": {
+      "title": "Cron Expression Builder — Visual Cron Scheduler — tools24.jp",
+      "description": "Build cron expressions visually. See the next execution time in JST, get plain-language schedule descriptions. For server cron jobs, GitHub Actions, AWS EventBridge, and more."
+    },
+    "warekiConverter": {
+      "title": "Japanese Era (Wareki) ↔ Western Calendar Converter — tools24.jp",
+      "description": "Convert between Japanese imperial era dates (Reiwa, Heisei, Showa, Taisho, Meiji) and Western calendar, UNIX timestamps, or ISO 8601. Essential for Japanese government forms and contracts."
+    },
+    "encodeDecode": {
+      "title": "Encode / Decode Toolkit — Base64, URL, JWT, Hash, Unicode — tools24.jp",
+      "description": "Base64 encoding/decoding, URL encoding, JWT decoding, MD5/SHA hash generation, and Unicode conversion — all in your browser. Supports Japanese text and Shift_JIS/EUC-JP encoding."
+    },
+    "dummyData": {
+      "title": "Dummy Data Generator — Japanese Test Data — tools24.jp",
+      "description": "Generate realistic Japanese test data: names, addresses, phone numbers, email, company names, My Number, and more — 22 field types. Export as CSV, JSON, TSV, or SQL. Nothing sent to servers."
+    },
+    "characterCounter": {
+      "title": "Character Counter — Count Characters, Words & Lines — tools24.jp",
+      "description": "Count characters, words, and lines in real time. Fullwidth/halfwidth distinction, manuscript paper conversion, Twitter character count. Free, browser-based."
+    },
+    "furiganaConverter": {
+      "title": "Furigana Converter — Add Reading Aids to Kanji — tools24.jp",
+      "description": "Automatically add furigana (reading aids) to Japanese kanji text. Convert to hiragana, katakana, or romaji. For Japanese learners, document editing, and accessible content creation."
+    },
+    "imageCompressor": {
+      "title": "Image Compressor & Resizer — PNG/JPG/WebP — tools24.jp",
+      "description": "Compress and resize PNG, JPG, and WebP images in your browser. Batch processing, quality control, size presets. No sign-up, no data sent to servers."
+    },
+    "contact": {
+      "title": "Contact — tools24.jp",
+      "description": "Questions, bug reports, or feature requests for tools24.jp."
+    },
+    "privacy": {
+      "title": "Privacy Policy — tools24.jp",
+      "description": "Privacy policy for tools24.jp."
+    },
+    "tokushoho": {
+      "title": "Legal Notice (Tokushoho) — tools24.jp",
+      "description": "Legal disclosure under Japan's Act on Specified Commercial Transactions for tools24.jp."
+    }
+  },
+  "legal": {
+    "disclaimer": "This service is provided as-is without warranties. Operated from Japan, subject to Japanese law.",
+    "jurisdictionNotice": "Disputes shall be governed by Japanese law with Tokyo District Court as the exclusive first-instance jurisdiction.",
+    "prDisclosure": "[Sponsored] This page contains affiliate links."
+  }
+}

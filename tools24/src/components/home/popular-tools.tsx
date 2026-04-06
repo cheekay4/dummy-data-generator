@@ -1,21 +1,25 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { LayoutGrid, Image, Braces, Type } from "lucide-react";
 
-const popularTools = [
-  { title: "ダミーデータ生成", href: "/dummy-data-generator", icon: LayoutGrid },
-  { title: "画像圧縮・リサイズ", href: "/image-compressor", icon: Image },
-  { title: "JSON整形ツール", href: "/json-formatter", icon: Braces },
-  { title: "文字数カウンター", href: "/character-counter", icon: Type },
+const popularToolIds = [
+  { id: "dummy-data-generator", href: "/dummy-data-generator", icon: LayoutGrid },
+  { id: "image-compressor", href: "/image-compressor", icon: Image },
+  { id: "json-formatter", href: "/json-formatter", icon: Braces },
+  { id: "character-counter", href: "/character-counter", icon: Type },
 ] as const;
 
-export function PopularTools(): React.ReactElement {
+export async function PopularTools(): Promise<React.ReactElement> {
+  const t = await getTranslations("home");
+  const tTools = await getTranslations("tools");
+
   return (
     <section>
       <h2 className="mb-3 text-sm font-medium text-muted-foreground">
-        よく使われているツール
+        {t("popularLabel")}
       </h2>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {popularTools.map((tool) => {
+        {popularToolIds.map((tool) => {
           const Icon = tool.icon;
           return (
             <Link
@@ -26,7 +30,7 @@ export function PopularTools(): React.ReactElement {
               <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-muted">
                 <Icon className="h-4 w-4 text-muted-foreground" />
               </div>
-              {tool.title}
+              {tTools(`${tool.id}.title`)}
             </Link>
           );
         })}

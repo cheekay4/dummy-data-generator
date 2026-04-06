@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 interface AdPlaceholderProps {
   slot: string;
   width: number;
@@ -5,8 +7,10 @@ interface AdPlaceholderProps {
   isPro?: boolean;
 }
 
-export function AdPlaceholder({ slot, width, height, isPro = false }: AdPlaceholderProps) {
+export async function AdPlaceholder({ slot, width, height, isPro = false }: AdPlaceholderProps): Promise<React.ReactElement | null> {
   if (isPro) return null;
+
+  const t = await getTranslations("common");
 
   return (
     <div
@@ -14,7 +18,7 @@ export function AdPlaceholder({ slot, width, height, isPro = false }: AdPlacehol
       style={{ width: "100%", maxWidth: width, height: height, minHeight: height }}
       data-ad-slot={slot}
     >
-      広告
+      {t("ad")}
     </div>
   );
 }

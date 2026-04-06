@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { ChevronRight } from "lucide-react";
 import { type ToolDef } from "@/lib/tools-config";
 import { Badge } from "@/components/ui/badge";
@@ -22,10 +23,14 @@ export function CategorySection({
   defaultShow = 3,
 }: CategorySectionProps): React.ReactElement {
   const [expanded, setExpanded] = useState(false);
+  const t = useTranslations("common");
+  const tTools = useTranslations("tools");
 
   const renderToolRow = (tool: ToolDef): React.ReactElement => {
     const Icon = tool.icon;
     const isComingSoon = tool.status === "coming-soon";
+    const displayTitle = tTools(`${tool.id}.title`);
+    const displayDescription = tTools(`${tool.id}.description`);
 
     const content = (
       <div
@@ -41,14 +46,14 @@ export function CategorySection({
           <Icon className="h-4 w-4 text-white" />
         </div>
         <div className="min-w-0 flex-1">
-          <span className="text-sm font-medium">{tool.title}</span>
+          <span className="text-sm font-medium">{displayTitle}</span>
           <span className="ml-2 hidden text-xs text-muted-foreground sm:inline">
-            {tool.description}
+            {displayDescription}
           </span>
         </div>
         {isComingSoon ? (
           <Badge variant="secondary" className="shrink-0 text-xs">
-            近日公開
+            {t("comingSoon")}
           </Badge>
         ) : (
           <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
@@ -90,7 +95,7 @@ export function CategorySection({
             onClick={() => setExpanded(!expanded)}
             className="text-xs text-muted-foreground hover:text-foreground transition-colors"
           >
-            {expanded ? "折りたたむ" : "すべて見る"}
+            {expanded ? t("collapse") : t("showAll")}
           </button>
         )}
       </div>
@@ -98,7 +103,7 @@ export function CategorySection({
       {subgroups ? (
         <div className="space-y-4">
           {subgroups.map((sg) => {
-            const groupTools = tools.filter((t) => t.subgroup === sg.filter);
+            const groupTools = tools.filter((tool) => tool.subgroup === sg.filter);
             const visibleGroupTools = expanded
               ? groupTools
               : groupTools.slice(0, defaultShow);
@@ -115,7 +120,7 @@ export function CategorySection({
                     onClick={() => setExpanded(true)}
                     className="mt-1 text-xs text-muted-foreground hover:text-foreground"
                   >
-                    +{groupTools.length - defaultShow} 件
+                    {t("moreItems", { count: groupTools.length - defaultShow })}
                   </button>
                 )}
               </div>

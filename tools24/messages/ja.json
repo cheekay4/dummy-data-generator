@@ -1,0 +1,234 @@
+{
+  "common": {
+    "siteName": "tools24.jp",
+    "tagline": "登録不要・無料のオンラインツール集。入力データはすべてブラウザ内で処理。外部送信なし。",
+    "copy": "コピー",
+    "copied": "コピーしました",
+    "download": "ダウンロード",
+    "clear": "クリア",
+    "reset": "リセット",
+    "input": "入力",
+    "output": "出力",
+    "convert": "変換",
+    "generate": "生成",
+    "loading": "処理中...",
+    "error": "エラーが発生しました",
+    "noData": "データがありません",
+    "browserOnly": "すべてのデータはブラウザ内で処理されます。サーバーへの送信はありません。",
+    "language": "言語",
+    "home": "ホーム",
+    "ad": "広告",
+    "comingSoon": "近日公開",
+    "showAll": "すべて見る",
+    "collapse": "折りたたむ",
+    "moreItems": "+{count} 件",
+    "noResults": "該当するツールが見つかりません",
+    "searchPlaceholder": "ツールを検索..."
+  },
+  "nav": {
+    "webTools": "Webツール",
+    "devTools": "開発者ツール",
+    "aiTools": "AIツール",
+    "taxTools": "確定申告ツール"
+  },
+  "footer": {
+    "copyright": "© 2026 tools24.jp",
+    "privacy": "プライバシーポリシー",
+    "tokushoho": "特商法表記",
+    "contact": "お問い合わせ",
+    "tagline": "tools24.jp — 便利なWebツールを無料で"
+  },
+  "home": {
+    "heroTitle": "tools24.jp",
+    "heroTagline": "登録不要・無料のオンラインツール集。",
+    "heroTaglineSub": "入力データはすべてブラウザ内で処理。外部送信なし。",
+    "popularLabel": "よく使われているツール",
+    "categoryAll": "すべて",
+    "categoryTools": "ツール",
+    "categoryAI": "AIツール",
+    "categoryTax": "確定申告ツール",
+    "seoText": "tools24.jp は、開発者・ビジネスユーザー向けの無料オンラインツール集です。JSON整形、画像圧縮、文字数カウント、正規表現テスト、ダミーデータ生成など、日常業務で使えるツールを提供しています。すべてのツールはブラウザ内で完結し、データがサーバーに送信されることはありません。",
+    "subgroupWeb": "Web",
+    "subgroupDev": "開発者向け"
+  },
+  "breadcrumb": {
+    "home": "ホーム",
+    "ariaLabel": "パンくずリスト"
+  },
+  "relatedTools": {
+    "heading": "その他の便利ツール"
+  },
+  "tools": {
+    "image-compressor": {
+      "title": "画像圧縮・リサイズ",
+      "description": "PNG/JPG/WebP画像をブラウザで圧縮・リサイズ"
+    },
+    "character-counter": {
+      "title": "文字数カウンター",
+      "description": "文字数・単語数・行数をリアルタイムカウント"
+    },
+    "furigana-converter": {
+      "title": "ふりがな変換",
+      "description": "漢字にふりがなを自動付与。ひらがな・カタカナ・ローマ字変換"
+    },
+    "zenkaku-hankaku": {
+      "title": "全角・半角変換",
+      "description": "全角⇔半角を一括変換"
+    },
+    "mojibake-fixer": {
+      "title": "文字化け修正ツール",
+      "description": "文字化けしたテキストを自動修復"
+    },
+    "digital-stamp": {
+      "title": "電子印鑑作成ツール",
+      "description": "ビジネス用の電子印鑑をブラウザで作成"
+    },
+    "favicon-generator": {
+      "title": "ファビコン一括生成",
+      "description": "画像からファビコンを一括生成"
+    },
+    "webp-converter": {
+      "title": "WebP変換ツール",
+      "description": "画像をWebP形式に変換"
+    },
+    "minify-tools": {
+      "title": "HTML/CSS/JS 圧縮",
+      "description": "HTML・CSS・JavaScriptのコードを圧縮"
+    },
+    "json-formatter": {
+      "title": "JSON整形ツール",
+      "description": "JSONの整形・圧縮・変換をブラウザだけで"
+    },
+    "regex-tester": {
+      "title": "正規表現テスター",
+      "description": "正規表現をリアルタイムでテスト・解説"
+    },
+    "dummy-data-generator": {
+      "title": "ダミーデータ生成",
+      "description": "日本のリアルなテストデータを瞬時に生成"
+    },
+    "cron-expression-builder": {
+      "title": "Cron式ビルダー",
+      "description": "Cron式を日本語で組み立て・解説"
+    },
+    "wareki-converter": {
+      "title": "和暦・西暦変換",
+      "description": "令和・平成・昭和と西暦・UNIX時間を一括変換"
+    },
+    "encode-decode": {
+      "title": "エンコード・デコード",
+      "description": "Base64・URL・JWT・ハッシュ・Unicode変換"
+    },
+    "data-masking": {
+      "title": "個人情報マスキング",
+      "description": "個人情報を安全にマスキング・匿名化"
+    },
+    "contract-checker": {
+      "title": "契約書チェッカー",
+      "description": "AIが契約書のリスクを自動分析"
+    },
+    "keigo-writer": {
+      "title": "敬語メールライター",
+      "description": "AIが敬語メールを自動生成"
+    },
+    "masking-ai": {
+      "title": "個人情報マスキング AI",
+      "description": "AIで個人情報を検出・マスキング"
+    },
+    "income-tax": {
+      "title": "所得税シミュレーター",
+      "description": "年収から所得税・住民税を試算"
+    },
+    "medical": {
+      "title": "医療費控除かんたん計算",
+      "description": "医療費控除の対象額と還付金を計算"
+    },
+    "furusato": {
+      "title": "ふるさと納税 控除上限",
+      "description": "ふるさと納税の控除上限額を計算"
+    },
+    "side-job": {
+      "title": "副業の確定申告ナビ",
+      "description": "副業収入の申告方法をナビゲート"
+    },
+    "life-insurance": {
+      "title": "生命保険料控除",
+      "description": "生命保険料の控除額を計算"
+    },
+    "housing-loan": {
+      "title": "住宅ローン控除",
+      "description": "住宅ローン控除の対象額を計算"
+    },
+    "furusato-tracker": {
+      "title": "ふるさと納税 管理",
+      "description": "ふるさと納税の寄附先・金額を管理"
+    },
+    "checklist": {
+      "title": "必要書類チェックリスト",
+      "description": "確定申告に必要な書類をチェック"
+    },
+    "etax-guide": {
+      "title": "e-Tax入力ガイド",
+      "description": "e-Taxの入力手順をステップごとにガイド"
+    }
+  },
+  "meta": {
+    "home": {
+      "title": "tools24.jp — 登録不要・無料のオンラインツール集",
+      "description": "JSON整形、画像圧縮、文字数カウント、ふりがな変換、ダミーデータ生成など、便利なオンラインツールが全て無料・ブラウザ完結で使えます。データ送信なし。"
+    },
+    "jsonFormatter": {
+      "title": "JSON整形ツール - オンラインでJSON変換・バリデーション",
+      "description": "無料のオンラインJSON整形ツール。JSONの整形、圧縮、CSV/YAML/XML変換、バリデーション、TypeScript型生成、差分比較がブラウザだけで完結。データはサーバーに送信されません。"
+    },
+    "regexTester": {
+      "title": "正規表現テスター - リアルタイムで正規表現をテスト・解説",
+      "description": "正規表現をリアルタイムでテスト。マッチ箇所のハイライト、日本語での解説、日本のデータ形式向けプリセット（郵便番号・電話番号・メール等）を搭載。"
+    },
+    "cronBuilder": {
+      "title": "Cron式ビルダー - ビジュアルでcron式を作成・日本語で説明",
+      "description": "Cron式をビジュアルで簡単に作成。日本語で実行スケジュールを説明、次回実行日時をJSTで表示。サーバー設定やタスクスケジューラーの設定に。"
+    },
+    "warekiConverter": {
+      "title": "和暦西暦変換ツール | 令和・平成・昭和↔西暦・UNIX時間を一括変換",
+      "description": "和暦（令和・平成・昭和・大正・明治）と西暦・UNIXタイムスタンプ・ISO 8601を瞬時に相互変換。年齢計算、営業日計算、祝日一覧も。ブラウザ完結、データ送信なし。"
+    },
+    "encodeDecode": {
+      "title": "エンコード・デコード ツールキット | Base64・URL・JWT・ハッシュ・Unicode変換",
+      "description": "Base64エンコード、URLエンコード、JWTデコード、MD5/SHAハッシュ生成、Unicode変換がブラウザだけで完結。日本語の文字コード処理にも完全対応。データはサーバーに送信されません。"
+    },
+    "dummyData": {
+      "title": "ダミーデータ生成ツール - 日本の住所・名前・電話番号をテスト用に自動生成",
+      "description": "日本の氏名・住所・電話番号・メール・会社名・マイナンバーなど22種類のテストデータをブラウザだけで瞬時に生成。CSV/JSON/TSV/SQL形式でダウンロード可能。データは送信されません。"
+    },
+    "characterCounter": {
+      "title": "文字数カウンター — 文字数・単語数・行数をリアルタイム計測",
+      "description": "文字数カウンターでテキストの文字数、単語数、行数をリアルタイムで計測。全角・半角の区別、原稿用紙換算、Twitter文字数チェックに対応。登録不要・無料・ブラウザ内で完結。"
+    },
+    "furiganaConverter": {
+      "title": "ふりがな変換 — 漢字にふりがなを自動付与",
+      "description": "漢字テキストにふりがなを自動付与。ひらがな・カタカナ・ローマ字変換に対応。日本語学習、テキスト校正、読み上げ原稿作成に。登録不要・無料・ブラウザ内で完結。"
+    },
+    "imageCompressor": {
+      "title": "画像圧縮・リサイズ — PNG/JPG/WebPをブラウザで圧縮",
+      "description": "PNG、JPG、WebP画像をブラウザ内で圧縮・リサイズ。複数ファイル一括処理、品質調整、サイズプリセット対応。登録不要・無料・データ送信なし。"
+    },
+    "contact": {
+      "title": "お問い合わせ",
+      "description": "tools24.jp へのご質問、不具合報告、ご要望はこちらからどうぞ。"
+    },
+    "privacy": {
+      "title": "プライバシーポリシー",
+      "description": "tools24.jp のプライバシーポリシーです。"
+    },
+    "tokushoho": {
+      "title": "特定商取引法に基づく表記",
+      "description": "tools24.jp の特定商取引法に基づく表記です。"
+    }
+  },
+  "legal": {
+    "disclaimer": "本サービスは現状有姿で提供されます。",
+    "jurisdictionNotice": "本サービスに関する紛争は、日本法を準拠法とし、東京地方裁判所を第一審の専属的合意管轄裁判所とします。",
+    "prDisclosure": "【PR】このページには広告・アフィリエイトリンクが含まれます。"
+  }
+}

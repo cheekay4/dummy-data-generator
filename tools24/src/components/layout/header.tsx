@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ThemeToggle } from "@/components/common/theme-toggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Separator } from "@/components/ui/separator";
 
 export function Header() {
@@ -12,7 +13,10 @@ export function Header() {
         >
           tools24.jp
         </Link>
-        <ThemeToggle />
+        <div className="flex items-center gap-3">
+          <LanguageSwitcher />
+          <ThemeToggle />
+        </div>
       </div>
       <Separator />
     </header>

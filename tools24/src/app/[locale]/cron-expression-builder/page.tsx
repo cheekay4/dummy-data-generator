@@ -1,102 +1,76 @@
-import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { CronBuilder } from "@/components/cron-builder/cron-builder";
 import { RelatedTools } from "@/components/common/related-tools";
 import { AdPlaceholder } from "@/components/common/ad-placeholder";
 
-export const metadata: Metadata = {
-  title: "Cron式ビルダー - ビジュアルでcron式を作成・日本語で説明",
-  description:
-    "Cron式をビジュアルで簡単に作成。日本語で実行スケジュールを説明、次回実行日時をJSTで表示。サーバー設定やタスクスケジューラーの設定に。",
-  keywords: [
-    "cron式",
-    "cronビルダー",
-    "cron 作成",
-    "cron 日本語",
-    "cron expression builder",
-    "スケジューラー",
-  ],
-  openGraph: {
-    title: "Cron式ビルダー - ビジュアルでcron式を作成・日本語で説明 | tools24.jp",
-    description:
-      "Cron式をビジュアルで簡単に作成。日本語で実行スケジュールを説明、次回実行日時をJSTで表示。",
-    url: "https://tools24.jp/cron-expression-builder",
-    type: "website",
-  },
-  alternates: {
-    canonical: "https://tools24.jp/cron-expression-builder",
-  },
-  other: {
-    "application/ld+json": JSON.stringify([
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        name: "Cron式ビルダー",
-        url: "https://tools24.jp/cron-expression-builder",
-        description:
-          "Cron式をビジュアルで作成・日本語説明・次回実行日時をJSTで表示。ブラウザ完結。",
-        applicationCategory: "DeveloperApplication",
-        operatingSystem: "Any",
-        offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
-        inLanguage: "ja",
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "このツールは無料ですか？",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "はい、完全無料です。会員登録も不要です。",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "データはサーバーに送信されますか？",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "いいえ、全てブラウザ内で処理されます。入力したデータは外部に一切送信されません。",
-            },
-          },
-        ],
-      },
-    ]),
-  },
-};
+const baseUrl = "https://tools24.jp";
 
-export default function CronExpressionBuilderPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+  const toolUrl =
+    locale === "ja"
+      ? `${baseUrl}/cron-expression-builder`
+      : `${baseUrl}/en/cron-expression-builder`;
+
+  return {
+    title: t("cronBuilder.title"),
+    description: t("cronBuilder.description"),
+    alternates: {
+      canonical: toolUrl,
+      languages: {
+        ja: `${baseUrl}/cron-expression-builder`,
+        en: `${baseUrl}/en/cron-expression-builder`,
+        "x-default": `${baseUrl}/cron-expression-builder`,
+      },
+    },
+    openGraph: {
+      title: t("cronBuilder.title"),
+      description: t("cronBuilder.description"),
+      url: toolUrl,
+      type: "website",
+      locale: locale === "ja" ? "ja_JP" : "en_US",
+    },
+  };
+}
+
+export default async function CronExpressionBuilderPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const tTools = await getTranslations({ locale, namespace: "tools" });
+
   return (
     <div className="container mx-auto px-4 py-6">
-      {/* 広告: ヘッダー直下 */}
       <div className="flex justify-center mb-6">
         <AdPlaceholder slot="top-banner" width={728} height={90} />
       </div>
 
-      {/* パンくずリスト */}
-      <Breadcrumb items={[{ label: "Cron式ビルダー" }]} />
+      <Breadcrumb items={[{ label: tTools("cron-expression-builder.title") }]} />
 
-      {/* ページタイトル */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-1">Cron式ビルダー</h1>
+        <h1 className="text-2xl font-bold mb-1">{tTools("cron-expression-builder.title")}</h1>
         <p className="text-sm text-muted-foreground">
-          ビジュアルでcron式を作成・日本語説明・次回実行日時をJSTで確認。データの送信なし。
+          {tTools("cron-expression-builder.description")}
         </p>
       </div>
 
-      {/* メイン機能 */}
       <CronBuilder />
 
-      {/* 広告 */}
       <div className="flex justify-center my-8">
         <AdPlaceholder slot="mid-rect" width={300} height={250} />
       </div>
 
-      {/* 関連ツール */}
       <RelatedTools currentPath="/cron-expression-builder" />
 
-      {/* SEOコンテンツ */}
+      {/* SEO content (JA) */}
       <section className="mt-12 space-y-8 text-sm text-muted-foreground">
         <div>
           <h2 className="text-lg font-semibold text-foreground mb-2">Cron式とは</h2>
@@ -202,7 +176,6 @@ export default function CronExpressionBuilderPage() {
           </div>
         </div>
 
-        {/* FAQ */}
         <div>
           <h2 className="text-lg font-semibold text-foreground mb-4">よくある質問（FAQ）</h2>
           <div className="space-y-3">
@@ -248,7 +221,6 @@ export default function CronExpressionBuilderPage() {
         </div>
       </section>
 
-      {/* 広告: フッター上 */}
       <div className="flex justify-center mt-12">
         <AdPlaceholder slot="footer-rect" width={336} height={280} />
       </div>

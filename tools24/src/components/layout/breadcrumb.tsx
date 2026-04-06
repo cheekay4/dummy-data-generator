@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 
 interface BreadcrumbItem {
   label: string;
@@ -9,13 +10,15 @@ interface BreadcrumbProps {
   items: BreadcrumbItem[];
 }
 
-export function Breadcrumb({ items }: BreadcrumbProps) {
+export async function Breadcrumb({ items }: BreadcrumbProps): Promise<React.ReactElement> {
+  const t = await getTranslations("breadcrumb");
+
   return (
-    <nav aria-label="パンくずリスト" className="mb-4">
+    <nav aria-label={t("ariaLabel")} className="mb-4">
       <ol className="flex items-center gap-1 text-sm text-muted-foreground flex-wrap">
         <li>
           <Link href="/" className="hover:text-foreground transition-colors">
-            ホーム
+            {t("home")}
           </Link>
         </li>
         {items.map((item, i) => (

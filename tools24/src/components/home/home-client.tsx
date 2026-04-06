@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { CategoryNav, type CategoryFilter } from "@/components/home/category-nav";
 import { CategorySection } from "@/components/home/category-section";
 import { getToolsByCategory } from "@/lib/tools-config";
 
 export function HomeClient(): React.ReactElement {
   const [category, setCategory] = useState<CategoryFilter>("all");
+  const t = useTranslations("home");
 
   const toolsCategory = getToolsByCategory("tools");
   const aiCategory = getToolsByCategory("ai");
@@ -22,11 +24,11 @@ export function HomeClient(): React.ReactElement {
 
       {showTools && (
         <CategorySection
-          title="ツール"
+          title={t("categoryTools")}
           tools={toolsCategory}
           subgroups={[
-            { label: "Web", filter: "web" },
-            { label: "開発者向け", filter: "dev" },
+            { label: t("subgroupWeb"), filter: "web" },
+            { label: t("subgroupDev"), filter: "dev" },
           ]}
           iconBg="bg-blue-500"
         />
@@ -34,7 +36,7 @@ export function HomeClient(): React.ReactElement {
 
       {showAI && (
         <CategorySection
-          title="AIツール"
+          title={t("categoryAI")}
           tools={aiCategory}
           iconBg="bg-purple-500"
           defaultShow={10}
@@ -43,7 +45,7 @@ export function HomeClient(): React.ReactElement {
 
       {showKakutei && (
         <CategorySection
-          title="確定申告ツール"
+          title={t("categoryTax")}
           tools={kakuteiCategory}
           iconBg="bg-green-600"
           defaultShow={3}

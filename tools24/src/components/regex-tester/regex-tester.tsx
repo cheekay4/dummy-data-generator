@@ -645,6 +645,7 @@ export function RegexTester() {
             onChange={(e) => setPattern(e.target.value)}
             placeholder="正規表現パターンを入力..."
             spellCheck={false}
+            maxLength={1000}
             className="flex-1 min-w-0 h-9 px-3 text-sm font-mono border rounded-md bg-background focus:outline-none focus:ring-1 focus:ring-ring"
           />
 
@@ -720,6 +721,7 @@ export function RegexTester() {
           placeholder="テストしたいテキストをここに貼り付けてください..."
           spellCheck={false}
           rows={10}
+          maxLength={100000}
           className="w-full px-3 py-2 text-sm font-mono border rounded-lg bg-background resize-y focus:outline-none focus:ring-1 focus:ring-ring"
         />
 

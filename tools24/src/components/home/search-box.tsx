@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Search } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { searchTools, type ToolDef } from "@/lib/tools-config";
 
 export function SearchBox(): React.ReactElement {
+  const t = useTranslations("common");
+  const tTools = useTranslations("tools");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<ToolDef[]>([]);
   const [open, setOpen] = useState(false);
@@ -54,7 +57,7 @@ export function SearchBox(): React.ReactElement {
           value={query}
           onChange={(e) => handleChange(e.target.value)}
           onFocus={() => query.trim() && setOpen(true)}
-          placeholder="ツールを検索..."
+          placeholder={t("searchPlaceholder")}
           className="w-full rounded-xl border bg-background py-2.5 pl-10 pr-16 text-sm outline-none transition-colors focus:border-primary"
         />
         <kbd className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 rounded border bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
@@ -82,9 +85,9 @@ export function SearchBox(): React.ReactElement {
                       <Icon className="h-3.5 w-3.5 text-muted-foreground" />
                     </div>
                     <div className="min-w-0">
-                      <p className="truncate font-medium">{tool.title}</p>
+                      <p className="truncate font-medium">{tTools(`${tool.id}.title`)}</p>
                       <p className="truncate text-xs text-muted-foreground">
-                        {tool.description}
+                        {tTools(`${tool.id}.description`)}
                       </p>
                     </div>
                   </Link>
@@ -97,7 +100,7 @@ export function SearchBox(): React.ReactElement {
 
       {open && query.trim() && results.length === 0 && (
         <div className="absolute z-50 mt-1 w-full rounded-xl border bg-card p-4 text-center text-sm text-muted-foreground shadow-lg">
-          該当するツールが見つかりません
+          {t("noResults")}
         </div>
       )}
     </div>

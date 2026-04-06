@@ -8,7 +8,7 @@ import EmailBodyPreview from './EmailBodyPreview';
 import LinePreview from './LinePreview';
 
 export default function PreviewPanel() {
-  const { channel, text, subject } = useScoringStore();
+  const { channel, text, subject, imageUrl } = useScoringStore();
   const { isPro } = useUser();
   const [tab, setTab] = useState<'mobile' | 'gmail'>('mobile');
 
@@ -41,10 +41,10 @@ export default function PreviewPanel() {
         <EmailSubjectPreview subject={subject || text} tab={tab} />
       )}
       {channel === 'email-body' && (
-        <EmailBodyPreview subject={subject} text={text} tab={tab} />
+        <EmailBodyPreview subject={subject} text={text} tab={tab} imageUrl={imageUrl ?? undefined} />
       )}
       {channel === 'line' && (
-        <LinePreview text={text} />
+        <LinePreview text={text} imageUrl={imageUrl ?? undefined} />
       )}
     </div>
   );

@@ -1,6 +1,14 @@
 import { AudienceSegment } from './types';
 
 export const AUDIENCE_PRESETS: Record<string, AudienceSegment> = {
+  'internet-population': {
+    totalRecipients: 10000,
+    conversionGoal: 'click',
+    gender: { female: 49, male: 49, other: 2 },
+    ageDistribution: { under20: 10, twenties: 14, thirties: 17, forties: 20, fifties: 20, sixtiesPlus: 19 },
+    attributes: { deviceMobile: 85, existingCustomer: 0 },
+    presetName: 'ネット人口比',
+  },
   'women-magazine': {
     totalRecipients: 10000,
     conversionGoal: 'purchase',
@@ -48,5 +56,29 @@ export const AUDIENCE_PRESETS: Record<string, AudienceSegment> = {
     ageDistribution: { under20: 2, twenties: 10, thirties: 40, forties: 35, fifties: 10, sixtiesPlus: 3 },
     attributes: { deviceMobile: 80, existingCustomer: 50 },
     presetName: 'ファミリー層',
+  },
+  'blog-tech': {
+    totalRecipients: 5000,
+    conversionGoal: 'click',
+    gender: { female: 27, male: 70, other: 3 },
+    ageDistribution: { under20: 5, twenties: 25, thirties: 30, forties: 25, fifties: 10, sixtiesPlus: 5 },
+    attributes: { deviceMobile: 75, existingCustomer: 0 },
+    presetName: 'テック系ブログ',
+  },
+  'blog-lifestyle': {
+    totalRecipients: 8000,
+    conversionGoal: 'click',
+    gender: { female: 70, male: 27, other: 3 },
+    ageDistribution: { under20: 5, twenties: 30, thirties: 30, forties: 20, fifties: 10, sixtiesPlus: 5 },
+    attributes: { deviceMobile: 88, existingCustomer: 0 },
+    presetName: 'ライフスタイルブログ',
+  },
+  'blog-corporate': {
+    totalRecipients: 3000,
+    conversionGoal: 'inquiry',
+    gender: { female: 42, male: 55, other: 3 },
+    ageDistribution: { under20: 2, twenties: 10, thirties: 25, forties: 30, fifties: 25, sixtiesPlus: 8 },
+    attributes: { deviceMobile: 50, existingCustomer: 0 },
+    presetName: '企業ブログ',
   },
 };

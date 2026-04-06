@@ -24,6 +24,16 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: true, sent: 0, reason: '一時停止中 (SEND_ENABLED != true)' })
   }
 
+  // オーケストレーター稼働中は Vercel cron をスキップ（二重送信防止）
+  const { data: orchConfig } = await supabase
+    .from('sales_config')
+    .select('value')
+    .eq('key', 'orchestrator_enabled')
+    .single()
+  if (orchConfig?.value === '"true"' || orchConfig?.value === true) {
+    return NextResponse.json({ ok: true, sent: 0, reason: 'ローカルオーケストレーター稼働中 — Vercel cron スキップ' })
+  }
+
   // 今日の送信数チェック
   const today = new Date().toISOString().split('T')[0]!
   const { data: statsRow } = await supabase
@@ -51,10 +61,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: true, sent: 0, reason: '承認済みメールなし' })
   }
 
+  // 同じリードに複数の承認済みメールがある場合は最古の1件だけ送信（重複防止）
+  const dedupedApproved = deduplicateByLeadId(approved as SalesEmail[])
+
   let sent = 0
   const errors: string[] = []
 
-  for (const email of approved as SalesEmail[]) {
+  for (const email of dedupedApproved) {
     if (!email.lead?.email) {
       errors.push(`email_id=${email.id}: リードのメールアドレスなし`)
       continue
@@ -111,23 +124,33 @@ export async function GET(req: NextRequest) {
         { onConflict: 'date' }
       )
 
-      // フォローアップ1を4日後にキュー（初回メールのみ）
+      // フォローアップ1を4日後にキュー（初回メールのみ・重複防止）
       if (!email.email_type || email.email_type === 'initial') {
-        const scheduledAt = new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString()
-        await supabase.from('sales_next_actions').insert({
-          lead_id: email.lead_id,
-          email_id: email.id,
-          action_type: 'followup_1',
-          scheduled_at: scheduledAt,
-          status: 'pending',
-          context: { original_subject: email.subject, original_body: email.body_text },
-        })
+        const { data: existingFollowup } = await supabase
+          .from('sales_next_actions')
+          .select('id')
+          .eq('lead_id', email.lead_id)
+          .eq('action_type', 'followup_1')
+          .eq('status', 'pending')
+          .limit(1)
+
+        if (!existingFollowup?.length) {
+          const scheduledAt = new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString()
+          await supabase.from('sales_next_actions').insert({
+            lead_id: email.lead_id,
+            email_id: email.id,
+            action_type: 'followup_1',
+            scheduled_at: scheduledAt,
+            status: 'pending',
+            context: { original_subject: email.subject, original_body: email.body_text },
+          })
+        }
       }
 
       sent++
 
       // 送信間隔を確保（最後の1通は不要）
-      if (sent < approved.length) {
+      if (sent < dedupedApproved.length) {
         await new Promise((resolve) => setTimeout(resolve, MIN_INTERVAL_MS))
       }
     } catch (err) {
@@ -142,4 +165,15 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json({ ok: true, sent, errors: errors.length ? errors : undefined })
+}
+
+/** 同じリードに複数の承認済みメールがある場合、最古の1件だけを残す */
+function deduplicateByLeadId(emails: SalesEmail[]): SalesEmail[] {
+  const seen = new Map<string, SalesEmail>()
+  for (const email of emails) {
+    if (!seen.has(email.lead_id)) {
+      seen.set(email.lead_id, email)
+    }
+  }
+  return [...seen.values()]
 }

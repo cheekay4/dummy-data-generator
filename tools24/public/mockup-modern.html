@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tools24.jp — Modern Portal Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #020617;
+  --bg-card: rgba(15, 23, 42, 0.6);
+  --bg-card-hover: rgba(15, 23, 42, 0.8);
+  --border-card: rgba(255,255,255,0.06);
+  --border-card-hover: rgba(255,255,255,0.12);
+  --text-primary: #fff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-faint: #475569;
+  --header-bg: rgba(2,6,23,0.80);
+  --header-border: rgba(255,255,255,0.05);
+  --search-bg: #0f172a;
+  --search-border: #1e293b;
+  --tag-active-bg: #fff;
+  --tag-active-text: #0f172a;
+  --tag-bg: rgba(30,41,59,0.5);
+  --tag-text: #94a3b8;
+  --tag-hover-bg: #1e293b;
+  --tag-hover-text: #fff;
+  --dot-color: rgba(148,163,184,0.15);
+  --glow-color: rgba(59,130,246,0.08);
+  --trust-border: rgba(255,255,255,0.05);
+  --shadow-hover: 0 0 40px -12px rgba(59,130,246,0.15);
+}
+
+body.light {
+  --bg: #ffffff;
+  --bg-card: #f8fafc;
+  --bg-card-hover: #ffffff;
+  --border-card: #e2e8f0;
+  --border-card-hover: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --text-faint: #94a3b8;
+  --header-bg: rgba(255,255,255,0.80);
+  --header-border: #e2e8f0;
+  --search-bg: #f1f5f9;
+  --search-border: #e2e8f0;
+  --tag-active-bg: #0f172a;
+  --tag-active-text: #fff;
+  --tag-bg: #f1f5f9;
+  --tag-text: #64748b;
+  --tag-hover-bg: #e2e8f0;
+  --tag-hover-text: #0f172a;
+  --dot-color: rgba(148,163,184,0.08);
+  --glow-color: rgba(59,130,246,0.04);
+  --trust-border: #e2e8f0;
+  --shadow-hover: 0 8px 30px -6px rgba(0,0,0,0.12);
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Header ─── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: var(--header-bg);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--header-border);
+}
+.header-logo {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.header-nav a {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.header-nav a:hover { color: var(--text-primary); }
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+.theme-toggle:hover {
+  color: var(--text-primary);
+  border-color: var(--border-card-hover);
+}
+.theme-toggle .icon-sun { display: none; }
+body.light .theme-toggle .icon-sun { display: block; }
+body.light .theme-toggle .icon-moon { display: none; }
+
+/* ─── Hero ─── */
+.hero {
+  position: relative;
+  padding: 80px 24px 48px;
+  text-align: center;
+  background: var(--bg);
+}
+@media (min-width: 768px) { .hero { padding: 112px 24px 48px; } }
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, var(--glow-color) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+.hero-title {
+  font-size: clamp(2.75rem, 6vw, 3.75rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+.hero-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 28rem;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+/* Search */
+.search-wrapper {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto 24px;
+}
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  background: var(--search-bg);
+  border: 1px solid var(--search-border);
+  border-radius: 12px;
+  padding: 14px 16px 14px 48px;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s;
+}
+.search-input::placeholder { color: var(--text-muted); }
+.search-input:focus {
+  border-color: rgba(59,130,246,0.5);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+/* USP */
+.usp-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.usp-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+.usp-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-faint);
+}
+
+/* ─── Tag Filter ─── */
+.tag-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 32px 24px 0;
+  position: relative;
+  z-index: 1;
+}
+.tag-btn {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tag-btn:hover {
+  background: var(--tag-hover-bg);
+  color: var(--tag-hover-text);
+}
+.tag-btn.active {
+  background: var(--tag-active-bg);
+  color: var(--tag-active-text);
+}
+
+/* ─── Bento Grid ─── */
+.grid-container {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 768px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .bento-grid { grid-template-columns: 1fr; } }
+
+/* Cards */
+.card, .card-featured {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
+  opacity: 0;
+}
+.card-featured { grid-column: span 2; padding: 28px; }
+@media (max-width: 480px) { .card-featured { grid-column: span 1; } }
+
+.card:hover, .card-featured:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card internals */
+.card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+.card-featured .card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.card-icon svg { width: 20px; height: 20px; }
+.card-featured .card-icon svg { width: 24px; height: 24px; }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.card-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.card-featured .card-title { font-size: 1rem; }
+.card-badge {
+  font-size: 0.6875rem;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+.badge-popular { background: rgba(59,130,246,0.1); color: #60a5fa; }
+.badge-price { background: rgba(139,92,246,0.1); color: #a78bfa; }
+
+.card-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  line-height: 1.5;
+  flex: 1;
+}
+.card-featured .card-desc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.card-cta {
+  font-size: 0.75rem;
+  color: #60a5fa;
+  font-weight: 500;
+}
+.card-featured .card-cta { font-size: 0.875rem; }
+
+/* Color accents */
+.accent-blue { background: rgba(59,130,246,0.1); color: #60a5fa; }
+.accent-emerald { background: rgba(16,185,129,0.1); color: #34d399; }
+.accent-violet { background: rgba(139,92,246,0.1); color: #a78bfa; }
+.accent-amber { background: rgba(245,158,11,0.1); color: #fbbf24; }
+
+/* ─── Tax Section ─── */
+.tax-section {
+  padding: 0 24px;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+.tax-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.tax-label {
+  font-size: 0.8125rem;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+.tax-toggle {
+  font-size: 0.75rem;
+  color: #60a5fa;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  padding: 4px 0;
+}
+.tax-toggle:hover { text-decoration: underline; }
+.tax-grid {
+  display: none;
+}
+.tax-grid.open {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding-bottom: 24px;
+}
+@media (max-width: 768px) { .tax-grid.open { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .tax-grid.open { grid-template-columns: 1fr; } }
+.tax-grid .card { animation-delay: calc(var(--i, 0) * 40ms); }
+
+/* ─── Trust ─── */
+.trust-section {
+  border-top: 1px solid var(--trust-border);
+  padding: 64px 24px;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+.trust-row {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  max-width: 200px;
+}
+.trust-icon { color: var(--text-faint); }
+.trust-title {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+body.light .trust-title { color: var(--text-primary); }
+
+.trust-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ─── Floating Label ─── */
+.floating-label {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(15,23,42,0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  z-index: 200;
+}
+body.light .floating-label {
+  background: rgba(255,255,255,0.9);
+  border-color: #e2e8f0;
+}
+
+/* Utility: hidden for filter */
+.card-hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- ═══════ Header ═══════ -->
+<header class="header">
+  <div class="header-logo">tools24.jp</div>
+  <nav class="header-nav">
+    <a href="#">ツール一覧</a>
+    <a href="#">料金</a>
+    <a href="#">お知らせ</a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切替">
+      <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/></svg>
+      <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </nav>
+</header>
+
+<!-- ═══════ Hero ═══════ -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">無料で使える</p>
+    <h1 class="hero-title">Webツール &amp;<br>AIプロツール</h1>
+    <p class="hero-desc">確定申告からWeb開発まで。ブラウザだけで完結する24本のツール集</p>
+
+    <div class="search-wrapper">
+      <span class="search-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      <input type="text" class="search-input" placeholder="何がしたいですか？（例：JSON整形、画像変換…）" id="searchInput">
+    </div>
+
+    <div class="usp-row">
+      <span class="usp-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+        データはブラウザ内処理
+      </span>
+      <span class="usp-dot"></span>
+      <span class="usp-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg>
+        登録不要で即利用
+      </span>
+      <span class="usp-dot"></span>
+      <span class="usp-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/></svg>
+        24本のプロツール
+      </span>
+    </div>
+  </div>
+
+  <!-- Tag Filter -->
+  <div class="tag-bar">
+    <button class="tag-btn active" data-tag="all" onclick="filterTag(this)">すべて 24</button>
+    <button class="tag-btn" data-tag="web" onclick="filterTag(this)">Webツール 6</button>
+    <button class="tag-btn" data-tag="dev" onclick="filterTag(this)">開発者ツール 6</button>
+    <button class="tag-btn" data-tag="ai" onclick="filterTag(this)">AIプロツール 3</button>
+    <button class="tag-btn" data-tag="tax" onclick="filterTag(this)">確定申告 9</button>
+  </div>
+</section>
+
+<!-- ═══════ Bento Grid ═══════ -->
+<div class="grid-container">
+  <div class="bento-grid" id="mainGrid">
+
+    <!-- Row 1: Featured -->
+    <div class="card-featured" data-cat="dev" style="--i:0">
+      <div class="card-icon accent-emerald">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1"/><path d="M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1"/></svg>
+      </div>
+      <div class="card-header">
+        <span class="card-title">JSON整形ツール</span>
+        <span class="card-badge badge-popular">Popular</span>
+      </div>
+      <p class="card-desc">JSONの整形・検証・変換・差分比較をブラウザで完結</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card-featured" data-cat="web" style="--i:1">
+      <div class="card-icon accent-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+      </div>
+      <div class="card-header">
+        <span class="card-title">WebP変換ツール</span>
+        <span class="card-badge badge-popular">Popular</span>
+      </div>
+      <p class="card-desc">PNG・JPG⇔WebPをブラウザで一括変換。画像サイズを大幅削減</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <!-- Row 2: Normal x4 -->
+    <div class="card" data-cat="web" style="--i:2">
+      <div class="card-icon accent-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">文字化け修正</span></div>
+      <p class="card-desc">エンコーディング自動判定で修復</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="dev" style="--i:3">
+      <div class="card-icon accent-emerald">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">正規表現テスター</span></div>
+      <p class="card-desc">リアルタイムでマッチ確認</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="web" style="--i:4">
+      <div class="card-icon accent-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">電子印鑑作成</span></div>
+      <p class="card-desc">名前入力で印影画像を生成</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="dev" style="--i:5">
+      <div class="card-icon accent-emerald">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="8" height="8" rx="1"/><rect x="14" y="2" width="8" height="8" rx="1"/><rect x="2" y="14" width="8" height="8" rx="1"/><rect x="14" y="14" width="8" height="8" rx="1"/><circle cx="6" cy="6" r="1"/><circle cx="18" cy="6" r="1"/><circle cx="6" cy="18" r="1"/><circle cx="18" cy="18" r="1"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">ダミーデータ生成</span></div>
+      <p class="card-desc">22種の日本語データを一括生成</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <!-- Row 3: Featured + Normal x2 -->
+    <div class="card-featured" data-cat="ai" style="--i:6">
+      <div class="card-icon accent-violet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      </div>
+      <div class="card-header">
+        <span class="card-title">敬語メールライター</span>
+        <span class="card-badge badge-price">&yen;290/月</span>
+      </div>
+      <p class="card-desc">AIが敬語メールを自動生成。8テンプレート対応</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="web" style="--i:7">
+      <div class="card-icon accent-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">ファビコン生成</span></div>
+      <p class="card-desc">画像からファビコン一式を生成</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="dev" style="--i:8">
+      <div class="card-icon accent-emerald">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">Cron式ビルダー</span></div>
+      <p class="card-desc">直感的にCron式を組み立て</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <!-- Row 4: Normal x4 -->
+    <div class="card" data-cat="web" style="--i:9">
+      <div class="card-icon accent-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m5 12-3 3 3 3"/><path d="m9 18 3-3-3-3"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">HTML/CSS/JS圧縮</span></div>
+      <p class="card-desc">ソースコードを圧縮・最小化</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="web" style="--i:10">
+      <div class="card-icon accent-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="m16 3 4 4-4 4"/><line x1="4" y1="7" x2="20" y2="7"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">全角半角変換</span></div>
+      <p class="card-desc">全角⇔半角を一括変換</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="dev" style="--i:11">
+      <div class="card-icon accent-emerald">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">和暦西暦変換</span></div>
+      <p class="card-desc">和暦⇔西暦・UNIX時間変換</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="dev" style="--i:12">
+      <div class="card-icon accent-emerald">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1 7 11l4 4L21 5"/><path d="M7 23 17 13l-4-4L3 19"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">エンコードデコード</span></div>
+      <p class="card-desc">Base64・URL・JWTを変換</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <!-- Row 5: AI tools -->
+    <div class="card" data-cat="ai" style="--i:13">
+      <div class="card-icon accent-violet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+      </div>
+      <div class="card-header">
+        <span class="card-title">個人情報マスキング</span>
+        <span class="card-badge badge-price">&yen;190/月</span>
+      </div>
+      <p class="card-desc">メール・電話を一括マスク</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="ai" style="--i:14">
+      <div class="card-icon accent-violet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="M13.3 16.3 15 18"/></svg>
+      </div>
+      <div class="card-header">
+        <span class="card-title">契約書チェッカー</span>
+        <span class="card-badge badge-price">&yen;490/月</span>
+      </div>
+      <p class="card-desc">AIが契約リスクを検出</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ Tax Section ═══════ -->
+<div class="tax-section" id="taxSection">
+  <div class="tax-header">
+    <span class="tax-label">確定申告ツール</span>
+    <button class="tax-toggle" id="taxToggle" onclick="toggleTax()">9本を表示</button>
+  </div>
+  <div class="bento-grid tax-grid" id="taxGrid">
+
+    <div class="card" data-cat="tax" style="--i:0">
+      <div class="card-icon accent-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">所得税計算</span></div>
+      <p class="card-desc">年収から手取りを即計算</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="tax" style="--i:1">
+      <div class="card-icon accent-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">医療費控除</span></div>
+      <p class="card-desc">医療費の控除額を計算</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="tax" style="--i:2">
+      <div class="card-icon accent-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">ふるさと納税</span></div>
+      <p class="card-desc">控除上限額をシミュレーション</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="tax" style="--i:3">
+      <div class="card-icon accent-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3h-4a2 2 0 0 0-2 2v2h8V5a2 2 0 0 0-2-2Z"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">副業確定申告</span></div>
+      <p class="card-desc">副業の申告要否を判定</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="tax" style="--i:4">
+      <div class="card-icon accent-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">生命保険料控除</span></div>
+      <p class="card-desc">保険料の控除額を計算</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="tax" style="--i:5">
+      <div class="card-icon accent-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">住宅ローン控除</span></div>
+      <p class="card-desc">住宅ローンの減税額を試算</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="tax" style="--i:6">
+      <div class="card-icon accent-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">ふるさと納税管理</span></div>
+      <p class="card-desc">寄付先と金額を一覧管理</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="tax" style="--i:7">
+      <div class="card-icon accent-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">確定申告チェックリスト</span></div>
+      <p class="card-desc">必要書類を漏れなく確認</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+    <div class="card" data-cat="tax" style="--i:8">
+      <div class="card-icon accent-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><line x1="10" y1="12" x2="10" y2="18"/><line x1="14" y1="12" x2="14" y2="18"/><line x1="10" y1="15" x2="14" y2="15"/></svg>
+      </div>
+      <div class="card-header"><span class="card-title">e-Tax提出ガイド</span></div>
+      <p class="card-desc">電子申告の手順を解説</p>
+      <span class="card-cta">使ってみる &rarr;</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ Trust Section ═══════ -->
+<section class="trust-section">
+  <div class="trust-row">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+      </div>
+      <span class="trust-title">ブラウザ内処理</span>
+      <span class="trust-desc">データはサーバーに送信されず、ブラウザ内で完結します</span>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg>
+      </div>
+      <span class="trust-title">登録不要</span>
+      <span class="trust-desc">アカウント作成なしで全ツールを即利用できます</span>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="5" rx="1"/><rect x="4" y="12" width="16" height="5" rx="1"/><rect x="6" y="17" width="12" height="5" rx="1"/></svg>
+      </div>
+      <span class="trust-title">24本のツール</span>
+      <span class="trust-desc">確定申告・Web開発・AIまで幅広くカバー</span>
+    </div>
+  </div>
+</section>
+
+<!-- Floating Label -->
+<div class="floating-label">tools24.jp — Modern Portal Mockup</div>
+
+<script>
+// Theme toggle
+function toggleTheme() {
+  document.body.classList.toggle('light');
+}
+
+// Tag filter
+function filterTag(btn) {
+  const tag = btn.dataset.tag;
+  const allBtns = document.querySelectorAll('.tag-btn');
+  const wasActive = btn.classList.contains('active');
+
+  allBtns.forEach(b => b.classList.remove('active'));
+
+  if (wasActive) {
+    // Deactivate — show all
+    document.querySelector('[data-tag="all"]').classList.add('active');
+    showAll();
+    return;
+  }
+
+  btn.classList.add('active');
+
+  if (tag === 'all') {
+    showAll();
+    return;
+  }
+
+  // Filter main grid
+  const mainCards = document.querySelectorAll('#mainGrid > [data-cat]');
+  mainCards.forEach(card => {
+    if (card.dataset.cat === tag) {
+      card.classList.remove('card-hidden');
+    } else {
+      card.classList.add('card-hidden');
+    }
+  });
+
+  // Handle tax section visibility
+  const taxSection = document.getElementById('taxSection');
+  if (tag === 'tax') {
+    taxSection.style.display = '';
+    const taxGrid = document.getElementById('taxGrid');
+    taxGrid.classList.add('open');
+    document.getElementById('taxToggle').textContent = '9本を非表示';
+  } else {
+    taxSection.style.display = 'none';
+  }
+}
+
+function showAll() {
+  const mainCards = document.querySelectorAll('#mainGrid > [data-cat]');
+  mainCards.forEach(card => card.classList.remove('card-hidden'));
+  document.getElementById('taxSection').style.display = '';
+  // Reset tax grid to collapsed
+  document.getElementById('taxGrid').classList.remove('open');
+  document.getElementById('taxToggle').textContent = '9本を表示';
+}
+
+// Tax toggle
+function toggleTax() {
+  const grid = document.getElementById('taxGrid');
+  const toggle = document.getElementById('taxToggle');
+  if (grid.classList.contains('open')) {
+    grid.classList.remove('open');
+    toggle.textContent = '9本を表示';
+  } else {
+    grid.classList.add('open');
+    toggle.textContent = '9本を非表示';
+    // Re-trigger animation
+    const cards = grid.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.style.animation = 'none';
+      card.offsetHeight; // trigger reflow
+      card.style.animation = '';
+    });
+  }
+}
+
+// Search filter
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  const q = e.target.value.toLowerCase().trim();
+  const mainCards = document.querySelectorAll('#mainGrid > [data-cat]');
+  const taxCards = document.querySelectorAll('#taxGrid > [data-cat]');
+
+  if (!q) {
+    mainCards.forEach(c => c.classList.remove('card-hidden'));
+    return;
+  }
+
+  mainCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.classList.toggle('card-hidden', !text.includes(q));
+  });
+
+  taxCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.classList.toggle('card-hidden', !text.includes(q));
+  });
+
+  // Auto-expand tax grid if search matches tax tools
+  const anyTaxVisible = Array.from(taxCards).some(c => !c.classList.contains('card-hidden'));
+  if (anyTaxVisible && q) {
+    document.getElementById('taxGrid').classList.add('open');
+  }
+});
+</script>
+
+</body>
+</html>

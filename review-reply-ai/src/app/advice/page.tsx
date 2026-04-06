@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: 'クチコミ返信の手直しガイド — AI返信をあなたらしく | 口コミ返信AI',
   description: 'AI生成の口コミ返信をもっとあなたらしくするコツを解説。業種別ポイント、NG表現集、ネガティブ口コミへの黄金テンプレートを無料公開。',
   keywords: '口コミ 返信 コツ, 口コミ 返信 例文, ネガティブ 口コミ 対応, クチコミ 返信 テンプレ',
+  alternates: {
+    canonical: 'https://myreplytone.com/advice',
+  },
 }
 
 export default function AdvicePage() {

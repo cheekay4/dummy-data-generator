@@ -20,8 +20,26 @@
       "WebSearch",
       "Bash(cd /c/Users/cheek/Desktop/my-first-project && npx create-next-app@latest review-reply-ai --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git 2>&1)",
       "Bash(python3:*)",
-      "Bash(cd /c/Users/cheek/Desktop/my-first-project && git push origin main --force 2>&1)",
-      "Bash(cd \"C:/Users/cheek/Desktop/my-first-project/sales-agent\" && echo \"b\" | timeout 10 node dist/index.js review 2>&1)"
+      "WebFetch(domain:myreplytone.com)",
+      "WebFetch(domain:support.google.com)",
+      "WebFetch(domain:www.vercelstatus.com)",
+      "WebFetch(domain:vercel-status.com)",
+      "WebFetch(domain:support.stripe.com)",
+      "WebFetch(domain:nebikatsu.com)",
+      "Bash(ls C:/Users/cheek/Desktop/my-first-project/kasuhara-shield/src/app/'\\(app\\)'/)",
+      "Bash(ls \"C:/Users/cheek/Desktop/my-first-project/kasuhara-shield/src/app/\\(app\\)/\")",
+      "Bash(ls \"C:/Users/cheek/Desktop/my-first-project/kasuhara-shield/src/app/\\(app\\)/documents/\")",
+      "Bash(ls \"C:/Users/cheek/Desktop/my-first-project/kasuhara-shield/src/app/\\(app\\)/settings/\")",
+      "Bash(mkdir -p \"C:/Users/cheek/Desktop/my-first-project/kasuhara-shield/src/app/api/incidents/[id]/analyze\")",
+      "Bash(mkdir -p \"C:/Users/cheek/Desktop/my-first-project/kasuhara-shield/src/app/api/organizations/[id]\")",
+      "Bash(npm run:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx next:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(ls C:/Users/cheek/Desktop/my-first-project/tools24/src/components/json-to-types/*.tsx)"
     ]
   }
 }

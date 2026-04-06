@@ -3,9 +3,10 @@
 interface Props {
   text: string;
   sender?: string;
+  imageUrl?: string;
 }
 
-export default function LinePreview({ text, sender = 'MsgScore' }: Props) {
+export default function LinePreview({ text, sender = 'MsgScore', imageUrl }: Props) {
   const lines = text.split('\n');
 
   return (
@@ -24,7 +25,11 @@ export default function LinePreview({ text, sender = 'MsgScore' }: Props) {
             <div className="w-8 h-8 rounded-full bg-[#00B900] flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5">
               {sender[0]}
             </div>
-            <div className="flex-1">
+            <div className="flex-1 space-y-1">
+              {imageUrl && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={imageUrl} alt="" className="w-full rounded-2xl rounded-tl-sm shadow-sm" />
+              )}
               <div className="bg-white rounded-2xl rounded-tl-sm p-3 shadow-sm">
                 <p className="text-sm text-stone-800 whitespace-pre-wrap break-words leading-relaxed">
                   {text.slice(0, 200)}{text.length > 200 ? '…' : ''}

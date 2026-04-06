@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useScoringStore } from '@/stores/scoring-store';
 import ChannelTabs from './ChannelTabs';
 import TextInput from './TextInput';
+import ImageInput from './ImageInput';
 import AudiencePanel from './AudiencePanel';
 import SubmitButton from './SubmitButton';
 import ResultView from '@/components/result/ResultView';
@@ -83,6 +84,9 @@ export default function ScoringWorkspace() {
                   </motion.div>
                 )}
               </AnimatePresence>
+
+              {/* 画像（email-subject以外） */}
+              {channel !== 'email-subject' && <ImageInput />}
 
               {/* セグメント設定 */}
               <AudiencePanel />

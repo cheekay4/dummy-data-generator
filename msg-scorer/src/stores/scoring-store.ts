@@ -9,6 +9,7 @@ interface ScoringState {
   channel: Channel;
   text: string;
   subject: string;
+  imageUrl: string | null;
   audience: AudienceSegment;
   result: ScoreResponse | null;
   error: string | null;
@@ -21,6 +22,7 @@ interface ScoringState {
   setChannel: (channel: Channel) => void;
   setText: (text: string) => void;
   setSubject: (subject: string) => void;
+  setImageUrl: (url: string | null) => void;
   setAudience: (audience: AudienceSegment) => void;
   setConversionGoal: (goal: ConversionGoal) => void;
   applyPreset: (presetKey: string) => void;
@@ -29,13 +31,14 @@ interface ScoringState {
   resetToInput: () => void;
 }
 
-const DEFAULT_AUDIENCE: AudienceSegment = AUDIENCE_PRESETS['ec-general'];
+const DEFAULT_AUDIENCE: AudienceSegment = AUDIENCE_PRESETS['internet-population'];
 
 export const useScoringStore = create<ScoringState>()((set, get) => ({
   phase: 'input',
   channel: 'email-subject',
   text: '',
   subject: '',
+  imageUrl: null,
   audience: DEFAULT_AUDIENCE,
   result: null,
   error: null,
@@ -48,6 +51,7 @@ export const useScoringStore = create<ScoringState>()((set, get) => ({
   setChannel: (channel) => set({ channel }),
   setText: (text) => set({ text }),
   setSubject: (subject) => set({ subject }),
+  setImageUrl: (url) => set({ imageUrl: url }),
   setAudience: (audience) => set({ audience }),
   setConversionGoal: (goal) =>
     set((state) => ({ audience: { ...state.audience, conversionGoal: goal } })),
@@ -115,5 +119,5 @@ export const useScoringStore = create<ScoringState>()((set, get) => ({
 
   commitResult: () => set({ phase: 'result', apiDone: false }),
 
-  resetToInput: () => set({ phase: 'input', result: null, error: null, historyId: null, shareToken: null, apiDone: false }),
+  resetToInput: () => set({ phase: 'input', result: null, error: null, historyId: null, shareToken: null, apiDone: false, imageUrl: null }),
 }));

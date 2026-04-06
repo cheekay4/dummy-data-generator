@@ -2,17 +2,19 @@ export const dynamic = 'force-dynamic'
 
 import { supabase } from '@/lib/supabase'
 import type { DailyStats } from '@/lib/types'
+import SendNowButton from '@/components/dashboard/SendNowButton'
 
 async function getStats() {
   const today = new Date().toISOString().split('T')[0]
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
 
-  const [statsRes, draftsRes, repliesRes, leadsRes, allLeadsRes] = await Promise.all([
+  const [statsRes, draftsRes, repliesRes, leadsRes, allLeadsRes, approvedRes] = await Promise.all([
     supabase.from('sales_daily_stats').select('*').gte('date', sevenDaysAgo).order('date'),
     supabase.from('sales_emails').select('id', { count: 'exact', head: true }).eq('status', 'draft'),
     supabase.from('sales_replies').select('id', { count: 'exact', head: true }).eq('human_approved', false),
     supabase.from('sales_leads').select('id', { count: 'exact', head: true }).in('status', ['new', 'analyzed']),
     supabase.from('sales_leads').select('conversation_phase'),
+    supabase.from('sales_emails').select('id', { count: 'exact', head: true }).eq('status', 'approved'),
   ])
 
   const todayStats = (statsRes.data as DailyStats[] | null)?.find((s) => s.date === today)
@@ -32,6 +34,7 @@ async function getStats() {
     pendingReplies: repliesRes.count ?? 0,
     pendingLeads: leadsRes.count ?? 0,
     funnel,
+    approvedCount: approvedRes.count ?? 0,
   }
 }
 
@@ -73,6 +76,9 @@ export default async function DashboardPage() {
           )
         })}
       </div>
+
+      {/* 承認済み即時送信 */}
+      <SendNowButton approvedCount={stats.approvedCount} />
 
       {/* 週次グラフ */}
       <div className="bg-white rounded-2xl border border-stone-200 p-6 mb-6">

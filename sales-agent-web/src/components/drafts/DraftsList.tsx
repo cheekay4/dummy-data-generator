@@ -22,6 +22,18 @@ function MsgScoreBadge({ score }: { score?: number }) {
   )
 }
 
+function QABadge({ score }: { score: number }) {
+  const color =
+    score >= 80 ? 'bg-green-100 text-green-700'
+    : score >= 70 ? 'bg-amber-100 text-amber-700'
+    : 'bg-red-100 text-red-600'
+  return (
+    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${color}`}>
+      QA: {score}
+    </span>
+  )
+}
+
 function DraftCard({
   draft,
   onApprove,
@@ -94,6 +106,17 @@ function DraftCard({
                 </span>
               )}
               <MsgScoreBadge score={draft.msgscore} />
+              {(draft as any).qa_score != null && <QABadge score={(draft as any).qa_score} />}
+              {(draft as any).auto_generated && (
+                <span className="text-xs bg-violet-50 text-violet-600 px-2 py-0.5 rounded-full font-medium">
+                  自動生成
+                </span>
+              )}
+              {(draft as any).auto_approved && (
+                <span className="text-xs bg-green-50 text-green-600 px-2 py-0.5 rounded-full font-medium">
+                  自動承認
+                </span>
+              )}
             </div>
           </div>
           <p className="text-xs text-stone-400 shrink-0">

@@ -3,7 +3,7 @@
 > このファイルはプロジェクトの現在状態を記録するSST（Single Source of Truth）。
 > Claude Code は毎セッション開始時に読み込み、変更時に即反映すること。
 
-最終更新: 2026-03-07（JapanDoc AI Phase 1-D 実装完了）
+最終更新: 2026-03-24（カスハラShield Vercelデプロイ + UX修正7件）
 
 ---
 
@@ -20,6 +20,8 @@
 | 引き継ぎAI | https://hikitsugi-ai.vercel.app | ✅ LIVE（Phase 1-C） | hikitsugi-ai |
 | ScanLingo API | https://japandoc-api.vercel.app | ✅ LIVE | japandoc-api |
 | ScanLingo | — | 🔧 開発中（Phase 1-A~D コード完了、UXテスト済み） | japandoc-ai |
+| DealRoom | — | 🔧 未デプロイ（Phase 1-A/B/C コード完了）| dealroom |
+| カスハラShield | https://kasuhara-shield.vercel.app | ✅ LIVE | kasuhara-shield |
 
 ---
 
@@ -163,6 +165,10 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-24 | kasuhara-shield: Vercel初回デプロイ（https://kasuhara-shield.vercel.app）+ UXテスト7件修正（LP改善・WelcomeGuide・オンボーディング強化・モバイルナビ・かんたん入力モード・料金プラン明確化）。npm run build ✅ | Claude Code |
+| 2026-03-20 | DealRoom Phase 1-A/B/C 全実装完了（ルームページ6セクション・RoomTracker・ダッシュボード・ルーム作成・Sales Agent連携）Agent Teams 3体。npm run build ✅ | Claude Code |
+| 2026-03-15 | tools24.jp: Sランクツール6本追加（文字化け修正/ファビコン生成/電子印鑑/WebP変換/Minify/全角半角変換）npm run build ✅ | Claude Code |
+| 2026-03-15 | sales-agent-web: 送信スケジュールページ新設（/schedule）Agent Teams 3体。日付グループ型タイムライン・JST対応・KPIカード・プロダクトフィルタ。npm run build ✅ | Claude Code |
 | 2026-03-14 | ScanLingo: カメラ修正（expo-dev-client追加・GestureHandlerRootView二重ネスト解消・CameraView onMountError/loading改善・eas.json整備）Agent Teams 3体。npx expo export --platform web ✅ | Claude Code |
 | 2026-03-14 | hikitsugi-ai Phase 1-D完了（音声入力UI+Transcribe API+GA4+チャットデザイン改善）Agent Teams 3体で実装・レビュー・デプロイ | Claude Code |
 | 2026-03-08 | hikitsugi-ai Phase 1-C完了(Supabase Auth+Stripe+DB永続化+Dashboard+共有リンク+利用制限)・myreplytone GA4修正(nonce-CSP対応のSSRスクリプトに変更) | Claude Code |

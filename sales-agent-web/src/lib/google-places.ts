@@ -110,12 +110,13 @@ export async function searchPlaces(opts: {
     body.includedType = placeTypes[0]
   }
 
-  // locationBias: circle around prefecture center (30km radius)
+  // locationRestriction: rectangle around prefecture center (~30km box)
   if (coords) {
-    body.locationBias = {
-      circle: {
-        center: { latitude: coords.lat, longitude: coords.lng },
-        radius: 30000.0,
+    const offset = 0.27 // ~30km in degrees
+    body.locationRestriction = {
+      rectangle: {
+        low: { latitude: coords.lat - offset, longitude: coords.lng - offset },
+        high: { latitude: coords.lat + offset, longitude: coords.lng + offset },
       },
     }
   }

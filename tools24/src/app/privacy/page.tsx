@@ -1,105 +1,146 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { Breadcrumb } from "@/components/common/breadcrumb";
 
 export const metadata: Metadata = {
-  title: "プライバシーポリシー",
-  description: "tools24.jp のプライバシーポリシーです。",
-  robots: { index: false, follow: false },
+  title: "プライバシーポリシー | 確定申告かんたんツール集",
+  description:
+    "確定申告かんたんツール集のプライバシーポリシー。データの取り扱い、Cookie、広告に関する方針を記載しています。",
+  alternates: { canonical: '/privacy' },
 };
 
 export default function PrivacyPage() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-3xl">
-      <Breadcrumb items={[{ label: "プライバシーポリシー" }]} />
-      <h1 className="text-2xl font-bold mb-6">プライバシーポリシー</h1>
-      <div className="prose prose-sm dark:prose-invert max-w-none space-y-6 text-sm">
-        <p className="text-muted-foreground">最終更新日: 2026年2月</p>
+    <>
+      <Breadcrumb
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "プライバシーポリシー" },
+        ]}
+      />
+
+      <h1 className="text-2xl md:text-3xl font-bold mb-8">
+        プライバシーポリシー
+      </h1>
+
+      <div className="prose dark:prose-invert max-w-none space-y-8">
+        <p className="text-muted-foreground leading-relaxed">
+          tools24.jp（以下「当サイト」）は、ユーザーの個人情報とプライバシーの保護に努めます。
+        </p>
 
         <section>
-          <h2 className="text-lg font-semibold mb-2">1. サイト概要</h2>
-          <p>
-            tools24.jp（以下「当サイト」）は、無料のオンラインWebツールを提供するサービスです。
-            当サイトのご利用に際して収集する情報の取り扱いについて説明します。
+          <h2 className="text-xl font-semibold">■ 個人情報の取り扱い</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            当サイトでは、お問い合わせの際にメールアドレス等の個人情報をご提供いただく場合があります。
+            取得した個人情報は、お問い合わせへの回答にのみ使用し、第三者への提供は行いません。
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-2">2. 収集する情報</h2>
-          <p>
-            当サイトのツールは、入力されたデータを一切サーバーに送信しません。
-            全ての処理はお使いのブラウザ内で完結します。
+          <h2 className="text-xl font-semibold">■ データの処理について</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            当サイトの計算ツール（所得税シミュレーター、医療費控除計算等）で入力されたデータは、
+            すべてお使いのブラウザ内で処理されます。サーバーへの送信は一切行いません。
           </p>
-          <p className="mt-2">
-            ただし、以下の目的でアクセス情報を収集することがあります：
-          </p>
-          <ul className="list-disc list-inside mt-2 space-y-1">
-            <li>サイトの利用状況の分析（Google Analytics）</li>
-            <li>広告の表示（Google AdSense、将来的に導入予定）</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 className="text-lg font-semibold mb-2">3. Cookieの使用</h2>
-          <p>
-            当サイトでは、以下の目的でCookieを使用する場合があります：
-          </p>
-          <ul className="list-disc list-inside mt-2 space-y-1">
-            <li>テーマ設定（ダークモード/ライトモード）の保存</li>
-            <li>Google Analyticsによるアクセス解析</li>
-            <li>Google AdSenseによる広告配信（将来的に導入予定）</li>
-          </ul>
-          <p className="mt-2">
-            ブラウザの設定でCookieを無効にすることができますが、一部機能が正常に動作しない場合があります。
+          <p className="text-muted-foreground leading-relaxed mt-2">
+            一部のデータはブラウザのlocalStorageに保存されますが、これはツール間のデータ連携と
+            利便性向上のためであり、外部に送信されることはありません。
+            localStorageのデータはブラウザの設定からいつでも削除できます。
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-2">4. Google Analytics</h2>
-          <p>
-            当サイトはGoogle Analyticsを使用してアクセス状況を分析しています。
-            Google Analyticsはトラフィックデータの収集のためにCookieを使用しています。
-            このデータは匿名で収集されており、個人を特定するものではありません。
-            Googleのプライバシーポリシーは
+          <h2 className="text-xl font-semibold">■ 広告について</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            当サイトでは、第三者配信の広告サービス「Google AdSense」を利用する予定です。
+            Google AdSenseでは、ユーザーの興味に応じた広告を表示するためにCookieを使用することがあります。
+            Cookieの使用を望まない場合は、ブラウザの設定または
             <a
-              href="https://policies.google.com/privacy"
+              href="https://adssettings.google.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline"
             >
-              こちら
+              Google広告設定
             </a>
-            をご確認ください。
+            から無効化できます。詳細は
+            <a
+              href="https://policies.google.com/technologies/ads?hl=ja"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              Googleのポリシー
+            </a>
+            をご覧ください。
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-2">5. 広告について</h2>
-          <p>
-            当サイトではGoogle AdSenseによる広告配信を予定しています。
-            広告配信にあたり、Googleおよびそのパートナーは当サイトへのアクセス情報（Cookieなど）を使用することがあります。
+          <h2 className="text-xl font-semibold">■ アクセス解析について</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            当サイトでは、サイトの利用状況を把握するためにGoogle Analyticsを利用する場合があります。
+            Google Analyticsはデータ収集のためにCookieを使用します。
+            データは匿名で収集されており、個人を特定するものではありません。
+            詳細は
+            <a
+              href="https://policies.google.com/privacy?hl=ja"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              Googleのプライバシーポリシー
+            </a>
+            をご覧ください。
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-2">6. プライバシーポリシーの変更</h2>
-          <p>
-            当サイトは、必要に応じてプライバシーポリシーを変更することがあります。
-            変更後のポリシーは本ページに掲載した時点で効力を生じるものとします。
+          <h2 className="text-xl font-semibold">■ 免責事項</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            当サイトの計算ツールは、税額や控除額の概算を提供するものであり、正確性を保証するものではありません。
+            実際の税額は個別の状況により異なります。確定申告の際は、
+            <a
+              href="https://www.keisan.nta.go.jp/kyoutu/ky/sm/top"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              国税庁の確定申告書等作成コーナー
+            </a>
+            をご利用いただくか、税務署または税理士にご相談ください。
+            当サイトの利用により生じたいかなる損害についても、当サイトは責任を負いかねます。
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold mb-2">7. お問い合わせ</h2>
-          <p>
-            プライバシーポリシーに関するご質問は
-            <Link href="/contact" className="text-primary hover:underline">
-              お問い合わせページ
-            </Link>
-            からご連絡ください。
+          <h2 className="text-xl font-semibold">■ 著作権</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            当サイトのコンテンツ（テキスト、画像、プログラム等）の著作権は当サイト運営者に帰属します。
+            無断での複製・転載はご遠慮ください。
           </p>
         </section>
+
+        <section>
+          <h2 className="text-xl font-semibold">■ プライバシーポリシーの変更</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            本ポリシーは予告なく変更される場合があります。変更後のポリシーは当ページに掲載した時点で効力を生じます。
+          </p>
+        </section>
+
+        <div className="text-sm text-muted-foreground mt-8 space-y-1">
+          <p>最終更新日: 2026年2月</p>
+          <p>運営者: tools24.jp 運営者</p>
+          <p>
+            お問い合わせ:{" "}
+            <a
+              href="mailto:satoshi.yamada0808@gmail.com"
+              className="text-primary hover:underline"
+            >
+              satoshi.yamada0808@gmail.com
+            </a>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

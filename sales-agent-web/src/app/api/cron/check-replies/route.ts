@@ -17,11 +17,21 @@ const AI_PROCESS_LIMIT = 1 // 10秒タイムアウト対策: AI処理は1件/回
  * 返信ポーリング Cron（5分間隔）
  * 送信済みメールのスレッドを確認し、新着返信を処理する
  */
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const cronSecret = process.env.CRON_SECRET
   const auth = req.headers.get('authorization')
   if (!cronSecret || auth !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
+  // オーケストレーター稼働中は Vercel cron をスキップ（二重処理防止）
+  const { data: orchConfig } = await supabase
+    .from('sales_config')
+    .select('value')
+    .eq('key', 'orchestrator_enabled')
+    .single()
+  if (orchConfig?.value === '"true"' || orchConfig?.value === true) {
+    return NextResponse.json({ ok: true, reason: 'ローカルオーケストレーター稼働中 — Vercel cron スキップ' })
   }
 
   const senderEmail = (process.env.SENDER_EMAIL ?? '').toLowerCase()
@@ -310,17 +320,27 @@ export async function POST(req: NextRequest) {
           .update({ status: 'completed', completed_at: new Date().toISOString() })
           .eq('id', action.id)
 
-        // followup_1 完了後 → followup_2 を7日後にキュー
+        // followup_1 完了後 → followup_2 を7日後にキュー（重複防止）
         if (followupType === 'followup_1') {
-          const scheduledAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
-          await supabase.from('sales_next_actions').insert({
-            lead_id: lead.id,
-            email_id: action.email_id,
-            action_type: 'followup_2',
-            scheduled_at: scheduledAt,
-            status: 'pending',
-            context: action.context,
-          })
+          const { data: existingFu2 } = await supabase
+            .from('sales_next_actions')
+            .select('id')
+            .eq('lead_id', lead.id)
+            .eq('action_type', 'followup_2')
+            .eq('status', 'pending')
+            .limit(1)
+
+          if (!existingFu2?.length) {
+            const scheduledAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+            await supabase.from('sales_next_actions').insert({
+              lead_id: lead.id,
+              email_id: action.email_id,
+              action_type: 'followup_2',
+              scheduled_at: scheduledAt,
+              status: 'pending',
+              context: action.context,
+            })
+          }
         }
 
         followupsProcessed++

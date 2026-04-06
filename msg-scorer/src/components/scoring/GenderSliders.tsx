@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { useScoringStore } from '@/stores/scoring-store';
 import { AUDIENCE_PRESETS } from '@/lib/presets';
 
-const DEFAULT_GENDER = AUDIENCE_PRESETS['ec-general'].gender;
+const DEFAULT_GENDER = AUDIENCE_PRESETS['internet-population'].gender;
 
 const inputClass =
-  'w-20 text-right border border-stone-200 rounded-lg px-2 py-1 text-sm font-mono bg-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all duration-150';
+  'flex-1 min-w-[5rem] text-right border border-stone-200 rounded-lg px-2 py-1 text-sm font-mono bg-white outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition-all duration-150';
 
 export default function GenderSliders() {
   const { audience, setAudience } = useScoringStore();
@@ -74,7 +74,7 @@ export default function GenderSliders() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-2">
         <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">性別構成</p>
         <button
           onClick={resetGender}
@@ -86,15 +86,8 @@ export default function GenderSliders() {
 
       <div className="space-y-2.5">
         {/* 女性 */}
-        <div className="flex items-center gap-3">
-          <span className="w-12 shrink-0 text-sm text-stone-600">女性</span>
-          <input
-            type="range" min={0} max={100}
-            value={female}
-            onChange={(e) => setFemale(Number(e.target.value))}
-            className="flex-1"
-            style={{ accentColor: '#ec4899' }}
-          />
+        <div className="flex items-center gap-2">
+          <span className="w-14 shrink-0 text-sm text-stone-600">女性</span>
           <input
             type="number" min={0}
             value={draftFemaleCount ?? femalePerson}
@@ -118,15 +111,8 @@ export default function GenderSliders() {
         </div>
 
         {/* 男性 */}
-        <div className="flex items-center gap-3">
-          <span className="w-12 shrink-0 text-sm text-stone-600">男性</span>
-          <input
-            type="range" min={0} max={100 - female}
-            value={male}
-            onChange={(e) => setMale(Number(e.target.value))}
-            className="flex-1"
-            style={{ accentColor: '#6366f1' }}
-          />
+        <div className="flex items-center gap-2">
+          <span className="w-14 shrink-0 text-sm text-stone-600">男性</span>
           <input
             type="number" min={0}
             value={draftMaleCount ?? malePerson}
@@ -150,11 +136,8 @@ export default function GenderSliders() {
         </div>
 
         {/* その他（自動計算） */}
-        <div className="flex items-center gap-3">
-          <span className="w-12 shrink-0 text-sm text-stone-500">その他</span>
-          <div className="flex-1 h-1.5 bg-stone-100 rounded-full">
-            <div className="h-1.5 bg-stone-300 rounded-full" style={{ width: `${other}%` }} />
-          </div>
+        <div className="flex items-center gap-2">
+          <span className="w-14 shrink-0 text-sm text-stone-500">その他</span>
           <span className={`${inputClass} bg-stone-50 text-stone-400`} aria-label="その他 人数">
             {Math.round((other / 100) * totalRecipients)}
           </span>

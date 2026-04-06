@@ -15,9 +15,10 @@ interface Props {
   text: string;
   sender?: string;
   tab?: 'mobile' | 'gmail';
+  imageUrl?: string;
 }
 
-export default function EmailBodyPreview({ subject, text, sender = 'MsgScore', tab = 'mobile' }: Props) {
+export default function EmailBodyPreview({ subject, text, sender = 'MsgScore', tab = 'mobile', imageUrl }: Props) {
   const now = new Date();
   const timeStr = now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
   const dateStr = now.toLocaleDateString('ja-JP', { month: 'long', day: 'numeric', weekday: 'short' });
@@ -91,6 +92,10 @@ export default function EmailBodyPreview({ subject, text, sender = 'MsgScore', t
 
               {/* 本文 */}
               <div className="bg-white px-4 py-3">
+                {imageUrl && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={imageUrl} alt="" className="w-full rounded mb-3" />
+                )}
                 <p className="text-sm text-stone-800 whitespace-pre-wrap break-words leading-relaxed">
                   {bodyPreview || <span className="text-stone-400">(本文なし)</span>}
                 </p>
@@ -186,9 +191,15 @@ export default function EmailBodyPreview({ subject, text, sender = 'MsgScore', t
                 </div>
 
                 {/* 本文 */}
-                <p className="text-sm text-stone-800 whitespace-pre-wrap break-words leading-relaxed pl-13">
-                  {bodyPreview || <span className="text-stone-400">(本文なし)</span>}
-                </p>
+                <div className="pl-13">
+                  {imageUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={imageUrl} alt="" className="w-full rounded mb-3" />
+                  )}
+                  <p className="text-sm text-stone-800 whitespace-pre-wrap break-words leading-relaxed">
+                    {bodyPreview || <span className="text-stone-400">(本文なし)</span>}
+                  </p>
+                </div>
               </div>
 
               {/* Gmail 返信ボタン */}

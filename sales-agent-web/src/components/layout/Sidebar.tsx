@@ -7,7 +7,10 @@ const NAV = [
   { href: '/campaigns', label: 'キャンペーン', emoji: '🎯' },
   { href: '/leads', label: 'リード', emoji: '👥' },
   { href: '/drafts', label: '承認待ち', emoji: '✉️' },
+  { href: '/schedule', label: 'スケジュール', emoji: '📅' },
   { href: '/replies', label: '返信', emoji: '💬' },
+  { href: '/escalations', label: 'エスカレーション', emoji: '🚨' },
+  { href: '/pipeline', label: 'パイプライン', emoji: '🔄' },
   { href: '/voc', label: 'VoC', emoji: '📊' },
   { href: '/settings/knowledge', label: 'ナレッジ', emoji: '📚' },
   { href: '/settings', label: '設定', emoji: '⚙️' },
@@ -23,7 +26,10 @@ export default function Sidebar() {
       </div>
       <nav className="flex-1 px-3 py-4 space-y-1">
         {NAV.map(({ href, label, emoji }) => {
-          const active = href === '/' ? pathname === '/' : pathname.startsWith(href)
+          const active =
+            href === '/' ? pathname === '/' :
+            href === '/settings' ? pathname === '/settings' :
+            pathname.startsWith(href)
           return (
             <Link
               key={href}

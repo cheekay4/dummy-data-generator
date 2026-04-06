@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic'
 
 import { supabase } from '@/lib/supabase'
+import AutomationControls from '@/components/AutomationControls'
 
 async function getStats() {
   const [totalLeads, totalSent, totalReplies] = await Promise.all([
@@ -71,50 +72,8 @@ export default async function SettingsPage() {
         </div>
       </div>
 
-      {/* 自動化設定 */}
-      <div className="bg-white rounded-2xl border border-stone-200 p-6 mb-6">
-        <h2 className="text-sm font-semibold text-stone-700 mb-4">⚙️ 自動化レベル</h2>
-        <div className="space-y-3">
-          {[
-            { level: 0, label: 'Level 0: 手動のみ', desc: 'CLI で generate → /drafts で手動承認 → CLI で send', active: false },
-            { level: 1, label: 'Level 1: 自動生成（現在）', desc: 'Vercel Cron が毎日 /api/cron/send を実行（/drafts での承認は必須）', active: true },
-            { level: 2, label: 'Level 2: 自動承認（危険）', desc: '承認ステップをスキップして自動送信。MsgScore 80点以上のみ対象', active: false },
-          ].map(({ level, label, desc, active }) => (
-            <div
-              key={level}
-              className={`rounded-xl border p-4 ${active ? 'border-indigo-300 bg-indigo-50' : 'border-stone-200'}`}
-            >
-              <p className={`text-sm font-semibold ${active ? 'text-indigo-700' : 'text-stone-700'}`}>
-                {label} {active && <span className="text-xs font-normal ml-1">← 現在</span>}
-              </p>
-              <p className="text-xs text-stone-500 mt-0.5">{desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* 送信設定 */}
-      <div className="bg-white rounded-2xl border border-stone-200 p-6 mb-6">
-        <h2 className="text-sm font-semibold text-stone-700 mb-3">📤 送信設定（現在の値）</h2>
-        <div className="space-y-0 text-sm text-stone-600">
-          {[
-            { label: '日次送信上限', value: '20 通' },
-            { label: '最小送信間隔', value: '60 秒' },
-            { label: 'ICP スコア閾値', value: '40 点' },
-            { label: 'MsgScore 低スコア警告', value: '70 点未満' },
-            { label: '人間承認', value: '必須' },
-          ].map(({ label, value }) => (
-            <div key={label} className="flex justify-between py-2 border-b border-stone-100 last:border-0">
-              <span className="text-stone-500">{label}</span>
-              <span className="font-medium">{value}</span>
-            </div>
-          ))}
-        </div>
-        <p className="text-xs text-stone-400 mt-3">
-          値の変更は <code className="bg-stone-100 px-1 rounded">.env.local</code> または CLI の{' '}
-          <code className="bg-stone-100 px-1 rounded">src/config/constants.ts</code> で行ってください。
-        </p>
-      </div>
+      {/* オーケストレーター & 自動化制御 */}
+      <AutomationControls />
 
       {/* Cron エンドポイント */}
       <div className="bg-white rounded-2xl border border-stone-200 p-6">

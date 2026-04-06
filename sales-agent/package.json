@@ -6,7 +6,19 @@
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "orchestrator": "tsx sales-orchestrator.ts",
+    "orchestrator:test-daily": "tsx sales-orchestrator.ts daily",
+    "orchestrator:test-discover": "tsx sales-orchestrator.ts discover",
+    "orchestrator:test-generate": "tsx sales-orchestrator.ts generate",
+    "orchestrator:test-qa": "tsx sales-orchestrator.ts qa",
+    "orchestrator:test-send": "tsx sales-orchestrator.ts send",
+    "orchestrator:test-replies": "tsx sales-orchestrator.ts replies",
+    "orchestrator:test-followup": "tsx sales-orchestrator.ts followup",
+    "orchestrator:test-weekly": "tsx sales-orchestrator.ts weekly",
+    "orchestrator:status": "tsx sales-orchestrator.ts status",
+    "check": "tsx check-config.ts",
+    "resolve-alerts": "tsx resolve-alerts.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.37.0",
@@ -16,12 +28,14 @@
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "googleapis": "^148.0.0",
+    "node-cron": "^4.2.1",
     "ora": "^8.2.0",
     "playwright": "^1.50.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",
+    "@types/node-cron": "^3.0.11",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   }

@@ -141,3 +141,26 @@ export interface VocEntry {
   product: string
   created_at: string
 }
+
+export interface ScheduleEvent {
+  id: string
+  leadId: string
+  companyName: string
+  product: ProductId
+  leadStatus: LeadStatus
+  emailType: EmailType
+  date: string          // YYYY-MM-DD (JST)
+  time?: string         // HH:mm (JST, sent のみ)
+  eventStatus: 'sent' | 'approved' | 'draft' | 'pending' | 'cancelled'
+  subject?: string
+  bodyText?: string     // 展開時に表示するメール本文
+}
+
+export interface ScheduleDateGroup {
+  date: string
+  label: string         // "3月16日 (日)" 形式
+  relativeLabel?: string // "今日" | "明日" | "昨日" 等
+  isToday: boolean
+  isPast: boolean
+  events: ScheduleEvent[]
+}

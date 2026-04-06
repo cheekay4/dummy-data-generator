@@ -8,9 +8,10 @@ interface Props {
   questionNumber: number
   totalQuestions: number
   onAnswer: (scores: QuestionOption['scores']) => void
+  onBack?: () => void
 }
 
-export default function DiagnosisCard({ question, questionNumber, totalQuestions, onAnswer }: Props) {
+export default function DiagnosisCard({ question, questionNumber, totalQuestions, onAnswer, onBack }: Props) {
   const [shuffledOptions, setShuffledOptions] = useState<QuestionOption[]>([])
   const [selected, setSelected] = useState<number | null>(null)
 
@@ -30,18 +31,21 @@ export default function DiagnosisCard({ question, questionNumber, totalQuestions
     }, 500)
   }
 
+  // Q1=0%, Q2=10%, ..., Q10=90%（結果画面で100%）
+  const progress = ((questionNumber - 1) / totalQuestions) * 100
+
   return (
     <div className="space-y-5">
       {/* プログレスバー */}
       <div>
         <div className="flex justify-between text-xs text-stone-400 mb-1.5">
           <span>Q{questionNumber}/{totalQuestions}</span>
-          <span>{Math.round((questionNumber / totalQuestions) * 100)}%</span>
+          <span>{Math.round(progress)}%</span>
         </div>
         <div className="w-full bg-stone-100 rounded-full h-2">
           <div
             className="bg-amber-400 h-2 rounded-full transition-all duration-500"
-            style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
+            style={{ width: `${progress}%` }}
           />
         </div>
       </div>
@@ -70,6 +74,17 @@ export default function DiagnosisCard({ question, questionNumber, totalQuestions
           </button>
         ))}
       </div>
+
+      {/* 前の問題に戻る */}
+      {onBack && (
+        <button
+          onClick={onBack}
+          disabled={selected !== null}
+          className="text-sm text-stone-400 hover:text-stone-600 disabled:opacity-30"
+        >
+          ← 前の問題に戻る
+        </button>
+      )}
     </div>
   )
 }

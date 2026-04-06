@@ -6,7 +6,6 @@ import {
   type AgeKey,
   calcTotal,
   calcTotalPersonCount,
-  updateBySlider as _updateBySlider,
   updateDirect as _updateDirect,
   updateByPersonCount as _updateByPersonCount,
 } from '@/lib/age-slider-logic';
@@ -21,7 +20,7 @@ const AGE_GROUPS: { key: AgeKey; label: string }[] = [
   { key: 'sixtiesPlus', label: '60歳以上' },
 ];
 
-const DEFAULT_AGE_DIST = AUDIENCE_PRESETS['ec-general'].ageDistribution;
+const DEFAULT_AGE_DIST = AUDIENCE_PRESETS['internet-population'].ageDistribution;
 
 export default function AgeSliders() {
   const { audience, setAudience } = useScoringStore();
@@ -30,9 +29,6 @@ export default function AgeSliders() {
   const totalRecipients = audience.totalRecipients;
   const isOver = total > 100;
   const isExact = Math.abs(total - 100) < 0.15;
-
-  const updateBySlider = (key: AgeKey, val: number) =>
-    setAudience({ ...audience, ageDistribution: _updateBySlider(dist, key, val) });
 
   const updateDirect = (key: AgeKey, pct: number) =>
     setAudience({ ...audience, ageDistribution: _updateDirect(dist, key, pct) });
@@ -49,7 +45,7 @@ export default function AgeSliders() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-2">
         <p className="text-xs font-medium text-stone-500 uppercase tracking-wider">年代構成</p>
         <button
           onClick={resetAge}
@@ -68,7 +64,6 @@ export default function AgeSliders() {
             totalRecipients={totalRecipients}
             color={AGE_GROUP_COLORS[i]}
             hasError={isOver}
-            onSliderChange={(val) => updateBySlider(key, val)}
             onPersonCountChange={(count) => updateByPersonCount(key, count)}
             onPercentChange={(pct) => updateDirect(key, pct)}
           />

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a56db"/>
+      <stop offset="100%" stop-color="#0e3a8c"/>
+    </linearGradient>
+    <pattern id="seigaiha" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M30 0 A30 30 0 0 1 60 30" fill="none" stroke="white" stroke-width="1.2"/>
+      <path d="M30 0 A20 20 0 0 1 50 20" fill="none" stroke="white" stroke-width="1.2" transform="translate(0,10)"/>
+      <path d="M30 0 A10 10 0 0 1 40 10" fill="none" stroke="white" stroke-width="1.2" transform="translate(0,20)"/>
+      <path d="M0 30 A30 30 0 0 1 30 60" fill="none" stroke="white" stroke-width="1.2"/>
+      <path d="M0 30 A20 20 0 0 1 20 50" fill="none" stroke="white" stroke-width="1.2" transform="translate(10,0)"/>
+      <path d="M0 30 A10 10 0 0 1 10 40" fill="none" stroke="white" stroke-width="1.2" transform="translate(20,0)"/>
+      <path d="M60 30 A30 30 0 0 1 90 60" fill="none" stroke="white" stroke-width="1.2" transform="translate(-60,0)"/>
+    </pattern>
+    <clipPath id="roundClip">
+      <rect width="512" height="512" rx="96" ry="96"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <g clip-path="url(#roundClip)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <rect width="512" height="512" fill="url(#seigaiha)" opacity="0.08"/>
+  </g>
+
+  <!-- Calculator body -->
+  <g clip-path="url(#roundClip)">
+    <rect x="126" y="80" width="260" height="352" rx="24" ry="24" fill="#e8f0fe"/>
+
+    <!-- Display -->
+    <rect x="154" y="108" width="204" height="72" rx="12" ry="12" fill="#1e3a6e"/>
+    <text x="340" y="164" font-family="Arial,sans-serif" font-size="48" font-weight="bold" fill="#60a5fa" text-anchor="end">¥</text>
+
+    <!-- Button grid: 4 rows x 3 cols + operator column -->
+    <!-- Row 1: C, (, ) | ÷ -->
+    <rect x="154" y="200" width="48" height="40" rx="8" ry="8" fill="#e53e3e"/>
+    <text x="178" y="227" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">C</text>
+
+    <rect x="210" y="200" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+    <rect x="266" y="200" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+
+    <rect x="330" y="200" width="48" height="40" rx="8" ry="8" fill="#93b4e8"/>
+
+    <!-- Row 2: 7, 8, 9 | × -->
+    <rect x="154" y="252" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+    <rect x="210" y="252" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+    <rect x="266" y="252" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+    <rect x="330" y="252" width="48" height="40" rx="8" ry="8" fill="#93b4e8"/>
+
+    <!-- Row 3: 4, 5, 6 | - -->
+    <rect x="154" y="304" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+    <rect x="210" y="304" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+    <rect x="266" y="304" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+    <rect x="330" y="304" width="48" height="40" rx="8" ry="8" fill="#93b4e8"/>
+
+    <!-- Row 4: 1, 2, 3 | = (tall) -->
+    <rect x="154" y="356" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+    <rect x="210" y="356" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+    <rect x="266" y="356" width="48" height="40" rx="8" ry="8" fill="#c7d6f0"/>
+    <rect x="330" y="356" width="48" height="40" rx="8" ry="8" fill="#60a5fa"/>
+  </g>
+</svg>

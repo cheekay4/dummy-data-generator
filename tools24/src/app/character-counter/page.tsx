@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { CharacterCounter } from "@/components/character-counter/character-counter";
-import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { Breadcrumb } from "@/components/common/breadcrumb";
 import { AdPlaceholder } from "@/components/common/ad-placeholder";
-import { RelatedTools } from "@/components/common/related-tools";
 
 export const metadata: Metadata = {
   title:
@@ -44,7 +43,7 @@ export default function CharacterCounterPage() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-center mb-8">
-          <AdPlaceholder slot="top-banner" width={728} height={90} />
+          <AdPlaceholder position="header" />
         </div>
 
         <div className="max-w-7xl mx-auto">
@@ -62,7 +61,7 @@ export default function CharacterCounterPage() {
           <CharacterCounter />
 
           <div className="flex justify-center my-8">
-            <AdPlaceholder slot="middle-rect" width={336} height={280} />
+            <AdPlaceholder position="content" />
           </div>
 
           {/* SEO コンテンツ */}
@@ -185,11 +184,11 @@ export default function CharacterCounterPage() {
             </div>
           </section>
 
-          <RelatedTools currentPath="/character-counter" />
+
         </div>
 
         <div className="flex justify-center mt-12">
-          <AdPlaceholder slot="bottom-rect" width={336} height={280} />
+          <AdPlaceholder position="content" />
         </div>
       </div>
     </>

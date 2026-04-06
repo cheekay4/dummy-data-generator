@@ -4,6 +4,9 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: '情報セキュリティ基本方針 | MyReplyTone',
   description: 'MyReplyTone（AI口コミ返信ジェネレーター）の情報セキュリティ基本方針。IPA SECURITY ACTION 二つ星宣言に基づく情報セキュリティへの取り組みについて。',
+  alternates: {
+    canonical: 'https://myreplytone.com/security-policy',
+  },
 }
 
 export default function SecurityPolicyPage() {

@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import type { Lead, LeadStatus } from '@/lib/types'
 
 const PHASE_LABELS: Record<string, { label: string; emoji: string }> = {
@@ -24,7 +25,29 @@ const STATUS_LABELS: Record<LeadStatus, { label: string; color: string }> = {
 }
 
 export default function LeadsTable({ leads }: { leads: Lead[] }) {
-  if (leads.length === 0) {
+  const [generatingId, setGeneratingId] = useState<string | null>(null)
+  const [leadsState, setLeadsState] = useState<Lead[]>(leads)
+
+  async function handleGenerateDraft(leadId: string) {
+    setGeneratingId(leadId)
+    try {
+      const res = await fetch(`/api/leads/${leadId}/generate-draft`, { method: 'POST' })
+      const data = await res.json()
+      if (data.ok) {
+        setLeadsState((prev) =>
+          prev.map((l) => (l.id === leadId ? { ...l, status: 'draft_ready' as LeadStatus } : l))
+        )
+      } else {
+        alert(data.error ?? 'ドラフト生成に失敗しました')
+      }
+    } catch {
+      alert('ドラフト生成に失敗しました')
+    } finally {
+      setGeneratingId(null)
+    }
+  }
+
+  if (leadsState.length === 0) {
     return (
       <div className="bg-white rounded-2xl border border-stone-200 p-12 text-center">
         <p className="text-4xl mb-4">👥</p>
@@ -43,7 +66,7 @@ export default function LeadsTable({ leads }: { leads: Lead[] }) {
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-stone-100 bg-stone-50">
-            {['企業名', 'メール', '商品', '業種', 'ICP', 'ステータス', 'フェーズ', '追加日'].map((h) => (
+            {['企業名', 'メール', '商品', '業種', 'ICP', 'ステータス', 'フェーズ', 'アクション', '追加日'].map((h) => (
               <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-stone-500 uppercase tracking-wider">
                 {h}
               </th>
@@ -51,8 +74,9 @@ export default function LeadsTable({ leads }: { leads: Lead[] }) {
           </tr>
         </thead>
         <tbody className="divide-y divide-stone-100">
-          {leads.map((lead) => {
+          {leadsState.map((lead) => {
             const statusInfo = STATUS_LABELS[lead.status] ?? { label: lead.status, color: 'bg-stone-100 text-stone-600' }
+            const isGenerating = generatingId === lead.id
             return (
               <tr key={lead.id} className="hover:bg-stone-50 transition-colors">
                 <td className="px-4 py-3 font-medium text-stone-900">
@@ -91,6 +115,35 @@ export default function LeadsTable({ leads }: { leads: Lead[] }) {
                     const phase = PHASE_LABELS[lead.conversation_phase] ?? { label: lead.conversation_phase, emoji: '⚪' }
                     return <span>{phase.emoji} {phase.label}</span>
                   })() : <span className="text-stone-300">—</span>}
+                </td>
+                <td className="px-4 py-3">
+                  {(lead.status === 'new' || lead.status === 'analyzed') ? (
+                    <button
+                      onClick={() => handleGenerateDraft(lead.id)}
+                      disabled={isGenerating}
+                      className="px-3 py-1.5 rounded-lg text-xs font-medium transition-colors bg-indigo-50 text-indigo-700 hover:bg-indigo-100 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                    >
+                      {isGenerating ? '生成中...' : 'ドラフト生成'}
+                    </button>
+                  ) : lead.status === 'draft_ready' ? (
+                    <span className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => handleGenerateDraft(lead.id)}
+                        disabled={isGenerating}
+                        className="px-2 py-1 rounded-lg text-xs font-medium transition-colors bg-stone-100 text-stone-600 hover:bg-stone-200 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                      >
+                        {isGenerating ? '生成中...' : '再生成'}
+                      </button>
+                      <a
+                        href="/drafts"
+                        className="px-2 py-1 rounded-lg text-xs font-medium bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors whitespace-nowrap"
+                      >
+                        確認 →
+                      </a>
+                    </span>
+                  ) : (
+                    <span className="text-stone-300">—</span>
+                  )}
                 </td>
                 <td className="px-4 py-3 text-stone-400 text-xs">
                   {new Date(lead.created_at).toLocaleDateString('ja-JP')}

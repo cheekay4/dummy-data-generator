@@ -14,7 +14,7 @@ import { useTeam } from '@/hooks/useTeam';
 import { TeamPreset } from '@/lib/types';
 import { AUDIENCE_PRESETS } from '@/lib/presets';
 
-const DEFAULT_AUDIENCE = AUDIENCE_PRESETS['ec-general'];
+const DEFAULT_AUDIENCE = AUDIENCE_PRESETS['internet-population'];
 
 function TeamPresetList() {
   const { team } = useTeam();
@@ -128,9 +128,9 @@ export default function AudiencePanel() {
   };
 
   return (
-    <div className="bg-stone-50 rounded-2xl p-6 border border-stone-200">
+    <div className="bg-stone-50 rounded-2xl p-5 border border-stone-200">
       {/* ヘッダー行 */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-semibold text-stone-700 flex items-center gap-2">
           <span>📊</span> 配信先セグメント
         </h3>
@@ -159,11 +159,11 @@ export default function AudiencePanel() {
       </div>
 
       {/* プリセット選択（常時表示） */}
-      <div className="space-y-5">
+      <div className="space-y-3">
+        <ConversionGoalSelector />
         <AudiencePresets />
         <CustomSegmentList refreshKey={refreshKey} />
         <TeamPresetList />
-        <ConversionGoalSelector />
         <RecipientInput />
       </div>
 
@@ -178,11 +178,11 @@ export default function AudiencePanel() {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <div className="mt-6 pt-5 border-t border-stone-200 space-y-6">
+            <div className="mt-4 pt-4 border-t border-stone-200 space-y-5">
               <GenderSliders />
               <AgeSliders />
               <div>
-                <p className="text-xs font-medium text-stone-500 uppercase tracking-wider mb-3">
+                <p className="text-xs font-medium text-stone-500 uppercase tracking-wider mb-2">
                   追加情報（任意）
                 </p>
                 <AdvancedSettings />

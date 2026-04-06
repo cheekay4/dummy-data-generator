@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react'
 import { isSupabaseConfigured, createClient } from '@/lib/supabase/client'
 import { mapToDISC, DISC_LABELS } from '@/lib/constants'
-import PersonalityRadar from '@/components/profile/PersonalityRadar'
 import AuthModal from '@/components/auth/AuthModal'
 import type { AxisKey, DISCType, CreationMethod } from '@/lib/types'
 import type { AnalyzeWritingResult } from '@/lib/types'
 import { getSampleReview, getSampleReply } from './sampleReplies'
+import { AXIS_CONFIG } from '@/lib/constants'
 import { BarChart2, Lightbulb } from 'lucide-react'
 
 const PENDING_DIAGNOSIS_KEY = 'rr_pending_diagnosis'
@@ -116,38 +116,27 @@ export default function ProfileResult({
         )}
       </div>
 
-      {/* レーダーチャート + スコア */}
-      <div className="bg-white border border-stone-200 rounded-2xl p-5">
-        <div className="flex flex-col sm:flex-row items-center gap-5">
-          <div className="flex-shrink-0">
-            <PersonalityRadar
-              agreeableness={scores.agreeableness}
-              extraversion={scores.extraversion}
-              conscientiousness={scores.conscientiousness}
-              openness={scores.openness}
-              size={180}
-            />
+      {/* スペクトラム表示 */}
+      <div className="bg-white border border-stone-200 rounded-2xl p-5 space-y-4">
+        {AXIS_CONFIG.map((ax) => (
+          <div key={ax.key}>
+            <div className="flex justify-between text-[11px] text-stone-400 mb-1.5">
+              <span>{ax.left}</span>
+              <span>{ax.right}</span>
+            </div>
+            <div className="relative h-3 bg-stone-100 rounded-full">
+              <div
+                className="absolute top-1/2 w-4 h-4 rounded-full shadow-md"
+                style={{
+                  left: `clamp(8px, calc(${(scores[ax.key] / 5) * 100}% - 8px), calc(100% - 8px))`,
+                  transform: 'translateY(-50%)',
+                  backgroundColor: ax.color,
+                  border: '2.5px solid white',
+                }}
+              />
+            </div>
           </div>
-          <div className="flex-1 space-y-2">
-            {[
-              { label: '温かみ', value: scores.agreeableness, color: 'bg-amber-400' },
-              { label: '社交性', value: scores.extraversion, color: 'bg-violet-400' },
-              { label: '丁寧さ', value: scores.conscientiousness, color: 'bg-blue-400' },
-              { label: '独自性', value: scores.openness, color: 'bg-emerald-400' },
-            ].map((ax) => (
-              <div key={ax.label} className="flex items-center gap-2">
-                <span className="text-xs text-stone-500 w-12">{ax.label}</span>
-                <div className="flex-1 bg-stone-100 rounded-full h-2">
-                  <div
-                    className={`${ax.color} h-2 rounded-full`}
-                    style={{ width: `${(ax.value / 5) * 100}%` }}
-                  />
-                </div>
-                <span className="text-xs text-stone-500 w-6">{ax.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
 
       {/* 分析テキスト（テキスト学習のみ） */}

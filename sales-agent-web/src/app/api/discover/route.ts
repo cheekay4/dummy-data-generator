@@ -116,8 +116,8 @@ export async function POST(req: NextRequest) {
     })
 
     for (const place of places) {
-      // チェーン店スキップ（レビュー1000件超）
-      if (place.userRatingCount && place.userRatingCount > 1000) continue
+      // チェーン店・中規模以上スキップ（レビュー500件超 = 個人店の範囲を超える）
+      if (place.userRatingCount && place.userRatingCount > 500) continue
       // サイトなしスキップ
       if (!place.websiteUri) continue
       // ポータルサイトスキップ

@@ -1,20 +1,20 @@
+import { cn } from "@/lib/utils";
+
+type AdPosition = "header" | "content" | "sidebar";
+
 interface AdPlaceholderProps {
-  slot: string;
-  width: number;
-  height: number;
-  isPro?: boolean;
+  position: AdPosition;
+  className?: string;
 }
 
-export function AdPlaceholder({ slot, width, height, isPro = false }: AdPlaceholderProps) {
-  if (isPro) return null;
-
+export function AdPlaceholder({ position, className }: AdPlaceholderProps) {
   return (
     <div
-      className="flex items-center justify-center bg-muted/40 border border-dashed border-muted-foreground/30 rounded text-muted-foreground/50 text-sm select-none"
-      style={{ width: "100%", maxWidth: width, height: height, minHeight: height }}
-      data-ad-slot={slot}
+      className={cn(className)}
+      style={{ height: 0, overflow: "hidden" }}
+      data-ad-position={position}
     >
-      広告
+      {/* AdSense: ここにad unitコードを貼る */}
     </div>
   );
 }

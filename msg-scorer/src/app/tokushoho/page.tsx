@@ -12,7 +12,7 @@ export default function TokushohoPage() {
     <main className="min-h-screen pt-16 py-20 px-4 sm:px-6">
       <div className="max-w-3xl mx-auto">
         <h1 className="font-outfit font-bold text-2xl text-stone-900 mb-2">特定商取引法に基づく表記</h1>
-        <p className="text-stone-400 text-sm mb-10">最終更新: 2026年3月2日</p>
+        <p className="text-stone-400 text-sm mb-10">最終更新: 2026年3月4日</p>
 
         <div className="text-stone-600 text-sm leading-relaxed">
           <dl className="divide-y divide-stone-200">
@@ -22,15 +22,15 @@ export default function TokushohoPage() {
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt className="font-bold text-stone-800">運営責任者</dt>
-              <dd className="mt-1 sm:mt-0 sm:col-span-2">請求があった場合に遅滞なく開示します</dd>
+              <dd className="mt-1 sm:mt-0 sm:col-span-2">Riku Kashiwagi</dd>
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt className="font-bold text-stone-800">所在地</dt>
-              <dd className="mt-1 sm:mt-0 sm:col-span-2">請求があった場合に遅滞なく開示します</dd>
+              <dd className="mt-1 sm:mt-0 sm:col-span-2">東京都文京区湯島3丁目15</dd>
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt className="font-bold text-stone-800">電話番号</dt>
-              <dd className="mt-1 sm:mt-0 sm:col-span-2">請求があった場合に遅滞なく開示します</dd>
+              <dd className="mt-1 sm:mt-0 sm:col-span-2">080-5181-8813</dd>
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt className="font-bold text-stone-800">メールアドレス</dt>

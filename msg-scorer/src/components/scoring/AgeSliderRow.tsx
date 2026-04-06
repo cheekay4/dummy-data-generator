@@ -7,13 +7,12 @@ interface Props {
   totalRecipients: number;
   color: string;
   hasError: boolean;
-  onSliderChange: (val: number) => void;
   onPersonCountChange: (count: number) => void;
   onPercentChange: (pct: number) => void;
 }
 
 const inputClass = (hasError: boolean) =>
-  `w-20 text-right border rounded-lg px-2 py-1 text-sm font-mono bg-white outline-none transition-all duration-150 ${
+  `flex-1 min-w-[5rem] text-right border rounded-lg px-2 py-1 text-sm font-mono bg-white outline-none transition-all duration-150 ${
     hasError
       ? 'border-red-400 ring-2 ring-red-100'
       : 'border-stone-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100'
@@ -25,14 +24,11 @@ export default function AgeSliderRow({
   totalRecipients,
   color,
   hasError,
-  onSliderChange,
   onPersonCountChange,
   onPercentChange,
 }: Props) {
   const personCount = Math.round((percent / 100) * totalRecipients);
 
-  // 編集中の値はドラフトとして保持し、blur/Enter でストアに反映する。
-  // こうすることで、タイプ中に外部 state の変換で上書きされる問題を防ぐ。
   const [draftPerson, setDraftPerson] = useState<string | null>(null);
   const [draftPercent, setDraftPercent] = useState<string | null>(null);
 
@@ -40,7 +36,7 @@ export default function AgeSliderRow({
     if (draftPerson === null) return;
     const n = parseInt(draftPerson, 10);
     if (!isNaN(n) && n >= 0) onPersonCountChange(n);
-    setDraftPerson(null); // 不正値・空文字は破棄して元の値に戻す
+    setDraftPerson(null);
   };
 
   const commitPercent = () => {
@@ -51,21 +47,10 @@ export default function AgeSliderRow({
   };
 
   return (
-    <div className="flex items-center gap-3">
-      <span className="w-12 shrink-0 text-sm text-stone-600">{label}</span>
+    <div className="flex items-center gap-2">
+      <span className="w-14 shrink-0 text-sm text-stone-600" style={{ color }}>{label}</span>
 
-      {/* スライダー: 常にストアの percent を表示（最低優先） */}
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={percent}
-        onChange={(e) => onSliderChange(Number(e.target.value))}
-        className="flex-1"
-        style={{ accentColor: color }}
-      />
-
-      {/* 人数入力: 最高優先 — 編集中はドラフト値を表示 */}
+      {/* 人数入力 */}
       <input
         type="number"
         min={0}
@@ -78,7 +63,7 @@ export default function AgeSliderRow({
       />
       <span className="text-xs text-stone-400 shrink-0">人</span>
 
-      {/* パーセント入力: 第二優先 — 編集中はドラフト値を表示 */}
+      {/* パーセント入力 */}
       <input
         type="number"
         min={0}

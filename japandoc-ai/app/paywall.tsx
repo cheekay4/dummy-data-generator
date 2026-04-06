@@ -1,37 +1,57 @@
-import { View, Text, Pressable, ScrollView } from 'react-native';
+import { useState, useEffect, useCallback } from 'react';
+import { View, Text, Pressable, ScrollView, ActivityIndicator, Alert, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useUserStore } from '@/src/stores/user-store';
+import {
+  initIAP,
+  disconnectIAP,
+  fetchProducts,
+  fetchSubscriptions,
+  buyCredits,
+  buySubscription,
+  restoreIAPPurchases,
+  verifyReceipt,
+  completePurchase,
+  getCreditsForProduct,
+  purchaseUpdatedListener,
+  purchaseErrorListener,
+  CREDIT_PRODUCT_IDS,
+  SUBSCRIPTION_PRODUCT_IDS,
+  type Product,
+  type Subscription,
+} from '@/src/lib/iap';
 
-const CREDIT_PACKS = [
-  { id: 'scanlingo.credits.5', scans: 5, price: 160, priceDisplay: '¥160' },
-  { id: 'scanlingo.credits.30', scans: 30, price: 500, priceDisplay: '¥500' },
-  { id: 'scanlingo.credits.100', scans: 100, price: 1500, priceDisplay: '¥1,500' },
-  { id: 'scanlingo.credits.300', scans: 300, price: 3500, priceDisplay: '¥3,500' },
+const FALLBACK_CREDITS = [
+  { id: 'scanlingo.credits.5', scans: 5, priceDisplay: '¥160' },
+  { id: 'scanlingo.credits.30', scans: 30, priceDisplay: '¥500' },
+  { id: 'scanlingo.credits.100', scans: 100, priceDisplay: '¥1,500' },
+  { id: 'scanlingo.credits.300', scans: 300, priceDisplay: '¥3,500' },
 ];
 
-const SUBSCRIPTIONS = [
-  { id: 'scanlingo.premium.monthly', priceDisplay: '¥980', trialKey: 'trialMonthly', yearly: false },
-  { id: 'scanlingo.premium.yearly', priceDisplay: '¥9,800', trialKey: 'trialYearly', yearly: true },
+const FALLBACK_SUBS = [
+  { id: 'scanlingo.premium.monthly', priceDisplay: '¥980', trialKey: 'trialMonthly' },
+  { id: 'scanlingo.premium.yearly', priceDisplay: '¥9,800', trialKey: 'trialYearly' },
 ];
 
 function CreditPackCard({
   scans,
-  price,
   priceDisplay,
   onPress,
+  loading,
   t,
 }: {
   scans: number;
-  price: number;
   priceDisplay: string;
   onPress: () => void;
+  loading: boolean;
   t: (key: string, options?: Record<string, unknown>) => string;
 }) {
   return (
     <Pressable
       onPress={onPress}
+      disabled={loading}
       style={{
         backgroundColor: '#1A1A22',
         borderRadius: 16,
@@ -40,6 +60,7 @@ function CreditPackCard({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        opacity: loading ? 0.6 : 1,
       }}
     >
       <View>
@@ -47,11 +68,15 @@ function CreditPackCard({
           {t('scans', { count: scans })}
         </Text>
         <Text style={{ fontSize: 12, color: '#9999AA', marginTop: 2 }}>
-          {priceDisplay} ({t('perScan', { price: `${Math.round(price / scans)}¥` })})
+          {priceDisplay}
         </Text>
       </View>
       <View style={{ backgroundColor: '#E8443A', borderRadius: 12, paddingHorizontal: 16, paddingVertical: 8 }}>
-        <Text style={{ color: '#FFF', fontWeight: '600', fontSize: 14 }}>{priceDisplay}</Text>
+        {loading ? (
+          <ActivityIndicator size="small" color="#FFF" />
+        ) : (
+          <Text style={{ color: '#FFF', fontWeight: '600', fontSize: 14 }}>{priceDisplay}</Text>
+        )}
       </View>
     </Pressable>
   );
@@ -62,18 +87,21 @@ function SubscriptionCard({
   trialKey,
   highlighted,
   onPress,
+  loading,
   t,
 }: {
   priceDisplay: string;
   trialKey: string;
   highlighted: boolean;
   onPress: () => void;
+  loading: boolean;
   t: (key: string) => string;
 }) {
   const features = ['featUnlimited', 'featHistory', 'featDeadlines', 'featNoAds'] as const;
   return (
     <Pressable
       onPress={onPress}
+      disabled={loading}
       style={{
         backgroundColor: '#1A1A22',
         borderRadius: 16,
@@ -81,6 +109,7 @@ function SubscriptionCard({
         marginBottom: 10,
         borderWidth: highlighted ? 2 : 0,
         borderColor: highlighted ? '#E8443A' : 'transparent',
+        opacity: loading ? 0.6 : 1,
       }}
     >
       {highlighted && (
@@ -111,24 +140,135 @@ function SubscriptionCard({
 export default function PaywallScreen() {
   const { t } = useTranslation('paywall');
   const router = useRouter();
-  const { addCredits, setPurchaseStatus, restorePurchases } = useUserStore();
+  const { addCredits, setPurchaseStatus } = useUserStore();
+  const [loading, setLoading] = useState<string | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [iapReady, setIapReady] = useState(false);
 
-  const handleBuyCredits = async (scans: number) => {
-    // TODO: Phase 1-D manual — integrate react-native-iap purchase flow
-    // For now, simulate purchase
-    await addCredits(scans);
-    router.back();
+  useEffect(() => {
+    let purchaseListener: { remove: () => void } | null = null;
+    let errorListener: { remove: () => void } | null = null;
+
+    async function setup() {
+      const connected = await initIAP();
+      if (!connected) return;
+      setIapReady(true);
+
+      const [prods, subs] = await Promise.all([fetchProducts(), fetchSubscriptions()]);
+      setProducts(prods);
+      setSubscriptions(subs);
+
+      purchaseListener = purchaseUpdatedListener(async (purchase) => {
+        const receipt = Platform.OS === 'ios'
+          ? purchase.transactionReceipt || ''
+          : purchase.purchaseToken || '';
+
+        if (!receipt) return;
+
+        try {
+          const result = await verifyReceipt(receipt, purchase.productId, purchase.transactionId);
+          if (result.valid) {
+            if (result.type === 'credits') {
+              await addCredits(result.credits);
+            } else {
+              await setPurchaseStatus('subscriber');
+            }
+            await completePurchase(purchase);
+            setLoading(null);
+            router.back();
+          }
+        } catch {
+          setLoading(null);
+          Alert.alert('Error', 'Purchase verification failed. Please try again.');
+        }
+      });
+
+      errorListener = purchaseErrorListener(() => {
+        setLoading(null);
+      });
+    }
+
+    setup();
+
+    return () => {
+      purchaseListener?.remove();
+      errorListener?.remove();
+      disconnectIAP();
+    };
+  }, [addCredits, setPurchaseStatus, router]);
+
+  const getProductPrice = useCallback(
+    (productId: string): string => {
+      const prod = products.find((p) => p.productId === productId);
+      if (prod) return prod.localizedPrice;
+      const sub = subscriptions.find((s) => s.productId === productId);
+      if (sub) return sub.localizedPrice;
+      return '';
+    },
+    [products, subscriptions],
+  );
+
+  const creditItems = CREDIT_PRODUCT_IDS.map((id) => {
+    const fallback = FALLBACK_CREDITS.find((f) => f.id === id)!;
+    return {
+      id,
+      scans: fallback.scans,
+      priceDisplay: getProductPrice(id) || fallback.priceDisplay,
+    };
+  });
+
+  const subItems = SUBSCRIPTION_PRODUCT_IDS.map((id) => {
+    const fallback = FALLBACK_SUBS.find((f) => f.id === id)!;
+    return {
+      id,
+      priceDisplay: getProductPrice(id) || fallback.priceDisplay,
+      trialKey: fallback.trialKey,
+    };
+  });
+
+  const handleBuyCredits = async (productId: string) => {
+    if (!iapReady) {
+      const credits = getCreditsForProduct(productId);
+      await addCredits(credits);
+      router.back();
+      return;
+    }
+    setLoading(productId);
+    const purchase = await buyCredits(productId);
+    if (!purchase) setLoading(null);
   };
 
-  const handleSubscribe = async () => {
-    // TODO: Phase 1-D manual — integrate react-native-iap subscription flow
-    await setPurchaseStatus('subscriber');
-    router.back();
+  const handleSubscribe = async (productId: string) => {
+    if (!iapReady) {
+      await setPurchaseStatus('subscriber');
+      router.back();
+      return;
+    }
+    setLoading(productId);
+    const purchase = await buySubscription(productId);
+    if (!purchase) setLoading(null);
   };
 
   const handleRestore = async () => {
-    await restorePurchases();
-    router.back();
+    setLoading('restore');
+    try {
+      const purchases = await restoreIAPPurchases();
+      const activeSub = purchases.find((p) =>
+        SUBSCRIPTION_PRODUCT_IDS.includes(p.productId),
+      );
+      if (activeSub) {
+        await setPurchaseStatus('subscriber');
+        Alert.alert(t('restored') || 'Restored', t('restoredSub') || 'Subscription restored!');
+        router.back();
+        return;
+      }
+      Alert.alert(t('noRestore') || 'No Purchases', t('noRestoreMsg') || 'No previous purchases found.');
+    } catch {
+      Alert.alert('Error', 'Failed to restore purchases.');
+    } finally {
+      setLoading(null);
+    }
   };
 
   return (
@@ -148,13 +288,14 @@ export default function PaywallScreen() {
         <Text style={{ fontSize: 16, fontWeight: '700', color: '#FFFFFF', marginBottom: 10 }}>
           {t('unlimitedAccess')}
         </Text>
-        {SUBSCRIPTIONS.map((sub, i) => (
+        {subItems.map((sub, i) => (
           <SubscriptionCard
             key={sub.id}
             priceDisplay={sub.priceDisplay}
             trialKey={sub.trialKey}
             highlighted={i === 0}
-            onPress={handleSubscribe}
+            onPress={() => handleSubscribe(sub.id)}
+            loading={loading === sub.id}
             t={t}
           />
         ))}
@@ -170,13 +311,13 @@ export default function PaywallScreen() {
         <Text style={{ fontSize: 16, fontWeight: '700', color: '#FFFFFF', marginBottom: 10 }}>
           {t('creditPacks')}
         </Text>
-        {CREDIT_PACKS.map((pack) => (
+        {creditItems.map((pack) => (
           <CreditPackCard
             key={pack.id}
             scans={pack.scans}
-            price={pack.price}
             priceDisplay={pack.priceDisplay}
-            onPress={() => handleBuyCredits(pack.scans)}
+            onPress={() => handleBuyCredits(pack.id)}
+            loading={loading === pack.id}
             t={t}
           />
         ))}
@@ -189,8 +330,12 @@ export default function PaywallScreen() {
         </View>
 
         {/* Restore + Close */}
-        <Pressable onPress={handleRestore} style={{ marginTop: 20, alignItems: 'center' }}>
-          <Text style={{ fontSize: 14, color: '#2D7FF9' }}>{t('restorePurchases')}</Text>
+        <Pressable onPress={handleRestore} disabled={loading === 'restore'} style={{ marginTop: 20, alignItems: 'center' }}>
+          {loading === 'restore' ? (
+            <ActivityIndicator size="small" color="#2D7FF9" />
+          ) : (
+            <Text style={{ fontSize: 14, color: '#2D7FF9' }}>{t('restorePurchases')}</Text>
+          )}
         </Pressable>
 
         <Pressable onPress={() => router.back()} style={{ marginTop: 12, alignItems: 'center' }}>

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tools24.jp — Pattern A Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #ffffff;
+    color: #0f172a;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 16px;
+  }
+
+  .logo {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+  }
+
+  .logo span {
+    color: #3b82f6;
+  }
+
+  .search-wrap {
+    flex: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .search-wrap svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+  }
+
+  .search-input {
+    width: 100%;
+    height: 36px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0 12px 0 38px;
+    font-size: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .search-input::placeholder { color: #94a3b8; }
+  .search-input:focus { border-color: #3b82f6; background: #ffffff; }
+
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #64748b;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+
+  .theme-toggle:hover { background: #f1f5f9; }
+
+  /* Tag bar */
+  .tag-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    overflow-x: auto;
+  }
+
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    border: none;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .tag-pill.active {
+    background: #0f172a;
+    color: #ffffff;
+  }
+
+  .tag-pill:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  .tag-pill:not(.active):hover {
+    background: #e2e8f0;
+  }
+
+  .tag-count {
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  /* Main content */
+  .main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 24px 80px;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  /* Card */
+  .card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background 0.15s;
+    cursor: pointer;
+    min-height: 140px;
+  }
+
+  .card:hover { background: #f1f5f9; }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(59, 130, 246, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #3b82f6;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    background: #f1f5f9;
+    color: #64748b;
+  }
+
+  .card-cta {
+    font-size: 13px;
+    font-weight: 500;
+    color: #3b82f6;
+    text-decoration: none;
+  }
+
+  .card-price {
+    font-size: 11px;
+    font-weight: 600;
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.08);
+    padding: 2px 8px;
+    border-radius: 9999px;
+  }
+
+  /* Collapsible */
+  .collapse-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: 'Noto Sans JP', sans-serif;
+    margin-bottom: 12px;
+    transition: color 0.15s;
+  }
+
+  .collapse-toggle:hover { color: #0f172a; }
+
+  .collapse-toggle svg {
+    transition: transform 0.2s;
+  }
+
+  .collapse-toggle.open svg {
+    transform: rotate(90deg);
+  }
+
+  .collapse-content {
+    display: none;
+  }
+
+  .collapse-content.open {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  /* Trust */
+  .trust {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #94a3b8;
+  }
+
+  .trust-item svg { color: #94a3b8; }
+
+  /* Pattern label */
+  .pattern-label {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    font-size: 11px;
+    color: #94a3b8;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 4px 10px;
+    border-radius: 6px;
+    z-index: 200;
+  }
+
+  @media (max-width: 768px) {
+    .grid, .collapse-content.open { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 520px) {
+    .grid, .collapse-content.open { grid-template-columns: 1fr; }
+    .header { padding: 0 16px; }
+    .main { padding: 16px 16px 80px; }
+    .trust { flex-direction: column; align-items: center; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo">tools24<span>.jp</span></div>
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="text" class="search-input" placeholder="ツールを検索...">
+  </div>
+  <button class="theme-toggle" title="テーマ切替">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+  </button>
+</header>
+
+<!-- Tag bar -->
+<nav class="tag-bar">
+  <button class="tag-pill active">すべて <span class="tag-count">(24)</span></button>
+  <button class="tag-pill" onclick="filterTag('web')">Webツール <span class="tag-count">(6)</span></button>
+  <button class="tag-pill" onclick="filterTag('dev')">開発者ツール <span class="tag-count">(6)</span></button>
+  <button class="tag-pill" onclick="filterTag('ai')">AIプロツール <span class="tag-count">(3)</span></button>
+  <button class="tag-pill" onclick="filterTag('tax')">確定申告 <span class="tag-count">(9)</span></button>
+</nav>
+
+<!-- Main -->
+<main class="main">
+
+  <!-- Web Tools -->
+  <div class="section-label">Webツール</div>
+  <div class="grid" data-section="web">
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+        </div>
+        <div class="card-title">文字化け修正</div>
+      </div>
+      <div class="card-desc">文字化けしたテキストを自動検出して正しいエンコーディングに修復します</div>
+      <div class="card-bottom">
+        <span class="card-badge">Webツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="card-title">ファビコン生成</div>
+      </div>
+      <div class="card-desc">画像やテキストからICO/PNG/SVG形式のファビコンを一括生成します</div>
+      <div class="card-bottom">
+        <span class="card-badge">Webツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="card-title">電子印鑑作成</div>
+      </div>
+      <div class="card-desc">名前を入力するだけで丸印・角印の電子印鑑画像を作成します</div>
+      <div class="card-bottom">
+        <span class="card-badge">Webツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 8 3 3-3 3"/><path d="M13 16h3"/></svg>
+        </div>
+        <div class="card-title">WebP変換</div>
+      </div>
+      <div class="card-desc">JPEG/PNGからWebP形式へ一括変換。画質を保ちながらファイルサイズを削減</div>
+      <div class="card-bottom">
+        <span class="card-badge">Webツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+        <div class="card-title">HTML/CSS/JS圧縮</div>
+      </div>
+      <div class="card-desc">HTML・CSS・JavaScriptを圧縮してファイルサイズを最小化します</div>
+      <div class="card-bottom">
+        <span class="card-badge">Webツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3v10"/><path d="m12.67 5.5 8.66 5"/><path d="m12.67 10.5 8.66-5"/><path d="M9 17c-2.8 0-5-.9-5-2s2.2-2 5-2 5 .9 5 2-2.2 2-5 2Z"/><path d="M9 17v4"/></svg>
+        </div>
+        <div class="card-title">全角半角変換</div>
+      </div>
+      <div class="card-desc">全角/半角文字の相互変換。カタカナ・英数字・記号に対応</div>
+      <div class="card-bottom">
+        <span class="card-badge">Webツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Dev Tools -->
+  <div class="section-label">開発者ツール</div>
+  <div class="grid" data-section="dev">
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18 22 12 16 6"/><path d="M8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="card-title">JSON整形</div>
+      </div>
+      <div class="card-desc">JSONデータを見やすく整形・圧縮。構文エラーの検出にも対応</div>
+      <div class="card-bottom">
+        <span class="card-badge">開発者ツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>
+        </div>
+        <div class="card-title">正規表現テスター</div>
+      </div>
+      <div class="card-desc">正規表現のリアルタイムテスト。マッチ結果のハイライト表示</div>
+      <div class="card-bottom">
+        <span class="card-badge">開発者ツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+        </div>
+        <div class="card-title">ダミーデータ生成</div>
+      </div>
+      <div class="card-desc">テスト用の日本語ダミーデータをJSON/CSV形式で一括生成</div>
+      <div class="card-bottom">
+        <span class="card-badge">開発者ツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="card-title">Cron式ビルダー</div>
+      </div>
+      <div class="card-desc">Cron式をGUIで組み立て。次回実行日時のプレビュー付き</div>
+      <div class="card-bottom">
+        <span class="card-badge">開発者ツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="card-title">和暦西暦変換</div>
+      </div>
+      <div class="card-desc">和暦（令和・平成・昭和等）と西暦を相互変換。年齢計算も</div>
+      <div class="card-bottom">
+        <span class="card-badge">開発者ツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v5h5"/><path d="m3 12.5 5 5"/><path d="m8 12.5-5 5"/></svg>
+        </div>
+        <div class="card-title">エンコードデコード</div>
+      </div>
+      <div class="card-desc">Base64・URL・HTMLエンティティのエンコード/デコード変換</div>
+      <div class="card-bottom">
+        <span class="card-badge">開発者ツール</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AI Pro Tools -->
+  <div class="section-label">AIプロツール</div>
+  <div class="grid" data-section="ai">
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3-3 3 3"/></svg>
+        </div>
+        <div class="card-title">敬語メールライター</div>
+      </div>
+      <div class="card-desc">要点を入力するだけでビジネス敬語のメール文面をAIが作成</div>
+      <div class="card-bottom">
+        <span class="card-price">&yen;290/月</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div class="card-title">個人情報マスキング</div>
+      </div>
+      <div class="card-desc">テキスト内の氏名・電話番号・住所等をAIが検出して自動マスク</div>
+      <div class="card-bottom">
+        <span class="card-price">&yen;190/月</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m10 10.5-1.5 4 1 1.5h5l1-1.5L14 10.5"/></svg>
+        </div>
+        <div class="card-title">契約書チェッカー</div>
+      </div>
+      <div class="card-desc">契約書をAIが分析し、リスク条項や不利な条件をハイライト表示</div>
+      <div class="card-bottom">
+        <span class="card-price">&yen;490/月</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Kakutei (collapsible) -->
+  <button class="collapse-toggle" id="taxToggle" onclick="toggleTax()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    確定申告ツール（9本）を表示
+  </button>
+  <div class="collapse-content" id="taxContent" data-section="tax">
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>
+        </div>
+        <div class="card-title">医療費控除計算</div>
+      </div>
+      <div class="card-desc">医療費の合計から控除額を自動計算</div>
+      <div class="card-bottom">
+        <span class="card-badge">確定申告</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        </div>
+        <div class="card-title">減価償却費計算</div>
+      </div>
+      <div class="card-desc">定額法・定率法の減価償却費を自動計算</div>
+      <div class="card-bottom">
+        <span class="card-badge">確定申告</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <div class="card-title">住宅ローン控除</div>
+      </div>
+      <div class="card-desc">住宅ローン残高から控除額をシミュレーション</div>
+      <div class="card-bottom">
+        <span class="card-badge">確定申告</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="card-title">ふるさと納税計算</div>
+      </div>
+      <div class="card-desc">控除上限額と自己負担額をかんたんシミュレーション</div>
+      <div class="card-bottom">
+        <span class="card-badge">確定申告</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="card-title">扶養控除判定</div>
+      </div>
+      <div class="card-desc">家族の収入から扶養控除の適用可否を判定</div>
+      <div class="card-bottom">
+        <span class="card-badge">確定申告</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <div class="card-title">所得税早見表</div>
+      </div>
+      <div class="card-desc">課税所得に応じた所得税額を速算表で即確認</div>
+      <div class="card-bottom">
+        <span class="card-badge">確定申告</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="card-title">青色申告ガイド</div>
+      </div>
+      <div class="card-desc">青色申告の要件と特別控除額をステップで解説</div>
+      <div class="card-bottom">
+        <span class="card-badge">確定申告</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        </div>
+        <div class="card-title">開業届テンプレート</div>
+      </div>
+      <div class="card-desc">個人事業の開業届出書の記入例と提出ガイド</div>
+      <div class="card-bottom">
+        <span class="card-badge">確定申告</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div class="card-title">経費率チェッカー</div>
+      </div>
+      <div class="card-desc">業種別の経費率目安と乖離率を自動チェック</div>
+      <div class="card-bottom">
+        <span class="card-badge">確定申告</span>
+        <a href="#" class="card-cta">使う &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Trust -->
+  <div class="trust">
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+      データはブラウザ内で処理
+    </div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      登録不要で無料ツールを利用可能
+    </div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      2024年税制対応済み
+    </div>
+  </div>
+
+</main>
+
+<!-- Pattern label -->
+<div class="pattern-label">Pattern A &mdash; IT-Tools風（ミニマル）</div>
+
+<script>
+function toggleTax() {
+  const toggle = document.getElementById('taxToggle');
+  const content = document.getElementById('taxContent');
+  toggle.classList.toggle('open');
+  content.classList.toggle('open');
+  if (toggle.classList.contains('open')) {
+    toggle.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 確定申告ツール（9本）を非表示';
+  } else {
+    toggle.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 確定申告ツール（9本）を表示';
+  }
+}
+
+function filterTag(category) {
+  const pills = document.querySelectorAll('.tag-pill');
+  pills.forEach(p => p.classList.remove('active'));
+  event.target.closest('.tag-pill').classList.add('active');
+
+  const sections = {
+    web: document.querySelector('[data-section="web"]'),
+    dev: document.querySelector('[data-section="dev"]'),
+    ai: document.querySelector('[data-section="ai"]'),
+    tax: document.getElementById('taxContent')
+  };
+  const labels = document.querySelectorAll('.section-label');
+  const taxToggle = document.getElementById('taxToggle');
+
+  if (category === 'all') {
+    Object.values(sections).forEach(s => { if (s) s.style.display = ''; });
+    labels.forEach(l => l.style.display = '');
+    taxToggle.style.display = '';
+    sections.tax.classList.remove('open');
+    taxToggle.classList.remove('open');
+    taxToggle.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 確定申告ツール（9本）を表示';
+    return;
+  }
+
+  // Hide all
+  Object.values(sections).forEach(s => { if (s) s.style.display = 'none'; });
+  labels.forEach(l => l.style.display = 'none');
+  taxToggle.style.display = 'none';
+
+  if (category === 'tax') {
+    taxToggle.style.display = '';
+    sections.tax.style.display = '';
+    sections.tax.classList.add('open');
+    taxToggle.classList.add('open');
+    taxToggle.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg> 確定申告ツール（9本）を非表示';
+    // Show tax label
+    labels[labels.length - 1] && (labels[labels.length - 1].style.display = 'none');
+  } else {
+    sections[category].style.display = '';
+    // Show corresponding label
+    const idx = category === 'web' ? 0 : category === 'dev' ? 1 : 2;
+    if (labels[idx]) labels[idx].style.display = '';
+  }
+}
+
+// "すべて" pill handler
+document.querySelector('.tag-pill.active').addEventListener('click', function() {
+  filterTag('all');
+  this.classList.add('active');
+});
+</script>
+
+</body>
+</html>

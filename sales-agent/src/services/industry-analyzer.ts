@@ -12,6 +12,8 @@ interface AnalysisResult {
   icp_score: number;
   industry_detail: IndustryDetail;
   recommended_product: ProductId;
+  estimated_scale: 'individual' | 'small' | 'medium' | 'large' | 'enterprise';
+  is_chain: boolean;
 }
 
 /**
@@ -47,16 +49,38 @@ ${pageContent.slice(0, 3000)}
   },
   "personalization_angle": "この企業にアプローチする際の最適な切り口（1文）",
   "icp_score": 0,
-  "recommended_product": "msgscore | review-reply-ai"
+  "recommended_product": "msgscore | review-reply-ai",
+  "estimated_scale": "individual",
+  "is_chain": false
 }
 
+## estimated_scale の判定基準
+- "individual": 個人事業主・オーナー1人で運営（例: 個人カフェ、フリーランス美容師）
+- "small": 従業員1〜10名の小規模事業（例: 個人経営レストラン、小さなジム）
+- "medium": 従業員11〜50名の中規模事業（例: 複数店舗展開、地域チェーン）
+- "large": 従業員51〜300名（例: 地方チェーン、中堅企業）
+- "enterprise": 従業員300名超の大企業・全国チェーン
+
+## is_chain の判定基準
+以下のいずれかに該当する場合 true:
+- 「店舗一覧」「店舗情報」「全国○○店舗」等の記載がある
+- フランチャイズ展開している
+- 複数の都道府県に拠点がある
+- ウェブサイトが明らかに企業サイト（IR情報、採用ページ等がある）
+
 ## ICP（理想顧客プロファイル）スコア基準
+加点:
 - LINE公式 or メルマガを運用 → +30
 - EC機能あり → +20
 - SNS活発（週3回以上更新） → +15
-- 従業員10名以下（小規模） → +15
+- 個人事業主 or 従業員10名以下 → +15
 - メールアドレスが公開されている → +10
 - 飲食/EC/ジムのいずれか → +10
+減点（重要: 大企業やチェーン店は対象外）:
+- estimated_scale が "medium" → -20
+- estimated_scale が "large" → -40
+- estimated_scale が "enterprise" → -60
+- is_chain が true → -30
 
 ## recommended_product の判定基準
 - 口コミが重要な業種（飲食・美容・ホテル・クリニック・ジム・教室等）→ "review-reply-ai"
@@ -84,6 +108,8 @@ ${pageContent.slice(0, 3000)}
     personalization_angle: string;
     icp_score: number;
     recommended_product?: ProductId;
+    estimated_scale?: string;
+    is_chain?: boolean;
   };
 
   return {
@@ -99,5 +125,7 @@ ${pageContent.slice(0, 3000)}
       personalization_angle: parsed.personalization_angle,
     },
     recommended_product: parsed.recommended_product ?? 'review-reply-ai',
+    estimated_scale: (parsed.estimated_scale as AnalysisResult['estimated_scale']) ?? 'small',
+    is_chain: parsed.is_chain ?? false,
   };
 }

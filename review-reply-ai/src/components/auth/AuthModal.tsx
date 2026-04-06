@@ -82,6 +82,10 @@ export default function AuthModal({ onClose, nextPath = '/profile' }: AuthModalP
               Googleアカウントで続ける
             </button>
 
+            <p className="text-[11px] text-stone-400 text-center -mt-2 mb-3">
+              ※ ログイン時に「supabase.co」という画面が表示されますが、MyReplyToneが利用している認証サービスです。安心してお進みください。
+            </p>
+
             <div className="flex items-center gap-3 mb-4">
               <div className="flex-1 h-px bg-stone-200" />
               <span className="text-xs text-stone-400">またはメールで</span>

@@ -4,6 +4,9 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: '利用規約 | MyReplyTone',
   description: 'MyReplyTone（AI口コミ返信ジェネレーター）の利用規約。サービス内容、料金プラン、禁止事項、免責事項、知的財産権について。',
+  alternates: {
+    canonical: 'https://myreplytone.com/terms',
+  },
 }
 
 export default function TermsPage() {

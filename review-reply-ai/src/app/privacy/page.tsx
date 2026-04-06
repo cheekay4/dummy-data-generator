@@ -4,6 +4,9 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'プライバシーポリシー | MyReplyTone',
   description: 'MyReplyTone（AI口コミ返信ジェネレーター）のプライバシーポリシー。収集する情報、利用目的、第三者提供、Cookie、データ保存期間について。',
+  alternates: {
+    canonical: 'https://myreplytone.com/privacy',
+  },
 }
 
 export default function PrivacyPage() {

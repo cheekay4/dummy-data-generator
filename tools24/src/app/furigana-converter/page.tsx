@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { FuriganaConverterMain } from "@/components/furigana-converter/furigana-converter-main";
-import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { Breadcrumb } from "@/components/common/breadcrumb";
 import { AdPlaceholder } from "@/components/common/ad-placeholder";
-import { RelatedTools } from "@/components/common/related-tools";
 
 export const metadata: Metadata = {
   title: "ふりがな変換 — 漢字にふりがなを自動付与 | tools24.jp",
@@ -42,7 +41,7 @@ export default function FuriganaConverterPage() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-center mb-8">
-          <AdPlaceholder slot="top-banner" width={728} height={90} />
+          <AdPlaceholder position="header" />
         </div>
 
         <div className="max-w-4xl mx-auto">
@@ -60,7 +59,7 @@ export default function FuriganaConverterPage() {
           <FuriganaConverterMain />
 
           <div className="flex justify-center my-8">
-            <AdPlaceholder slot="middle-rect" width={336} height={280} />
+            <AdPlaceholder position="content" />
           </div>
 
           {/* SEO コンテンツ */}
@@ -150,11 +149,11 @@ export default function FuriganaConverterPage() {
             </div>
           </section>
 
-          <RelatedTools currentPath="/furigana-converter" />
+
         </div>
 
         <div className="flex justify-center mt-12">
-          <AdPlaceholder slot="bottom-rect" width={336} height={280} />
+          <AdPlaceholder position="content" />
         </div>
       </div>
     </>

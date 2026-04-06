@@ -5,6 +5,9 @@ import { Mail, Clock, MessageSquare } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'お問い合わせ | MyReplyTone',
   description: 'MyReplyTone（AI口コミ返信ジェネレーター）へのお問い合わせはこちらから。機能に関するご質問、不具合のご報告、ご要望などお気軽にどうぞ。',
+  alternates: {
+    canonical: 'https://myreplytone.com/contact',
+  },
 }
 
 export default function ContactPage() {

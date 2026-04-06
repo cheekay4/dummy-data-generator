@@ -21,7 +21,7 @@ export function FuriganaConverterMain(): React.ReactElement {
   const [dictLoading, setDictLoading] = useState(false);
   const [dictReady, setDictReady] = useState(false);
   const [copied, setCopied] = useState(false);
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   // Load dictionary on mount
   useEffect(() => {

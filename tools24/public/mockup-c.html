@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tools24.jp — Pattern C</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #0f172a;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  /* ── Header ── */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: 56px;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+  }
+  .header-logo {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+    text-decoration: none;
+    letter-spacing: -.02em;
+  }
+  .header-nav { display: flex; gap: 28px; align-items: center; }
+  .header-nav a {
+    font-size: 14px;
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color .15s;
+  }
+  .header-nav a:hover { color: #0f172a; }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    padding: 64px 24px;
+  }
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -.03em;
+    line-height: 1.2;
+  }
+  .hero-sub {
+    font-size: 1.125rem;
+    color: #64748b;
+    margin-top: 12px;
+  }
+  .search-wrap {
+    max-width: 560px;
+    margin: 32px auto 0;
+    position: relative;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+  }
+  .search-input {
+    width: 100%;
+    height: 52px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 0 20px 0 50px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    background: #fff;
+  }
+  .search-input::placeholder { color: #94a3b8; }
+  .search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,.12);
+  }
+
+  /* ── Sections ── */
+  .section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .section + .section {
+    margin-top: 64px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 64px;
+  }
+  .section:first-of-type { margin-top: 24px; }
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .section-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-blue { background: #3b82f6; }
+  .dot-emerald { background: #10b981; }
+  .dot-violet { background: #8b5cf6; }
+  .dot-amber { background: #f59e0b; }
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .section-count {
+    font-size: 14px;
+    color: #94a3b8;
+    font-weight: 400;
+  }
+  .section-sub {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 28px;
+  }
+
+  /* ── Card Grid ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform .2s, box-shadow .2s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(15,23,42,.08);
+  }
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-blue { background: #eff6ff; color: #3b82f6; }
+  .icon-emerald { background: #ecfdf5; color: #10b981; }
+  .icon-violet { background: #f5f3ff; color: #8b5cf6; }
+  .icon-amber { background: #fffbeb; color: #f59e0b; }
+  .card-icon svg { width: 24px; height: 24px; }
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 16px;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+  .card-price {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 4px;
+  }
+  .card-cta {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .cta-blue { color: #3b82f6; }
+  .cta-emerald { color: #10b981; }
+  .cta-violet { color: #8b5cf6; }
+  .cta-amber { color: #f59e0b; }
+
+  /* ── Muted Section ── */
+  .muted-notice {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-left: 4px;
+  }
+  .show-more {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #f59e0b;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .show-more:hover { text-decoration: underline; }
+
+  /* ── Trust ── */
+  .trust {
+    max-width: 1120px;
+    margin: 80px auto 0;
+    padding: 0 32px 80px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 64px;
+    text-align: center;
+  }
+  .trust-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .trust-sub {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 36px;
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .trust-icon {
+    width: 44px;
+    height: 44px;
+    background: #f8fafc;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+  }
+  .trust-icon svg { width: 22px; height: 22px; }
+  .trust-label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .trust-desc {
+    font-size: 12px;
+    color: #94a3b8;
+  }
+
+  /* ── Footer label ── */
+  .pattern-label {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    background: #0f172a;
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    z-index: 100;
+    opacity: .85;
+  }
+
+  @media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2rem; }
+    .trust-grid { grid-template-columns: 1fr; }
+    .header { padding: 0 16px; }
+    .section { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════ Header ════ -->
+<header class="header">
+  <a href="#" class="header-logo">tools24.jp</a>
+  <nav class="header-nav">
+    <a href="#">ツール一覧</a>
+    <a href="#">AIプロツール</a>
+    <a href="#">確定申告</a>
+    <a href="#">お知らせ</a>
+  </nav>
+</header>
+
+<!-- ════ Hero ════ -->
+<section class="hero">
+  <h1 class="hero-title">tools24.jp</h1>
+  <p class="hero-sub">ブラウザだけで使える無料ツール集</p>
+  <div class="search-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="text" class="search-input" placeholder="ツールを検索...">
+  </div>
+</section>
+
+<!-- ════ Section 1: Web ════ -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-dot dot-blue"></span>
+    <h2 class="section-title">Webツール</h2>
+  </div>
+  <p class="section-sub">6本のツール</p>
+
+  <div class="grid">
+    <!-- 文字化け修正 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-blue">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m10 13-2 2 2 2"/><path d="m14 17 2-2-2-2"/></svg>
+      </div>
+      <div class="card-title">文字化け修正</div>
+      <div class="card-desc">壊れた日本語テキストを自動検出して正しいエンコードに変換</div>
+      <span class="card-cta cta-blue">使う &rarr;</span>
+    </a>
+
+    <!-- ファビコン生成 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-blue">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+      </div>
+      <div class="card-title">ファビコン生成</div>
+      <div class="card-desc">テキストや画像からマルチサイズのファビコンを一括生成</div>
+      <span class="card-cta cta-blue">使う &rarr;</span>
+    </a>
+
+    <!-- 電子印鑑作成 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-blue">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div class="card-title">電子印鑑作成</div>
+      <div class="card-desc">名前を入力するだけで透過PNGの電子印鑑を即座に生成</div>
+      <span class="card-cta cta-blue">使う &rarr;</span>
+    </a>
+
+    <!-- WebP変換 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-blue">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+      </div>
+      <div class="card-title">WebP変換</div>
+      <div class="card-desc">JPEG・PNGをWebP形式に変換してファイルサイズを大幅削減</div>
+      <span class="card-cta cta-blue">使う &rarr;</span>
+    </a>
+
+    <!-- HTML/CSS/JS圧縮 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-blue">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>
+      </div>
+      <div class="card-title">HTML/CSS/JS圧縮</div>
+      <div class="card-desc">コードをミニファイして読み込み速度を改善</div>
+      <span class="card-cta cta-blue">使う &rarr;</span>
+    </a>
+
+    <!-- 全角半角変換 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-blue">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h10"/></svg>
+      </div>
+      <div class="card-title">全角半角変換</div>
+      <div class="card-desc">全角カタカナ・英数字と半角を相互に一括変換</div>
+      <span class="card-cta cta-blue">使う &rarr;</span>
+    </a>
+  </div>
+</div>
+
+<!-- ════ Section 2: Dev ════ -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-dot dot-emerald"></span>
+    <h2 class="section-title">開発者ツール</h2>
+  </div>
+  <p class="section-sub">6本のツール</p>
+
+  <div class="grid">
+    <!-- JSON整形 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-emerald">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+      </div>
+      <div class="card-title">JSON整形</div>
+      <div class="card-desc">JSONを見やすくフォーマット・バリデーション・ツリー表示</div>
+      <span class="card-cta cta-emerald">使う &rarr;</span>
+    </a>
+
+    <!-- 正規表現テスター -->
+    <a class="card" href="#">
+      <div class="card-icon icon-emerald">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-4-4"/></svg>
+      </div>
+      <div class="card-title">正規表現テスター</div>
+      <div class="card-desc">正規表現パターンのリアルタイムマッチングとデバッグ</div>
+      <span class="card-cta cta-emerald">使う &rarr;</span>
+    </a>
+
+    <!-- ダミーデータ生成 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-emerald">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+      </div>
+      <div class="card-title">ダミーデータ生成</div>
+      <div class="card-desc">日本語対応のリアルなテストデータをJSON・CSVで出力</div>
+      <span class="card-cta cta-emerald">使う &rarr;</span>
+    </a>
+
+    <!-- Cron式ビルダー -->
+    <a class="card" href="#">
+      <div class="card-icon icon-emerald">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="card-title">Cron式ビルダー</div>
+      <div class="card-desc">GUIでCron式を組み立てて次回実行日時をプレビュー</div>
+      <span class="card-cta cta-emerald">使う &rarr;</span>
+    </a>
+
+    <!-- 和暦西暦変換 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-emerald">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
+      </div>
+      <div class="card-title">和暦西暦変換</div>
+      <div class="card-desc">令和・平成・昭和と西暦をワンクリックで相互変換</div>
+      <span class="card-cta cta-emerald">使う &rarr;</span>
+    </a>
+
+    <!-- エンコードデコード -->
+    <a class="card" href="#">
+      <div class="card-icon icon-emerald">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="14" y="3" rx="1"/><path d="M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/><path d="M3 10h4"/><path d="M10 3v4"/></svg>
+      </div>
+      <div class="card-title">エンコードデコード</div>
+      <div class="card-desc">Base64・URL・HTMLエンティティのエンコードとデコード</div>
+      <span class="card-cta cta-emerald">使う &rarr;</span>
+    </a>
+  </div>
+</div>
+
+<!-- ════ Section 3: AI Pro ════ -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-dot dot-violet"></span>
+    <h2 class="section-title">AIプロツール</h2>
+  </div>
+  <p class="section-sub">3本のツール</p>
+
+  <div class="grid">
+    <!-- 敬語メールライター -->
+    <a class="card" href="#">
+      <div class="card-icon icon-violet">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </div>
+      <div class="card-title">敬語メールライター</div>
+      <div class="card-desc">ラフな文章をビジネス敬語メールに自動変換</div>
+      <div class="card-price">&yen;290/月</div>
+      <span class="card-cta cta-violet">無料で試す &rarr;</span>
+    </a>
+
+    <!-- 個人情報マスキング -->
+    <a class="card" href="#">
+      <div class="card-icon icon-violet">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+      </div>
+      <div class="card-title">個人情報マスキング</div>
+      <div class="card-desc">テキスト内の氏名・住所・電話番号を自動検出してマスク</div>
+      <div class="card-price">&yen;190/月</div>
+      <span class="card-cta cta-violet">無料で試す &rarr;</span>
+    </a>
+
+    <!-- 契約書チェッカー -->
+    <a class="card" href="#">
+      <div class="card-icon icon-violet">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m9 15 2 2 4-4"/></svg>
+      </div>
+      <div class="card-title">契約書チェッカー</div>
+      <div class="card-desc">契約書の不利な条項やリスクをAIが自動レビュー</div>
+      <div class="card-price">&yen;490/月</div>
+      <span class="card-cta cta-violet">無料で試す &rarr;</span>
+    </a>
+  </div>
+</div>
+
+<!-- ════ Section 4: Tax (muted) ════ -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-dot dot-amber"></span>
+    <h2 class="section-title">確定申告ツール</h2>
+    <span class="section-count">9本</span>
+    <span class="muted-notice">（確定申告シーズン終了）</span>
+  </div>
+  <p class="section-sub" style="opacity:.6">シーズン外ですが引き続きご利用いただけます</p>
+
+  <div class="grid" style="opacity:.7">
+    <!-- 医療費控除 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-amber">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M10 14h4"/><path d="M12 12v4"/></svg>
+      </div>
+      <div class="card-title">医療費控除計算</div>
+      <div class="card-desc">年間医療費から控除額と還付金をシミュレーション</div>
+      <span class="card-cta cta-amber">使う &rarr;</span>
+    </a>
+
+    <!-- ふるさと納税 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-amber">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
+      <div class="card-title">ふるさと納税計算</div>
+      <div class="card-desc">年収と家族構成から控除上限額を正確に算出</div>
+      <span class="card-cta cta-amber">使う &rarr;</span>
+    </a>
+
+    <!-- 所得税計算 -->
+    <a class="card" href="#">
+      <div class="card-icon icon-amber">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <div class="card-title">所得税計算</div>
+      <div class="card-desc">収入から所得税・住民税・手取りを自動計算</div>
+      <span class="card-cta cta-amber">使う &rarr;</span>
+    </a>
+  </div>
+
+  <a class="show-more" href="#">他6本を表示</a>
+</div>
+
+<!-- ════ Trust ════ -->
+<section class="trust">
+  <h2 class="trust-title">安心してご利用いただけます</h2>
+  <p class="trust-sub">すべてのツールはブラウザ上で完結。データがサーバーに送信されることはありません。</p>
+  <div class="trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+      </div>
+      <div class="trust-label">プライバシー保護</div>
+      <div class="trust-desc">データはブラウザ内で処理</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div class="trust-label">登録不要</div>
+      <div class="trust-desc">アカウント作成なしで即利用</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="trust-label">完全無料</div>
+      <div class="trust-desc">広告なし・課金なし</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pattern Label ── -->
+<div class="pattern-label">Pattern C -- 10015.io風（カテゴリ分割）</div>
+
+</body>
+</html>

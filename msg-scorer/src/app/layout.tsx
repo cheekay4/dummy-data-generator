@@ -64,6 +64,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://msgscore.jp' },
+  verification: { google: 'i1tIAqA_ocD3SB5UvyIgJ1X0S5aYRZs1f4VDgjFfgWM' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

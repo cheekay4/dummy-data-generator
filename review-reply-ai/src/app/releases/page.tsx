@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'リリースノート',
+  title: 'リリースノート | MyReplyTone',
   description: 'MyReplyTone の更新履歴・新機能・改善情報をお知らせします。',
+  alternates: {
+    canonical: 'https://myreplytone.com/releases',
+  },
 }
 
 const RELEASES = [

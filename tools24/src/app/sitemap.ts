@@ -169,6 +169,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/emoji-generator`,
+      lastModified: new Date("2026-05-03"),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
     // 開発者ツール
     {
       url: `${baseUrl}/dev`,

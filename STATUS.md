@@ -22,6 +22,7 @@
 | ScanLingo | — | 🔧 開発中（Phase 1-A~D コード完了、UXテスト済み） | japandoc-ai |
 | DealRoom | — | 🔧 未デプロイ（Phase 1-A/B/C コード完了）| dealroom |
 | カスハラShield | https://kasuhara-shield.vercel.app | ✅ LIVE | kasuhara-shield |
+| 触診部位同定トレーナー | — | 🔬 Phase 0 検証完了（実装未着手） | palpation-trainer |
 
 ---
 
@@ -165,6 +166,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-08-09 | palpation-trainer: Phase 0 検証完了（Z-Anatomy/BodyParts3D 実データ解析・GLB変換テスト・日本語用語ライセンス調査。レポート: palpation-trainer/PHASE0-VERIFICATION.md）。データソース戦略の確認待ち | Claude Code |
 | 2026-03-24 | kasuhara-shield: Vercel初回デプロイ（https://kasuhara-shield.vercel.app）+ UXテスト7件修正（LP改善・WelcomeGuide・オンボーディング強化・モバイルナビ・かんたん入力モード・料金プラン明確化）。npm run build ✅ | Claude Code |
 | 2026-03-20 | DealRoom Phase 1-A/B/C 全実装完了（ルームページ6セクション・RoomTracker・ダッシュボード・ルーム作成・Sales Agent連携）Agent Teams 3体。npm run build ✅ | Claude Code |
 | 2026-03-15 | tools24.jp: Sランクツール6本追加（文字化け修正/ファビコン生成/電子印鑑/WebP変換/Minify/全角半角変換）npm run build ✅ | Claude Code |

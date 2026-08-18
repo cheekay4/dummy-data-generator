@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { Bp3dManifestSource } from "../anatomy/AnatomySource.js";
+import { getCaseTruth } from "../cases/caseDb.js";
 import { getScopeIds } from "../facts/getStructureFacts.js";
 import { landmarkSchema, type Landmark } from "../scoring/palpation.js";
 import { AnatomyScene } from "./AnatomyScene.js";
 import { Panel } from "./Panel.js";
+import { useViewerStore } from "./store.js";
 import testLandmarksJson from "../data/test-landmarks.json" with { type: "json" };
 
 export function App(): React.JSX.Element {
   const [manifest, setManifest] = useState<unknown>(null);
   const [error, setError] = useState<string | null>(null);
+  const caseId = useViewerStore((s) => s.caseId);
 
   useEffect(() => {
     // メッシュはビルドに同梱せず実行時ロード（仕様 §2.1）
@@ -26,9 +29,13 @@ export function App(): React.JSX.Element {
     [manifest]
   );
 
+  // 開発用: 症例選択時はその truth ランドマークを表示（座標の目視検証用）
   const landmarks: Landmark[] = useMemo(
-    () => testLandmarksJson.landmarks.map((l) => landmarkSchema.parse(l)),
-    []
+    () =>
+      caseId === null
+        ? testLandmarksJson.landmarks.map((l) => landmarkSchema.parse(l))
+        : getCaseTruth(caseId).targetLandmarks,
+    [caseId]
   );
 
   if (error !== null) {

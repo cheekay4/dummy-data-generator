@@ -1,6 +1,13 @@
+import { getCaseTruth, listCases } from "../cases/caseDb.js";
 import { getStructureFacts } from "../facts/getStructureFacts.js";
 import type { Landmark } from "../scoring/palpation.js";
 import { useViewerStore, type LayerKey } from "./store.js";
+
+const DIFF_LABEL: Record<string, string> = {
+  basic: "初級",
+  intermediate: "中級",
+  advanced: "上級",
+};
 
 const LAYER_LABEL: Record<LayerKey, string> = {
   skin: "皮膚",
@@ -14,6 +21,8 @@ export function Panel({ landmarks }: { landmarks: readonly Landmark[] }): React.
   const skinOpacity = useViewerStore((s) => s.skinOpacity);
   const setSkinOpacity = useViewerStore((s) => s.setSkinOpacity);
   const judgment = useViewerStore((s) => s.lastJudgment);
+  const caseId = useViewerStore((s) => s.caseId);
+  const setCaseId = useViewerStore((s) => s.setCaseId);
 
   return (
     <aside className="panel">
@@ -64,6 +73,23 @@ export function Panel({ landmarks }: { landmarks: readonly Landmark[] }): React.
           </table>
           <div className="score">スコア素点: {(judgment.weightedScore * 100).toFixed(0)}%</div>
         </>
+      )}
+
+      <h2>症例ランドマーク（開発用・truth 表示）</h2>
+      <select
+        value={caseId ?? ""}
+        onChange={(e) => setCaseId(e.target.value === "" ? null : e.target.value)}
+        style={{ width: "100%", marginBottom: 6 }}
+      >
+        <option value="">動作確認用プレースホルダー3点</option>
+        {listCases().map((c) => (
+          <option key={c.id} value={c.id}>
+            {c.id}（{DIFF_LABEL[c.difficulty]}）
+          </option>
+        ))}
+      </select>
+      {caseId !== null && (
+        <div className="sub">正解ラベル: {getCaseTruth(caseId).diagnosisLabel}</div>
       )}
 
       <h2>ランドマーク（表示中）</h2>

@@ -22,7 +22,7 @@
 | ScanLingo | — | 🔧 開発中（Phase 1-A~D コード完了、UXテスト済み） | japandoc-ai |
 | DealRoom | — | 🔧 未デプロイ（Phase 1-A/B/C コード完了）| dealroom |
 | カスハラShield | https://kasuhara-shield.vercel.app | ✅ LIVE | kasuhara-shield |
-| 触診部位同定トレーナー | — | 🔧 Phase 2 3Dビューワー完了（Phase 3: 症例データ待ち） | palpation-trainer |
+| 触診部位同定トレーナー | — | 🔧 Phase 3 症例DB完了（Phase 4: LLM統合待ち） | palpation-trainer |
 
 ---
 
@@ -166,6 +166,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-08-18 | palpation-trainer: Phase 3 症例DB完了（10症例・public/truth型分離・リーク防止テスト・ランドマーク座標を幾何生成しビューワー実証。テスト34件パス） | Claude Code |
 | 2026-08-18 | palpation-trainer: Phase 2 3Dビューワー完了（Vite+R3F、61メッシュ表示・レイヤー切替・レイキャスト座標取得・ランドマーク判定をブラウザ実証。テスト24件パス） | Claude Code |
 | 2026-08-18 | palpation-trainer: Phase 1 データ基盤完了（A案承認→モノレポ+BodyParts3D変換パイプライン61メッシュ+scope.json 55構造+層B事実テーブル+getStructureFacts+テスト18件パス） | Claude Code |
 | 2026-08-09 | palpation-trainer: Phase 0 検証完了（Z-Anatomy/BodyParts3D 実データ解析・GLB変換テスト・日本語用語ライセンス調査。レポート: palpation-trainer/PHASE0-VERIFICATION.md）。データソース戦略の確認待ち | Claude Code |

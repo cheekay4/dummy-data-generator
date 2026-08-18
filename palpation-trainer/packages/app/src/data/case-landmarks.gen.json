@@ -1,0 +1,332 @@
+{
+  "generatedBy": "tools/make-case-landmarks.mjs（骨・筋メッシュ幾何近似 → 皮膚投影。教員レビュー前）",
+  "side": "right",
+  "axes": "X=左右(右が負) Y=前後(前が負) Z=上下 [mm]",
+  "points": {
+    "acromion_r": {
+      "skinPoint": [
+        -169.6,
+        -60,
+        1349.9
+      ],
+      "depthMm": 7.9,
+      "sourcePoint": [
+        -166.5,
+        -58.1,
+        1343
+      ]
+    },
+    "superior_angle_r": {
+      "skinPoint": [
+        -62.9,
+        26.3,
+        1337.9
+      ],
+      "depthMm": 47.6,
+      "sourcePoint": [
+        -62.5,
+        -17.8,
+        1320
+      ]
+    },
+    "spine_scapula_mid_r": {
+      "skinPoint": [
+        -103.3,
+        25.9,
+        1328.7
+      ],
+      "depthMm": 41.5,
+      "sourcePoint": [
+        -90.9,
+        -9.6,
+        1311.2
+      ]
+    },
+    "medial_border_mid_r": {
+      "skinPoint": [
+        -38.2,
+        28.7,
+        1304.5
+      ],
+      "depthMm": 47.4,
+      "sourcePoint": [
+        -59.9,
+        -12.4,
+        1295.3
+      ]
+    },
+    "inferior_angle_r": {
+      "skinPoint": [
+        -108.4,
+        23.5,
+        1171.5
+      ],
+      "depthMm": 34.3,
+      "sourcePoint": [
+        -94.4,
+        -5.3,
+        1184
+      ]
+    },
+    "infraglenoid_r": {
+      "skinPoint": [
+        -165.1,
+        -64.8,
+        1350.7
+      ],
+      "depthMm": 54.2,
+      "sourcePoint": [
+        -152,
+        -59.4,
+        1298.3
+      ]
+    },
+    "greater_tubercle_r": {
+      "skinPoint": [
+        -201.5,
+        -86.2,
+        1332.7
+      ],
+      "depthMm": 24.8,
+      "sourcePoint": [
+        -188.9,
+        -80.3,
+        1312.2
+      ]
+    },
+    "intertubercular_r": {
+      "skinPoint": [
+        -171.9,
+        -113.4,
+        1329.2
+      ],
+      "depthMm": 21,
+      "sourcePoint": [
+        -164.9,
+        -100.2,
+        1314.5
+      ]
+    },
+    "lesser_tubercle_r": {
+      "skinPoint": [
+        -156.1,
+        -109.6,
+        1335.7
+      ],
+      "depthMm": 23.9,
+      "sourcePoint": [
+        -155.1,
+        -96.3,
+        1315.9
+      ]
+    },
+    "deltoid_tuberosity_r": {
+      "skinPoint": [
+        -234.1,
+        -87.3,
+        1178.7
+      ],
+      "depthMm": 31.3,
+      "sourcePoint": [
+        -207.4,
+        -72.1,
+        1172.7
+      ]
+    },
+    "lateral_epicondyle_r": {
+      "skinPoint": [
+        -258.1,
+        -53.3,
+        1056.4
+      ],
+      "depthMm": 19.1,
+      "sourcePoint": [
+        -240.8,
+        -61.2,
+        1054
+      ]
+    },
+    "medial_epicondyle_r": {
+      "skinPoint": [
+        -173.9,
+        -69.2,
+        1052.5
+      ],
+      "depthMm": 5.5,
+      "sourcePoint": [
+        -177.7,
+        -68.4,
+        1048.5
+      ]
+    },
+    "supraspinatus_belly_r": {
+      "skinPoint": [
+        -149.9,
+        -62.6,
+        1354.3
+      ],
+      "depthMm": 34.8,
+      "sourcePoint": [
+        -136.9,
+        -56.7,
+        1322.6
+      ]
+    },
+    "infraspinatus_belly_r": {
+      "skinPoint": [
+        -156.8,
+        7.5,
+        1327.1
+      ],
+      "depthMm": 63.4,
+      "sourcePoint": [
+        -132.6,
+        -38.6,
+        1290.9
+      ]
+    },
+    "teres_minor_belly_r": {
+      "skinPoint": [
+        -169.2,
+        2.1,
+        1239.6
+      ],
+      "depthMm": 59.2,
+      "sourcePoint": [
+        -143.6,
+        -40.8,
+        1271.4
+      ]
+    },
+    "teres_major_belly_r": {
+      "skinPoint": [
+        -162.4,
+        -13.7,
+        1211.5
+      ],
+      "depthMm": 46.9,
+      "sourcePoint": [
+        -132.2,
+        -40.1,
+        1235.7
+      ]
+    },
+    "subscapularis_belly_r": {
+      "skinPoint": [
+        -96.5,
+        40.3,
+        1275.5
+      ],
+      "depthMm": 69.6,
+      "sourcePoint": [
+        -89.8,
+        -28.1,
+        1264.5
+      ]
+    },
+    "deltoid_middle_belly_r": {
+      "skinPoint": [
+        -220.4,
+        -78,
+        1316.3
+      ],
+      "depthMm": 39.3,
+      "sourcePoint": [
+        -188.4,
+        -69.8,
+        1295.1
+      ]
+    },
+    "biceps_long_belly_r": {
+      "skinPoint": [
+        -193.3,
+        -113.3,
+        1157.5
+      ],
+      "depthMm": 27.3,
+      "sourcePoint": [
+        -197.4,
+        -87.3,
+        1164.5
+      ]
+    },
+    "triceps_long_belly_r": {
+      "skinPoint": [
+        -151.6,
+        -28.3,
+        1155.7
+      ],
+      "depthMm": 33.1,
+      "sourcePoint": [
+        -179.6,
+        -45.3,
+        1160.3
+      ]
+    },
+    "trapezius_upper_belly_r": {
+      "skinPoint": [
+        -42,
+        -31.9,
+        1417.6
+      ],
+      "depthMm": 11.4,
+      "sourcePoint": [
+        -37.4,
+        -41,
+        1412.5
+      ]
+    },
+    "rhomboid_major_belly_r": {
+      "skinPoint": [
+        -23.5,
+        23.7,
+        1282.3
+      ],
+      "depthMm": 30.4,
+      "sourcePoint": [
+        -34.7,
+        -4.5,
+        1282.4
+      ]
+    },
+    "levator_insertion_r": {
+      "skinPoint": [
+        -53.3,
+        30,
+        1323.9
+      ],
+      "depthMm": 47.1,
+      "sourcePoint": [
+        -59.3,
+        -14.4,
+        1309.3
+      ]
+    },
+    "serratus_belly_r": {
+      "skinPoint": [
+        -166.6,
+        -113.9,
+        1215.4
+      ],
+      "depthMm": 73.5,
+      "sourcePoint": [
+        -110.1,
+        -68.8,
+        1228.6
+      ]
+    },
+    "brachialis_belly_r": {
+      "skinPoint": [
+        -183.8,
+        -96.4,
+        1093.4
+      ],
+      "depthMm": 33.2,
+      "sourcePoint": [
+        -207.8,
+        -75.2,
+        1102.3
+      ]
+    }
+  }
+}

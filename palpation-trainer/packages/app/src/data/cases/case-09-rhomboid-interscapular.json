@@ -1,0 +1,86 @@
+{
+  "id": "case-09-rhomboid-interscapular",
+  "region": "shoulder",
+  "difficulty": "intermediate",
+  "public": {
+    "demographics": "35歳 女性 右利き 美容師",
+    "chiefComplaint": "右の肩甲骨と背骨の間がズーンと痛む。仕事の後半になるとひどい",
+    "historyScript": {
+      "発症・きっかけ": "数か月前から。立て込んだ週の後から気になり出した",
+      "疼痛部位": "肩甲骨の内側の縁と背骨の間。指1本で「ここ」と示せる点がある",
+      "疼痛の性質": "重い鈍痛。ひどいときは焼けるような感じ",
+      "夜間痛": "ない",
+      "増悪動作": "腕を前に伸ばしたままハサミを使い続ける姿勢。長時間の同一姿勢",
+      "軽快因子": "肩甲骨を寄せて伸びをすると一時的に楽",
+      "職業・生活": "美容師10年目。1日8時間立ち仕事で腕を前に上げている時間が長い",
+      "スポーツ・趣味": "ない",
+      "既往・全身状態": "特記なし",
+      "しびれ・感覚": "腕や手のしびれはない"
+    },
+    "persona": {
+      "speechStyle": "接客業らしい丁寧な話し方。痛む場所を的確に示す",
+      "emotionalState": "仕事は続けたいので付き合い方を知りたい",
+      "cooperativeness": "high"
+    },
+    "forbidden": [
+      "仕事姿勢の詳細は職業について聞かれてから話す",
+      "「ここ」と一点で示せることは、部位を詳しく聞かれてから言う"
+    ]
+  },
+  "truth": {
+    "targetLandmarks": [
+      {
+        "fmaId": "FMA13379",
+        "center": [
+          -23.5,
+          23.7,
+          1282.3
+        ],
+        "radiusMm": 30,
+        "weight": 2,
+        "radiusRationale": "肩甲骨内側縁と棘突起の間の筋腹。僧帽筋中部越しだが圧痛点は限局しやすい（D-008）。座標はメッシュ幾何近似の皮膚投影（教員レビュー前）"
+      },
+      {
+        "fmaId": "FMA23242",
+        "center": [
+          -38.2,
+          28.7,
+          1304.5
+        ],
+        "radiusMm": 30,
+        "weight": 1,
+        "radiusRationale": "停止部の骨縁（D-008）。座標はメッシュ幾何近似の皮膚投影（教員レビュー前）"
+      }
+    ],
+    "responsibleMuscles": [
+      "FMA13379",
+      "FMA13380"
+    ],
+    "innervation": [
+      "FMA65279"
+    ],
+    "diagnosisLabel": "菱形筋の筋筋膜性疼痛（肩甲間部痛）",
+    "distractors": [
+      {
+        "fmaId": "FMA9626",
+        "kind": "muscle",
+        "reason": "同部位の表層を覆うため混同しやすいが、圧痛の深さと肩甲骨内転での再現が菱形筋を示唆"
+      },
+      {
+        "fmaId": "FMA13397",
+        "kind": "muscle",
+        "reason": "同じ内側縁に付着する拮抗筋で、機能的関連から選ばれやすい"
+      },
+      {
+        "fmaId": "FMA6720",
+        "kind": "nerve",
+        "reason": "僧帽筋と混同した場合の誤答。菱形筋の支配は肩甲背神経"
+      }
+    ]
+  },
+  "review": {
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "reviewStatus": "draft"
+  }
+}

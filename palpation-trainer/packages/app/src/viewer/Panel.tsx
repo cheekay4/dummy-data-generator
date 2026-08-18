@@ -3,32 +3,25 @@ import { getStructureFacts } from "../facts/getStructureFacts.js";
 import type { Landmark } from "../scoring/palpation.js";
 import { useViewerStore, type LayerKey } from "./store.js";
 
-const DIFF_LABEL: Record<string, string> = {
-  basic: "初級",
-  intermediate: "中級",
-  advanced: "上級",
-};
-
 const LAYER_LABEL: Record<LayerKey, string> = {
   skin: "皮膚",
   muscle: "筋",
   bone: "骨",
 };
 
-export function Panel({ landmarks }: { landmarks: readonly Landmark[] }): React.JSX.Element {
+const DIFF_LABEL: Record<string, string> = {
+  basic: "初級",
+  intermediate: "中級",
+  advanced: "上級",
+};
+
+export function LayerControls(): React.JSX.Element {
   const layers = useViewerStore((s) => s.layers);
   const toggleLayer = useViewerStore((s) => s.toggleLayer);
   const skinOpacity = useViewerStore((s) => s.skinOpacity);
   const setSkinOpacity = useViewerStore((s) => s.setSkinOpacity);
-  const judgment = useViewerStore((s) => s.lastJudgment);
-  const caseId = useViewerStore((s) => s.caseId);
-  const setCaseId = useViewerStore((s) => s.setCaseId);
-
   return (
-    <aside className="panel">
-      <h1>触診部位同定トレーナー</h1>
-      <div className="sub">Phase 2 — 3Dビューワー技術検証</div>
-
+    <>
       <h2>レイヤー表示</h2>
       {(Object.keys(LAYER_LABEL) as LayerKey[]).map((key) => (
         <label key={key}>
@@ -46,6 +39,22 @@ export function Panel({ landmarks }: { landmarks: readonly Landmark[] }): React.
         onChange={(e) => setSkinOpacity(Number(e.target.value))}
         style={{ width: "100%" }}
       />
+    </>
+  );
+}
+
+/** 開発モードのパネル（座標検証・症例ランドマークの目視確認用） */
+export function DevPanel({ landmarks }: { landmarks: readonly Landmark[] }): React.JSX.Element {
+  const judgment = useViewerStore((s) => s.lastJudgment);
+  const caseId = useViewerStore((s) => s.caseId);
+  const setCaseId = useViewerStore((s) => s.setCaseId);
+
+  return (
+    <aside className="panel">
+      <h1>開発ビューワー</h1>
+      <div className="sub">座標検証・truth ランドマーク表示（学習者には見せない画面）</div>
+
+      <LayerControls />
 
       <h2>触診クリック判定</h2>
       {judgment === null ? (
@@ -57,7 +66,11 @@ export function Panel({ landmarks }: { landmarks: readonly Landmark[] }): React.
           </div>
           <table>
             <thead>
-              <tr><th>ランドマーク</th><th>距離</th><th>判定</th></tr>
+              <tr>
+                <th>ランドマーク</th>
+                <th>距離</th>
+                <th>判定</th>
+              </tr>
             </thead>
             <tbody>
               {judgment.results.map((r) => (
@@ -75,7 +88,7 @@ export function Panel({ landmarks }: { landmarks: readonly Landmark[] }): React.
         </>
       )}
 
-      <h2>症例ランドマーク（開発用・truth 表示）</h2>
+      <h2>症例ランドマーク（truth 表示）</h2>
       <select
         value={caseId ?? ""}
         onChange={(e) => setCaseId(e.target.value === "" ? null : e.target.value)}
@@ -105,8 +118,7 @@ export function Panel({ landmarks }: { landmarks: readonly Landmark[] }): React.
       </table>
 
       <div className="notice">
-        ⚠️ 表示中のランドマーク座標は Phase 2 動作確認用のプレースホルダー（骨メッシュ極値からの近似）であり、
-        症例の正解データではありません。正式なランドマークは Phase 3 で作成します。
+        ⚠️ プレースホルダー座標・症例座標とも幾何近似であり、解剖学教員のレビュー前です。
       </div>
     </aside>
   );

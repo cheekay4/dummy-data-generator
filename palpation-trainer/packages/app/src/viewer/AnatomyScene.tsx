@@ -4,7 +4,7 @@ import { Suspense, useCallback, useMemo, useRef } from "react";
 import type { Group } from "three";
 import type { AnatomySource } from "../anatomy/AnatomySource.js";
 import { getStructureFacts, listScope } from "../facts/getStructureFacts.js";
-import { judgePalpation, type Landmark } from "../scoring/palpation.js";
+import type { Landmark } from "../scoring/palpation.js";
 import type { FmaId, StructureCategory } from "../types/anatomy.js";
 import { LandmarkMarkers } from "./LandmarkMarkers.js";
 import { StructureMesh } from "./StructureMesh.js";
@@ -25,18 +25,33 @@ function layerOf(category: StructureCategory): LayerKey | null {
   return null;
 }
 
+export type Vec3 = [number, number, number];
+
 interface Props {
   source: AnatomySource;
+  /** 表示するランドマーク（開発モードのみ。セッション中は空配列で正解を隠す） */
   landmarks: readonly Landmark[];
+  /** 皮膚クリック時のネイティブ座標コールバック */
+  onNativePick?: (point: Vec3) => void;
+  /** クリック地点の表示（セッションの触診候補点） */
+  pickedPoint?: Vec3 | null;
+  /** 深部メッシュのクリックで構造名を照会する（identification フェーズ） */
+  inspectMode?: boolean;
 }
 
 /** 3D シーン。データは BodyParts3D ネイティブ座標（Z-up, mm）のまま持ち、
  *  表示用の回転（Z-up→Y-up）と縮尺（mm→m）はこのグループでのみ適用する（DECISIONS.md D-003） */
-export function AnatomyScene({ source, landmarks }: Props): React.JSX.Element {
+export function AnatomyScene({
+  source,
+  landmarks,
+  onNativePick,
+  pickedPoint,
+  inspectMode = false,
+}: Props): React.JSX.Element {
   const groupRef = useRef<Group>(null);
   const layers = useViewerStore((s) => s.layers);
   const skinOpacity = useViewerStore((s) => s.skinOpacity);
-  const setJudgment = useViewerStore((s) => s.setJudgment);
+  const setInspected = useViewerStore((s) => s.setInspected);
 
   const categoryById = useMemo(() => {
     const map = new Map<FmaId, StructureCategory>();
@@ -44,20 +59,25 @@ export function AnatomyScene({ source, landmarks }: Props): React.JSX.Element {
     return map;
   }, []);
 
+  const toNative = useCallback((e: ThreeEvent<PointerEvent>): Vec3 | null => {
+    const group = groupRef.current;
+    if (group === null) return null;
+    const local = group.worldToLocal(e.point.clone());
+    return [
+      Math.round(local.x * 10) / 10,
+      Math.round(local.y * 10) / 10,
+      Math.round(local.z * 10) / 10,
+    ];
+  }, []);
+
   const onSkinPick = useCallback(
     (e: ThreeEvent<PointerEvent>) => {
-      const group = groupRef.current;
-      if (group === null) return;
+      if (onNativePick === undefined) return;
       e.stopPropagation();
-      const local = group.worldToLocal(e.point.clone());
-      const point: [number, number, number] = [
-        Math.round(local.x * 10) / 10,
-        Math.round(local.y * 10) / 10,
-        Math.round(local.z * 10) / 10,
-      ];
-      setJudgment(judgePalpation(point, landmarks));
+      const point = toNative(e);
+      if (point !== null) onNativePick(point);
     },
-    [landmarks, setJudgment]
+    [onNativePick, toNative]
   );
 
   const meshes = source.listMeshStructures().flatMap((fmaId) => {
@@ -68,12 +88,12 @@ export function AnatomyScene({ source, landmarks }: Props): React.JSX.Element {
     const isSkin = fmaId === SKIN_ID;
     return source.getMeshes(fmaId).map((ref) => ({
       key: `${fmaId}:${ref.file}`,
+      fmaId,
       url: source.resolveUrl(ref.file),
       color: CATEGORY_COLOR[category] ?? "#888888",
       opacity: isSkin ? skinOpacity : 1,
       visible: layers[layer],
       isSkin,
-      nameJa: getStructureFacts(fmaId).nameJa,
     }));
   });
 
@@ -88,17 +108,35 @@ export function AnatomyScene({ source, landmarks }: Props): React.JSX.Element {
       <directionalLight position={[2, 2, 2]} intensity={0.5} />
       <Suspense fallback={null}>
         <group ref={groupRef} rotation={[-Math.PI / 2, 0, 0]} scale={0.001}>
-          {meshes.map((m) => (
-            <StructureMesh
-              key={m.key}
-              url={m.url}
-              color={m.color}
-              opacity={m.opacity}
-              visible={m.visible}
-              {...(m.isSkin && m.visible ? { onPick: onSkinPick } : {})}
-            />
-          ))}
+          {meshes.map((m) => {
+            const pickable = m.isSkin && m.visible && onNativePick !== undefined;
+            const inspectable = inspectMode && !m.isSkin && m.visible;
+            return (
+              <StructureMesh
+                key={m.key}
+                url={m.url}
+                color={m.color}
+                opacity={m.opacity}
+                visible={m.visible}
+                {...(pickable ? { onPick: onSkinPick } : {})}
+                {...(inspectable
+                  ? {
+                      onPick: (e: ThreeEvent<PointerEvent>): void => {
+                        e.stopPropagation();
+                        setInspected(m.fmaId);
+                      },
+                    }
+                  : {})}
+              />
+            );
+          })}
           <LandmarkMarkers landmarks={landmarks} />
+          {pickedPoint != null && (
+            <mesh position={pickedPoint}>
+              <sphereGeometry args={[5, 12, 12]} />
+              <meshBasicMaterial color="#42a5f5" />
+            </mesh>
+          )}
         </group>
       </Suspense>
       <OrbitControls target={[-0.17, 1.35, 0.06]} enableDamping />
@@ -106,3 +144,5 @@ export function AnatomyScene({ source, landmarks }: Props): React.JSX.Element {
     </Canvas>
   );
 }
+
+export { getStructureFacts };

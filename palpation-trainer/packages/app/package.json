@@ -5,18 +5,31 @@
   "type": "module",
   "description": "触診部位同定トレーナー アプリケーション（プロプライエタリ）",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json && vite build",
     "test": "vitest run",
-    "lint": "eslint src __tests__"
+    "lint": "eslint src __tests__ --max-warnings 0",
+    "data:publish": "node tools/publish-anatomy.mjs"
   },
   "dependencies": {
-    "zod": "^4.1.5"
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.185.1",
+    "zod": "^4.1.5",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@types/three": "^0.185.4",
+    "@vitejs/plugin-react": "^6.0.5",
     "eslint": "^9.34.0",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.42.0",
+    "vite": "^8.2.1",
     "vitest": "^3.2.4"
   }
 }

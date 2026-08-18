@@ -3,3 +3,5 @@ dist/
 .cache/
 .env.local
 *.tsbuildinfo
+packages/app/public/anatomy/
+packages/app/public/draco/

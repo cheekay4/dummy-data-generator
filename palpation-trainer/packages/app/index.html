@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>触診部位同定トレーナー — 3Dビューワー（Phase 2）</title>
+  </head>
+  <body>
+    <script>
+      // 非表示タブ（自動検証・CI）では rAF が発火せず R3F が初期化されないため、
+      // hidden 時のみ setTimeout ベースにフォールバックする。可視タブでは無効。
+      if (document.visibilityState === "hidden") {
+        window.requestAnimationFrame = (cb) => setTimeout(() => cb(performance.now()), 33);
+        window.cancelAnimationFrame = (id) => clearTimeout(id);
+      }
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/viewer/main.tsx"></script>
+  </body>
+</html>

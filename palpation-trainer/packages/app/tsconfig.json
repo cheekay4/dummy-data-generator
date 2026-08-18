@@ -3,7 +3,8 @@
     "target": "ES2023",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": ["ES2023"],
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
@@ -11,10 +12,8 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "declaration": true,
-    "outDir": "dist",
-    "rootDir": "."
+    "noEmit": true
   },
-  "include": ["src/**/*.ts", "__tests__/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "__tests__/**/*.ts"],
   "exclude": ["dist", "node_modules"]
 }

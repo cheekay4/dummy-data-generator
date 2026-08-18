@@ -1,6 +1,3 @@
-import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 import { z } from "zod";
 import {
   scopeSchema,
@@ -10,19 +7,19 @@ import {
   type StructureFacts,
 } from "../types/anatomy.js";
 import { DataIntegrityError, OutOfScopeError } from "./errors.js";
+// JSON は静的インポート（ブラウザ = Vite バンドル / Node = import attributes）。
+// メッシュ（anatomy-data）と異なり、層B はアプリ自身の資産なので同梱してよい。
+import scopeJson from "../config/scope.json" with { type: "json" };
+import musclesJson from "../data/facts/muscles.json" with { type: "json" };
+import nervesJson from "../data/facts/nerves.json" with { type: "json" };
+import landmarksJson from "../data/facts/landmarks.json" with { type: "json" };
+import skeletonJson from "../data/facts/skeleton.json" with { type: "json" };
 
-const HERE = dirname(fileURLToPath(import.meta.url));
+const scope: Scope = scopeSchema.parse(scopeJson);
 
-function loadJson(rel: string): unknown {
-  return JSON.parse(readFileSync(join(HERE, rel), "utf8")) as unknown;
-}
-
-const scope: Scope = scopeSchema.parse(loadJson("../config/scope.json"));
-
-const FACT_FILES = ["muscles", "nerves", "landmarks", "skeleton"] as const;
 const factsList: StructureFacts[] = z
   .array(structureFactsSchema)
-  .parse(FACT_FILES.flatMap((n) => loadJson(`../data/facts/${n}.json`) as unknown[]));
+  .parse([...musclesJson, ...nervesJson, ...landmarksJson, ...skeletonJson]);
 
 const scopeIds: ReadonlySet<FmaId> = new Set(scope.structures.map((s) => s.fmaId));
 const factsById: ReadonlyMap<FmaId, StructureFacts> = new Map(

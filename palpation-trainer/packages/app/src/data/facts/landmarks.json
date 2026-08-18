@@ -1,0 +1,119 @@
+[
+  {
+    "fmaId": "FMA23260", "category": "landmark",
+    "nameJa": "肩峰", "nameEn": "acromion", "nameLa": "Acromion",
+    "aliasesJa": ["けんぽう"],
+    "description": "肩甲棘の外側端が前外方へ張り出した扁平な突起。肩の最外側上部で皮下に容易に触知できる、肩関節触診の基準点",
+    "ta98": "A02.4.01.009", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA23257", "category": "landmark",
+    "nameJa": "肩峰角", "nameEn": "acromial angle", "nameLa": "Angulus acromialis",
+    "aliasesJa": ["けんぽうかく"],
+    "description": "肩峰後外側の角。肩甲棘後縁から肩峰外側縁へ移行する部位で、骨指標として上腕長計測などの基準に用いられる",
+    "ta98": "A02.4.01.011", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA13455", "category": "landmark",
+    "nameJa": "烏口突起", "nameEn": "coracoid process", "nameLa": "Processus coracoideus",
+    "aliasesJa": ["うこうとっき"],
+    "description": "肩甲骨上縁外側から前外方へ屈曲して突出する突起。鎖骨外側1/3の下方（三角筋胸筋三角の深部）で触知。上腕二頭筋短頭・烏口腕筋・小胸筋の付着部",
+    "ta98": "A02.4.01.023", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得。同名重複項目があるため書籍照合予定)。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA13453", "category": "landmark",
+    "nameJa": "肩甲棘", "nameEn": "spine of scapula", "nameLa": "Spina scapulae",
+    "aliasesJa": ["けんこうきょく"],
+    "description": "肩甲骨後面を内上方から外上方へ走る骨稜。全長にわたり皮下に触知でき、内側端は T3 棘突起の高さに相当するとされる。棘上窩と棘下窩を分ける",
+    "ta98": "A02.4.01.005", "ta2": "1147",
+    "source": "用語/ID: Wikidata Q3321474 (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA13315", "category": "landmark",
+    "nameJa": "肩甲骨下角", "nameEn": "inferior angle of scapula", "nameLa": "Angulus inferior scapulae",
+    "aliasesJa": ["けんこうこつかかく", "下角"],
+    "description": "肩甲骨の下端の角。座位・立位で T7〜T8 棘突起の高さに相当するとされ、体表からの脊椎レベル同定の基準点。広背筋の一部が起始する",
+    "ta98": "A02.4.01.016", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameJa は手動補完（書籍照合前）。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA23242", "category": "landmark",
+    "nameJa": "肩甲骨内側縁", "nameEn": "medial border of scapula", "nameLa": "Margo medialis scapulae",
+    "aliasesJa": ["けんこうこつないそくえん", "内側縁", "脊柱縁"],
+    "description": "肩甲骨の脊柱側の縁。菱形筋・前鋸筋の停止部。安静時は正中から約5〜7cm 外側で脊柱とほぼ平行に位置するとされる",
+    "ta98": null, "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameJa は手動補完（書籍照合前）。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA23390", "category": "landmark",
+    "nameJa": "大結節", "nameEn": "greater tubercle", "nameLa": "Tuberculum majus humeri",
+    "aliasesJa": ["だいけっせつ", "上腕骨大結節"],
+    "description": "上腕骨近位端の外側の隆起。肩峰前外側縁の直下（下垂位）で触知し、内外旋で指の下を移動する。棘上筋・棘下筋・小円筋の停止部（上面・中面・下面）",
+    "ta98": "A02.4.04.005", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameJa は手動補完（書籍照合前）。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA23393", "category": "landmark",
+    "nameJa": "小結節", "nameEn": "lesser tubercle", "nameLa": "Tuberculum minus humeri",
+    "aliasesJa": ["しょうけっせつ", "上腕骨小結節"],
+    "description": "上腕骨近位端の前面内側の隆起。烏口突起の外側やや下方で触知。肩甲下筋の停止部",
+    "ta98": "A02.4.04.006", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameJa は手動補完（書籍照合前）。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA23396", "category": "landmark",
+    "nameJa": "結節間溝", "nameEn": "intertubercular sulcus", "nameLa": "Sulcus intertubercularis humeri",
+    "aliasesJa": ["けっせつかんこう", "上腕二頭筋溝"],
+    "description": "大結節と小結節の間の縦溝。上腕二頭筋長頭腱が通る。上腕を軽度外旋すると前面で触知しやすい。長頭腱炎の圧痛点として臨床的に重要",
+    "ta98": "A02.4.04.007", "ta2": "1186",
+    "source": "用語/ID: Wikidata Q724537 (CC0, 2026-08-18取得)。nameJa は手動補完（書籍照合前）。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA23418", "category": "landmark",
+    "nameJa": "三角筋粗面", "nameEn": "deltoid tuberosity", "nameLa": "Tuberositas deltoidea humeri",
+    "aliasesJa": ["さんかくきんそめん"],
+    "description": "上腕骨体外側面のほぼ中央にある粗面。三角筋の停止部。筋腹越しのため触知はやや不明瞭",
+    "ta98": "A02.4.04.020", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameJa は手動補完（書籍照合前）。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA23441", "category": "landmark",
+    "nameJa": "内側上顆", "nameEn": "medial epicondyle of humerus", "nameLa": "Epicondylus medialis humeri",
+    "aliasesJa": ["ないそくじょうか", "上腕骨内側上顆"],
+    "description": "上腕骨遠位端内側の突出。肘内側で明瞭に触知。前腕屈筋群の共同起始部。後方の尺骨神経溝を尺骨神経が走行する",
+    "ta98": "A02.4.04.027", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameJa は学会式表記へ正規化（書籍照合前）。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA23442", "category": "landmark",
+    "nameJa": "外側上顆", "nameEn": "lateral epicondyle of humerus", "nameLa": "Epicondylus lateralis humeri",
+    "aliasesJa": ["がいそくじょうか", "上腕骨外側上顆"],
+    "description": "上腕骨遠位端外側の突出。肘外側で明瞭に触知。前腕伸筋群の共同起始部。上腕骨外側上顆炎（テニス肘）の圧痛点",
+    "ta98": "A02.4.04.029", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameJa は学会式表記へ正規化（書籍照合前）。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA39795", "category": "landmark",
+    "nameJa": "肘頭", "nameEn": "olecranon", "nameLa": "Olecranon",
+    "aliasesJa": ["ちゅうとう", "肘頭突起"],
+    "description": "尺骨近位端後方の突起。肘後面で最も突出し容易に触知。上腕三頭筋の停止部。肘伸展位で内側上顆・外側上顆と一直線、屈曲位で三角形を成す（Hüter の三角）",
+    "ta98": "A02.4.06.002", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameJa は学会式表記へ正規化（書籍照合前）。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  }
+]

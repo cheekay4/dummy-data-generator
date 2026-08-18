@@ -1,0 +1,146 @@
+[
+  {
+    "fmaId": "FMA5906", "category": "nerve",
+    "nameJa": "腕神経叢", "nameEn": "brachial plexus", "nameLa": "Plexus brachialis",
+    "aliasesJa": ["わんしんけいそう"],
+    "description": "C5〜T1 脊髄神経前枝で構成される神経叢。根→神経幹（上・中・下）→神経束（外側・後・内側）を経て上肢の末梢神経を分枝する",
+    "ta98": "A14.2.03.001", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA37072", "category": "nerve",
+    "nameJa": "腋窩神経", "nameEn": "axillary nerve", "nameLa": "Nervus axillaris",
+    "aliasesJa": ["えきかしんけい"],
+    "description": "腕神経叢後神経束の枝（C5・C6）。外側腋窩隙（quadrilateral space）を後上腕回旋動脈と共に通過し、三角筋・小円筋を支配。上外側上腕皮神経として肩外側の皮膚感覚も担う",
+    "ta98": "A14.2.03.059", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA37064", "category": "nerve",
+    "nameJa": "筋皮神経", "nameEn": "musculocutaneous nerve", "nameLa": "Nervus musculocutaneus",
+    "aliasesJa": ["きんぴしんけい"],
+    "description": "腕神経叢外側神経束の枝（C5〜C7）。烏口腕筋を貫通し、烏口腕筋・上腕二頭筋・上腕筋を支配。遠位は外側前腕皮神経として前腕外側の皮膚感覚を担う",
+    "ta98": "A14.2.03.024", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA37069", "category": "nerve",
+    "nameJa": "橈骨神経", "nameEn": "radial nerve", "nameLa": "Nervus radialis",
+    "aliasesJa": ["とうこつしんけい"],
+    "description": "腕神経叢後神経束の枝（C5〜T1）。上腕骨後面の橈骨神経溝を上腕深動脈と共に走行し、上腕三頭筋および前腕伸筋群を支配。上腕骨骨幹部骨折で障害されやすい",
+    "ta98": "A14.2.03.049", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA14385", "category": "nerve",
+    "nameJa": "正中神経", "nameEn": "median nerve", "nameLa": "Nervus medianus",
+    "aliasesJa": ["せいちゅうしんけい"],
+    "description": "腕神経叢外側・内側神経束の合流枝（C6〜T1）。上腕では筋枝を出さず上腕動脈に伴走し、前腕屈筋群の大部分と母指球筋を支配する",
+    "ta98": "A14.2.03.031", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA37319", "category": "nerve",
+    "nameJa": "尺骨神経", "nameEn": "ulnar nerve", "nameLa": "Nervus ulnaris",
+    "aliasesJa": ["しゃっこつしんけい"],
+    "description": "腕神経叢内側神経束の枝（C8・T1）。上腕内側を下行し上腕骨内側上顆後方の尺骨神経溝を通過（肘部で触知可能）。前腕・手の一部の筋と皮膚を支配",
+    "ta98": "A14.2.03.040", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameLa は手動補完。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA37025", "category": "nerve",
+    "nameJa": "肩甲上神経", "nameEn": "suprascapular nerve", "nameLa": "Nervus suprascapularis",
+    "aliasesJa": ["けんこうじょうしんけい"],
+    "description": "腕神経叢上神経幹の枝（C5・C6）。肩甲切痕（上肩甲横靭帯の下）を通過して棘上筋・棘下筋を支配。肩甲切痕部での絞扼が臨床的に知られる",
+    "ta98": "A14.2.03.014", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA65304", "category": "nerve",
+    "nameJa": "上肩甲下神経", "nameEn": "superior subscapular nerve", "nameLa": "Nervus subscapularis superior",
+    "aliasesJa": ["じょうけんこうかしんけい"],
+    "description": "腕神経叢後神経束の枝（C5・C6）。肩甲下筋の上部を支配",
+    "ta98": null, "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得。Wikidata の ja ラベルは表記揺れがあるため学会式表記に正規化、書籍照合待ち)。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA65307", "category": "nerve",
+    "nameJa": "下肩甲下神経", "nameEn": "inferior subscapular nerve", "nameLa": "Nervus subscapularis inferior",
+    "aliasesJa": ["かけんこうかしんけい"],
+    "description": "腕神経叢後神経束の枝（C5・C6）。肩甲下筋の下部と大円筋を支配",
+    "ta98": null, "ta2": "6429",
+    "source": "用語/ID: Wikidata Q623365 (CC0, 2026-08-18取得)。nameLa は手動補完。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA65290", "category": "nerve",
+    "nameJa": "胸背神経", "nameEn": "thoracodorsal nerve", "nameLa": "Nervus thoracodorsalis",
+    "aliasesJa": ["きょうはいしんけい"],
+    "description": "腕神経叢後神経束の枝（C6〜C8）。肩甲下動脈・胸背動脈に伴走して広背筋を支配",
+    "ta98": "A14.2.03.016", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA65275", "category": "nerve",
+    "nameJa": "長胸神経", "nameEn": "long thoracic nerve", "nameLa": "Nervus thoracicus longus",
+    "aliasesJa": ["ちょうきょうしんけい"],
+    "description": "腕神経叢の根（C5〜C7）から直接分枝。前鋸筋の表面を下行して同筋を支配。麻痺により翼状肩甲（winged scapula）を呈する",
+    "ta98": "A14.2.03.012", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA65279", "category": "nerve",
+    "nameJa": "肩甲背神経", "nameEn": "dorsal scapular nerve", "nameLa": "Nervus dorsalis scapulae",
+    "aliasesJa": ["けんこうはいしんけい"],
+    "description": "腕神経叢の根（主に C5）から直接分枝。中斜角筋を貫通し、肩甲挙筋・大菱形筋・小菱形筋を支配",
+    "ta98": "A14.2.03.011", "ta2": "6409",
+    "source": "用語/ID: Wikidata Q1740177 (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA65296", "category": "nerve",
+    "nameJa": "外側胸筋神経", "nameEn": "lateral pectoral nerve", "nameLa": "Nervus pectoralis lateralis",
+    "aliasesJa": ["がいそくきょうきんしんけい"],
+    "description": "腕神経叢外側神経束の枝（C5〜C7）。大胸筋（主に鎖骨部・上部）を支配",
+    "ta98": "A14.2.03.018", "ta2": "6419",
+    "source": "用語/ID: Wikidata Q2575284 (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA65293", "category": "nerve",
+    "nameJa": "内側胸筋神経", "nameEn": "medial pectoral nerve", "nameLa": "Nervus pectoralis medialis",
+    "aliasesJa": ["ないそくきょうきんしんけい"],
+    "description": "腕神経叢内側神経束の枝（C8・T1）。小胸筋を貫通または迂回し、小胸筋と大胸筋（胸肋部・下部）を支配",
+    "ta98": "A14.2.03.017", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA6720", "category": "nerve",
+    "nameJa": "副神経", "nameEn": "accessory nerve", "nameLa": "Nervus accessorius",
+    "aliasesJa": ["ふくしんけい", "第XI脳神経", "第11脳神経"],
+    "description": "第XI脳神経。外側頸三角を斜走して僧帽筋と胸鎖乳突筋を運動支配する。後頸三角でのリンパ節生検等で損傷リスクがある",
+    "ta98": "A14.2.01.184", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA65280", "category": "nerve",
+    "nameJa": "鎖骨下筋神経", "nameEn": "nerve to subclavius", "nameLa": "Nervus subclavius",
+    "aliasesJa": ["さこつかきんしんけい", "鎖骨下神経"],
+    "description": "腕神経叢上神経幹の枝（C5・C6）。鎖骨下筋を支配",
+    "ta98": "A14.2.03.013", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameJa は手動補完（書籍照合前）。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  }
+]

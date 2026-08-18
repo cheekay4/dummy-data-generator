@@ -1,0 +1,12 @@
+# 既知 FMA ID から ja/en/la ラベル + TA98/TA2 を取得（Wikidata 構造化データ = CC0）
+SELECT ?fma ?item ?ja ?en ?la ?ta98 ?ta2 WHERE {
+  VALUES ?fma { "32521" "9629" "32546" "32550" "32549" "13413" "37670" "37688"
+                "37664" "37667" "9627" "13109" "9626" "13397" "13379" "13380"
+                "32519" "13410" "13357" "13321" "13394" "13303" "7163" }
+  ?item wdt:P1402 ?fma .
+  OPTIONAL { ?item rdfs:label ?ja FILTER(LANG(?ja)="ja") }
+  OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en)="en") }
+  OPTIONAL { ?item rdfs:label ?la FILTER(LANG(?la)="la") }
+  OPTIONAL { ?item wdt:P1323 ?ta98 }
+  OPTIONAL { ?item wdt:P7173 ?ta2 }
+}

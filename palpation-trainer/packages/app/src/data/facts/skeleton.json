@@ -1,0 +1,65 @@
+[
+  {
+    "fmaId": "FMA13321", "category": "bone",
+    "nameJa": "鎖骨", "nameEn": "clavicle", "nameLa": "Clavicula",
+    "aliasesJa": ["さこつ"],
+    "description": "胸骨と肩甲骨をつなぐ S 字状の長骨。全長にわたり皮下に触知できる。内側2/3は前弯、外側1/3は後弯",
+    "ta98": "A02.4.02.001", "ta2": "1168",
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA13394", "category": "bone",
+    "nameJa": "肩甲骨", "nameEn": "scapula", "nameLa": "Scapula",
+    "aliasesJa": ["けんこうこつ", "肩胛骨"],
+    "description": "胸郭後面（第2〜7肋骨の高さ）に位置する扁平な三角形の骨。肩甲棘・肩峰・烏口突起・内側縁・下角が主要な触診指標",
+    "ta98": "A02.4.01.001", "ta2": "1143",
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得。Wikidata の ja ラベル「肩胛骨」は学会式「肩甲骨」に正規化しエイリアスに保持)。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA13303", "category": "bone",
+    "nameJa": "上腕骨", "nameEn": "humerus", "nameLa": "Humerus",
+    "aliasesJa": ["じょうわんこつ"],
+    "description": "上腕の長骨。近位端に骨頭・大結節・小結節、骨幹に三角筋粗面・橈骨神経溝、遠位端に内側上顆・外側上顆をもつ",
+    "ta98": "A02.4.04.001", "ta2": "1180",
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA25912", "category": "joint",
+    "nameJa": "肩関節", "nameEn": "glenohumeral joint", "nameLa": "Articulatio humeri",
+    "aliasesJa": ["肩甲上腕関節", "かたかんせつ"],
+    "description": "上腕骨頭と肩甲骨関節窩からなる球関節。人体で最も可動域が大きく、その分安定性を回旋筋腱板に依存する",
+    "ta98": "A03.5.08.001", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameLa は手動補完。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA25898", "category": "joint",
+    "nameJa": "肩鎖関節", "nameEn": "acromioclavicular joint", "nameLa": "Articulatio acromioclavicularis",
+    "aliasesJa": ["けんさかんせつ", "AC関節"],
+    "description": "鎖骨外側端と肩峰の間の平面関節。鎖骨外側端を外側へたどると段差として触知できる。脱臼（肩鎖関節損傷）の好発部位",
+    "ta98": "A03.5.03.001", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameLa は手動補完。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA25883", "category": "joint",
+    "nameJa": "胸鎖関節", "nameEn": "sternoclavicular joint", "nameLa": "Articulatio sternoclavicularis",
+    "aliasesJa": ["きょうさかんせつ", "SC関節"],
+    "description": "鎖骨内側端と胸骨柄の間の鞍関節（関節円板を含む）。上肢帯と体幹をつなぐ唯一の骨性連結。頸切痕外側で触知できる",
+    "ta98": "A03.5.04.001", "ta2": null,
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得)。nameLa は手動補完。記述: 標準的解剖学教科書の通説に基づくドラフト（書籍照合・教員レビュー前）",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  },
+  {
+    "fmaId": "FMA7163", "category": "skin",
+    "nameJa": "皮膚", "nameEn": "skin", "nameLa": "Cutis",
+    "aliasesJa": ["ひふ", "体表"],
+    "description": "体表全体を覆う器官。本システムでは触診部位指定のレイキャスト対象となる全身1枚メッシュ（BodyParts3D FJ2810）に対応する",
+    "ta98": "A16.0.00.002", "ta2": "7041",
+    "source": "用語/ID: Wikidata (CC0, 2026-08-18取得。ja ラベル「ヒトの皮膚」は「皮膚」に正規化)。記述: 標準的解剖学教科書の通説に基づくドラフト",
+    "review": { "reviewedBy": null, "reviewedAt": null, "reviewStatus": "draft" }
+  }
+]

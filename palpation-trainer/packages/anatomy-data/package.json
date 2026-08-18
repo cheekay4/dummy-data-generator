@@ -1,0 +1,19 @@
+{
+  "name": "@palpation/anatomy-data",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "BodyParts3D 由来の3Dメッシュ変換パイプライン（フォーマット変換 + Draco 圧縮のみ。形状改変なし）",
+  "scripts": {
+    "download": "node scripts/download.mjs",
+    "convert": "node scripts/convert.mjs"
+  },
+  "dependencies": {
+    "@gltf-transform/core": "^4.4.2",
+    "@gltf-transform/functions": "^4.4.2",
+    "adm-zip": "^0.5.16",
+    "draco3dgltf": "^1.5.7",
+    "obj2gltf": "^3.2.0",
+    "@gltf-transform/extensions": "^4.4.2"
+  }
+}

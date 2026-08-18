@@ -1,0 +1,336 @@
+{
+  "region": "shoulder",
+  "generatedBy": "tools/build-scope.mjs（層B facts + anatomy-data/structures.json から生成）",
+  "structures": [
+    {
+      "fmaId": "FMA13303",
+      "nameEn": "humerus",
+      "category": "bone",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA13321",
+      "nameEn": "clavicle",
+      "category": "bone",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA13394",
+      "nameEn": "scapula",
+      "category": "bone",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA13315",
+      "nameEn": "inferior angle of scapula",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA13453",
+      "nameEn": "spine of scapula",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA13455",
+      "nameEn": "coracoid process",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA23242",
+      "nameEn": "medial border of scapula",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA23257",
+      "nameEn": "acromial angle",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA23260",
+      "nameEn": "acromion",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA23390",
+      "nameEn": "greater tubercle",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA23393",
+      "nameEn": "lesser tubercle",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA23396",
+      "nameEn": "intertubercular sulcus",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA23418",
+      "nameEn": "deltoid tuberosity",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA23441",
+      "nameEn": "medial epicondyle of humerus",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA23442",
+      "nameEn": "lateral epicondyle of humerus",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA39795",
+      "nameEn": "olecranon",
+      "category": "landmark",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA25883",
+      "nameEn": "sternoclavicular joint",
+      "category": "joint",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA25898",
+      "nameEn": "acromioclavicular joint",
+      "category": "joint",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA25912",
+      "nameEn": "glenohumeral joint",
+      "category": "joint",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA13109",
+      "nameEn": "pectoralis minor",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA13357",
+      "nameEn": "latissimus dorsi",
+      "category": "muscle",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA13379",
+      "nameEn": "rhomboid major",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA13380",
+      "nameEn": "rhomboid minor",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA13397",
+      "nameEn": "serratus anterior",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA13410",
+      "nameEn": "subclavius",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA13413",
+      "nameEn": "subscapularis",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA32519",
+      "nameEn": "levator scapulae",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA32521",
+      "nameEn": "deltoid",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA32546",
+      "nameEn": "infraspinatus",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA32549",
+      "nameEn": "teres major",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA32550",
+      "nameEn": "teres minor",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA37664",
+      "nameEn": "coracobrachialis",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA37667",
+      "nameEn": "brachialis",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA37670",
+      "nameEn": "biceps brachii",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA37688",
+      "nameEn": "triceps brachii",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA9626",
+      "nameEn": "trapezius",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA9627",
+      "nameEn": "pectoralis major",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA9629",
+      "nameEn": "supraspinatus",
+      "category": "muscle",
+      "hasMesh": true
+    },
+    {
+      "fmaId": "FMA14385",
+      "nameEn": "median nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA37025",
+      "nameEn": "suprascapular nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA37064",
+      "nameEn": "musculocutaneous nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA37069",
+      "nameEn": "radial nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA37072",
+      "nameEn": "axillary nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA37319",
+      "nameEn": "ulnar nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA5906",
+      "nameEn": "brachial plexus",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA65275",
+      "nameEn": "long thoracic nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA65279",
+      "nameEn": "dorsal scapular nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA65280",
+      "nameEn": "nerve to subclavius",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA65290",
+      "nameEn": "thoracodorsal nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA65293",
+      "nameEn": "medial pectoral nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA65296",
+      "nameEn": "lateral pectoral nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA65304",
+      "nameEn": "superior subscapular nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA65307",
+      "nameEn": "inferior subscapular nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA6720",
+      "nameEn": "accessory nerve",
+      "category": "nerve",
+      "hasMesh": false
+    },
+    {
+      "fmaId": "FMA7163",
+      "nameEn": "skin",
+      "category": "skin",
+      "hasMesh": true
+    }
+  ]
+}

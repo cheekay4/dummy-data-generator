@@ -1,0 +1,15 @@
+# 初回で未解決だった構造の追加クエリ（FMA を OPTIONAL に緩和 + 別名表記）
+SELECT ?q ?item ?fma ?ja ?en ?la ?ta98 ?ta2 WHERE {
+  VALUES ?q { "spine of the scapula"@en "scapular spine"@en "spine of scapula"@en
+              "bicipital groove"@en "intertubercular groove"@en "intertubercular sulcus"@en
+              "inferior subscapular nerve"@en "lower subscapular nerve"@en
+              "dorsal scapular nerve"@en "lateral pectoral nerve"@en
+              "biceps brachii"@en "biceps brachii muscle"@en "biceps"@en }
+  { ?item rdfs:label ?q } UNION { ?item skos:altLabel ?q }
+  ?item wdt:P1323 ?ta98 .
+  OPTIONAL { ?item wdt:P1402 ?fma }
+  OPTIONAL { ?item rdfs:label ?ja FILTER(LANG(?ja)="ja") }
+  OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en)="en") }
+  OPTIONAL { ?item rdfs:label ?la FILTER(LANG(?la)="la") }
+  OPTIONAL { ?item wdt:P7173 ?ta2 }
+}

@@ -1,0 +1,494 @@
+{
+  "fetchedAt": "2026-08-18T06:14:57.004Z",
+  "source": "Wikidata SPARQL (structured data: CC0)",
+  "byFma": [
+    {
+      "item": "http://www.wikidata.org/entity/Q16343",
+      "la": "Clavicula",
+      "en": "clavicle",
+      "ja": "鎖骨",
+      "fma": "13321",
+      "ta98": "A02.4.02.001",
+      "ta2": "1168"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q19087",
+      "la": "Musculus infraspinatus",
+      "en": "infraspinatus muscle",
+      "ja": "棘下筋",
+      "fma": "32546",
+      "ta98": "A04.6.02.008",
+      "ta2": "2458"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q56658",
+      "la": "Musculus teres major",
+      "en": "teres major muscle",
+      "ja": "大円筋",
+      "fma": "32549",
+      "ta98": "A04.6.02.011",
+      "ta2": "2462"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q74959",
+      "la": "Musculus supraspinatus",
+      "en": "supraspinatus muscle",
+      "ja": "棘上筋",
+      "fma": "9629",
+      "ta98": "A04.6.02.006",
+      "ta2": "2457"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q204113",
+      "la": "Musculus trapezius",
+      "en": "trapezius muscle",
+      "ja": "僧帽筋",
+      "fma": "9626",
+      "ta98": "A04.3.01.001",
+      "ta2": "2226"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q283673",
+      "la": "Musculus latissimus dorsi",
+      "en": "latissimus dorsi muscle",
+      "ja": "広背筋",
+      "fma": "13357",
+      "ta98": "A04.3.01.006",
+      "ta2": "2231"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q162595",
+      "la": "Humerus",
+      "en": "humerus",
+      "ja": "上腕骨",
+      "fma": "13303",
+      "ta98": "A02.4.04.001",
+      "ta2": "1180"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q16336",
+      "la": "Scapula",
+      "en": "scapula",
+      "ja": "肩胛骨",
+      "fma": "13394",
+      "ta98": "A02.4.01.001",
+      "ta2": "1143"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q74963",
+      "la": "Musculus teres minor",
+      "en": "teres minor muscle",
+      "ja": "小円筋",
+      "fma": "32550",
+      "ta98": "A04.6.02.010",
+      "ta2": "2459"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q83379",
+      "la": "Musculus triceps brachii",
+      "en": "triceps brachii muscle",
+      "ja": "上腕三頭筋",
+      "fma": "37688",
+      "ta98": "A04.6.02.019",
+      "ta2": "2471"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q130050",
+      "la": "Musculus subscapularis",
+      "en": "subscapularis muscle",
+      "ja": "肩甲下筋",
+      "fma": "13413",
+      "ta98": "A04.6.02.012",
+      "ta2": "2460"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q130086",
+      "la": "Musculus subclavius",
+      "en": "subclavius muscle",
+      "ja": "鎖骨下筋",
+      "fma": "13410",
+      "ta98": "A04.4.01.007",
+      "ta2": "2306"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q130243",
+      "la": "Musculus deltoideus",
+      "en": "deltoid muscle",
+      "ja": "三角筋",
+      "fma": "32521",
+      "ta98": "A04.6.02.002",
+      "ta2": "2452"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q25950351",
+      "en": "human musculus biceps brachii",
+      "fma": "37670"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q743294",
+      "la": "Musculus serratus anterior",
+      "en": "serratus anterior muscle",
+      "ja": "前鋸筋",
+      "fma": "13397",
+      "ta98": "A04.4.01.008",
+      "ta2": "2307"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q752441",
+      "la": "Musculus brachialis",
+      "en": "brachialis muscle",
+      "ja": "上腕筋",
+      "fma": "37667",
+      "ta98": "A04.6.02.018",
+      "ta2": "2469"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q755141",
+      "la": "Musculus levator scapulae",
+      "en": "levator scapulae muscle",
+      "ja": "肩甲挙筋",
+      "fma": "32519",
+      "ta98": "A04.3.01.009",
+      "ta2": "2234"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q532798",
+      "la": "Musculus pectoralis major",
+      "en": "pectoralis major",
+      "ja": "大胸筋",
+      "fma": "9627",
+      "ta98": "A04.4.01.002",
+      "ta2": "2301"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q617389",
+      "la": "musculus rhomboideus major",
+      "en": "rhomboid major muscle",
+      "ja": "大菱形筋",
+      "fma": "13379",
+      "ta98": "A04.3.01.007",
+      "ta2": "2232"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q730359",
+      "la": "Musculus coracobrachialis",
+      "en": "coracobrachialis muscle",
+      "ja": "烏口腕筋",
+      "fma": "37664",
+      "ta98": "A04.6.02.017",
+      "ta2": "2468"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q757083",
+      "la": "Musculus pectoralis minor",
+      "en": "pectoralis minor muscle",
+      "ja": "小胸筋",
+      "fma": "13109",
+      "ta98": "A04.4.01.006",
+      "ta2": "2305"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q901538",
+      "la": "Musculus rhomboideus minor",
+      "en": "rhomboid minor muscle",
+      "ja": "小菱形筋",
+      "fma": "13380",
+      "ta98": "A04.3.01.008",
+      "ta2": "2233"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q5259911",
+      "la": "Cutis humanum",
+      "en": "human skin",
+      "ja": "ヒトの皮膚",
+      "fma": "7163",
+      "ta98": "A16.0.00.002",
+      "ta2": "7041"
+    }
+  ],
+  "byLabel": [
+    {
+      "item": "http://www.wikidata.org/entity/Q388431",
+      "la": "Epicondylus lateralis humeri",
+      "en": "lateral epicondyle of the humerus",
+      "ja": "上腕骨の外側上顆",
+      "q": "lateral epicondyle of the humerus",
+      "fma": "23442",
+      "ta98": "A02.4.04.029",
+      "ta2": "1209"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q559526",
+      "la": "Nervus suprascapularis",
+      "en": "suprascapular nerve",
+      "ja": "肩甲上神経",
+      "q": "suprascapular nerve",
+      "fma": "37025",
+      "ta98": "A14.2.03.014",
+      "ta2": "6411"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q615414",
+      "la": "Acromion",
+      "en": "acromion",
+      "ja": "肩峰",
+      "q": "acromion",
+      "fma": "23260",
+      "ta98": "A02.4.01.009",
+      "ta2": "1152"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q623377",
+      "la": "Nervus subscapularis superior",
+      "en": "upper subscapular nerve",
+      "ja": "上下肩甲下神経",
+      "q": "superior subscapular nerve",
+      "fma": "65304",
+      "ta2": "6428"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q143633",
+      "la": "Nervus thoracodorsalis",
+      "en": "thoracodorsal nerve",
+      "ja": "胸背神経",
+      "q": "thoracodorsal nerve",
+      "fma": "65290",
+      "ta98": "A14.2.03.016",
+      "ta2": "6430"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q271987",
+      "la": "Nervus accessorius",
+      "en": "accessory nerve",
+      "ja": "副神経",
+      "q": "accessory nerve",
+      "fma": "6720",
+      "ta98": "A14.1.02.112",
+      "ta2": "6352"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q271987",
+      "la": "Nervus accessorius",
+      "en": "accessory nerve",
+      "ja": "副神経",
+      "q": "accessory nerve",
+      "fma": "6720",
+      "ta98": "A14.2.01.184",
+      "ta2": "6352"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q725616",
+      "la": "Angulus inferior scapulae",
+      "en": "inferior angle of the scapula",
+      "q": "inferior angle of scapula",
+      "fma": "13315",
+      "ta98": "A02.4.01.016",
+      "ta2": "1167"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q792532",
+      "la": "Epicondylus medialis humeri",
+      "en": "medial epicondyle of the humerus",
+      "q": "medial epicondyle of the humerus",
+      "fma": "23441",
+      "ta98": "A02.4.04.027",
+      "ta2": "1207",
+      "ja": "上腕骨の内側上顆"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q836921",
+      "la": "Tuberositas deltoidea humeri",
+      "en": "deltoid tuberosity of the humerus",
+      "q": "deltoid tuberosity",
+      "fma": "23418",
+      "ta98": "A02.4.04.020",
+      "ta2": "1193"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q846961",
+      "la": "Plexus brachialis",
+      "en": "brachial plexus",
+      "q": "brachial plexus",
+      "fma": "5906",
+      "ta98": "A14.2.03.001",
+      "ta2": "6395",
+      "ja": "腕神経叢"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q897486",
+      "la": "Tuberculum minus humeri",
+      "en": "lesser tubercle",
+      "q": "lesser tubercle",
+      "fma": "23393",
+      "ta98": "A02.4.04.006",
+      "ta2": "1185"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q897631",
+      "la": "Tuberculum majus humeri",
+      "en": "greater tubercle",
+      "q": "greater tubercle",
+      "fma": "23390",
+      "ta98": "A02.4.04.005",
+      "ta2": "1184"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q905716",
+      "la": "Processus coracoideus",
+      "en": "coracoid process",
+      "q": "coracoid process",
+      "fma": "13455",
+      "ta98": "A02.4.01.023",
+      "ta2": "1159",
+      "ja": "烏口突起"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q1364876",
+      "la": "Nervus medianus",
+      "en": "median nerve",
+      "q": "median nerve",
+      "fma": "14385",
+      "ta98": "A14.2.03.031",
+      "ta2": "6459",
+      "ja": "正中神経"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q1781342",
+      "la": "Nervus subclavius",
+      "en": "subclavian nerve",
+      "q": "subclavian nerve",
+      "fma": "65280",
+      "ta98": "A14.2.03.013",
+      "ta2": "6412"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q1781342",
+      "la": "Nervus subclavius",
+      "en": "subclavian nerve",
+      "q": "nerve to subclavius",
+      "fma": "65280",
+      "ta98": "A14.2.03.013",
+      "ta2": "6412"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q1890743",
+      "la": "Nervus thoracicus longus",
+      "en": "long thoracic nerve",
+      "q": "long thoracic nerve",
+      "fma": "65275",
+      "ta98": "A14.2.03.012",
+      "ta2": "6410",
+      "ja": "長胸神経"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q1978103",
+      "la": "Nervus pectoralis medialis",
+      "en": "medial pectoral nerve",
+      "q": "medial pectoral nerve",
+      "fma": "65293",
+      "ta98": "A14.2.03.017",
+      "ta2": "6444",
+      "ja": "内側胸筋神経"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q2536335",
+      "la": "Olecranon",
+      "en": "olecranon",
+      "q": "olecranon",
+      "fma": "39795",
+      "ta98": "A02.4.06.002",
+      "ta2": "1231",
+      "ja": "肘頭突起"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q254580",
+      "en": "ulnar nerve",
+      "ja": "尺骨神経",
+      "q": "ulnar nerve",
+      "fma": "37319",
+      "ta98": "A14.2.03.040",
+      "ta2": "6449"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q571378",
+      "en": "medial border of scapula",
+      "q": "medial border of scapula",
+      "fma": "23242"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q640022",
+      "en": "sternoclavicular articulation",
+      "ja": "胸鎖関節",
+      "q": "sternoclavicular joint",
+      "fma": "25883",
+      "ta98": "A03.5.04.001",
+      "ta2": "1750"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q1640207",
+      "en": "acromioclavicular joint",
+      "ja": "肩鎖関節",
+      "q": "acromioclavicular joint",
+      "fma": "25898",
+      "ta98": "A03.5.03.001",
+      "ta2": "1744"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q1758798",
+      "en": "shoulder joint",
+      "ja": "肩関節",
+      "q": "shoulder joint",
+      "fma": "25912",
+      "ta98": "A03.5.08.001",
+      "ta2": "1764"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q3321474",
+      "en": "coracoid process",
+      "q": "coracoid process",
+      "fma": "13453",
+      "ta98": "A02.4.01.005",
+      "ta2": "1147"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q1365325",
+      "la": "Nervus radialis",
+      "en": "radial nerve",
+      "ja": "橈骨神経",
+      "q": "radial nerve",
+      "fma": "37069",
+      "ta98": "A14.2.03.049",
+      "ta2": "6431"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q1547173",
+      "la": "Nervus axillaris",
+      "en": "axillary nerve",
+      "ja": "腋窩神経",
+      "q": "axillary nerve",
+      "fma": "37072",
+      "ta98": "A14.2.03.059",
+      "ta2": "6440"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q1758126",
+      "la": "Nervus musculocutaneus",
+      "en": "musculocutaneous nerve",
+      "ja": "筋皮神経",
+      "q": "musculocutaneous nerve",
+      "fma": "37064",
+      "ta98": "A14.2.03.024",
+      "ta2": "6421"
+    },
+    {
+      "item": "http://www.wikidata.org/entity/Q17080287",
+      "la": "Angulus acromialis",
+      "en": "acromial angle",
+      "ja": "肩峰角",
+      "q": "acromial angle",
+      "fma": "23257",
+      "ta98": "A02.4.01.011",
+      "ta2": "1154"
+    }
+  ]
+}

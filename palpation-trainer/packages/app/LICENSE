@@ -1,0 +1,9 @@
+Proprietary License
+
+Copyright (c) 2026 tools24.jp
+
+本パッケージ（packages/app）のソースコード・症例データ・採点ロジック・UIは
+プロプライエタリであり、無断複製・再配布・改変を禁じる。
+
+なお、本パッケージは 3D メッシュデータを含まない。メッシュは実行時に
+packages/anatomy-data（CC BY 4.0）からロードされる。

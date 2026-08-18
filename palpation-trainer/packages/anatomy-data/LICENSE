@@ -1,0 +1,10 @@
+本パッケージに含まれる3Dメッシュデータおよびその変換物は、以下のライセンスに従う:
+
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+由来データ: BodyParts3D, ライフサイエンス統合データベースセンター (DBCLS)
+ライセンス表記: https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
+（2025-02-25 更新のライセンスページで CC BY 4.0 を確認。詳細は ATTRIBUTION.md）
+
+変換スクリプト (scripts/) は MIT License とする。

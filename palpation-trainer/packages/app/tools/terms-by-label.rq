@@ -1,0 +1,22 @@
+# メッシュを持たない構造（骨指標・関節・神経）を英語ラベル/別名から解決し FMA ID を取得
+SELECT ?q ?item ?fma ?ja ?en ?la ?ta98 ?ta2 WHERE {
+  VALUES ?q { "acromion"@en "acromial angle"@en "coracoid process"@en
+              "spine of scapula"@en "inferior angle of scapula"@en "medial border of scapula"@en
+              "greater tubercle"@en "lesser tubercle"@en "intertubercular sulcus"@en
+              "deltoid tuberosity"@en "medial epicondyle of the humerus"@en
+              "lateral epicondyle of the humerus"@en "olecranon"@en
+              "shoulder joint"@en "acromioclavicular joint"@en "sternoclavicular joint"@en
+              "brachial plexus"@en "axillary nerve"@en "musculocutaneous nerve"@en
+              "radial nerve"@en "median nerve"@en "ulnar nerve"@en
+              "suprascapular nerve"@en "superior subscapular nerve"@en "inferior subscapular nerve"@en
+              "thoracodorsal nerve"@en "long thoracic nerve"@en "dorsal scapular nerve"@en
+              "lateral pectoral nerve"@en "medial pectoral nerve"@en "accessory nerve"@en
+              "nerve to subclavius"@en "subclavian nerve"@en }
+  { ?item rdfs:label ?q } UNION { ?item skos:altLabel ?q }
+  ?item wdt:P1402 ?fma .
+  OPTIONAL { ?item rdfs:label ?ja FILTER(LANG(?ja)="ja") }
+  OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en)="en") }
+  OPTIONAL { ?item rdfs:label ?la FILTER(LANG(?la)="la") }
+  OPTIONAL { ?item wdt:P1323 ?ta98 }
+  OPTIONAL { ?item wdt:P7173 ?ta2 }
+}
